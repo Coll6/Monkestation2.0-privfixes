@@ -8,4 +8,4 @@ $Body = 'A SQL error was found in the following files:' #This parameter is optio
 $SMTPServer = 'smtp.gmail.com'
 $SMTPPort = '587'
 $Account = "username" #SMTP server account name, excluding the domain address (this part: @domain.com)
-$Password = 'password' #SMTP server password, if you're using Gmail's and have 2-factor authentication you'll have to use an App Password (Google for how)
+$Password = 'password' #SMTP server password, if you're using Gmail's and have 2-factor authentication you'll have to use an App Password (Google for how) test addition
