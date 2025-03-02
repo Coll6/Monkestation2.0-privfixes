@@ -50,7 +50,6 @@
 			episode_names += new /datum/episode_name("[pick("THE CREW'S DAY OUT", "THIS SIDE OF PARADISE", "[uppr_name]: A SITUATION COMEDY", "THE CREW'S LUNCH BREAK", "THE CREW'S BACK IN BUSINESS", "THE CREW'S BIG BREAK", "THE CREW SAVES THE DAY", "THE CREW RULES THE WORLD", "THE ONE WITH ALL THE SCIENCE AND PROGRESS AND PROMOTIONS AND ALL THE COOL AND GOOD THINGS", "THE TURNING POINT")]", "High score of [SSticker.roundend_station_integrity].", 250)
 
 	if(istype(SSticker.mode, /datum/game_mode/dynamic))
-		var/list/ran_events = SSgamemode.triggered_round_events.Copy()
 		switch(rand(1, 100))
 			if(0 to 35)
 				episode_names += new /datum/episode_name("[pick("THE DAY [uppr_name] STOOD STILL", "MUCH ADO ABOUT NOTHING", "WHERE SILENCE HAS LEASE", "RED HERRING", "HOME ALONE", "GO BIG OR GO [uppr_name]", "PLACEBO EFFECT", "ECHOES", "SILENT PARTNERS", "WITH FRIENDS LIKE THESE...", "EYE OF THE STORM", "BORN TO BE MILD", "STILL WATERS")]", "Low threat level.", 150)
@@ -65,14 +64,6 @@
 				if(get_station_avg_temp() < T0C)
 					episode_names += new /datum/episode_name/rare("[pick("THE OPPORTUNITY OF A LIFETIME", "DRASTIC MEASURES", "DEUS EX", "THE SHOW MUST GO ON", "TRIAL BY FIRE", "A STITCH IN TIME", "ALL'S FAIR IN LOVE AND WAR", "COME HELL OR HIGH HEAVEN", "REVERSAL OF FORTUNE", "DOUBLE TOIL AND DOUBLE TROUBLE")]")
 					episode_names += new /datum/episode_name/rare("A COLD DAY IN HELL", "Station temperature was below 0C this round and threat was high", 1000)
-		if(locate(/datum/round_event_control/antagonist/solo/malf) in ran_events)
-			episode_names += new /datum/episode_name/rare("[pick("I'M SORRY [uppr_name], I'M AFRAID I CAN'T LET YOU DO THAT", "A STRANGE GAME", "THE AI GOES ROGUE", "RISE OF THE MACHINES")]", "Round included a malfunctioning AI.", 300)
-		if(locate(/datum/round_event_control/antagonist/solo/revolutionary) in ran_events)
-			episode_names += new /datum/episode_name/rare("[pick("THE CREW STARTS A REVOLUTION", "HELL IS OTHER SPESSMEN", "INSURRECTION", "THE CREW RISES UP", 25;"FUN WITH FRIENDS")]", "Round included roundstart revs.", 350)
-			if(copytext(uppr_name,1,2) == "V")
-				episode_names += new /datum/episode_name/rare("V FOR [uppr_name]", "Round included roundstart revs... and the station's name starts with V.", 1500)
-		if(locate(/datum/round_event_control/blob) in ran_events)
-			episode_names += new /datum/episode_name/rare("[pick("MARRIED TO THE BLOB", "THE CREW GETS QUARANTINED")]", "Round included a roundstart blob.", 350)
 
 	if(BLACKBOX_FEEDBACK_NUM("narsies_spawned") > 0)
 		episode_names += new /datum/episode_name/rare("[pick("NAR-SIE'S DAY OUT", "NAR-SIE'S VACATION", "THE CREW LEARNS ABOUT SACRED GEOMETRY", "REALM OF THE MAD GOD", "THE ONE WITH THE ELDRITCH HORROR", 50;"STUDY HARD, BUT PART-SIE HARDER")]", "Nar-Sie is loose!", 500)

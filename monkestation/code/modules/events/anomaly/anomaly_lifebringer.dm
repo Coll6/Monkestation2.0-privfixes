@@ -5,7 +5,6 @@
 
 	max_occurrences = 2
 	weight = 15
-	track = EVENT_TRACK_MUNDANE
 
 /datum/round_event/anomaly/anomaly_lifebringer
 	start_when = 1

@@ -915,16 +915,11 @@
 					continue
 				shake_camera(crew_member, 15, 1)
 
-			SSgamemode.point_gain_multipliers[EVENT_TRACK_ROLESET]++
 
 
 		if(HACK_SLEEPER) // Trigger one or multiple sleeper agents with the crew (or for latejoining crew)
 			// monkestation start: inject storyteller events instead of dynamic rulesets
 			var/event_to_spawn = pick_weight(list(
-				/datum/round_event_control/antagonist/solo/traitor/midround = 75,
-				// hmmm, let's rarely spawn some non-traitor antags just to spice things up a bit
-				/datum/round_event_control/antagonist/solo/heretic/midround = 15,
-				/datum/round_event_control/antagonist/solo/from_ghosts/wizard = 1
 			))
 			force_event_after(event_to_spawn, "[hacker] hacking a communications console", rand(20 SECONDS, 1 MINUTES))
 			priority_announce(

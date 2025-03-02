@@ -7,9 +7,6 @@
 
 	category = EVENT_CATEGORY_SPACE
 	description = "Spawns a contractor in space near the station."
-	track = EVENT_TRACK_MAJOR
-	tags = list(TAG_OUTSIDER_ANTAG, TAG_SPACE, TAG_COMBAT)
-	checks_antag_cap = TRUE
 
 /datum/round_event/ghost_role/contractor
 	minimum_required = 1

@@ -9,8 +9,6 @@
 
 	min_wizard_trigger_potency = 1
 	max_wizard_trigger_potency = 4
-	track = EVENT_TRACK_MAJOR
-	tags = list(TAG_MAGICAL, TAG_DESTRUCTIVE)
 
 /datum/round_event/anomaly/anomaly_storm
 	start_when = 1

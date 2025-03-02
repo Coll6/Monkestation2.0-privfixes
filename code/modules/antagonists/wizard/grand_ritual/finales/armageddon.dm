@@ -55,10 +55,6 @@
 			tesla.energy = 200*/
 //monkestation removal end
 		if (DOOM_METEORS)
-			var/datum/dynamic_ruleset/roundstart/meteor/meteors = new()
-			meteors.meteordelay = 0
-			var/datum/game_mode/dynamic/mode = SSticker.mode
-			mode.execute_roundstart_rule(meteors) // Meteors will continue until morale is crushed.
 			priority_announce("Meteors have been detected on collision course with the station.", "Meteor Alert", ANNOUNCER_METEORS)
 //monkestation edit start
 		if (DOOM_EVENTS) //triggers a MASSIVE amount of events pretty quickly
@@ -74,18 +70,10 @@
 				addtimer(CALLBACK(event, TYPE_PROC_REF(/datum/round_event_control, run_event)), (10 * timer_counter) SECONDS)
 				timer_counter++
 		if (DOOM_ANTAGS) //so I heard you like antags
-			var/datum/game_mode/dynamic/dynamic = SSticker.mode
-			dynamic.create_threat(100, dynamic.threat_log, "Final grand ritual")
 			ASYNC //sleeps
 				for(var/i in 1 to 4) //spawn 4 midrounds
 					sleep(50) //sleep 5 seconds between each one
-					var/list/possible_rulesets = dynamic.init_rulesets(/datum/dynamic_ruleset/midround/from_ghosts)
-					if(i == 1) //always draft at least one heavy, although funny, it would be kind of lame if we just got 4 abductors
-						for(var/datum/dynamic_ruleset/midround/entry in possible_rulesets)
-							if(!entry.midround_ruleset_style == MIDROUND_RULESET_STYLE_HEAVY)
-								possible_rulesets -= entry
-					var/picked_ruleset = pick(possible_rulesets)
-					dynamic.picking_specific_rule(picked_ruleset, TRUE)
+
 		if (DOOM_ROD) //spawns a ghost controlled, forced looping rod, only technically less damaging then singaloth or tesloose
 			var/obj/effect/immovablerod/rod = new(current_location)
 			rod.loopy_rod = TRUE
