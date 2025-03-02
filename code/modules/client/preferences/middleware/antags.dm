@@ -59,15 +59,6 @@
 /datum/preference_middleware/antags/proc/get_antag_bans()
 	var/list/antag_bans = list()
 
-	for (var/datum/dynamic_ruleset/dynamic_ruleset as anything in subtypesof(/datum/dynamic_ruleset))
-		var/antag_flag = initial(dynamic_ruleset.antag_flag)
-		var/antag_flag_override = initial(dynamic_ruleset.antag_flag_override)
-
-		if (isnull(antag_flag))
-			continue
-
-		if (is_banned_from(preferences.parent?.ckey, list(antag_flag_override || antag_flag, ROLE_SYNDICATE)))
-			antag_bans += serialize_antag_name(antag_flag)
 
 	return antag_bans
 
@@ -77,19 +68,6 @@
 
 	var/list/antag_days_left = list()
 
-	for (var/datum/dynamic_ruleset/dynamic_ruleset as anything in subtypesof(/datum/dynamic_ruleset))
-		var/antag_flag = initial(dynamic_ruleset.antag_flag)
-		var/antag_flag_override = initial(dynamic_ruleset.antag_flag_override)
-
-		if (isnull(antag_flag))
-			continue
-
-		var/days_needed = preferences.parent?.get_remaining_days(
-			GLOB.special_roles[antag_flag_override || antag_flag]
-		)
-
-		if (days_needed > 0)
-			antag_days_left[serialize_antag_name(antag_flag)] = days_needed
 
 	return antag_days_left
 
@@ -128,13 +106,6 @@
 
 	var/list/antagonists = non_ruleset_antagonists.Copy()
 
-	for (var/datum/dynamic_ruleset/ruleset as anything in subtypesof(/datum/dynamic_ruleset))
-		var/datum/antagonist/antagonist_type = initial(ruleset.antag_datum)
-		if (isnull(antagonist_type))
-			continue
-
-		// antag_flag is guaranteed to be unique by unit tests.
-		antagonists[initial(ruleset.antag_flag)] = antagonist_type
 
 	var/list/generated_icons = list()
 

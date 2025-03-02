@@ -8,7 +8,6 @@
 	min_players = 30
 	min_wizard_trigger_potency = 1
 	max_wizard_trigger_potency = 4
-	track = EVENT_TRACK_MUNDANE
 
 /datum/round_event/anomaly/anomaly_fluid
 	start_when = 1

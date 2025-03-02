@@ -60,4 +60,3 @@ SUBSYSTEM_DEF(autotransfer)
 	crew_transfer_continue() // safety measure
 
 /datum/controller/subsystem/autotransfer/proc/crew_transfer_continue()
-	SSgamemode.point_gain_multipliers[EVENT_TRACK_ROLESET]++

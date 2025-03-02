@@ -6,8 +6,6 @@
 	max_occurrences = 3
 	min_players = 3
 	category = EVENT_CATEGORY_ANOMALIES
-	track = EVENT_TRACK_MODERATE
-	tags = list(TAG_SPOOKY)
 
 /datum/round_event/random_artifact
 	announce_when = 0

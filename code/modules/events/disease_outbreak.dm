@@ -25,7 +25,6 @@
 	max_occurrences = 2
 	min_players = 15
 	weight = 4
-	track = EVENT_TRACK_MAJOR //monkie edit
 	earliest_start = 20 MINUTES
 	category = EVENT_CATEGORY_HEALTH
 	description = "A 'classic' virus will infect some members of the crew."

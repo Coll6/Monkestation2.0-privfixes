@@ -13,11 +13,6 @@
 	description = "The crew will either pay up, or face a pirate assault."
 	admin_setup = list(/datum/event_admin_setup/listed_options/pirates)
 	map_flags = EVENT_SPACE_ONLY
-//monkestation edit start
-	track = EVENT_TRACK_MAJOR
-	tags = list(TAG_COMBAT, TAG_COMMUNAL, TAG_EXTERNAL, TAG_OUTSIDER_ANTAG)
-	checks_antag_cap = TRUE
-//monkestation edit end
 
 /datum/round_event_control/pirates/preRunEvent()
 	if(!(length(GLOB.light_pirate_gangs) + length(GLOB.heavy_pirate_gangs))) //monkestation edit: adds the pirate gangs check, as well as a redundant planetary check

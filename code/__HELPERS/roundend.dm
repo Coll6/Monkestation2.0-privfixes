@@ -248,10 +248,7 @@ GLOBAL_LIST_INIT(round_end_images, world.file2list("data/image_urls.txt")) // MO
 
 	CHECK_TICK
 
-	//Set news report and mode result
-	mode.set_round_result()
-	SSgamemode.round_end_report()
-	SSgamemode.store_roundend_data() // store data on roundend for next round
+
 
 	to_chat(world, span_infoplain(span_big(span_bold("<BR><BR><BR>The round has ended."))))
 	log_game("The round has ended.")
@@ -374,7 +371,7 @@ GLOBAL_LIST_INIT(round_end_images, world.file2list("data/image_urls.txt")) // MO
 	var/list/parts = list()
 
 	//might want to make this a full section, monkestation edit
-	parts += "<div class='panel stationborder'><span class='header'>[("Storyteller: [SSgamemode.current_storyteller ? SSgamemode.current_storyteller.name : "N/A"]")]</span></div>"
+	parts += "<div class='panel stationborder'><span class='header'>[]</span></div>"
 
 	//AI laws
 	parts += law_report()
@@ -426,17 +423,7 @@ GLOBAL_LIST_INIT(round_end_images, world.file2list("data/image_urls.txt")) // MO
 			//ignore this comment, it fixes the broken sytax parsing caused by the " above
 			else
 				parts += "[FOURSPACES]<i>Nobody died this shift!</i>"
-	if(istype(SSticker.mode, /datum/game_mode/dynamic))
-		var/datum/game_mode/dynamic/mode = SSticker.mode
-		parts += "[FOURSPACES]Threat level: [mode.threat_level]"
-		parts += "[FOURSPACES]Threat left: [mode.mid_round_budget]"
-		if(mode.roundend_threat_log.len)
-			parts += "[FOURSPACES]Threat edits:"
-			for(var/entry as anything in mode.roundend_threat_log)
-				parts += "[FOURSPACES][FOURSPACES][entry]<BR>"
-		parts += "[FOURSPACES]Executed rules:"
-		for(var/datum/dynamic_ruleset/rule in mode.executed_rules)
-			parts += "[FOURSPACES][FOURSPACES][rule.ruletype] - <b>[rule.name]</b>: -[rule.cost + rule.scaled_times * rule.scaling_cost] threat"
+
 	return parts.Join("<br>")
 
 /client/proc/roundend_report_file()

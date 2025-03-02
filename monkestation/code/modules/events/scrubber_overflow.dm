@@ -1,7 +1,6 @@
 #define BASE_EVAPORATION_MULTIPLIER 10
 
 /datum/round_event_control/scrubber_overflow
-	shared_occurence_type = SHARED_SCRUBBERS
 
 /datum/round_event/scrubber_overflow
 	reagents_amount = 100

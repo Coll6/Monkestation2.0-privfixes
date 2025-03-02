@@ -40,7 +40,6 @@
 	max_occurrences = 2
 	earliest_start = 20 MINUTES
 	category = EVENT_CATEGORY_ENTITIES
-	track = EVENT_TRACK_MAJOR
 	description = "Angry monkies pour out of portals."
 
 /datum/round_event/portal_storm/portal_storm_monkey

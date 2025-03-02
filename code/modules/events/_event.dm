@@ -41,24 +41,6 @@
 	/// Flags dictating whether this event should be run on certain kinds of map
 	var/map_flags = NONE
 
-	// monkestation start
-	/// The typepath to the event group this event is a part of.
-	var/datum/event_group/event_group = null
-	var/roundstart = FALSE
-	var/cost = 1
-	var/reoccurence_penalty_multiplier = 0.75
-	var/shared_occurence_type
-	var/track = EVENT_TRACK_MODERATE
-	/// Last calculated weight that the storyteller assigned this event
-	var/calculated_weight = 0
-	var/tags = list() 	/// Tags of the event
-	/// List of the shared occurence types.
-	var/list/shared_occurences = list()
-	/// Whether a roundstart event can happen post roundstart. Very important for events which override job assignments.
-	var/can_run_post_roundstart = TRUE
-	/// If set then the type or list of types of storytellers we are restricted to being trigged by
-	var/list/allowed_storytellers
-	// monkestation end
 
 /datum/round_event_control/New()
 	if(config && !wizardevent) // Magic is unaffected by configs
@@ -97,14 +79,6 @@
 // Admin-created events override this.
 /datum/round_event_control/proc/can_spawn_event(players_amt, allow_magic = FALSE, fake_check = FALSE)
 	SHOULD_CALL_PARENT(TRUE)
-// monkestation start: event groups and storyteller stuff
-	if(SSgamemode.current_storyteller?.disable_distribution || SSgamemode.halted_storyteller)
-		return FALSE
-	if(event_group && !GLOB.event_groups[event_group].can_run())
-		return FALSE
-	if(roundstart && (!SSgamemode.can_run_roundstart || (SSgamemode.ran_roundstart && !fake_check && !SSgamemode.current_storyteller?.ignores_roundstart)))
-		return FALSE
-// monkestation end
 	if(occurrences >= max_occurrences)
 		return FALSE
 	if(earliest_start >= (world.time - SSticker.round_start_time))
@@ -118,20 +92,6 @@
 	if(EMERGENCY_ESCAPED_OR_ENDGAMED)
 		return FALSE
 	if(ispath(typepath, /datum/round_event/ghost_role) && !(GLOB.ghost_role_flags & GHOSTROLE_MIDROUND_EVENT))
-		return FALSE
-
-// monkestation start: storyteller stuff
-	if(checks_antag_cap && !roundstart && !SSgamemode.can_inject_antags())
-		return FALSE
-	if(!check_enemies())
-		return FALSE
-	if(allowed_storytellers && SSgamemode.current_storyteller && ((islist(allowed_storytellers) && \
-		!is_type_in_list(SSgamemode.current_storyteller, allowed_storytellers)) || SSgamemode.current_storyteller.type != allowed_storytellers))
-		return FALSE
-// monkestation end
-
-	var/datum/game_mode/dynamic/dynamic = SSticker.mode
-	if (istype(dynamic) && dynamic_should_hijack && dynamic.random_event_hijacked != HIJACKED_NOTHING)
 		return FALSE
 
 	return TRUE
@@ -148,8 +108,6 @@
 	// We sleep HERE, in pre-event setup (because there's no sense doing it in run_event() since the event is already running!) for the given amount of time to make an admin has enough time to cancel an event un-fitting of the present round.
 	if(alert_observers)
 		message_admins("Random Event triggering in [DisplayTimeText(RANDOM_EVENT_ADMIN_INTERVENTION_TIME)]: [name]. (<a href='byond://?src=[REF(src)];cancel=1'>CANCEL</a>)")
-		if(!roundstart)
-			sleep(RANDOM_EVENT_ADMIN_INTERVENTION_TIME)
 
 		if(!can_spawn_event(get_active_player_count(alive_check = TRUE, afk_check = TRUE, human_check = TRUE), fake_check = TRUE) && !forced)
 			if(!forced)
@@ -213,11 +171,6 @@ Runs the event
 
 	triggering = FALSE
 	log_game("[random ? "Random" : "Forced"] Event triggering: [name] ([typepath]).")
-
-	// monkestation start: event groups
-	if(event_group)
-		GLOB.event_groups[event_group].on_run(src)
-	// monkestation end
 
 	if(alert_observers)
 		round_event.announce_deadchat(random, event_cause)
@@ -297,74 +250,25 @@ Runs the event
 	processing = TRUE
 
 /datum/round_event_control/roundstart
-	roundstart = TRUE
 	earliest_start = 0
 
-///Adds an occurence. Has to use the setter to properly handle shared occurences
-/datum/round_event_control/proc/add_occurence()
-	if(shared_occurence_type)
-		if(!shared_occurences[shared_occurence_type])
-			shared_occurences[shared_occurence_type] = 0
-		shared_occurences[shared_occurence_type]++
-	occurrences++
 
 ///Subtracts an occurence. Has to use the setter to properly handle shared occurences
 /datum/round_event_control/proc/subtract_occurence()
-	if(shared_occurence_type)
-		if(!shared_occurences[shared_occurence_type])
-			shared_occurences[shared_occurence_type] = 0
-		shared_occurences[shared_occurence_type]--
 	occurrences--
 
 ///Gets occurences. Has to use the getter to properly handle shared occurences
 /datum/round_event_control/proc/get_occurences()
-	if(shared_occurence_type)
-		if(!shared_occurences[shared_occurence_type])
-			shared_occurences[shared_occurence_type] = 0
-		return shared_occurences[shared_occurence_type]
 	return occurrences
 
 /// Prints the action buttons for this event.
 /datum/round_event_control/proc/get_href_actions()
-	if(SSticker.HasRoundStarted())
-		if(roundstart)
-			if(!can_run_post_roundstart)
-				return "<a class='linkOff'>Fire</a> <a class='linkOff'>Schedule</a>"
-			return "<a href='byond://?src=[REF(src)];action=fire'>Fire</a> <a href='byond://?src=[REF(src)];action=schedule'>Schedule</a>"
-		else
-			return "<a href='byond://?src=[REF(src)];action=fire'>Fire</a> <a href='byond://?src=[REF(src)];action=schedule'>Schedule</a> <a href='byond://?src=[REF(src)];action=force_next'>Force Next</a>"
-	else
-		if(roundstart)
-			return "<a href='byond://?src=[REF(src)];action=schedule'>Add Roundstart</a> <a href='byond://?src=[REF(src)];action=force_next'>Force Roundstart</a>"
-		else
-			return "<a class='linkOff'>Fire</a> <a class='linkOff'>Schedule</a> <a class='linkOff'>Force Next</a>"
+
 
 
 /datum/round_event_control/Topic(href, href_list)
 	. = ..()
-	if(QDELETED(src))
-		return
-	switch(href_list["action"])
-		if("schedule")
-			message_admins("[key_name_admin(usr)] scheduled event [src.name].")
-			log_admin_private("[key_name(usr)] scheduled [src.name].")
-			SSgamemode.current_storyteller.buy_event(src, src.track)
-		if("force_next")
-			if(length(src.admin_setup))
-				for(var/datum/event_admin_setup/admin_setup_datum in src.admin_setup)
-					if(admin_setup_datum.prompt_admins() == ADMIN_CANCEL_EVENT)
-						return
-			message_admins("[key_name_admin(usr)] forced scheduled event [src.name].")
-			log_admin_private("[key_name(usr)] forced scheduled event [src.name].")
-			SSgamemode.forced_next_events[src.track] = src
-		if("fire")
-			if(length(src.admin_setup))
-				for(var/datum/event_admin_setup/admin_setup_datum in src.admin_setup)
-					if(admin_setup_datum.prompt_admins() == ADMIN_CANCEL_EVENT)
-						return
-			message_admins("[key_name_admin(usr)] fired event [src.name].")
-			log_admin_private("[key_name(usr)] fired event [src.name].")
-			run_event(random = FALSE, admin_forced = TRUE)
+
 
 //monkestation addition ends - STORYTELLERS
 

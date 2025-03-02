@@ -265,30 +265,6 @@ SUBSYSTEM_DEF(ticker)
 	var/init_start = world.timeofday
 
 	mode = new /datum/game_mode/dynamic
-	SSgamemode.init_storyteller() //monkestation addition
-	CHECK_TICK
-	//Configure mode and assign player to special mode stuff
-	var/can_continue = 0
-	//monkestation addition start
-	can_continue =	SSgamemode.pre_setup()
-	CHECK_TICK
-	//monkestation addition end
-	can_continue = src.mode.pre_setup() //Choose antagonists
-	CHECK_TICK
-	can_continue = can_continue && SSjob.DivideOccupations() //Distribute jobs
-	CHECK_TICK
-
-	if(!GLOB.Debug2)
-		if(!can_continue)
-			log_game("Game failed pre_setup")
-			QDEL_NULL(mode)
-			to_chat(world, "<B>Error setting up game.</B> Reverting to pre-game lobby.")
-			SSjob.ResetOccupations()
-			return FALSE
-	else
-		message_admins(span_notice("DEBUG: Bypassing prestart checks..."))
-
-	CHECK_TICK
 
 	// There may be various config settings that have been set or modified by this point.
 	// This is the point of no return before spawning in new players, let's run over the
@@ -350,8 +326,6 @@ SUBSYSTEM_DEF(ticker)
 
 /datum/controller/subsystem/ticker/proc/PostSetup()
 	set waitfor = FALSE
-	SSgamemode.current_storyteller.process(STORYTELLER_WAIT_TIME * 0.1) // we want this asap
-	SSgamemode.current_storyteller.round_started = TRUE
 	mode.post_setup()
 	GLOB.start_state = new /datum/station_state()
 	GLOB.start_state.count()

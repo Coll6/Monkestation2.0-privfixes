@@ -4,9 +4,6 @@
 	weight = 0
 	category = EVENT_CATEGORY_WIZARD
 	description = "Trigger a random wizard event that meets its normal conditions."
-	track = EVENT_TRACK_MAJOR
-	tags = list(TAG_SPOOKY, TAG_MAGICAL)
-	allowed_storytellers = /datum/storyteller/mystic
 
 /datum/round_event/summon_wizard_event
 	///the event we have actually chosen to run
