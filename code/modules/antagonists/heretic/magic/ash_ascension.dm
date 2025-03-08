@@ -52,12 +52,7 @@
 	if(!isturf(owner.loc))
 		return
 
-	for(var/turf/nearby_turf as anything in RANGE_TURFS(1, owner))
-		var/obj/effect/hotspot/flame_tile = locate(nearby_turf) || new(nearby_turf)
-		flame_tile.alpha = 125
-		nearby_turf.hotspot_expose(750, 25 * seconds_per_tick, 1)
-		for(var/mob/living/fried_living in nearby_turf.contents - owner)
-			fried_living.apply_damage(2.5 * seconds_per_tick, BURN)
+
 
 /// Creates one, large, expanding ring of fire around the caster, which does not follow them.
 /datum/action/cooldown/spell/fire_cascade
@@ -85,15 +80,7 @@
 
 /// Spreads a huge wave of fire in a radius around us, staggered between levels
 /datum/action/cooldown/spell/fire_cascade/proc/fire_cascade(atom/centre, flame_radius = 1)
-	for(var/i in 0 to flame_radius)
-		for(var/turf/nearby_turf as anything in spiral_range_turfs(i + 1, centre))
-			var/obj/effect/hotspot/flame_tile = locate(nearby_turf) || new(nearby_turf)
-			flame_tile.alpha = 125
-			nearby_turf.hotspot_expose(750, 50, 1)
-			for(var/mob/living/fried_living in nearby_turf.contents - owner)
-				fried_living.apply_damage(5, BURN)
 
-		stoplag(0.3 SECONDS)
 
 /datum/action/cooldown/spell/fire_cascade/big
 	name = "Greater Fire Cascade"
@@ -156,8 +143,7 @@
 			L.adjustFireLoss(20)
 			to_chat(L, span_userdanger("You're hit by [source]'s eldritch flames!"))
 
-		new /obj/effect/hotspot(T)
-		T.hotspot_expose(700,50,1)
+
 		// deals damage to mechs
 		for(var/obj/vehicle/sealed/mecha/M in T.contents)
 			if(M in hit_list)

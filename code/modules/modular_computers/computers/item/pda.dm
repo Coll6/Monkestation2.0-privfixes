@@ -215,7 +215,6 @@
 	target.client?.give_award(/datum/award/achievement/misc/clickbait, target)
 
 	if(current_turf)
-		current_turf.hotspot_expose(700,125)
 		if(istype(inserted_disk, /obj/item/computer_disk/virus/detomatix))
 			explosion(src, devastation_range = -1, heavy_impact_range = 1, light_impact_range = 3, flash_range = 4)
 		else

@@ -312,14 +312,7 @@
 			areas_with_multiple_APCs.Add(A.type)
 		CHECK_TICK
 
-	for(var/obj/machinery/airalarm/AA in GLOB.air_alarms)
-		var/area/A = get_area(AA)
-		if(!A) //Make sure the target isn't inside an object, which results in runtimes.
-			dat += "Skipped over [AA] in invalid location, [AA.loc].<br>"
-			continue
-		if(!(A.type in areas_with_air_alarm))
-			areas_with_air_alarm.Add(A.type)
-		CHECK_TICK
+
 
 	for(var/obj/machinery/requests_console/RC in GLOB.req_console_all)
 		var/area/A = get_area(RC)

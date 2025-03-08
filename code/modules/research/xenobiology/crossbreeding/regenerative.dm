@@ -46,10 +46,7 @@ Regenerative extracts:
 	colour = "orange"
 
 /obj/item/slimecross/regenerative/orange/core_effect_before(mob/living/target, mob/user)
-	target.visible_message(span_warning("\The [src] boils over!"))
-	for(var/turf/targetturf in RANGE_TURFS(1,target))
-		if(!locate(/obj/effect/hotspot) in targetturf)
-			new /obj/effect/hotspot(targetturf)
+
 
 /obj/item/slimecross/regenerative/purple
 	colour = "purple"

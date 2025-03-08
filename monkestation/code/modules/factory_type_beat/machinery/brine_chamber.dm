@@ -5,7 +5,7 @@
 	icon_state = "brine_chamber"
 	density = TRUE
 	anchored = TRUE
-	can_atmos_pass = ATMOS_PASS_NO
+
 
 
 //pain

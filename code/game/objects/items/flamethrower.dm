@@ -234,38 +234,13 @@
 	for(var/turf/T in turflist)
 		if(T == previousturf)
 			continue //so we don't burn the tile we be standin on
-		var/list/turfs_sharing_with_prev = previousturf.get_atmos_adjacent_turfs(alldir=1)
-		if(!(T in turfs_sharing_with_prev))
-			break
-		if(lit)
-			if(igniter)
-				igniter.ignite_turf(src,T)
-			else
-				default_ignite(T)
-		if(beaker)
-			if(beaker.reagents.total_volume)
-				project_reagents(T, user)
-				beaker.reagents.remove_all(beaker.reagents.maximum_volume * 0.05) //only reduce reagents once per shot
-		sleep(0.1 SECONDS)
-		previousturf = T
-	operating = FALSE
-	for(var/mob/M in viewers(1, loc))
-		if((M.client && M.machine == src))
-			attack_self(M)
+
 
 
 /obj/item/flamethrower/proc/default_ignite(turf/target, release_amount = 0.05)
 	//TODO: DEFERRED Consider checking to make sure tank pressure is high enough before doing this...
 	//Transfer 5% of current tank air contents to turf
-	var/datum/gas_mixture/tank_mix = ptank.return_air()
-	var/datum/gas_mixture/air_transfer = tank_mix.remove_ratio(release_amount)
 
-	if(air_transfer.gases[/datum/gas/plasma])
-		air_transfer.gases[/datum/gas/plasma][MOLES] *= 5 //Suffering
-	target.assume_air(air_transfer)
-	//Burn it based on transfered gas
-	target.hotspot_expose((tank_mix.temperature*2) + 380,500)
-	//location.hotspot_expose(1000,500,1)
 
 /obj/item/flamethrower/proc/project_reagents(atom/target, mob/user)
 	var/range = max(min(3, get_dist(src, target)), 1)
@@ -328,17 +303,10 @@
 
 
 /obj/item/assembly/igniter/proc/flamethrower_process(turf/open/location)
-	location.hotspot_expose(heat,2)
+
 
 /obj/item/assembly/igniter/proc/ignite_turf(obj/item/flamethrower/F,turf/open/location,release_amount = 0.05)
 	F.default_ignite(location,release_amount)
 
 /obj/item/flamethrower/proc/instant_refill()
 	SIGNAL_HANDLER
-	if(ptank)
-		var/datum/gas_mixture/tank_mix = ptank.return_air()
-		tank_mix.assert_gas(/datum/gas/plasma)
-		tank_mix.gases[/datum/gas/plasma][MOLES] = (10*ONE_ATMOSPHERE)*ptank.volume/(R_IDEAL_GAS_EQUATION*T20C)
-	else
-		ptank = new /obj/item/tank/internals/plasma/full(src)
-	update_appearance()

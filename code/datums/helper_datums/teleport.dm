@@ -128,23 +128,20 @@
 	if(no_teleport && (destination_area.area_flags & NOTELEPORT))
 		return
 
-	var/datum/gas_mixture/floor_gas_mixture = floor_turf.air
+	var/datum/gas_mixture/floor_gas_mixture
 	if(!floor_gas_mixture)
 		return
 
-	var/list/floor_gases = floor_gas_mixture.gases
+	var/list/floor_gases
 	var/static/list/gases_to_check = list(
-		/datum/gas/oxygen = list(16, 100),
-		/datum/gas/nitrogen,
-		/datum/gas/carbon_dioxide = list(0, 10)
+
 	)
 	if(!check_gases(floor_gases, gases_to_check))
 		return FALSE
 
 	// Aim for goldilocks temperatures and pressure
-	if((floor_gas_mixture.temperature <= 270) || (floor_gas_mixture.temperature >= 360))
-		return
-	var/pressure = floor_gas_mixture.return_pressure()
+
+	var/pressure
 	if((pressure <= 20) || (pressure >= 550))
 		return
 

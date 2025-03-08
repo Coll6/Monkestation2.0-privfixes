@@ -48,7 +48,7 @@
 		out_var += cached_gases[total_moles_id][MOLES];\
 	}
 
-GLOBAL_LIST_INIT(nonoverlaying_gases, typecache_of_gases_with_no_overlays())
+GLOBAL_LIST_INIT(nonoverlaying_gases, null)
 ///Returns a list of overlays of every gas in the mixture
 #define GAS_OVERLAYS(gases, out_var, z_layer_turf)\
 	do { \

@@ -47,7 +47,6 @@ GLOBAL_LIST_INIT(initalized_ocean_areas, list())
 
 /turf/open/openspace/ocean
 	name = "ocean"
-	planetary_atmos = TRUE
 	baseturfs = /turf/open/openspace/ocean
 	var/replacement_turf = /turf/open/floor/plating/ocean
 
@@ -72,8 +71,6 @@ GLOBAL_LIST_INIT(initalized_ocean_areas, list())
 	barefootstep = FOOTSTEP_SAND
 	clawfootstep = FOOTSTEP_SAND
 	heavyfootstep = FOOTSTEP_GENERIC_HEAVY
-	planetary_atmos = TRUE
-	initial_gas_mix = OSHAN_DEFAULT_ATMOS
 
 	upgradable = FALSE
 	attachment_holes = FALSE
@@ -180,8 +177,7 @@ GLOBAL_LIST_INIT(initalized_ocean_areas, list())
 
 
 /turf/open/floor/plating/ocean/proc/assume_self()
-	if(!atmos_adjacent_turfs)
-		immediate_calculate_adjacent_turfs()
+
 	for(var/direction in GLOB.cardinals)
 		var/turf/directional_turf = get_step(src, direction)
 		if(istype(directional_turf, /turf/open/floor/plating/ocean))
@@ -190,12 +186,7 @@ GLOBAL_LIST_INIT(initalized_ocean_areas, list())
 			if(isclosedturf(directional_turf))
 				RegisterSignal(directional_turf, COMSIG_TURF_DESTROY, PROC_REF(add_turf_direction), TRUE)
 				continue
-			else if(!(directional_turf in atmos_adjacent_turfs))
-				var/obj/machinery/door/found_door = locate(/obj/machinery/door) in directional_turf
-				if(found_door)
-					RegisterSignal(found_door, COMSIG_ATOM_DOOR_OPEN, TYPE_PROC_REF(/turf/open/floor/plating/ocean, door_opened))
-				RegisterSignal(directional_turf, COMSIG_TURF_UPDATE_AIR, PROC_REF(add_turf_direction_non_closed), TRUE)
-				continue
+
 			else
 				open_turfs.Add(direction)
 
@@ -206,12 +197,6 @@ GLOBAL_LIST_INIT(initalized_ocean_areas, list())
 /turf/open/floor/plating/ocean/proc/door_opened(datum/source)
 	SIGNAL_HANDLER
 
-	var/obj/machinery/door/found_door = source
-	var/turf/turf = get_turf(found_door)
-
-	if(turf.can_atmos_pass())
-		turf.add_liquid_list(ocean_reagents, FALSE, ocean_temp)
-
 /turf/open/floor/plating/ocean/proc/process_turf()
 	for(var/direction in open_turfs)
 		var/turf/directional_turf = get_step(src, direction)
@@ -221,13 +206,6 @@ GLOBAL_LIST_INIT(initalized_ocean_areas, list())
 			if(!open_turfs.len)
 				SSliquids.active_ocean_turfs -= src
 			return
-		else if(!(directional_turf in atmos_adjacent_turfs))
-			RegisterSignal(directional_turf, COMSIG_TURF_UPDATE_AIR, PROC_REF(add_turf_direction_non_closed), TRUE)
-			open_turfs -= direction
-			if(!open_turfs.len)
-				SSliquids.active_ocean_turfs -= src
-			return
-
 		directional_turf.add_liquid_list(ocean_reagents, FALSE, ocean_temp)
 
 /turf/open/floor/plating/ocean/proc/rebuild_adjacent()
@@ -351,8 +329,6 @@ GLOBAL_LIST_INIT(initalized_ocean_areas, list())
 	SIGNAL_HANDLER
 	var/turf/direction_turf = source
 
-	if(!(direction_turf in atmos_adjacent_turfs))
-		return
 
 	open_turfs.Add(get_dir(src, direction_turf))
 
@@ -728,7 +704,7 @@ GLOBAL_VAR_INIT(lavaland_points_generated, 0)
 
 	turf_type = /turf/open/misc/asteroid/basalt/lava_land_surface
 	baseturfs = /turf/open/misc/asteroid/basalt/lava_land_surface
-	initial_gas_mix = LAVALAND_DEFAULT_ATMOS
+
 	defer_change = TRUE
 
 

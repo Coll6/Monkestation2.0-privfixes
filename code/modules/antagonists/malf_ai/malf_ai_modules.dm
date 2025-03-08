@@ -24,29 +24,8 @@ GLOBAL_LIST_INIT(blacklisted_malf_machines, typecacheof(list(
 		/obj/machinery/syndicatebomb/empty,
 		/obj/machinery/syndicatebomb/self_destruct,
 		/obj/machinery/syndicatebomb/training,
-		/obj/machinery/atmospherics/pipe/layer_manifold,
-		/obj/machinery/atmospherics/pipe/multiz,
-		/obj/machinery/atmospherics/pipe/smart,
-		/obj/machinery/atmospherics/pipe/smart/manifold, //mapped one
-		/obj/machinery/atmospherics/pipe/smart/manifold4w, //mapped one
-		/obj/machinery/atmospherics/pipe/color_adapter,
-		/obj/machinery/atmospherics/pipe/bridge_pipe,
-		/obj/machinery/atmospherics/pipe/heat_exchanging/simple,
-		/obj/machinery/atmospherics/pipe/heat_exchanging/junction,
-		/obj/machinery/atmospherics/pipe/heat_exchanging/manifold,
-		/obj/machinery/atmospherics/pipe/heat_exchanging/manifold4w,
-		/obj/machinery/atmospherics/components/tank,
-		/obj/machinery/atmospherics/components/unary/portables_connector,
-		/obj/machinery/atmospherics/components/unary/passive_vent,
-		/obj/machinery/atmospherics/components/unary/heat_exchanger,
-		/obj/machinery/atmospherics/components/unary/hypertorus/core,
-		/obj/machinery/atmospherics/components/unary/hypertorus/waste_output,
-		/obj/machinery/atmospherics/components/unary/hypertorus/moderator_input,
-		/obj/machinery/atmospherics/components/unary/hypertorus/fuel_input,
-		/obj/machinery/hypertorus/interface,
-		/obj/machinery/hypertorus/corner,
-		/obj/machinery/atmospherics/components/binary/valve,
-		/obj/machinery/portable_atmospherics/canister,
+
+
 	)))
 
 GLOBAL_LIST_INIT(malf_modules, subtypesof(/datum/ai_module))
@@ -616,7 +595,7 @@ GLOBAL_LIST_INIT(malf_modules, subtypesof(/datum/ai_module))
 			if(HAS_TRAIT(honk_victim, TRAIT_GODMODE) || !honk_victim.can_hear())
 				continue
 			var/turf/victim_turf = get_turf(honk_victim)
-			if((isspaceturf(victim_turf) || ((victim_turf.return_air()?.return_pressure() || 0) < SOUND_MINIMUM_PRESSURE)) && !victim_turf.Adjacent(found_intercom)) //Prevents getting honked in space
+			if((isspaceturf(victim_turf) ||  0) < SOUND_MINIMUM_PRESSURE && !victim_turf.Adjacent(found_intercom)) //Prevents getting honked in space
 				continue
 			victims |= honk_victim
 	for(var/mob/living/carbon/victim as anything in victims)
@@ -719,10 +698,7 @@ GLOBAL_LIST_INIT(malf_modules, subtypesof(/datum/ai_module))
 	uses = 1
 
 /datum/action/innate/ai/break_air_alarms/Activate()
-	for(var/obj/machinery/airalarm/AA in GLOB.air_alarms)
-		if(!is_station_level(AA.z))
-			continue
-		AA.obj_flags |= EMAGGED
+
 	to_chat(owner, span_notice("All air alarm safeties on the station have been overridden. Air alarms may now use the Flood environmental mode."))
 	owner.playsound_local(owner, 'sound/machines/terminal_off.ogg', 50, 0)
 
@@ -1098,12 +1074,6 @@ GLOBAL_LIST_INIT(malf_modules, subtypesof(/datum/ai_module))
 		var/obj/machinery/door/airlock/clicked_airlock = clicked_on
 		if (!clicked_airlock.canAIControl(ai_caller))
 			clicked_airlock.balloon_alert(ai_caller, "unable to interface!")
-			return FALSE
-
-	if (istype(clicked_on, /obj/machinery/airalarm))
-		var/obj/machinery/airalarm/alarm = clicked_on
-		if (alarm.aidisabled)
-			alarm.balloon_alert(ai_caller, "unable to interface!")
 			return FALSE
 
 	if (istype(clicked_on, /obj/machinery/power/apc))

@@ -296,10 +296,6 @@
 		cell.emp_act(severity)
 
 /obj/item/clothing/head/helmet/space/suicide_act(mob/living/carbon/user)
-	var/datum/gas_mixture/environment = user.loc.return_air()
-	if(HAS_TRAIT(user, TRAIT_RESISTCOLD) || !environment || environment.return_temperature() >= user.bodytemp_cold_damage_limit)
-		user.visible_message(span_suicide("[user] is beating [user.p_them()]self with \the [src]! It looks like [user.p_theyre()] trying to commit suicide!"))
-		return BRUTELOSS
 	user.say("You want proof? I'll give you proof! Here's proof of what'll happen to you if you stay here with your stuff!", forced = "space helmet suicide")
 	user.visible_message(span_suicide("[user] is removing [user.p_their()] helmet to make a point! Yo, holy shit, [user.p_they()] dead!")) //the use of p_they() instead of p_their() here is intentional
 	user.adjust_bodytemperature(-INFINITY, min_temp = CELCIUS_TO_KELVIN(-225 CELCIUS))

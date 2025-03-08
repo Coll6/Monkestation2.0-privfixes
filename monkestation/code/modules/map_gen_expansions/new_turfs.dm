@@ -16,9 +16,9 @@
 	canSmoothWith = SMOOTH_GROUP_FLOOR_GRASS + SMOOTH_GROUP_CLOSED_TURFS
 	layer = HIGH_TURF_LAYER
 	//damaged_dmi = 'icons/turf/damaged.dmi'
-	initial_gas_mix = FOREST_DEFAULT_ATMOS
+
 	flags_1 = NONE
-	planetary_atmos = TRUE
+
 	dig_result = /obj/item/food/grown/grass
 	changes_icon = FALSE
 	/// Which icon file to use for turf specific edge smoothing states.
@@ -69,18 +69,15 @@
 /turf/open/openspace/forest
 	name = "open forest air"
 	baseturfs = /turf/open/openspace/forest
-	initial_gas_mix = FOREST_DEFAULT_ATMOS
-	planetary_atmos = TRUE
+
 
 /turf/open/misc/dirt/forest
 	desc = "Hard-packed dirt - much too hard to plant seeds in."
-	initial_gas_mix = FOREST_DEFAULT_ATMOS
-	planetary_atmos = TRUE
+
 	baseturfs = /turf/baseturf_bottom
 
 /turf/open/misc/sandy_dirt/forest
-	initial_gas_mix = FOREST_DEFAULT_ATMOS
-	planetary_atmos = TRUE
+
 
 /turf/closed/mineral/random/forest
 	name = "forest mountainside"
@@ -92,7 +89,7 @@
 	defer_change = TRUE
 	turf_type = /turf/open/misc/dirt/forest
 	baseturfs = /turf/open/misc/dirt/forest
-	initial_gas_mix = FOREST_DEFAULT_ATMOS
+
 	weak_turf = TRUE
 
 /turf/closed/mineral/random/forest/Change_Ore(ore_type, random = 0)
@@ -117,16 +114,16 @@
 
 /turf/open/floor/engine/hull/reinforced/planetary
 	desc = "Sturdy exterior hull plating that separates you from the outside world"
-	initial_gas_mix = FOREST_DEFAULT_ATMOS
+
 
 /turf/open/floor/engine/hull/planetary
 	desc = "Sturdy exterior hull plating that separates you from the outside world."
-	initial_gas_mix = FOREST_DEFAULT_ATMOS
+
 
 /turf/open/lava/plasma/forest
-	initial_gas_mix = FOREST_DEFAULT_ATMOS
+
 	baseturfs = /turf/open/lava/plasma/forest
-	planetary_atmos = TRUE
+
 
 	icon = 'monkestation/code/modules/map_gen_expansions/icons/turfs/floors/plasma_forest.dmi'
 	mask_icon = 'monkestation/code/modules/map_gen_expansions/icons/turfs/floors/plasma_forest_mask.dmi'
@@ -140,4 +137,4 @@
 
 /turf/open/floor/plating/forest
 	icon_state = "plating"
-	initial_gas_mix = FOREST_DEFAULT_ATMOS
+

@@ -204,8 +204,7 @@ GLOBAL_LIST_INIT(dreams, populate_dream_list())
 		/obj/item/radio/intercom,
 		/obj/structure/cable,
 		/obj/structure/disposalpipe/segment,
-		/obj/machinery/atmospherics/pipe/smart/manifold4w,
-		/obj/machinery/atmospherics/components/unary/vent_scrubber,
+
 		/obj/machinery/atmospherics/components/unary/vent_pump,
 		/obj/machinery/duct,
 		/obj/machinery/navbeacon,

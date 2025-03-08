@@ -184,7 +184,7 @@
 /// Fourth and final link in a breath chain
 /mob/living/carbon/proc/handle_breath_temperature(datum/gas_mixture/breath)
 	// The air you breathe out should match your body temperature
-	breath.temperature = bodytemperature
+
 
 /**
  * Attempts to take a breath from the external or internal air tank.
@@ -221,8 +221,7 @@
 		var/obj/loc_as_obj = loc
 		. = loc_as_obj.handle_internal_lifeform(src, volume_needed)
 
-	else if(isturf(loc)) //Breathe from loc as turf
-		. = loc.remove_air((environment?.total_moles() * BREATH_PERCENTAGE) || 0)
+
 
 	return .
 
@@ -320,7 +319,7 @@
 /// Base carbon environment handler, adds natural stabilization
 /mob/living/carbon/human/handle_environment(datum/gas_mixture/environment, seconds_per_tick, times_fired)
 	. = ..()
-	var/pressure = environment.return_pressure()
+	var/pressure
 	var/adjusted_pressure = calculate_affecting_pressure(pressure)
 
 	// Set alerts and apply damage based on the amount of pressure

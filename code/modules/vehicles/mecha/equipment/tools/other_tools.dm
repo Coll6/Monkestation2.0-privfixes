@@ -449,21 +449,11 @@
 	var/move_cost = 20 //moles per step
 
 /obj/item/mecha_parts/mecha_equipment/thrusters/gas/try_attach_part(mob/user, obj/vehicle/sealed/mecha/M, attach_right = FALSE)
-	if(!M.internal_tank)
-		to_chat(user, span_warning("[M] does not have an internal tank and cannot support this upgrade!"))
-		return FALSE
+
 	return ..()
 
 /obj/item/mecha_parts/mecha_equipment/thrusters/gas/thrust(movement_dir)
-	if(!chassis || !chassis.internal_tank)
-		return FALSE
-	var/datum/gas_mixture/our_mix = chassis.internal_tank.return_air()
-	var/moles = our_mix.total_moles()
-	if(moles < move_cost)
-		our_mix.remove(moles)
-		return FALSE
-	our_mix.remove(move_cost)
-	generate_effect(movement_dir)
+
 	return TRUE
 
 /obj/item/mecha_parts/mecha_equipment/thrusters/ion //for mechs with built-in thrusters, should never really exist un-attached to a mech

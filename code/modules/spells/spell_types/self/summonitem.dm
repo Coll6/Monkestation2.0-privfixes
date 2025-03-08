@@ -149,7 +149,7 @@
 				// Edge cases for moving certain machinery...
 				if(istype(retrieved_item, /obj/machinery/portable_atmospherics))
 					var/obj/machinery/portable_atmospherics/atmos_item = retrieved_item
-					atmos_item.disconnect()
+
 					atmos_item.update_appearance()
 
 				// Otherwise bring the whole thing with us

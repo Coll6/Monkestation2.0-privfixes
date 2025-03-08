@@ -245,21 +245,7 @@
 	if(!istype(location))
 		return
 
-	var/obj/effect/hotspot/hotspot = locate() in location
-	if(!location.air) //monkestation edit: doesnt require a hotspot
-		return
 
-	QDEL_NULL(hotspot)
-	var/datum/gas_mixture/air = location.air
-	var/list/gases = air.gases
-	if (gases[/datum/gas/plasma])
-		var/scrub_amt = min(30, gases[/datum/gas/plasma][MOLES]) //Absorb some plasma
-		gases[/datum/gas/plasma][MOLES] -= scrub_amt
-		absorbed_plasma += scrub_amt
-	if (air.temperature > T20C)
-		air.temperature = max(air.temperature / 2, T20C)
-	air.garbage_collect()
-	location.air_update_turf(FALSE, FALSE)
 
 //MONKESTATION EDIT START
 /obj/effect/particle_effect/fluid/foam/firefighting/make_result()
@@ -309,23 +295,22 @@
 	desc = "A lightweight foamed metal wall that can be used as base to construct a wall."
 	gender = PLURAL
 	max_integrity = 20
-	can_atmos_pass = ATMOS_PASS_DENSITY
+
 	obj_flags = CAN_BE_HIT | BLOCK_Z_IN_DOWN | BLOCK_Z_IN_UP
 	///Var used to prevent spamming of the construction sound
 	var/next_beep = 0
 
 /obj/structure/foamedmetal/Initialize(mapload)
 	. = ..()
-	air_update_turf(TRUE, TRUE)
+
 
 /obj/structure/foamedmetal/Destroy()
-	air_update_turf(TRUE, FALSE)
+
 	. = ..()
 
 /obj/structure/foamedmetal/Move()
-	var/turf/T = loc
 	. = ..()
-	move_update_air(T)
+
 
 /obj/structure/foamedmetal/attack_paw(mob/user, list/modifiers)
 	return attack_hand(user, modifiers)
@@ -431,26 +416,6 @@
 		return
 
 	location.ClearWet()
-	if(location.air)
-		var/datum/gas_mixture/air = location.air
-		air.temperature = 293.15
-		for(var/obj/effect/hotspot/fire in location)
-			qdel(fire)
-
-		var/list/gases = air.gases
-		for(var/gas_type in gases)
-			switch(gas_type)
-				if(/datum/gas/oxygen, /datum/gas/nitrogen)
-					continue
-				else
-					gases[gas_type][MOLES] = 0
-		air.garbage_collect()
-
-	for(var/obj/machinery/atmospherics/components/unary/comp in location)
-		if(!comp.welded)
-			comp.welded = TRUE
-			comp.update_appearance()
-			comp.visible_message(span_danger("[comp] sealed shut!"))
 
 	for(var/mob/living/potential_tinder in location)
 		potential_tinder.extinguish_mob()

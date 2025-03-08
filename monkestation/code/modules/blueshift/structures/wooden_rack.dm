@@ -56,7 +56,7 @@
 	idle_power_usage = 0
 	circuit = null
 	has_emissive = FALSE
-	can_atmos_pass = ATMOS_PASS_YES
+
 	visible_contents = TRUE
 
 /obj/machinery/smartfridge/wooden/Initialize(mapload)

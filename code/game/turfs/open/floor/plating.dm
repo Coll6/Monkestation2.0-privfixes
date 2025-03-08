@@ -191,8 +191,6 @@
 	desc = "Thick, tough flooring created with multiple layers of metal."
 	icon_state = "r_plate-0"
 
-	thermal_conductivity = 0.025
-	heat_capacity = INFINITY
 
 	baseturfs = /turf/open/floor/plating
 	allow_replacement = FALSE

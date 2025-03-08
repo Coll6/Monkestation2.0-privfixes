@@ -140,7 +140,7 @@
 	// Determine what tiles should be pumped. We grab from a 3x3 area,
 	// but overall try to pump the same volume regardless of number of affected tiles
 	var/turf/local_turf = get_turf(src)
-	var/list/turf/candidate_turfs = local_turf.get_atmos_adjacent_turfs(alldir = TRUE)
+	var/list/turf/candidate_turfs
 	candidate_turfs += local_turf
 
 	var/list/turf/affected_turfs = list()
@@ -296,11 +296,6 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/plumbing/floor_pump/input/on/waste, 0
 		return FALSE
 
 	if(affected_turf.liquids?.liquid_group.expected_turf_height >= max_ext_volume)
-		return FALSE
-	var/turf/open/open_turf = affected_turf
-	var/datum/gas_mixture/gas_mix = open_turf?.return_air()
-	if(gas_mix?.return_pressure() > max_ext_kpa)
-		over_pressure = TRUE
 		return FALSE
 	return TRUE
 

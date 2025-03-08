@@ -255,9 +255,7 @@
 	var/datum/gas_mixture/environment = turf_to_check.return_air()
 	if(!istype(environment))
 		return
-	var/pressure = environment.return_pressure()
-	if(pressure <= LAVALAND_EQUIPMENT_EFFECT_PRESSURE)
-		. = TRUE
+
 
 ///Find an obstruction free turf that's within the range of the center. Can also condition on if it is of a certain area type.
 /proc/find_obstruction_free_location(range, atom/center, area/specific_area)

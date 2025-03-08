@@ -199,9 +199,7 @@
 	var/gas_amount = 30
 	/// What can we cough up?
 	var/list/gas_types = list(
-		/datum/gas/bz = 30,
-		/datum/gas/miasma = 50,
-		/datum/gas/plasma = 20,
+
 	)
 	/// Cooldown between corrupted effects (monkestation addition)
 	COOLDOWN_DECLARE(effect_cooldown)
@@ -220,11 +218,8 @@
 	COOLDOWN_START(src, effect_cooldown, rand(25 SECONDS, 90 SECONDS))
 	// monkestation end
 	breather.emote("cough");
-	var/chosen_gas = pick_weight(gas_types)
 	var/datum/gas_mixture/mix_to_spawn = new()
-	mix_to_spawn.add_gas(pick(chosen_gas))
-	mix_to_spawn.gases[chosen_gas][MOLES] = gas_amount
-	mix_to_spawn.temperature = breather.bodytemperature
+
 	log_atmos("[owner] coughed some gas into the air due to their corrupted lungs.", mix_to_spawn)
 	var/turf/open/our_turf = get_turf(breather)
 	our_turf.assume_air(mix_to_spawn)

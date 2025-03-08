@@ -25,7 +25,7 @@
 
 /mob/living/basic/heretic_summon/fire_shark/Initialize(mapload)
 	. = ..()
-	AddElement(/datum/element/death_gases, /datum/gas/plasma, 40)
+
 	AddElement(/datum/element/simple_flying)
 	AddElement(/datum/element/venomous, /datum/reagent/phlogiston, 2)
 	AddComponent(/datum/component/swarming)

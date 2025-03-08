@@ -46,7 +46,7 @@
 				cooling_down = FALSE
 		else
 			playsound(user, pick(sound_effect), 50, TRUE, mixer_channel = CHANNEL_MOB_SOUNDS)
-			Location.atmos_spawn_air(atmos_gas)
+
 			spawn(20)
 				cooling_down = FALSE
 	//Do NOT call parent on this.
@@ -115,8 +115,7 @@
 /obj/item/organ/internal/butt/plasma/On_Fart(mob/user)
 	if(prob(15) && !cooling_down)
 		user.visible_message("<span class='danger'>[user]'s gas catches fire!</span>")
-		var/turf/Location = get_turf(user)
-		new /obj/effect/hotspot(Location)
+
 	..()
 
 //XENOMORPH ASS
@@ -216,7 +215,7 @@
 	if(!cooling_down)
 		cooling_down = TRUE
 		user.newtonian_move(user.dir)
-		Location.atmos_spawn_air(atmos_gas)
+
 		if(prob(true_instability))
 			user.visible_message("<span class='warning'>[user]'s butt goes flying off!</span>")
 			new /obj/effect/decal/cleanable/blood(Location)
@@ -300,8 +299,7 @@
 		listen_probability = 75
 		butt_probability = 30
 		bot_cover_flags |= BOT_COVER_EMAGGED
-		var/turf/butt = get_turf(src)
-		butt.atmos_spawn_air("miasma=5;TEMP=310.15")
+
 		playsound(src, pick('sound/misc/fart1.ogg', 'monkestation/sound/effects/fart2.ogg', 'monkestation/sound/effects/fart3.ogg', 'monkestation/sound/effects/fart4.ogg'), 100 ,use_reverb = TRUE, mixer_channel = CHANNEL_PRUDE)
 
 /mob/living/simple_animal/bot/buttbot/Hear(message, atom/movable/speaker, datum/language/message_language, raw_message, radio_freq, list/spans, list/message_mods, message_range)
@@ -312,9 +310,7 @@
 		for (var/i in 1 to length(split_message))
 			if(prob(butt_probability))
 				split_message[i] = pick("butt", "butts")
-		if((bot_cover_flags & BOT_COVER_EMAGGED))
-			var/turf/butt = get_turf(src)
-			butt.atmos_spawn_air("miasma=5;TEMP=310.15")
+
 		var/joined_text = jointext(split_message, " ")
 		if(!findtext(joined_text, "butt")) //We must butt, or else.
 			cooling_down = FALSE

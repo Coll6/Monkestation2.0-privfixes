@@ -249,7 +249,7 @@
 	anchored = TRUE
 	opacity = FALSE
 	density = TRUE
-	can_atmos_pass = ATMOS_PASS_DENSITY
+
 	duration = 82
 	color = COLOR_DARK_ORANGE
 
@@ -296,8 +296,7 @@
 		var/turf/closed/mineral/M = T
 		M.gets_drilled()
 	playsound(T, SFX_EXPLOSION, 80, TRUE)
-	new /obj/effect/hotspot(T)
-	T.hotspot_expose(DRAKE_FIRE_TEMP, DRAKE_FIRE_EXPOSURE, 1)
+
 	for(var/mob/living/L in T.contents)
 		if(istype(L, /mob/living/simple_animal/hostile/megafauna/dragon))
 			continue

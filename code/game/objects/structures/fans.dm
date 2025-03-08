@@ -8,7 +8,7 @@
 	density = TRUE
 	var/buildstacktype = /obj/item/stack/sheet/iron
 	var/buildstackamount = 5
-	can_atmos_pass = ATMOS_PASS_NO
+
 
 /obj/structure/fans/deconstruct()
 	if(!(flags_1 & NODECONSTRUCT_1))
@@ -37,10 +37,10 @@
 
 /obj/structure/fans/Initialize(mapload)
 	. = ..()
-	air_update_turf(TRUE, TRUE)
+
 
 /obj/structure/fans/Destroy()
-	air_update_turf(TRUE, FALSE)
+
 	. = ..()
 
 //Invisible, indestructible fans

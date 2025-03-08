@@ -172,8 +172,7 @@
 	)
 	/// machines whitelisted from being shy with
 	var/list/shy_machine_whitelist = list(
-		/obj/machinery/atmospherics/components/unary/vent_pump,
-		/obj/machinery/atmospherics/components/unary/vent_scrubber,
+
 	)
 
 /mob/living/basic/drone/Initialize(mapload)

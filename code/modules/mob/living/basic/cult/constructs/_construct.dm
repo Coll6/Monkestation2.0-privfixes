@@ -9,7 +9,7 @@
 	bodytemp_cold_damage_limit = -1
 	bodytemp_heat_damage_limit = INFINITY
 	damage_coeff = list(BRUTE = 1, BURN = 1, TOX = 0, CLONE = 0, STAMINA = 0, OXY = 0)
-	pressure_resistance = 100
+
 	speed = 0
 	unique_name = TRUE
 	initial_language_holder = /datum/language_holder/construct

@@ -1079,42 +1079,6 @@
 	else
 		return pick("trails_1", "trails_2")
 
-/mob/living/experience_pressure_difference(pressure_difference, direction, pressure_resistance_prob_delta = 0)
-	playsound(src, 'sound/effects/space_wind.ogg', 50, TRUE)
-	if(buckled || mob_negates_gravity())
-		return
-
-	//MONKESTATION EDIT START
-	if (pressure_difference > pressure_resistance && body_position != LYING_DOWN && HAS_TRAIT(src, TRAIT_FEEBLE))
-		Paralyze(1 SECONDS)
-		Knockdown(4 SECONDS)
-		emote("scream", intentional=FALSE)
-	//MONKESTATION EDIT END
-	if(client && client.move_delay >= world.time + world.tick_lag*2)
-		pressure_resistance_prob_delta -= 30
-
-	var/list/turfs_to_check = list()
-
-	if(!has_limbs)
-		var/turf/T = get_step(src, angle2dir(dir2angle(direction)+90))
-		if (T)
-			turfs_to_check += T
-
-		T = get_step(src, angle2dir(dir2angle(direction)-90))
-		if(T)
-			turfs_to_check += T
-
-		for(var/t in turfs_to_check)
-			T = t
-			if(T.density)
-				pressure_resistance_prob_delta -= 20
-				continue
-			for (var/atom/movable/AM in T)
-				if (AM.density && AM.anchored)
-					pressure_resistance_prob_delta -= 20
-					break
-	..(pressure_difference, direction, pressure_resistance_prob_delta)
-
 /mob/living/can_resist()
 	if(next_move > world.time)
 		return FALSE
@@ -1257,7 +1221,7 @@
  * but is slightly more complex if we're inside another movable (in which we average the temps of our body and the movable)
  */
 /mob/living/proc/get_temperature(datum/gas_mixture/environment)
-	var/loc_temp = environment ? environment.return_temperature() : T0C
+	var/loc_temp = T0C
 	if(isobj(loc))
 		var/obj_temp = loc.return_temperature()
 		if(!isnull(obj_temp))

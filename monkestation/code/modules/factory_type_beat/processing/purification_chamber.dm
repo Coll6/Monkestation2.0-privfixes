@@ -28,7 +28,7 @@
 /obj/machinery/bouldertech/purification_chamber/AltClick(mob/user)
 	. = ..()
 	if(oxygen_input)
-		oxygen_input.disconnect()
+
 		QDEL_NULL(oxygen_input)
 
 	var/side = tgui_input_list(user, "Choose a side to try and deploy the tank on", "[name]", list("North", "South"))
@@ -39,21 +39,14 @@
 	if(side == "South")
 		direction = SOUTH
 
-	if(!(locate(/obj/machinery/atmospherics/components/unary/portables_connector) in get_step(src, direction)))
-		return
 
 	oxygen_input = new(get_step(src, direction))
-	var/obj/machinery/atmospherics/components/unary/portables_connector/possible_port = locate(/obj/machinery/atmospherics/components/unary/portables_connector) in oxygen_input.loc
-	if(!oxygen_input.connect(possible_port))
-		QDEL_NULL(oxygen_input)
+
 
 /obj/machinery/bouldertech/purification_chamber/process()
 	if(!anchored)
 		return PROCESS_KILL
 
-	if(oxygen_input)
-		oxygen_input.air_contents.assert_gas(/datum/gas/oxygen, oxygen_input.air_contents)
-		oxygen_moles = oxygen_input.air_contents.gases[/datum/gas/oxygen][MOLES]
 
 	if(oxygen_moles < REQUIRED_OXYGEN_MOLES)
 		return
@@ -61,8 +54,6 @@
 	var/stop_processing_check = FALSE
 	var/boulders_concurrent = boulders_processing_max ///How many boulders can we touch this process() call
 	for(var/obj/item/potential_boulder as anything in boulders_contained)
-		if(oxygen_input)
-			oxygen_input.air_contents.remove_specific(/datum/gas/oxygen, REQUIRED_OXYGEN_MOLES)
 
 		if(QDELETED(potential_boulder))
 			boulders_contained -= potential_boulder
@@ -168,12 +159,11 @@
 	name = "external purification oxygen tank"
 	icon = 'monkestation/code/modules/factory_type_beat/icons/mining_machines.dmi'
 	icon_state = "air_pump"
-	pressure_resistance = 7 * ONE_ATMOSPHERE
-	volume = 2000
+
 	density = TRUE
 	max_integrity = 300
 	integrity_failure = 0.4
-	armor_type = /datum/armor/portable_atmospherics_canister
+
 
 
 /obj/machinery/portable_atmospherics/purification_input/Initialize(mapload)

@@ -201,10 +201,7 @@
 /obj/structure/chem_separator/proc/can_process(datum/gas_mixture/air)
 	if(!burning)
 		return FALSE
-	if(!air || !air.has_gas(/datum/gas/oxygen, 1))
-		return FALSE
-	if(air.temperature > required_temp) // Too hot to condense
-		return FALSE
+
 	if(!beaker)
 		return FALSE
 	if(beaker.reagents.total_volume >= beaker.reagents.maximum_volume)
@@ -217,9 +214,7 @@
 	var/datum/gas_mixture/air = return_air()
 	if(!can_process(air))
 		return stop()
-	if(isturf(loc))
-		var/turf/location = loc
-		location.hotspot_expose(exposed_temperature = 700, exposed_volume = 5)
+
 	if(reagents.chem_temp < required_temp)
 		reagents.adjust_thermal_energy(heating_rate * seconds_per_tick * SPECIFIC_HEAT_DEFAULT * reagents.maximum_volume)
 		reagents.chem_temp = min(reagents.chem_temp, required_temp)
@@ -233,7 +228,7 @@
 		// Vapor to condenser
 		reagents.trans_id_to(condenser, separating_reagent.type, vapor_amount)
 		// Cool the vapor down
-		condenser.set_temperature(air.temperature)
+
 		// Condense into container
 		condenser.trans_to(beaker.reagents, condenser.total_volume)
 	else if (boiling)

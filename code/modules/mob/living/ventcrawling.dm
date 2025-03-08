@@ -4,7 +4,7 @@
 	// Being able to always ventcrawl trumps being only able to ventcrawl when wearing nothing
 	var/required_nudity = HAS_TRAIT(src, TRAIT_VENTCRAWLER_NUDE) && !HAS_TRAIT(src, TRAIT_VENTCRAWLER_ALWAYS)
 	// Cache the vent_movement bitflag var from atmos machineries
-	var/vent_movement = ventcrawl_target.vent_movement
+	var/vent_movement
 
 	if(!Adjacent(ventcrawl_target))
 		return
@@ -35,9 +35,7 @@
 			if(provide_feedback)
 				to_chat(src, span_warning("You can't crawl around in the ventilation ducts with items!"))
 			return
-	if(ventcrawl_target.welded)
-		if(provide_feedback)
-			to_chat(src, span_warning("You can't crawl around a welded vent!"))
+
 		return
 
 	if(!(vent_movement & VENTCRAWL_ENTRANCE_ALLOWED))
@@ -66,21 +64,7 @@
 		REMOVE_TRAIT(src, TRAIT_MOVE_VENTCRAWLING, VENTCRAWLING_TRAIT)
 		update_pipe_vision()
 
-	//Entrance here
-	else
-		var/datum/pipeline/vent_parent = ventcrawl_target.parents[1]
-		if(vent_parent && (vent_parent.members.len || vent_parent.other_atmos_machines))
-			ventcrawl_target.flick_overlay_static(image('icons/effects/vent_indicator.dmi', "arrow", ABOVE_MOB_LAYER, dir = get_dir(src.loc, ventcrawl_target.loc)), 2 SECONDS)
-			visible_message(span_notice("[src] begins climbing into the ventilation system...") ,span_notice("You begin climbing into the ventilation system..."))
-			if(!do_after(src, 2.5 SECONDS, target = ventcrawl_target, extra_checks = CALLBACK(src, PROC_REF(can_enter_vent), ventcrawl_target)))
-				return
-			if(has_client && isnull(client))
-				return
-			ventcrawl_target.flick_overlay_static(image('icons/effects/vent_indicator.dmi', "insert", ABOVE_MOB_LAYER), 1 SECONDS)
-			visible_message(span_notice("[src] scrambles into the ventilation ducts!"),span_notice("You climb into the ventilation ducts."))
-			move_into_vent(ventcrawl_target)
-		else
-			to_chat(src, span_warning("This ventilation duct is not connected to anything!"))
+
 
 /**
  * Moves living mob directly into the vent as a ventcrawler
@@ -122,9 +106,6 @@
 	for(var/atom/movable/screen/plane_master/pipecrawl as anything in hud_used.get_true_plane_masters(PIPECRAWL_IMAGES_PLANE))
 		pipecrawl.unhide_plane(src)
 
-	var/obj/machinery/atmospherics/current_location = loc
-	var/list/our_pipenets = current_location.return_pipenets()
-
 	// We on occasion want to do a full rebuild. this lets us do that
 	if(full_refresh)
 		for(var/image/current_image in pipes_shown)
@@ -135,33 +116,9 @@
 	if(!pipetracker)
 		pipetracker = new()
 
-	var/turf/our_turf = get_turf(src)
 	// We're getting the smallest "range" arg we can pass to the spatial grid and still get all the stuff we need
 	// We preload a bit more then we need so movement looks ok
 	var/list/view_range = getviewsize(client.view)
 	pipetracker.set_bounds(view_range[1] + 1, view_range[2] + 1)
 
-	var/list/entered_exited_pipes = pipetracker.recalculate_type_members(our_turf, SPATIAL_GRID_CONTENTS_TYPE_ATMOS)
-	var/list/pipes_gained = entered_exited_pipes[1]
-	var/list/pipes_lost = entered_exited_pipes[2]
 
-	for(var/obj/machinery/atmospherics/pipenet_part as anything in pipes_lost)
-		if(!pipenet_part.pipe_vision_img)
-			continue
-		client.images -= pipenet_part.pipe_vision_img
-		pipes_shown -= pipenet_part.pipe_vision_img
-
-	for(var/obj/machinery/atmospherics/pipenet_part as anything in pipes_gained)
-		// If the machinery is not part of our net or is not meant to be seen, continue
-		var/list/thier_pipenets = pipenet_part.return_pipenets()
-		if(!length(thier_pipenets & our_pipenets))
-			continue
-		if(!(pipenet_part.vent_movement & VENTCRAWL_CAN_SEE))
-			continue
-
-		if(!pipenet_part.pipe_vision_img)
-			var/turf/their_turf = get_turf(pipenet_part)
-			pipenet_part.pipe_vision_img = image(pipenet_part, pipenet_part.loc, dir = pipenet_part.dir)
-			SET_PLANE(pipenet_part.pipe_vision_img, PIPECRAWL_IMAGES_PLANE, their_turf)
-		client.images += pipenet_part.pipe_vision_img
-		pipes_shown += pipenet_part.pipe_vision_img

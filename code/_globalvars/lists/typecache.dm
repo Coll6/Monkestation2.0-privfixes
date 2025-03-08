@@ -36,6 +36,6 @@ GLOBAL_LIST_INIT(typecache_general_bad_hostile_attack_targets, typecacheof(list(
 
 /// A typecache of objects that player controlled, easily accessible, hostile mobs should not be able to move around easily
 GLOBAL_LIST_INIT(typecache_general_bad_things_to_easily_move, typecacheof(list(
-	/obj/machinery/portable_atmospherics/canister,
+
 	/obj/structure/reagent_dispensers,
 )))

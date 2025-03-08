@@ -363,7 +363,7 @@ GLOBAL_LIST_EMPTY(teleportlocs)
 	//atmos cleanup
 	firealarms = null
 	air_vents = null
-	air_scrubbers = null
+
 	//turf cleanup
 	turfs_by_zlevel = null
 	turfs_to_uncontain_by_zlevel = null

@@ -56,17 +56,6 @@
 	priority_alarms.Cut()
 	minor_alarms.Cut()
 
-	for (var/obj/machinery/airalarm/air_alarm as anything in GLOB.air_alarms)
-		if (air_alarm.z != z)
-			continue
-
-		switch (air_alarm.danger_level)
-			if (AIR_ALARM_ALERT_NONE)
-				continue
-			if (AIR_ALARM_ALERT_WARNING)
-				minor_alarms += get_area_name(air_alarm, format_text = TRUE)
-			if (AIR_ALARM_ALERT_HAZARD)
-				priority_alarms += get_area_name(air_alarm, format_text = TRUE)
 
 	// Either we got new alarms, or we have no alarms anymore
 	if ((alarm_count == 0) != (minor_alarms.len + priority_alarms.len == 0))

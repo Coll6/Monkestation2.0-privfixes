@@ -54,12 +54,7 @@ All ShuttleMove procs go here
 		CRASH("A turf queued to move via shuttle somehow had no skipover in baseturfs. [src]([type]):[loc]")
 	newT.CopyOnTop(src, 1, shuttle_depth, TRUE)
 	newT.blocks_air = TRUE
-	newT.air_update_turf(TRUE, FALSE)
-	blocks_air = TRUE
-	air_update_turf(TRUE, TRUE)
-	if(isopenturf(newT))
-		var/turf/open/new_open = newT
-		new_open.copy_air_with_tile(src)
+
 	SEND_SIGNAL(src, COMSIG_TURF_ON_SHUTTLE_MOVE, newT)
 
 	return TRUE
@@ -85,13 +80,7 @@ All ShuttleMove procs go here
 
 /turf/proc/lateShuttleMove(turf/oldT)
 	blocks_air = initial(blocks_air)
-	air_update_turf(TRUE, blocks_air)
-	oldT.blocks_air = initial(oldT.blocks_air)
-	oldT.air_update_turf(TRUE, oldT.blocks_air)
 
-	if(outdoor_effect)
-		oldT.outdoor_effect = null
-		oldT.get_sky_and_weather_states()
 
 
 /////////////////////////////////////////////////////////////////////////////////////
@@ -205,8 +194,7 @@ All ShuttleMove procs go here
 
 /obj/machinery/atmospherics/afterShuttleMove(turf/oldT, list/movement_force, shuttle_dir, shuttle_preferred_direction, move_dir, rotation)
 	. = ..()
-	if(pipe_vision_img)
-		pipe_vision_img.loc = loc
+
 
 /obj/machinery/computer/auxiliary_base/afterShuttleMove(turf/oldT, list/movement_force, shuttle_dir, shuttle_preferred_direction, move_dir, rotation)
 	. = ..()
@@ -215,32 +203,7 @@ All ShuttleMove procs go here
 
 /obj/machinery/atmospherics/afterShuttleMove(turf/oldT, list/movement_force, shuttle_dir, shuttle_preferred_direction, move_dir, rotation)
 	. = ..()
-	var/missing_nodes = FALSE
-	for(var/i in 1 to device_type)
-		if(nodes[i])
-			var/obj/machinery/atmospherics/node = nodes[i]
-			var/connected = FALSE
-			for(var/D in GLOB.cardinals)
-				if(node in get_step(src, D))
-					connected = TRUE
-					break
 
-			if(!connected)
-				nullify_node(i)
-
-		if(!nodes[i])
-			missing_nodes = TRUE
-
-	if(missing_nodes)
-		atmos_init()
-		for(var/obj/machinery/atmospherics/A in pipeline_expansion())
-			A.atmos_init()
-			if(A.return_pipenet())
-				A.add_member(src)
-		SSair.add_to_rebuild_queue(src)
-	else
-		// atmos_init() calls update_appearance(), so we don't need to call it
-		update_appearance()
 
 /obj/machinery/navbeacon/beforeShuttleMove(turf/newT, rotation, move_mode, obj/docking_port/mobile/moving_dock)
 	. = ..()

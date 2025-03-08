@@ -285,10 +285,6 @@
 		stack_trace("We tried to check a gas_mixture that doesn't exist for its firetype, what are you DOING")
 		return
 
-	if(environment.temperature >= FIRE_MINIMUM_TEMPERATURE_TO_EXIST)
-		return FIRELOCK_ALARM_TYPE_HOT
-	if(environment.temperature <= BODYTEMP_COLD_DAMAGE_LIMIT)
-		return FIRELOCK_ALARM_TYPE_COLD
 	return
 
 /obj/machinery/door/firedoor/proc/process_results(datum/source)
@@ -299,17 +295,7 @@
 			return
 
 	var/turf/checked_turf = source
-	var/result = check_atmos(checked_turf)
-
-	if(result && TURF_SHARES(checked_turf))
-		issue_turfs |= checked_turf
-		if(alarm_type) // If you've already got an alarm, go away
-			return
-		// Store our alarm type, in case we can't activate for some reason
-		alarm_type = result
-		if(!ignore_alarms)
-			start_activation_process(result)
-	else if(length(issue_turfs))
+	if(length(issue_turfs))
 		issue_turfs -= checked_turf
 		if(length(issue_turfs) && alarm_type != FIRELOCK_ALARM_TYPE_GENERIC)
 			return
@@ -704,7 +690,7 @@
 	icon = 'icons/obj/doors/edge_Doorfire.dmi'
 	can_crush = FALSE
 	flags_1 = ON_BORDER_1
-	can_atmos_pass = ATMOS_PASS_PROC
+
 
 /obj/machinery/door/firedoor/border_only/closed
 	icon_state = "door_closed"
@@ -757,11 +743,6 @@
 		leaving.Bump(src)
 		return COMPONENT_ATOM_BLOCK_EXIT
 
-/obj/machinery/door/firedoor/border_only/can_atmos_pass(turf/T, vertical = FALSE)
-	if(get_dir(loc, T) == dir)
-		return !density
-	else
-		return TRUE
 
 /obj/machinery/door/firedoor/heavy
 	name = "heavy firelock"

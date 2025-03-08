@@ -4,7 +4,7 @@
 	icon_state = "floor"
 
 /turf/open/floor/iron/shuttle/evac/airless
-	initial_gas_mix = AIRLESS_ATMOS
+
 
 /turf/open/floor/iron/shuttle/arrivals
 	name = "shuttle floor"
@@ -12,31 +12,31 @@
 	icon_state = "floor"
 
 /turf/open/floor/iron/shuttle/arrivals/airless
-	initial_gas_mix = AIRLESS_ATMOS
+
 
 /turf/open/floor/iron/white/textured_large/airless
-	initial_gas_mix = AIRLESS_ATMOS
+
 
 /turf/open/floor/catwalk_floor/iron/airless
-	initial_gas_mix = AIRLESS_ATMOS
+
 
 /turf/open/floor/catwalk_floor/iron_white/airless
-	initial_gas_mix = AIRLESS_ATMOS
+
 
 /turf/open/floor/catwalk_floor/iron_dark/airless
-	initial_gas_mix = AIRLESS_ATMOS
+
 
 /turf/open/floor/catwalk_floor/iron_dark/telecomms
-	initial_gas_mix = TCOMMS_ATMOS
+
 
 /turf/open/floor/catwalk_floor/flat_white/airless
-	initial_gas_mix = AIRLESS_ATMOS
+
 
 /turf/open/floor/catwalk_floor/titanium/Airless
-	initial_gas_mix = AIRLESS_ATMOS
+
 
 /turf/open/floor/catwalk_floor/iron_smooth/airless
-	initial_gas_mix = AIRLESS_ATMOS
+
 
 /*
 /area/shuttle
@@ -110,7 +110,7 @@
 	icon_state = "floor1"
 
 /turf/open/floor/iron/shuttle/ferry/airless
-	initial_gas_mix = AIRLESS_ATMOS
+
 
 /*
  *	EVAC
@@ -130,7 +130,7 @@
 	icon_state = "floor"
 
 /turf/open/floor/iron/shuttle/evac/airless
-	initial_gas_mix = AIRLESS_ATMOS
+
 
 /*
  *	ARRIVALS
@@ -150,7 +150,7 @@
 	icon_state = "floor"
 
 /turf/open/floor/iron/shuttle/arrivals/airless
-	initial_gas_mix = AIRLESS_ATMOS
+
 
 /*
  *	CARGO
@@ -170,7 +170,7 @@
 	icon_state = "floor"
 
 /turf/open/floor/iron/shuttle/cargo/airless
-	initial_gas_mix = AIRLESS_ATMOS
+
 
 /*
  *	MINING
@@ -260,13 +260,13 @@
 	icon_state = "flat"
 
 /turf/open/floor/iron/shuttle/exploration/flat/airless
-	initial_gas_mix = AIRLESS_ATMOS
+
 
 /turf/open/floor/iron/shuttle/exploration/textured_flat
 	icon_state = "flattexture"
 
 /turf/open/floor/iron/shuttle/exploration/textured_flat/airless
-	initial_gas_mix = AIRLESS_ATMOS
+
 
 /turf/open/floor/iron/shuttle/exploration/equipmentrail1
 	icon_state = "rail1"
@@ -281,7 +281,7 @@
 	icon_state = "hazard"
 
 /turf/open/floor/iron/shuttle/exploration/hazard/airless
-	initial_gas_mix = AIRLESS_ATMOS
+
 
 //Re-textures based off the survival pods, without the orange stripe. Now you can re-color them to paint your spaceships!
 //(Do faded tones - DONT USE NEON BRIGHT COLORS, I /WILL/ CRY, and your ship will look like literal crap)
@@ -345,7 +345,7 @@
 
 // Used for Ringworm near-station asteroids
 /turf/open/misc/asteroid/moon/airless
-	initial_gas_mix = AIRLESS_ATMOS
+
 	worm_chance = 0
 
 /turf/closed/mineral/random/stationside/moon
@@ -376,8 +376,7 @@
 
 /turf/open/misc/dirt/planet
 	baseturfs = /turf/open/misc/dirt/planet
-	initial_gas_mix = OPENTURF_DEFAULT_ATMOS
-	planetary_atmos = TRUE
+
 	footstep = FOOTSTEP_SAND
 	barefootstep = FOOTSTEP_SAND
 	clawfootstep = FOOTSTEP_SAND
@@ -387,18 +386,15 @@
 // For some reason, the dirt used Lavaland atmos (OPENTURF_LOW_PRESSURE), this would suck whilst on the planet.
 
 /turf/open/misc/grass/planet
-	planetary_atmos = TRUE
-	initial_gas_mix = OPENTURF_DEFAULT_ATMOS
+
 	baseturfs = /turf/open/misc/sandy_dirt/planet
 
 /turf/open/misc/grass/jungle/planet
-	initial_gas_mix = OPENTURF_DEFAULT_ATMOS
-	planetary_atmos = TRUE
+
 	baseturfs = /turf/open/misc/sandy_dirt/planet
 // We want planetary atmos, but most importantly, to become dirt upon destruction. Well, dirt, then dirtier dirt.
 // Why are we doing this? Grief-proofing. It'd suck if I walked out my house and there was just a space tile and all the air in the city is being sucked in because some smackhead destroyed the ground in the night somehow.
 
 /turf/open/misc/sandy_dirt/planet
-	planetary_atmos = TRUE
-	initial_gas_mix = OPENTURF_DEFAULT_ATMOS
+
 	baseturfs = /turf/open/misc/dirt/planet

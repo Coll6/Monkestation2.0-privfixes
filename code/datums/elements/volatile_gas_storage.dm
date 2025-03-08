@@ -28,7 +28,7 @@
 	UnregisterSignal(source, COMSIG_ATOM_BREAK)
 
 /datum/element/volatile_gas_storage/proc/Break(atom/origin, datum/gas_mixture/released_gas)
-	var/expelled_pressure = min(released_gas?.return_pressure(), max_explosive_pressure)
+	var/expelled_pressure
 
 	if(expelled_pressure < minimum_explosive_pressure)
 		return
@@ -40,10 +40,7 @@
 
 /datum/element/volatile_gas_storage/proc/AtmosComponentBreak(obj/machinery/atmospherics/components/owner)
 	SIGNAL_HANDLER
-	for(var/datum/gas_mixture/gas_contents as anything in owner.airs)
-		if(!gas_contents)
-			continue
-		Break(owner, gas_contents)
+
 
 /datum/element/volatile_gas_storage/proc/ObjBreak(obj/owner)
 	SIGNAL_HANDLER

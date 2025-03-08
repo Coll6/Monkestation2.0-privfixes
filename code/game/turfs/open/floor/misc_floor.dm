@@ -70,10 +70,10 @@
 	always_off = TRUE
 
 /turf/open/floor/circuit/airless
-	initial_gas_mix = AIRLESS_ATMOS
+
 
 /turf/open/floor/circuit/telecomms
-	initial_gas_mix = TCOMMS_ATMOS
+
 
 /turf/open/floor/circuit/telecomms/mainframe
 	name = "mainframe base"
@@ -97,10 +97,10 @@
 	floor_tile = /obj/item/stack/tile/circuit/green/anim
 
 /turf/open/floor/circuit/green/airless
-	initial_gas_mix = AIRLESS_ATMOS
+
 
 /turf/open/floor/circuit/green/telecomms
-	initial_gas_mix = TCOMMS_ATMOS
+
 
 /turf/open/floor/circuit/green/telecomms/mainframe
 	name = "mainframe base"
@@ -121,10 +121,10 @@
 	floor_tile = /obj/item/stack/tile/circuit/red/anim
 
 /turf/open/floor/circuit/red/airless
-	initial_gas_mix = AIRLESS_ATMOS
+
 
 /turf/open/floor/circuit/red/telecomms
-	initial_gas_mix = TCOMMS_ATMOS
+
 
 /turf/open/floor/pod
 	name = "pod floor"
@@ -197,12 +197,10 @@
 	floor_tile = /obj/item/stack/tile/bronze/filled
 
 /turf/open/floor/bronze/filled/lavaland
-	planetary_atmos = TRUE
-	initial_gas_mix = LAVALAND_DEFAULT_ATMOS
+
 
 /turf/open/floor/bronze/filled/icemoon
-	planetary_atmos = TRUE
-	initial_gas_mix = ICEMOON_DEFAULT_ATMOS
+
 
 /turf/open/floor/white
 	name = "white floor"
@@ -217,8 +215,7 @@
 	name = "plastic floor"
 	desc = "Cheap, lightweight flooring. Melts easily."
 	icon_state = "plastic"
-	thermal_conductivity = 0.1
-	heat_capacity = 900
+
 	custom_materials = list(/datum/material/plastic=SMALL_MATERIAL_AMOUNT*5)
 	floor_tile = /obj/item/stack/tile/plastic
 
@@ -254,7 +251,7 @@
 	color = null
 
 /turf/open/floor/plating/plasma
-	initial_gas_mix = ATMOS_TANK_PLASMA
+
 
 /turf/open/floor/plating/plasma/rust/Initialize(mapload)
 	. = ..()
@@ -305,7 +302,7 @@
 	return
 
 /turf/open/floor/cult/airless
-	initial_gas_mix = AIRLESS_ATMOS
+
 
 /turf/open/floor/material/meat
 	name = "living floor"
@@ -318,7 +315,7 @@
 	set_custom_materials(list(GET_MATERIAL_REF(/datum/material/meat) = SHEET_MATERIAL_AMOUNT))
 
 /turf/open/floor/material/meat/airless
-	initial_gas_mix = AIRLESS_ATMOS
+
 	baseturfs = /turf/open/misc/asteroid/airless
 
 /turf/open/floor/iron/tgmcemblem

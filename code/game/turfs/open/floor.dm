@@ -14,8 +14,7 @@
 	smoothing_groups = SMOOTH_GROUP_TURF_OPEN + SMOOTH_GROUP_OPEN_FLOOR
 	canSmoothWith = SMOOTH_GROUP_TURF_OPEN + SMOOTH_GROUP_OPEN_FLOOR
 
-	thermal_conductivity = 0.04
-	heat_capacity = 10000
+
 	tiled_dirt = TRUE
 
 
@@ -97,13 +96,13 @@
 						ScrapeAway(flags = CHANGETURF_INHERIT_AIR)
 					else
 						break_tile()
-					hotspot_expose(1000,CELL_VOLUME)
+
 					if(prob(33))
 						new /obj/item/stack/sheet/iron(src)
 		if(EXPLODE_LIGHT)
 			if (prob(50))
 				src.break_tile()
-				src.hotspot_expose(1000,CELL_VOLUME)
+
 
 /turf/open/floor/is_shielded()
 	for(var/obj/structure/A in contents)

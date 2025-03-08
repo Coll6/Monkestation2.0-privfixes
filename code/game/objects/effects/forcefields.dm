@@ -5,7 +5,7 @@
 	anchored = TRUE
 	opacity = FALSE
 	density = TRUE
-	can_atmos_pass = ATMOS_PASS_DENSITY
+
 	/// If set, how long the force field lasts after it's created. Set to 0 to have infinite duration forcefields.
 	var/initial_duration = 30 SECONDS
 
@@ -46,7 +46,7 @@
 	desc = "An unholy shield that blocks all attacks."
 	icon = 'icons/effects/cult/effects.dmi'
 	icon_state = "cultshield"
-	can_atmos_pass = ATMOS_PASS_NO
+
 	initial_duration = 20 SECONDS
 
 /// A form of the cult forcefield that lasts permanently.
@@ -72,7 +72,7 @@
 	name = "psychic forcefield"
 	desc = "A wall of psychic energy powerful enough stop the motion of objects. Projectiles ricochet."
 	icon_state = "psychic"
-	can_atmos_pass = ATMOS_PASS_YES
+
 	flags_ricochet = RICOCHET_SHINY | RICOCHET_HARD
 	receive_ricochet_chance_mod = INFINITY //we do ricochet a lot!
 	initial_duration = 10 SECONDS
@@ -86,7 +86,7 @@
 	anchored = TRUE
 	layer = LOW_SIGIL_LAYER
 	density = FALSE
-	can_atmos_pass = ATMOS_PASS_NO
+
 	initial_duration = 30 SECONDS
 	/// Flags for what antimagic can just ignore our forcefields
 	var/antimagic_flags = MAGIC_RESISTANCE

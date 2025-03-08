@@ -13,7 +13,7 @@
 	mob_size = MOB_SIZE_HUGE
 	health = 600 // 15 PKA shots
 	maxHealth = 600
-	pressure_resistance = 200
+
 	response_help_continuous = "pets"
 	response_help_simple = "pet"
 	response_disarm_continuous = "gently pushes"

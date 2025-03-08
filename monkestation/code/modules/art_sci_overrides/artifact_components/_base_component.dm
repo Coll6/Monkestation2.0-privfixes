@@ -386,8 +386,6 @@
 	COOLDOWN_START(src,reactivate_cooldown,STIMULI_CD_TIME)
 
 /datum/component/artifact/proc/stimulate_from_turf_heat(turf/target)
-	if(!QDELETED(target))
-		process_stimuli(STIMULUS_HEAT, target.return_air().temperature, FALSE)
 
 /datum/component/artifact/proc/stimulate_from_rad_act(intensity)
 	process_stimuli(STIMULUS_RADIATION, intensity)

@@ -87,8 +87,6 @@
 
 	// This is a basic floodfill algorithm of atmos connected tiles
 	// Turfs will be stored in the form turf -> TRUE
-	var/chem_temp = source.chem_temp
-	var/hot_chem = chem_temp >= 300
 	var/list/turflist = list()
 	var/list/reactable = list()
 	turflist[epicenter] = TRUE
@@ -99,14 +97,10 @@
 			i--
 			continue
 
-		for(var/turf/lad as anything in valid_step.atmos_adjacent_turfs)
-			if(turflist[lad])
-				continue
-			turflist[lad] = TRUE
+
 
 		reactable += valid_step.get_all_contents() // Yes this means multitile objects double react. I don't care. skill issue
-		if(hot_chem)
-			valid_step.hotspot_expose(chem_temp*2, 5)
+
 
 	// Remove anything we can't see
 	for(var/atom/thing as anything in (dview(spread_range, epicenter) & reactable))

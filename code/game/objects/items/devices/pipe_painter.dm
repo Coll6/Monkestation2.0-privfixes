@@ -15,13 +15,6 @@
 	if(!proximity_flag)
 		return
 
-	if(!istype(A, /obj/machinery/atmospherics/pipe))
-		return
-
-	var/obj/machinery/atmospherics/pipe/P = A
-	if(P.paint(GLOB.pipe_paint_colors[paint_color]))
-		playsound(src, 'sound/machines/click.ogg', 50, TRUE)
-		user.visible_message(span_notice("[user] paints \the [P] [paint_color]."),span_notice("You paint \the [P] [paint_color]."))
 
 /obj/item/pipe_painter/attack_self(mob/user)
 	paint_color = tgui_input_list(user, "Which colour do you want to use?", "Pipe painter", GLOB.pipe_paint_colors)

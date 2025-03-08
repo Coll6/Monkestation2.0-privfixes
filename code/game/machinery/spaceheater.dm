@@ -126,12 +126,10 @@
 			update_appearance()
 		return
 
-	var/datum/gas_mixture/enviroment = local_turf.return_air()
-
 	var/new_mode = HEATER_MODE_STANDBY
-	if(set_mode != HEATER_MODE_COOL && enviroment.temperature < target_temperature - temperature_tolerance)
+	if(set_mode != HEATER_MODE_COOL)
 		new_mode = HEATER_MODE_HEAT
-	else if(set_mode != HEATER_MODE_HEAT && enviroment.temperature > target_temperature + temperature_tolerance)
+	else if(set_mode != HEATER_MODE_HEAT)
 		new_mode = HEATER_MODE_COOL
 
 	if(mode != new_mode)
@@ -141,9 +139,8 @@
 	if(mode == HEATER_MODE_STANDBY)
 		return
 
-	var/heat_capacity = enviroment.heat_capacity()
-	var/required_energy = abs(enviroment.temperature - target_temperature) * heat_capacity
-	required_energy = min(required_energy, heating_power)
+	var/heat_capacity
+	var/required_energy
 
 	if(required_energy < 1)
 		return
@@ -151,11 +148,6 @@
 	var/delta_temperature = required_energy / heat_capacity
 	if(mode == HEATER_MODE_COOL)
 		delta_temperature *= -1
-	if(delta_temperature)
-		for (var/turf/open/turf in ((local_turf.atmos_adjacent_turfs || list()) + local_turf))
-			var/datum/gas_mixture/turf_gasmix = turf.return_air()
-			turf_gasmix.temperature += delta_temperature
-			air_update_turf(FALSE, FALSE)
 	cell.use(required_energy / efficiency)
 
 /obj/machinery/space_heater/RefreshParts()
@@ -242,10 +234,7 @@
 
 	var/turf/local_turf = get_turf(loc)
 	var/current_temperature
-	if(istype(local_turf))
-		var/datum/gas_mixture/enviroment = local_turf.return_air()
-		current_temperature = enviroment.temperature
-	else if(isturf(local_turf))
+	if(isturf(local_turf))
 		current_temperature = local_turf.temperature
 	if(isnull(current_temperature))
 		data["currentTemp"] = "N/A"

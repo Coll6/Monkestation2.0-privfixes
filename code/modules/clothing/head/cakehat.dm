@@ -30,8 +30,7 @@
 		if(wearer.is_holding(src) || wearer.head == src)
 			location = wearer.loc
 
-	if(isturf(location))
-		location.hotspot_expose(700, 1)
+
 
 /obj/item/clothing/head/utility/hardhat/cakehat/turn_on(mob/living/user)
 	..()

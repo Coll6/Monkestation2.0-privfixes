@@ -276,7 +276,7 @@
 		var/datum/gas_mixture/environment = location.return_air()
 		if(!environment)
 			continue
-		avg_temp += environment.temperature
+
 		avg_divide++
 
 	if(avg_divide)

@@ -138,15 +138,13 @@
 			var/obj/machinery/atmospherics/components/unary/outlet_injector/input = GLOB.objects_by_id_tag[air_sensor.inlet_id || ""]
 			if (!QDELETED(input))
 				chamber_info["input_info"] = list(
-					"active" = input.on,
-					"amount" = input.volume_rate,
+
 				)
 
 			var/obj/machinery/atmospherics/components/unary/vent_pump/output = GLOB.objects_by_id_tag[air_sensor.outlet_id || ""]
 			if (!QDELETED(output))
 				chamber_info["output_info"] = list(
-					"active" = output.on,
-					"amount" = output.internal_pressure_bound,
+
 				)
 
 		data["chambers"] += list(chamber_info)
@@ -172,7 +170,7 @@
 			if(QDELETED(input))
 				return TRUE
 
-			input.on = !input.on
+
 			input.update_appearance(UPDATE_ICON)
 		if("toggle_output")
 			if (!(chamber in atmos_chambers))
@@ -186,7 +184,6 @@
 			if(QDELETED(output))
 				return TRUE
 
-			output.on = !output.on
 			output.update_appearance(UPDATE_ICON)
 		if("adjust_input")
 			if (!(chamber in atmos_chambers))
@@ -205,7 +202,7 @@
 				return TRUE
 			target = clamp(target, 0, MAX_TRANSFER_RATE)
 
-			input.volume_rate = clamp(target, 0, min(input.airs[1].volume, MAX_TRANSFER_RATE))
+
 		if("adjust_output")
 			if (!(chamber in atmos_chambers))
 				return TRUE
@@ -223,7 +220,7 @@
 				return TRUE
 			target = clamp(target, 0, ATMOS_PUMP_MAX_PRESSURE)
 
-			output.internal_pressure_bound = target
+
 		if("reconnect")
 			reconnect(usr)
 

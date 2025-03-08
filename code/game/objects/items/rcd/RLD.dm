@@ -139,8 +139,7 @@
 					if(skip)
 						continue
 					//can't put a light here
-					if(!(isspaceturf(C) || TURF_SHARES(C)))
-						continue
+
 					//find turf closest to our player
 					var/x0 = C.x
 					var/y0 = C.y

@@ -138,8 +138,7 @@
 		shake_camera(shaken, 3, 3)
 
 	var/turf/launch_turf = get_turf(chassis)
-	new /obj/effect/hotspot(launch_turf)
-	launch_turf.hotspot_expose(700, 50, 1)
+
 	new /obj/effect/skyfall_landingzone(launch_turf, chassis)
 	chassis.resistance_flags |= INDESTRUCTIBLE //not while jumping at least
 	chassis.mecha_flags |= QUIET_STEPS|QUIET_TURNS|CANNOT_INTERACT

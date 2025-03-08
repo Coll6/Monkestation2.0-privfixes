@@ -39,8 +39,7 @@ GLOBAL_LIST_INIT(blacklisted_automated_baseturfs, typecacheof(list(
 	if(slip)
 		var/datum/component/wet_floor/new_wet_floor_component = copy_to_turf.AddComponent(/datum/component/wet_floor)
 		new_wet_floor_component.InheritComponent(slip)
-	if (copy_air)
-		copy_to_turf.air.copy_from(air)
+
 
 //wrapper for ChangeTurf()s that you want to prevent/affect without overriding ChangeTurf() itself
 /turf/proc/TerraformTurf(path, new_baseturf, flags)
@@ -203,11 +202,8 @@ GLOBAL_LIST_INIT(blacklisted_automated_baseturfs, typecacheof(list(
 
 /turf/open/ChangeTurf(path, list/new_baseturfs, flags) //Resist the temptation to make this default to keeping air.
 	if ((flags & CHANGETURF_INHERIT_AIR) && ispath(path, /turf/open))
-		var/datum/gas_mixture/stashed_air = new()
-		stashed_air.copy_from(air)
-		var/stashed_state = excited
 		var/datum/pollution/stashed_pollution = pollution
-		var/datum/excited_group/stashed_group = excited_group
+
 		. = ..() //If path == type this will return us, don't bank on making a new type
 		if (!.) // changeturf failed or didn't do anything
 			return
@@ -217,35 +213,11 @@ GLOBAL_LIST_INIT(blacklisted_automated_baseturfs, typecacheof(list(
 			new_turf.pollution = stashed_pollution
 			stashed_pollution.handle_overlay()
 
-		new_turf.air.copy_from(stashed_air)
-		new_turf.excited = stashed_state
-		new_turf.excited_group = stashed_group
-		#ifdef VISUALIZE_ACTIVE_TURFS
-		if(stashed_state)
-			new_turf.add_atom_colour(COLOR_VIBRANT_LIME, TEMPORARY_COLOUR_PRIORITY)
-		#endif
-		if(stashed_group)
-			if(stashed_group.should_display || SSair.display_all_groups)
-				stashed_group.display_turf(new_turf)
-	else
-		for(var/turf/open/adjacent_turf as anything in atmos_adjacent_turfs)
-			if(QDELETED(adjacent_turf) || !adjacent_turf.atmos_adjacent_turfs)
-				continue
-			adjacent_turf.atmos_adjacent_turfs -= src
-		atmos_adjacent_turfs = null
-		if(pollution)
-			qdel(pollution)
-		if(excited || excited_group)
-			SSair.remove_from_active(src) //Clean up wall excitement, and refresh excited groups
-		if(ispath(path,/turf/closed) || ispath(path,/turf/cordon))
-			flags |= CHANGETURF_RECALC_ADJACENT
-		return ..()
 
 //If you modify this function, ensure it works correctly with lateloaded map templates.
 /turf/proc/AfterChange(flags, oldType) //called after a turf has been replaced in ChangeTurf()
 	levelupdate()
 	if(flags & CHANGETURF_RECALC_ADJACENT)
-		immediate_calculate_adjacent_turfs()
 		if(ispath(oldType, /turf/closed) && isopenturf(src))
 			SSair.add_to_active(src)
 	else //In effect, I want closed turfs to make their tile active when sheered, but we need to queue it since they have no adjacent turfs
@@ -259,40 +231,6 @@ GLOBAL_LIST_INIT(blacklisted_automated_baseturfs, typecacheof(list(
 
 //////Assimilate Air//////
 /turf/open/proc/Assimilate_Air()
-	var/turf_count = LAZYLEN(atmos_adjacent_turfs)
-	if(blocks_air || !turf_count) //if there weren't any open turfs, no need to update.
-		return
-
-	var/datum/gas_mixture/total = new//Holders to assimilate air from nearby turfs
-	var/list/total_gases = total.gases
-	//Stolen blatently from self_breakdown
-	var/list/turf_list = atmos_adjacent_turfs + src
-	var/turflen = turf_list.len
-	var/energy = 0
-	var/heat_cap = 0
-
-	for(var/turf/open/turf in turf_list)
-		//Cache?
-		var/datum/gas_mixture/turf/mix = turf.air
-		//"borrowing" this code from merge(), I need to play with the temp portion. Lets expand it out
-		//temperature = (giver.temperature * giver_heat_capacity + temperature * self_heat_capacity) / combined_heat_capacity
-		var/capacity = mix.heat_capacity()
-		energy += mix.temperature * capacity
-		heat_cap += capacity
-
-		var/list/giver_gases = mix.gases
-		for(var/giver_id in giver_gases)
-			ASSERT_GAS_IN_LIST(giver_id, total_gases)
-			total_gases[giver_id][MOLES] += giver_gases[giver_id][MOLES]
-
-	total.temperature = energy / heat_cap
-	for(var/id in total_gases)
-		total_gases[id][MOLES] /= turflen
-
-	for(var/turf/open/turf in turf_list)
-		turf.air.copy_from(total)
-		turf.update_visuals()
-		SSair.add_to_active(turf)
 
 /// Attempts to replace a tile with lattice. Amount is the amount of tiles to scrape away.
 /turf/proc/attempt_lattice_replacement(amount = 2)

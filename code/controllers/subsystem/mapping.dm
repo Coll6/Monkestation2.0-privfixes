@@ -1040,10 +1040,7 @@ GLOBAL_LIST_EMPTY(the_station_areas)
 	for(var/offset in gen_from to new_offset)
 		GLOB.fullbright_overlays += create_fullbright_overlay(offset)
 
-	for(var/datum/gas/gas_type as anything in GLOB.meta_gas_info)
-		var/list/gas_info = GLOB.meta_gas_info[gas_type]
-		if(initial(gas_type.moles_visible) != null)
-			gas_info[META_GAS_OVERLAY] += generate_gas_overlays(gen_from, new_offset, gas_type)
+
 
 /datum/controller/subsystem/mapping/proc/create_plane_offsets(gen_from, new_offset)
 	for(var/plane_offset in gen_from to new_offset)

@@ -7,7 +7,6 @@
 	layer = LARGE_MOB_LAYER //above most mobs, but below speechbubbles
 	maptext_height = 64
 	maptext_width = 64
-	pressure_resistance = 200
 	/// What icon file update_held_items will look for when making inhands for xenos
 	var/alt_inhands_file = 'monkestation/code/modules/blueshift/icons/big_xenos.dmi'
 	/// Setting this will give a xeno generic_evolve set to evolve them into this type

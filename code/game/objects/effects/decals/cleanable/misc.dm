@@ -403,7 +403,7 @@
 	/// Is this fuel pool currently burning?
 	var/burning = FALSE
 	/// Type of hotspot fuel pool spawns upon being ignited
-	var/hotspot_type = /obj/effect/hotspot
+
 
 /obj/effect/decal/cleanable/fuel_pool/Initialize(mapload, burn_stacks)
 	. = ..()
@@ -438,14 +438,14 @@
 	SIGNAL_HANDLER
 
 	burn_amount -= 1
-	var/obj/effect/hotspot/hotspot = new hotspot_type(get_turf(src))
+
 	addtimer(CALLBACK(src, PROC_REF(ignite_others)), 0.5 SECONDS)
 
 	if(!burn_amount)
 		qdel(src)
 		return
 
-	RegisterSignal(hotspot, COMSIG_QDELETING, PROC_REF(burn_process))
+
 
 /**
  * Ignites other oil pools around itself.

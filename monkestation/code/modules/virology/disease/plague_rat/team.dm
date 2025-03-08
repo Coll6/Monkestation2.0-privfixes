@@ -56,11 +56,6 @@ GLOBAL_VAR_INIT(static_plague_team, null)
 
 	if (!invasion)
 		var/list/found_vents = list()
-		for(var/obj/machinery/atmospherics/components/unary/vent_scrubber/temp_vent in GLOB.machines)
-			var/turf/scrubber_turf = get_turf(temp_vent)
-			if(!is_station_level(scrubber_turf.z))
-				continue
-			found_vents.Add(temp_vent)
 		if(length(found_vents))
 			invasion = get_turf(pick(found_vents))
 		else

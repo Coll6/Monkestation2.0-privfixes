@@ -48,7 +48,7 @@
 	//Multiplier for tanks and gases insidee
 	var/power_coeff = 1
 
-/obj/machinery/power/rad_collector/anchored/Initialize(mapload) 
+/obj/machinery/power/rad_collector/anchored/Initialize(mapload)
 	. = ..()
 	set_anchored(TRUE)
 
@@ -72,15 +72,7 @@
 /obj/machinery/power/rad_collector/process(seconds_per_tick)
 	if(loaded_tank)
 		var/datum/gas_mixture/tank_mix = loaded_tank.return_air()
-		if(active)
-			for(var/id in tank_mix.gases)
-				if(tank_mix.gases[id][MOLES] >= 10) //Stops cheesing.
-					power_coeff += (GLOB.meta_gas_info[id][META_GAS_SPECIFIC_HEAT]) //250 (plasma), 2000 (hypernobi), etc etc
-					var/gasdrained = min(power_production_drain * drain_ratio * seconds_per_tick, tank_mix.gases[id][MOLES])
-					tank_mix.gases[id][MOLES] -= gasdrained
-					tank_mix.assert_gas(/datum/gas/hydrogen) //Produce Hydrogen. Mostly because it explodes.
-					tank_mix.gases[/datum/gas/hydrogen][MOLES] += gasdrained
-					tank_mix.garbage_collect()
+
 		if(!tank_mix && loaded_tank)
 			investigate_log("<font color='red'>out of gas.</font>.", INVESTIGATE_ENGINE)
 			playsound(src, 'sound/machines/ding.ogg', 50, TRUE)
@@ -101,10 +93,8 @@
 	toggle_power()
 	user.visible_message(span_notice("[user.name] turns the [src.name] [active? "on":"off"]."), \
 	span_notice("You turn the [src.name] [active? "on":"off"]."))
-	var/datum/gas_mixture/tank_mix = loaded_tank?.return_air()
 	var/fuel
-	if(loaded_tank)
-		fuel = tank_mix.gases[/datum/gas/plasma]
+
 	fuel = fuel ? fuel[MOLES] : 0
 	investigate_log("turned [active?"<font color='green'>on</font>":"<font color='red'>off</font>"] by [key_name(user)]. [loaded_tank?"Fuel: [round(fuel/0.29)]%":"<font color='red'>It is empty</font>"].", INVESTIGATE_ENGINE)
 

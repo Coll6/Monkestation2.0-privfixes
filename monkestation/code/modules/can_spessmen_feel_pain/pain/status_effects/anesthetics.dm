@@ -42,8 +42,7 @@
 // Extend "too much N2O" so we can apply anesthesia if it knocks the guy out
 /obj/item/organ/internal/lungs/too_much_n2o(mob/living/carbon/breather, datum/gas_mixture/breath, n2o_pp, old_n2o_pp)
 	. = ..()
-	if(HAS_TRAIT(breather, TRAIT_KNOCKEDOUT))
-		breather.apply_status_effect(/datum/status_effect/grouped/anesthetic, /datum/gas/nitrous_oxide)
+
 
 /datum/status_effect/anesthesia_grog
 	id = "anesthesia_grog"

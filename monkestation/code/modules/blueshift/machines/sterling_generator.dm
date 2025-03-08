@@ -10,16 +10,6 @@
 		qdel(src)
 		return
 
-	gas_connector = new(location)
-	gas_connector.dir = connected_machine.dir
-	gas_connector.airs[1].volume = gas_volume
-
-	SSair.start_processing_machine(connected_machine)
-	register_with_machine()
-	gas_connector.set_init_directions()
-	gas_connector.atmos_init()
-	SSair.add_to_rebuild_queue(gas_connector)
-	RegisterSignal(gas_connector, COMSIG_QDELETING, PROC_REF(connector_deleted))
 
 /datum/gas_machine_connector/Destroy()
 	connected_machine = null
@@ -100,46 +90,20 @@
  * Handles the disconnection from the pipe network
  */
 /datum/gas_machine_connector/proc/disconnect_connector()
-	var/obj/machinery/atmospherics/node = gas_connector.nodes[1]
-	if(node)
-		if(gas_connector in node.nodes) //Only if it's actually connected. On-pipe version would is one-sided.
-			node.disconnect(gas_connector)
-		gas_connector.nodes[1] = null
-	if(gas_connector.parents[1])
-		gas_connector.nullify_pipenet(gas_connector.parents[1])
+
 
 /**
  * Handles the reconnection to the pipe network
  */
 /datum/gas_machine_connector/proc/reconnect_connector()
-	gas_connector.dir = connected_machine.dir
-	gas_connector.set_init_directions()
-	var/obj/machinery/atmospherics/node = gas_connector.nodes[1]
-	gas_connector.atmos_init()
-	node = gas_connector.nodes[1]
-	if(node)
-		node.atmos_init()
-		node.add_member(gas_connector)
-		gas_connector.update_parents()
-	SSair.add_to_rebuild_queue(gas_connector)
+
+
 
 /**
  * Handles air relocation to the pipe network/environment
  */
 /datum/gas_machine_connector/proc/relocate_airs(mob/user)
-	var/turf/local_turf = get_turf(connected_machine)
-	var/datum/gas_mixture/inside_air = gas_connector.airs[1]
-	if(inside_air.total_moles() > 0)
-		if(!gas_connector.nodes[1])
-			local_turf.assume_air(inside_air)
-			return
-		var/datum/gas_mixture/parents_air = gas_connector.parents[1].air
-		if(istype(gas_connector.nodes[1], /obj/machinery/atmospherics/components/unary/portables_connector))
-			var/obj/machinery/atmospherics/components/unary/portables_connector/portable_devices_connector = gas_connector.nodes[1]
-			if(!portable_devices_connector.connected_device)
-				local_turf.assume_air(inside_air)
-				return
-		parents_air.merge(inside_air)
+
 
 // Stirling generator, like a miniature TEG, pipe hot air in, and keep the air around it cold
 
@@ -155,7 +119,6 @@
 	use_power = NO_POWER_USE
 	circuit = null
 	max_integrity = 300
-	armor_type = /datum/armor/unary_thermomachine
 	set_dir_on_move = FALSE
 	can_change_cable_layer = TRUE
 	/// Reference to the datum connector we're using to interface with the pipe network
@@ -201,30 +164,6 @@
 		connect_to_network()
 		if(!powernet)
 			return
-
-	var/turf/our_turf = get_turf(src)
-
-	var/datum/gas_mixture/hot_air_from_pipe = connected_chamber.gas_connector.airs[1]
-	var/datum/gas_mixture/environment = our_turf.return_air()
-
-	if(!QUANTIZE(hot_air_from_pipe.total_moles()) || !QUANTIZE(environment.total_moles())) //Don't transfer if there's no gas
-		return
-
-	var/gas_temperature_delta = hot_air_from_pipe.temperature - environment.temperature
-
-	if(!(gas_temperature_delta > 0))
-		current_power_generation = 0
-		return
-
-	var/input_capacity = hot_air_from_pipe.heat_capacity()
-	var/output_capacity = environment.heat_capacity()
-	var/cooling_heat_amount = CALCULATE_CONDUCTION_ENERGY(gas_temperature_delta, input_capacity, output_capacity)
-	hot_air_from_pipe.temperature = max(hot_air_from_pipe.temperature - (cooling_heat_amount / input_capacity), TCMB)
-
-	/// Takes the amount of heat moved, and divides it by the maximum temperature difference we expect, creating a number to divide power generation by
-	var/effective_energy_transfer = round((max_efficient_heat_difference / min(gas_temperature_delta, max_efficient_heat_difference)), 0.01)
-	current_power_generation = round(max_power_output / effective_energy_transfer)
-
 
 /obj/machinery/power/stirling_generator/process()
 	var/power_output = round(current_power_generation)

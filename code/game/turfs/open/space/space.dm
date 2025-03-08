@@ -7,17 +7,17 @@ GLOBAL_VAR_INIT(starlight_color, pick(COLOR_TEAL, COLOR_GREEN, COLOR_CYAN, COLOR
 	underfloor_accessibility = UNDERFLOOR_INTERACTABLE
 
 	temperature = TCMB
-	thermal_conductivity = OPEN_HEAT_TRANSFER_COEFFICIENT
-	heat_capacity = 700000
+
+	var/starlight_source_count = 0
 
 	var/destination_z
 	var/destination_x
 	var/destination_y
 
-	var/static/datum/gas_mixture/immutable/space/space_gas = new
+
 	// We do NOT want atmos adjacent turfs
 	init_air = FALSE
-	run_later = TRUE
+
 	plane = PLANE_SPACE
 	layer = SPACE_LAYER
 	light_power = 0.75
@@ -49,7 +49,7 @@ GLOBAL_VAR_INIT(starlight_color, pick(COLOR_TEAL, COLOR_GREEN, COLOR_CYAN, COLOR
  */
 /turf/open/space/Initialize(mapload)
 	SHOULD_CALL_PARENT(FALSE)
-	air = space_gas
+
 
 	if (PERFORM_ALL_TESTS(focus_only/multiple_space_initialization))
 		if(flags_1 & INITIALIZED_1)
@@ -98,7 +98,7 @@ GLOBAL_VAR_INIT(starlight_color, pick(COLOR_TEAL, COLOR_GREEN, COLOR_CYAN, COLOR
 
 /turf/open/space/AfterChange()
 	..()
-	atmos_overlay_types = null
+
 
 /turf/open/space/Assimilate_Air()
 	return

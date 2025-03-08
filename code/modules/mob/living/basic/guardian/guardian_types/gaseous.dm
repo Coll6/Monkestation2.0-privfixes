@@ -83,13 +83,7 @@
 	var/active_gas = null
 	/// Associative list of types of gases to moles we create every life tick.
 	var/static/list/possible_gases = list(
-		/datum/gas/oxygen = 50,
-		/datum/gas/nitrogen = 750, //overpressurizing is hard!.
-		/datum/gas/water_vapor = 1, //you need incredibly little water vapor for the effects to kick in
-		/datum/gas/nitrous_oxide = 15,
-		/datum/gas/carbon_dioxide = 50,
-		/datum/gas/plasma = 3,
-		/datum/gas/bz = 10,
+
 	)
 
 /datum/action/cooldown/mob_cooldown/expel_gas/Grant(mob/granted_to)
@@ -106,8 +100,6 @@
 	StartCooldown(360 SECONDS)
 	// Regeneated each time just in case someone fucks with our list
 	var/list/gas_selection = list("None")
-	for(var/datum/gas/gas as anything in possible_gases)
-		gas_selection[initial(gas.name)] = gas
 
 	var/picked_gas = tgui_input_list(owner, "Select a gas to emit.", "Gas Producer", gas_selection)
 	StartCooldown()
@@ -148,8 +140,6 @@
 	if (isnull(active_gas))
 		return // We shouldn't even be registered at this point but just in case
 	var/datum/gas_mixture/mix_to_spawn = new()
-	mix_to_spawn.add_gas(active_gas)
-	mix_to_spawn.gases[active_gas][MOLES] = possible_gases[active_gas] * seconds_per_tick
-	mix_to_spawn.temperature = T20C
+
 	var/turf/open/our_turf = get_turf(owner)
 	our_turf.assume_air(mix_to_spawn)

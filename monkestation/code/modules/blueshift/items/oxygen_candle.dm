@@ -25,8 +25,6 @@
 	var/turf/pos = get_turf(src)
 	if(!pos)
 		return
-	pos.hotspot_expose(500, 100)
-	pos.atmos_spawn_air("o2=10;TEMP=[OXY_CANDLE_RELEASE_TEMP]")
 	processes_left--
 	if(processes_left <= 0)
 		set_light(0)

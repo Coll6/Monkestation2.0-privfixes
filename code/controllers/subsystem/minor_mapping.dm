@@ -37,9 +37,6 @@ SUBSYSTEM_DEF(minor_mapping)
 /datum/controller/subsystem/minor_mapping/proc/valid_mouse_turf(turf/open/proposed_turf)
 	if(!istype(proposed_turf))
 		return FALSE
-	var/datum/gas_mixture/turf/turf_gasmix = proposed_turf.air
-	var/turf_temperature = proposed_turf.temperature
-	return turf_gasmix.has_gas(/datum/gas/oxygen, 5) && turf_temperature < NPC_DEFAULT_MAX_TEMP && turf_temperature > NPC_DEFAULT_MIN_TEMP
 
 /datum/controller/subsystem/minor_mapping/proc/place_satchels(amount=10)
 	var/list/turfs = find_satchel_suitable_turfs()

@@ -50,7 +50,7 @@
 	icon_state = "frame_1"
 
 	prev_tier = /obj/structure/canister_frame/machine/unfinished_canister_frame
-	finished_obj = /obj/machinery/portable_atmospherics/canister
+
 
 /obj/structure/canister_frame/machine/examine(user)
 	. = ..()

@@ -10,9 +10,8 @@
 	fire_damage = 10
 
 /datum/action/cooldown/mob_cooldown/fire_breath/ice/burn_turf(turf/fire_turf, list/hit_list, atom/source)
-	var/obj/effect/hotspot/fire_hotspot = ..()
-	fire_hotspot.add_atom_colour(COLOR_BLUE_LIGHT, FIXED_COLOUR_PRIORITY) // You're blue now, that's my attack
-	return fire_hotspot
+
+	return
 
 /datum/action/cooldown/mob_cooldown/fire_breath/ice/on_burn_mob(mob/living/barbecued, mob/living/source)
 	barbecued.apply_status_effect(/datum/status_effect/ice_block_talisman, 2 SECONDS)

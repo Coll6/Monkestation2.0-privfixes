@@ -35,11 +35,7 @@
 	desc = "The latest model in Nakamura Engineering's line of delamination suppression systems.<br>You don't want to be in the chamber when it's activated!<br>\
 		Come to think of it, CentCom would rather you didn't activate it at all.<br>These things are expensive!"
 	use_power = IDLE_POWER_USE
-	can_unwrench = FALSE // comedy option, what if unwrenching trying to steal it throws you into the crystal for a nice dusting
-	shift_underlay_only = FALSE
-	hide = TRUE
-	piping_layer = PIPING_LAYER_MAX
-	pipe_state = "injector"
+
 	resistance_flags = FIRE_PROOF | FREEZE_PROOF | UNACIDABLE
 	idle_power_usage = BASE_MACHINE_IDLE_CONSUMPTION * 4
 
@@ -85,8 +81,7 @@
 /obj/machinery/atmospherics/components/unary/delam_scram/proc/marry_sm()
 	my_sm = WEAKREF(GLOB.main_supermatter_engine)
 
-/obj/machinery/atmospherics/components/unary/delam_scram/update_icon_nopipes()
-	return
+
 
 /**
  * The atmos code is functionally identical to /obj/machinery/atmospherics/components/unary/outlet_injector
@@ -95,26 +90,13 @@
 */
 /obj/machinery/atmospherics/components/unary/delam_scram/process_atmos()
 	..()
-	if(!on || !is_operational)
-		return
 
 	var/turf/location = get_turf(loc)
 
 	if(isclosedturf(location))
 		return
 
-	var/datum/gas_mixture/air_contents = airs[1]
 
-	if(air_contents.temperature > 0)
-		var/transfer_moles = (air_contents.return_pressure() * volume_rate) / (air_contents.temperature * R_IDEAL_GAS_EQUATION)
-
-		if(!transfer_moles)
-			return
-
-		var/datum/gas_mixture/removed = air_contents.remove(transfer_moles)
-
-		location.assume_air(removed)
-		update_parents()
 
 /// Signal handler for the emergency stop button/automated system
 /obj/machinery/atmospherics/components/unary/delam_scram/proc/panic_time(source, trigger_reason)
@@ -127,21 +109,7 @@
 
 /// Check for admin intervention or a fault in the signal validation, we don't exactly want to fire this on accident
 /obj/machinery/atmospherics/components/unary/delam_scram/proc/prereq_check(source, trigger_reason)
-	if(on)
-		return FALSE
 
-	if(admin_disabled)
-		investigate_log("Delam SCRAM tried to activate but an admin disabled it", INVESTIGATE_ATMOS)
-		playsound(src, 'sound/misc/compiler-failure.ogg', 100, FALSE, MACHINE_SOUND_RANGE, ignore_walls = TRUE, use_reverb = TRUE, falloff_distance = MACHINE_SOUND_FALLOFF_DISTANCE)
-		radio.talk_into(src, "System fault! Unable to trigger.", warning_channel)
-		audible_message(span_danger("[src] makes a series of sad beeps. Someone has corrupted its software!"))
-		return FALSE
-
-	if(world.time - SSticker.round_start_time > 30 MINUTES && trigger_reason != DIVINE_INTERVENTION)
-		playsound(src, 'sound/misc/compiler-failure.ogg', 100, FALSE, MACHINE_SOUND_RANGE, ignore_walls = TRUE, use_reverb = TRUE, falloff_distance = MACHINE_SOUND_FALLOFF_DISTANCE)
-		audible_message(span_danger("[src] makes a series of sad beeps. The internal charge only lasts about 30 minutes... what a feat of engineering!"))
-		investigate_log("Delam SCRAM signal was received but failed precondition check. (Round time or trigger reason)", INVESTIGATE_ATMOS)
-		return FALSE
 
 	return TRUE
 
@@ -190,7 +158,7 @@
 		return
 
 	// Fire bell close, that nice 'are we gonna die?' rumble out far
-	on = TRUE
+
 	//alert_sound_to_playing('sound/misc/earth_rumble_distant3.ogg', override_volume = TRUE)
 	update_appearance()
 
@@ -204,13 +172,6 @@
 	angry_sm.update_appearance()
 
 	// Don't vent the delam juice as it works its magic
-	for(var/obj/machinery/atmospherics/components/unary/vent_scrubber/scrubby_boi in range(3, src))
-		scrubby_boi.on = FALSE
-		scrubby_boi.update_appearance()
-
-	for(var/obj/machinery/atmospherics/components/unary/vent_pump/venti_boi in range(3, src))
-		venti_boi.on = FALSE
-		venti_boi.update_appearance()
 
 	// The windows can only protect you for so long
 	for(var/obj/structure/window/reinforced/plasma/fucked_window in range(3, src))
@@ -252,11 +213,6 @@
 
 /obj/machinery/atmospherics/components/unary/delam_scram/New()
 	. = ..()
-	var/datum/gas_mixture/delam_juice = new
-	delam_juice.add_gases(/datum/gas/freon)
-	delam_juice.gases[/datum/gas/freon][MOLES] = SM_COOLING_MIXTURE_MOLES
-	delam_juice.temperature = SM_COOLING_MIXTURE_TEMP
-	airs[1] = delam_juice
 
 /// A big red button you can smash to stop the supermatter engine, oh how tempting!
 /obj/machinery/button/delam_scram
@@ -585,9 +541,7 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/delam_procedure, 32)
 		message_admins("No active delam SCRAM units found on map! Either it's not mapped or it's already been used!")
 		return FALSE
 
-	if(my_one_and_only.on)
-		message_admins("[my_one_and_only] can't fire, it's already been triggered!")
-		return FALSE
+
 
 	return my_one_and_only
 

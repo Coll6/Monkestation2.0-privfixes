@@ -232,8 +232,7 @@
 	//stuff tied to the area to rename
 	var/static/list/to_rename = typecacheof(list(
 		/obj/machinery/airalarm,
-		/obj/machinery/atmospherics/components/unary/vent_scrubber,
-		/obj/machinery/atmospherics/components/unary/vent_pump,
+
 		/obj/machinery/door,
 		/obj/machinery/firealarm,
 		/obj/machinery/light_switch,

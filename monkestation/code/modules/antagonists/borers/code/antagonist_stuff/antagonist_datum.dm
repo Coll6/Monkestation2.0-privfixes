@@ -19,14 +19,6 @@
 	for(var/obj/machinery/atmospherics/components/unary/vent_pump/temp_vent as anything in SSmachines.get_machines_by_type_and_subtypes(/obj/machinery/atmospherics/components/unary/vent_pump))
 		if(QDELETED(temp_vent))
 			continue
-		if(is_station_level(temp_vent.loc.z) && !temp_vent.welded)
-			var/datum/pipeline/temp_vent_parent = temp_vent.parents[1]
-			if(!temp_vent_parent)
-				continue // No parent vent
-			// Stops Cortical Borers getting stuck in small networks.
-			// See: Security, Virology
-			if(length(temp_vent_parent.other_atmos_machines) > 20)
-				vents += temp_vent
 
 	if(!length(vents))
 		message_admins(span_adminnotice("[spender] ([ckey(spender.key)]) tried spawning in as a borer, but no suitable vents were found!"))

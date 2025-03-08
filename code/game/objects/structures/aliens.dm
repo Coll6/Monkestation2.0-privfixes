@@ -63,21 +63,20 @@
 	canSmoothWith = SMOOTH_GROUP_ALIEN_RESIN
 	max_integrity = 200
 	var/resintype = null
-	can_atmos_pass = ATMOS_PASS_DENSITY
+
 
 
 /obj/structure/alien/resin/Initialize(mapload)
 	. = ..()
-	air_update_turf(TRUE, TRUE)
+
 
 /obj/structure/alien/resin/Destroy()
-	air_update_turf(TRUE, FALSE)
+
 	. = ..()
 
 /obj/structure/alien/resin/Move()
-	var/turf/T = loc
 	. = ..()
-	move_update_air(T)
+
 
 /obj/structure/alien/resin/wall
 	name = "resin wall"
@@ -89,8 +88,7 @@
 	smoothing_groups = SMOOTH_GROUP_ALIEN_WALLS + SMOOTH_GROUP_ALIEN_RESIN
 	canSmoothWith = SMOOTH_GROUP_ALIEN_WALLS
 
-/obj/structure/alien/resin/wall/block_superconductivity()
-	return 1
+
 
 /// meant for one lavaland ruin or anywhere that has simplemobs who can push aside structures
 /obj/structure/alien/resin/wall/immovable
@@ -202,19 +200,7 @@
 		qdel(src)
 		return
 	//lets try to grow in a direction
-	for(var/turf/check_turf in src_turf.get_atmos_adjacent_turfs())
-		//we cannot grow on blacklisted turfs
-		if(is_type_in_list(check_turf, blacklisted_turfs))
-			continue
-		var/obj/structure/alien/weeds/check_weed = locate() in check_turf
-		//we cannot grow onto other weeds
-		if(check_weed)
-			continue
-		//spawn a new one in the turf
-		check_weed = new(check_turf)
-		//set the new one's parent node to our parent node
-		check_weed.parent_node = parent_node
-		check_weed.RegisterSignal(parent_node, COMSIG_QDELETING, PROC_REF(after_parent_destroyed))
+
 
 /**
  * Called when the parent node is destroyed

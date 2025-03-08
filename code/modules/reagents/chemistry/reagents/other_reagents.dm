@@ -203,20 +203,13 @@
 	if(!istype(exposed_turf))
 		return
 
-	var/cool_temp = cooling_temperature
 	if(reac_volume >= 5)
 		exposed_turf.MakeSlippery(TURF_WET_WATER, 10 SECONDS, min(reac_volume*1.5 SECONDS, 60 SECONDS))
 
 	for(var/mob/living/basic/slime/exposed_slime in exposed_turf)
 		exposed_slime.apply_water()
 
-	var/obj/effect/hotspot/hotspot = (locate(/obj/effect/hotspot) in exposed_turf)
-	if(hotspot && !isspaceturf(exposed_turf))
-		if(exposed_turf.air)
-			var/datum/gas_mixture/air = exposed_turf.air
-			air.temperature = max(min(air.temperature-(cool_temp*1000), air.temperature/cool_temp),TCMB)
-			air.react(src)
-			qdel(hotspot)
+
 
 /*
  * Water reaction to an object

@@ -98,7 +98,7 @@
 	///This is used to determine on which slots an item can fit.
 	var/slot_flags = 0
 	pass_flags = PASSTABLE
-	pressure_resistance = 4
+
 	/// This var exists as a weird proxy "owner" ref
 	/// It's used in a few places. Stop using it, and optimially replace all uses please
 	var/obj/item/master = null
@@ -947,8 +947,7 @@
 			success = TRUE
 		if(success)
 			location = get_turf(pyromanic)
-	if(isturf(location))
-		location.hotspot_expose(flame_heat, 5)
+
 
 /// If an object can successfully be used as a fire starter it will return a message
 /obj/item/proc/ignition_effect(atom/A, mob/user)

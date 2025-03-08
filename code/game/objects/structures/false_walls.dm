@@ -16,7 +16,7 @@
 	smoothing_groups = SMOOTH_GROUP_WALLS + SMOOTH_GROUP_CLOSED_TURFS
 	canSmoothWith = SMOOTH_GROUP_WALLS
 	can_be_unanchored = FALSE
-	can_atmos_pass = ATMOS_PASS_DENSITY
+
 	rad_insulation = RAD_MEDIUM_INSULATION
 	material_flags = MATERIAL_EFFECTS
 	var/mineral = /obj/item/stack/sheet/iron
@@ -31,7 +31,7 @@
 	var/obj/item/stack/initialized_mineral = new mineral // Okay this kinda sucks.
 	set_custom_materials(initialized_mineral.mats_per_unit, mineral_amount)
 	qdel(initialized_mineral)
-	air_update_turf(TRUE, TRUE)
+
 
 /obj/structure/falsewall/attack_hand(mob/user, list/modifiers)
 	if(opening)
@@ -55,7 +55,7 @@
 		set_opacity(density)
 		opening = FALSE
 		update_appearance()
-		air_update_turf(TRUE, !density)
+
 
 /obj/structure/falsewall/update_icon(updates=ALL)//Calling icon_update will refresh the smoothwalls if it's closed, otherwise it will make sure the icon is correct if it's open
 	. = ..()
@@ -400,7 +400,7 @@
 		set_opacity(density && mat_opacity)
 		opening = FALSE
 		update_appearance()
-		air_update_turf(TRUE, !density)
+
 
 /obj/structure/falsewall/material/ChangeToWall(delete = 1)
 	var/turf/current_turf = get_turf(src)

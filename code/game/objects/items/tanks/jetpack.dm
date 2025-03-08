@@ -8,7 +8,7 @@
 	w_class = WEIGHT_CLASS_BULKY
 	distribute_pressure = ONE_ATMOSPHERE * O2STANDARD
 	actions_types = list(/datum/action/item_action/set_internals, /datum/action/item_action/toggle_jetpack, /datum/action/item_action/jetpack_stabilization)
-	var/gas_type = /datum/gas/oxygen
+	var/gas_type
 	var/on = FALSE
 	var/stabilizers = FALSE
 	var/can_be_emped = TRUE //monkestation addition: improvised jetpack doesn't have any electronics to emp
@@ -49,10 +49,6 @@
 		turn_off(user)
 
 /obj/item/tank/jetpack/populate_gas()
-	if(gas_type)
-		var/datum/gas_mixture/our_mix = return_air()
-		our_mix.assert_gas(gas_type)
-		our_mix.gases[gas_type][MOLES] = ((6 * ONE_ATMOSPHERE) * volume / (R_IDEAL_GAS_EQUATION * T20C))
 
 /obj/item/tank/jetpack/ui_action_click(mob/user, action)
 	if(istype(action, /datum/action/item_action/toggle_jetpack))
@@ -109,18 +105,14 @@
 		user.remove_movespeed_modifier(/datum/movespeed_modifier/jetpack/fullspeed)
 
 /obj/item/tank/jetpack/proc/allow_thrust(num, use_fuel = TRUE)
-	if((num < 0.005 || air_contents.total_moles() < num))
-		turn_off(get_user())
-		return FALSE
+
 
 	// We've got the gas, it's chill
 	if(!use_fuel)
 		return TRUE
 
 	var/datum/gas_mixture/removed = remove_air(num)
-	if(removed.total_moles() < 0.005)
-		turn_off(get_user())
-		return FALSE
+
 
 	var/turf/T = get_turf(src)
 	T.assume_air(removed)
@@ -229,7 +221,6 @@
 	icon_state = "jetpack-black"
 	inhand_icon_state = "jetpack-black"
 	distribute_pressure = 0
-	gas_type = /datum/gas/carbon_dioxide
 
 //MONKESTATION EDIT START
 /obj/item/tank/jetpack/mining //tried to get hardsuit jetpacks to work again took all day with no real progess so this is the compromise

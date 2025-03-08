@@ -14,20 +14,18 @@
 /datum/wires/airalarm/interactable(mob/user)
 	if(!..())
 		return FALSE
-	var/obj/machinery/airalarm/A = holder
-	if(A.panel_open && A.buildstage == 2)
-		return TRUE
+//	if(A.panel_open && A.buildstage == 2)
+	return TRUE
 
 /datum/wires/airalarm/get_status()
-	var/obj/machinery/airalarm/A = holder
 	var/list/status = list()
-	status += "The interface light is [A.locked ? "red" : "green"]."
-	status += "The short indicator is [A.shorted ? "lit" : "off"]."
-	status += "The AI connection light is [!A.aidisabled ? "on" : "off"]."
+//	status += "The interface light is [A.locked ? "red" : "green"]."
+//	status += "The short indicator is [A.shorted ? "lit" : "off"]."
+//	status += "The AI connection light is [!A.aidisabled ? "on" : "off"]."
 	return status
 
 /datum/wires/airalarm/on_pulse(wire)
-	var/obj/machinery/airalarm/A = holder
+	/*
 	switch(wire)
 		if(WIRE_POWER) // Short out for a long time.
 			if(!A.shorted)
@@ -50,9 +48,9 @@
 			if(A.alarm_manager.clear_alarm(ALARM_ATMOS))
 				A.danger_level = AIR_ALARM_ALERT_NONE
 			A.update_appearance()
-
+*/
 /datum/wires/airalarm/on_cut(wire, mend, source)
-	var/obj/machinery/airalarm/A = holder
+	/*
 	switch(wire)
 		if(WIRE_POWER) // Short out forever.
 			A.shock(usr, 50)
@@ -70,3 +68,4 @@
 			if(A.alarm_manager.send_alarm(ALARM_ATMOS))
 				A.danger_level = AIR_ALARM_ALERT_HAZARD
 			A.update_appearance()
+*/

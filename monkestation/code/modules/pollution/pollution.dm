@@ -100,8 +100,7 @@
 	if(amount_to_scrub >= total_amount || !isopenturf(my_turf) || QDELING(my_turf))
 		qdel(src)
 		return
-	if(planetary_multiplier && my_turf.planetary_atmos) //Dissipate faster on planetary atmos
-		amount_to_scrub *= POLLUTION_DISSIPATION_PLANETARY_MULTIPLIER
+
 	for(var/type in pollutants)
 		pollutants[type] -= amount_to_scrub * pollutants[type] / total_amount
 	total_amount -= amount_to_scrub
@@ -140,16 +139,8 @@
 		SET_UNACTIVE_POLLUTION(src)
 		return
 	var/list/sharing_turfs
-	var/list/already_processed_cache = SSpollution.processed_this_run
 	var/list/potential_activers
-	for(var/turf/open/open_turf as anything in my_turf.atmos_adjacent_turfs)
-		if(!isopenturf(open_turf) || QDELING(open_turf))
-			continue
-		if(!already_processed_cache[open_turf])
-			if(can_share_with(open_turf))
-				LAZYSET(sharing_turfs, open_turf, TRUE)
-			else
-				LAZYSET(potential_activers, open_turf, TRUE)
+
 	if(!length(sharing_turfs))
 		SET_UNACTIVE_POLLUTION(src)
 		return
@@ -253,7 +244,4 @@
 
 ///Atmos adjacency has been updated on this turf, see if it affects any of our pollutants
 /turf/proc/update_adjacent_pollutants()
-	for(var/turf/open/open_turf as anything in atmos_adjacent_turfs)
-		if(!isopenturf(open_turf) || QDELING(open_turf) || QDELETED(open_turf.pollution))
-			continue
-		SET_ACTIVE_POLLUTION(open_turf.pollution)
+

@@ -13,7 +13,7 @@
 	pass_flags_self = PASSDOORS
 	max_integrity = 350
 	armor_type = /datum/armor/machinery_door
-	can_atmos_pass = ATMOS_PASS_DENSITY
+
 	flags_1 = PREVENT_CLICK_UNDER_1
 	receive_ricochet_chance_mod = 0.8
 	damage_deflection = 10
@@ -77,7 +77,7 @@
 	. = ..()
 	set_init_door_layer()
 	update_freelook_sight()
-	air_update_turf(TRUE, TRUE)
+
 	register_context()
 	GLOB.airlocks += src
 	if(elevator_mode)
@@ -145,7 +145,7 @@
 	if(spark_system)
 		qdel(spark_system)
 		spark_system = null
-	air_update_turf(TRUE, FALSE)
+
 	return ..()
 
 /**
@@ -213,10 +213,8 @@
 		return
 
 /obj/machinery/door/Move()
-	var/turf/T = loc
 	. = ..()
-	if(density) //Gotta be closed my friend
-		move_update_air(T)
+
 
 /obj/machinery/door/CanAllowThrough(atom/movable/mover, border_dir)
 	. = ..()
@@ -414,7 +412,7 @@
 	update_appearance()
 	set_opacity(0)
 	operating = FALSE
-	air_update_turf(TRUE, FALSE)
+
 	update_freelook_sight()
 	if(autoclose)
 		autoclose_in(DOOR_CLOSE_WAIT)
@@ -465,7 +463,7 @@
 	if(visible && !glass)
 		set_opacity(1)
 	operating = FALSE
-	air_update_turf(TRUE, TRUE)
+
 	update_freelook_sight()
 
 	if(!can_crush)
@@ -529,10 +527,7 @@
 	if(!glass && GLOB.cameranet)
 		GLOB.cameranet.updateVisibility(src, 0)
 
-/obj/machinery/door/block_superconductivity() // All non-glass airlocks block heat, this is intended.
-	if(opacity || heat_proof)
-		return 1
-	return 0
+
 
 /obj/machinery/door/morgue
 	icon = 'icons/obj/doors/doormorgue.dmi'

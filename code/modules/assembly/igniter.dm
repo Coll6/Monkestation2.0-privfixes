@@ -33,9 +33,7 @@
 /obj/item/assembly/igniter/activate()
 	if(!..())
 		return FALSE//Cooldown check
-	var/turf/location = get_turf(loc)
-	if(location)
-		location.hotspot_expose(heat, EXPOSED_VOLUME)
+
 	if(holder)
 		SEND_SIGNAL(holder.loc, COMSIG_IGNITER_ACTIVATE)
 	if(QDELETED(src))
@@ -64,10 +62,7 @@
 	. = ..()
 	if(!.)
 		return //Cooldown check
-	var/turf/location = get_turf(loc)
-	if(location)
-		var/datum/gas_mixture/enviro = location.return_air()
-		enviro.temperature = clamp(min(T20C, enviro.temperature*0.85),MIN_FREEZE_TEMP,MAX_FREEZE_TEMP)
+
 	sparks.start()
 
 #undef EXPOSED_VOLUME

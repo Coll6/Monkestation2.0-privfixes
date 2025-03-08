@@ -767,7 +767,7 @@ GLOBAL_LIST_EMPTY(station_turfs)
 		. += turf_to_check
 
 /turf/proc/GetHeatCapacity()
-	. = heat_capacity
+
 
 /turf/proc/GetTemperature()
 	. = temperature

@@ -4,7 +4,6 @@
 	icon_state = "reebemap"
 	layer = SPACE_LAYER
 	baseturfs = /turf/open/indestructible/reebe_void
-	planetary_atmos = TRUE
 	bullet_bounce_sound = null //forever falling
 	tiled_dirt = FALSE
 
@@ -67,7 +66,6 @@
 	name = "clockwork floor"
 	desc = "You feel a faint warmth from below it."
 	icon_state = "clockwork_floor"
-	planetary_atmos = TRUE
 	baseturfs = /turf/open/indestructible/reebe_flooring
 	turf_flags = NOJAUNT
 

@@ -173,7 +173,7 @@
 	var/gas_type = "o2"
 
 /obj/effect/mine/gas/mineEffect(mob/victim)
-	atmos_spawn_air("[gas_type]=[gas_amount]")
+
 
 
 /obj/effect/mine/gas/plasma

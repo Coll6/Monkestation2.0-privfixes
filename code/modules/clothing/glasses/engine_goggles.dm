@@ -109,28 +109,6 @@
 				flick_overlay_global(pic, list(user.client), 8)
 
 /obj/item/clothing/glasses/meson/engine/proc/show_connections()
-	var/mob/living/carbon/human/user = loc
-
-	for(var/obj/machinery/atmospherics/pipe/smart/smart in connection_images)
-		if(get_dist(loc, smart.loc) > range)
-			connection_images -= smart
-
-	for(var/obj/machinery/atmospherics/pipe/smart/smart in orange(range, user))
-		if(!connection_images[smart])
-			connection_images[smart] = list()
-		for(var/direction in GLOB.cardinals)
-			if(!(smart.get_init_directions() & direction))
-				continue
-			if(!connection_images[smart][dir2text(direction)])
-				var/image/arrow
-				arrow = new('icons/obj/atmospherics/pipes/simple.dmi', get_turf(smart), "connection_overlay")
-				arrow.dir = direction
-				arrow.layer = smart.layer
-				arrow.color = smart.pipe_color
-				PIPING_LAYER_DOUBLE_SHIFT(arrow, smart.piping_layer)
-				connection_images[smart][dir2text(direction)] = arrow
-			if(connection_images.len)
-				flick_overlay_global(connection_images[smart][dir2text(direction)], list(user.client), 1.5 SECONDS)
 
 /obj/item/clothing/glasses/meson/engine/update_icon_state()
 	icon_state = inhand_icon_state = "trayson-[mode]"
@@ -181,8 +159,7 @@
 	for(var/turf/open in view(range, viewer))
 		if(open.blocks_air)
 			continue
-		var/datum/gas_mixture/environment = open.return_air()
-		var/temp = round(environment.return_temperature())
+		var/temp
 		var/image/pic = image('icons/turf/overlays.dmi', open, "greyOverlay", ABOVE_ALL_MOB_LAYER)
 		// Lower than TEMP_SHADE_CYAN should be deep blue
 		switch(temp)

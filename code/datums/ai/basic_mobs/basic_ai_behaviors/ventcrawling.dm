@@ -57,12 +57,10 @@
 	var/obj/machinery/atmospherics/components/unary/vent_pump/returnable_vent
 	var/obj/machinery/atmospherics/components/unary/vent_pump/vent_we_entered_through = controller.blackboard[target_key] || controller.blackboard[BB_ENTRY_VENT_TARGET]
 
-	var/datum/pipeline/entry_vent_parent = vent_we_entered_through.parents[1]
+
 	var/list/potential_exits = list()
 
-	for(var/obj/machinery/atmospherics/components/unary/vent_pump/vent in entry_vent_parent.other_atmos_machines)
-		if(is_vent_valid(vent))
-			potential_exits.Add(vent)
+
 
 	if(length(potential_exits))
 		returnable_vent = pick(potential_exits)
@@ -109,7 +107,6 @@
 
 /// Incredibly stripped down version of the overarching `can_enter_vent` proc on `/mob, just meant for rapid rechecking of a vent. Will be TRUE if not blocked, FALSE otherwise.
 /datum/ai_behavior/crawl_through_vents/proc/is_vent_valid(obj/machinery/atmospherics/components/unary/vent_pump/checkable)
-	return !QDELETED(checkable) && !checkable.welded
 
 /// Aw fuck, we may have been bested somehow. Regardless of what we do, we can't exit through a vent! Let's end our misery and prevent useless endless calculations.
 /datum/ai_behavior/crawl_through_vents/proc/suicide_pill(datum/ai_controller/controller, target_key)

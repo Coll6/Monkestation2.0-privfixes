@@ -104,8 +104,7 @@
 
 /obj/machinery/atmospherics/get_save_vars()
 	return ..() + list(
-		NAMEOF(src, piping_layer),
-		NAMEOF(src, pipe_color),
+
 	)
 
 /obj/item/pipe/get_save_vars()

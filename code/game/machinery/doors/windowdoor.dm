@@ -15,7 +15,7 @@
 	flags_1 = ON_BORDER_1
 	opacity = FALSE
 	pass_flags_self = PASSGLASS
-	can_atmos_pass = ATMOS_PASS_PROC
+
 	interaction_flags_machine = INTERACT_MACHINE_WIRES_IF_OPEN | INTERACT_MACHINE_ALLOW_SILICON | INTERACT_MACHINE_OPEN_SILICON | INTERACT_MACHINE_REQUIRES_SILICON | INTERACT_MACHINE_OPEN
 	set_dir_on_move = FALSE
 	opens_with_door_remote = TRUE
@@ -69,8 +69,7 @@
 	if(atom_integrity == 0)
 		playsound(src, SFX_SHATTER, 70, TRUE)
 	electronics = null
-	var/turf/floor = get_turf(src)
-	floor.air_update_turf(TRUE, FALSE)
+
 	return ..()
 
 /obj/machinery/door/window/update_icon_state()
@@ -182,11 +181,7 @@
 
 	return TRUE
 
-/obj/machinery/door/window/can_atmos_pass(turf/T, vertical = FALSE)
-	if(get_dir(loc, T) == dir)
-		return !density
-	else
-		return TRUE
+
 
 //used in the AStar algorithm to determinate if the turf the door is on is passable
 /obj/machinery/door/window/CanAStarPass(to_dir, datum/can_pass_info/pass_info)
@@ -225,7 +220,7 @@
 	icon_state ="[base_state]open"
 	sleep(1 SECONDS)
 	set_density(FALSE)
-	air_update_turf(TRUE, FALSE)
+
 	update_freelook_sight()
 
 	if(operating == 1) //emag again
@@ -268,7 +263,7 @@
 	icon_state = base_state
 
 	set_density(TRUE)
-	air_update_turf(TRUE, TRUE)
+
 	update_freelook_sight()
 	sleep(1 SECONDS)
 

@@ -128,7 +128,7 @@
 	desc = "A special breed of horse engineered by the syndicate to be capable of surviving in the deep reaches of space. A modern outlaw's best friend."
 	faction = list(ROLE_SYNDICATE)
 	ponycolors = list("#5d566f", COLOR_RED)
-	pressure_resistance = 200
+
 	habitable_atmos = list("min_oxy" = 0, "max_oxy" = 0, "min_plas" = 0, "max_plas" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
 	bodytemp_cold_damage_limit = -1
 	bodytemp_heat_damage_limit = 1500

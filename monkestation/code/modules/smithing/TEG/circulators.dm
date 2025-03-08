@@ -8,8 +8,7 @@
 	desc = "A gas circulator pump and heat exchanger."
 	icon = 'goon/icons/teg.dmi'
 	icon_state = "circ1-off"
-	pipe_flags = PIPING_ONE_PER_TURF | PIPING_DEFAULT_LAYER_ONLY
-	vent_movement = VENTCRAWL_CAN_SEE
+
 	density = TRUE
 	circuit = /obj/item/circuitboard/machine/circulator
 
@@ -79,32 +78,7 @@
 
 /obj/machinery/atmospherics/components/binary/circulator/proc/return_transfer_air()
 
-	var/datum/gas_mixture/air1 = airs[1]
-	var/datum/gas_mixture/air2 = airs[2]
 
-	var/output_starting_pressure = air1.return_pressure()
-	var/input_starting_pressure = air2.return_pressure()
-
-	if(output_starting_pressure >= input_starting_pressure-10)
-		//Need at least 10 KPa difference to overcome friction in the mechanism
-		last_pressure_delta = 0
-		return null
-
-	//Calculate necessary moles to transfer using PV = nRT
-	if(air2.temperature <= 0)
-		last_pressure_delta = 0
-		return
-
-	var/pressure_delta = (input_starting_pressure - output_starting_pressure)/2
-	pressure_delta *= lubricated_multiplier
-
-	var/transfer_moles = abs(pressure_delta) * air1.volume / max(air2.temperature / R_IDEAL_GAS_EQUATION, 1) //this fixes a runtime where because of weirdness we runtime as pressure delta is negative so we abs() it
-	last_pressure_delta = pressure_delta
-	//Actually transfer the gas
-	var/datum/gas_mixture/removed = air2.remove(transfer_moles)
-	reagent_effects(removed)
-	update_parents()
-	return removed
 
 /obj/machinery/atmospherics/components/binary/circulator/proc/reagent_effects(datum/gas_mixture/removed)
 	if(!reagents.total_volume)
@@ -140,7 +114,7 @@
 		if(prob(3))
 			visible_message(span_warning("You notice the [src] looks to be briefly covered in haze!"))
 
-	removed.temperature = max(removed.temperature + temperature_change, 1)
+
 
 /obj/machinery/atmospherics/components/binary/circulator/process_atmos()
 	update_appearance()
@@ -185,50 +159,11 @@
 		disconnectFromGenerator()
 	balloon_alert(user, "[anchored ? "secure" : "unsecure"]")
 
-	var/obj/machinery/atmospherics/node1 = nodes[1]
-	var/obj/machinery/atmospherics/node2 = nodes[2]
-
-	if(node1)
-		node1.disconnect(src)
-		nodes[1] = null
-		if(parents[1])
-			nullify_pipenet(parents[1])
-
-	if(node2)
-		node2.disconnect(src)
-		nodes[2] = null
-		if(parents[2])
-			nullify_pipenet(parents[2])
-
-	if(anchored)
-		set_init_directions()
-		atmos_init()
-		node1 = nodes[1]
-		if(node1)
-			node1.atmos_init()
-			node1.add_member(src)
-		node2 = nodes[2]
-		if(node2)
-			node2.atmos_init()
-			node2.add_member(src)
-		SSair.add_to_rebuild_queue(src)
-
 	return TRUE
 
-/obj/machinery/atmospherics/components/binary/circulator/set_init_directions()
-	switch(dir)
-		if(NORTH, SOUTH)
-			initialize_directions = NORTH|SOUTH
 
-/obj/machinery/atmospherics/components/binary/circulator/get_node_connects()
-	if(flipped)
-		return list(SOUTH, NORTH)
-	return list(NORTH, SOUTH)
 
-/obj/machinery/atmospherics/components/binary/circulator/can_be_node(obj/machinery/atmospherics/target)
-	if(anchored)
-		return ..(target)
-	return FALSE
+
 
 /obj/machinery/atmospherics/components/binary/circulator/multitool_act(mob/living/user, obj/item/I)
 	if(generator)
@@ -271,7 +206,4 @@
 	generator.update_appearance()
 	generator = null
 
-/obj/machinery/atmospherics/components/binary/circulator/set_piping_layer(new_layer)
-	..()
-	pixel_x = 0
-	pixel_y = 0
+

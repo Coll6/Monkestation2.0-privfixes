@@ -364,7 +364,7 @@ GLOBAL_LIST_INIT(typecache_holodeck_linked_floorcheck_ok, typecacheof(list(/turf
 			if(prob(30))
 				do_sparks(2, 1, holo_turf)
 			SSexplosions.lowturf += holo_turf
-			holo_turf.hotspot_expose(1000,500,1)
+
 
 	if(!(obj_flags & EMAGGED))
 		for(var/item in spawned)

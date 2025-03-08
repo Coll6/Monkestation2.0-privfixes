@@ -19,7 +19,4 @@
 	if(QDELETED(owner))
 		return
 	owner.balloon_alert_to_viewers("vomits a cloud of plasma!")
-	var/turf/open/owner_turf = get_turf(owner)
-	if(istype(owner_turf) && !QDELING(owner_turf))
-		owner_turf.atmos_spawn_air("plasma=50;TEMP=[T20C]")
 	owner.vomit(vomit_type = VOMIT_PURPLE, harm = FALSE)

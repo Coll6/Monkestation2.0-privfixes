@@ -100,9 +100,6 @@ GLOBAL_DATUM(current_eminence, /mob/living/eminence) //set to the current eminen
 /mob/living/eminence/fire_act()
 	return
 
-/mob/living/eminence/experience_pressure_difference(pressure_difference, direction, pressure_resistance_prob_delta)
-	return
-
 /mob/living/eminence/can_z_move(direction, turf/start, turf/destination, z_move_flags, mob/living/rider)
 	z_move_flags |= ZMOVE_IGNORE_OBSTACLES
 	return ..()

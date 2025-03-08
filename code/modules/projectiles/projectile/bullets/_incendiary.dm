@@ -17,10 +17,6 @@
 
 	if(!leaves_fire_trail)
 		return
-	var/turf/location = get_turf(src)
-	if(location)
-		new /obj/effect/hotspot(location)
-		location.hotspot_expose(700, 50, 1)
 
 /// Incendiary bullet that more closely resembles a real flamethrower sorta deal, no visible bullet, just flames.
 /obj/projectile/bullet/incendiary/fire
@@ -43,10 +39,8 @@
 
 /obj/projectile/bullet/incendiary/fire/on_hit(atom/target, blocked = 0, pierce_hit)
 	. = ..()
-	var/turf/location = get_turf(target)
-	if(isopenturf(location))
-		new /obj/effect/hotspot(location)
-		location.hotspot_expose(700, 50, 1)
+
+
 
 /// Used in [the backblast element][/datum/element/backblast]
 /obj/projectile/bullet/incendiary/fire/backblast

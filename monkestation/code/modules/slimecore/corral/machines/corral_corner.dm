@@ -171,7 +171,6 @@
 
 	icon = 'monkestation/code/modules/slimecore/icons/machinery.dmi'
 	icon_state = "corral_fence"
-	can_atmos_pass = ATMOS_PASS_NO
 	can_astar_pass = CANASTARPASS_ALWAYS_PROC
 
 /obj/effect/corral_fence/CanPass(atom/movable/mover, border_dir)
