@@ -781,15 +781,6 @@
 	..(hit_atom, throwingdatum, do_splash = FALSE)
 
 /obj/item/reagent_containers/cup/glass/bottle/molotov/smash(atom/target, mob/thrower, ranged = FALSE)
-	var/firestarter = 0
-	for(var/datum/reagent/contained_reagent in reagents.reagent_list)
-		for(var/accelerant_type in accelerants)
-			if(istype(contained_reagent, accelerant_type))
-				firestarter = 1
-				break
-	if(firestarter && active)
-		target.fire_act()
-		new /obj/effect/hotspot(get_turf(target))
 	..()
 
 /obj/item/reagent_containers/cup/glass/bottle/molotov/attackby(obj/item/I, mob/user, params)

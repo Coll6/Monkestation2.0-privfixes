@@ -48,8 +48,6 @@
 	if(isspaceturf(src) || !isopenturf(get_turf(src)))
 		return
 
-	var/turf/location = get_turf(src)
-	location.atmos_spawn_air("water_vapor=10;TEMP=350")
 
 //No detonation because it's strong enough as it is
 

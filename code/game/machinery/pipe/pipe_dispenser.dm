@@ -44,14 +44,7 @@
 			recipes = GLOB.transit_tube_recipes
 	// Generate pipe categories
 	for(var/c in recipes)
-		var/list/cat = recipes[c]
 		var/list/r = list()
-		for(var/i in 1 to cat.len)
-			var/datum/pipe_info/info = cat[i]
-			r += list(list("pipe_name" = info.name, "pipe_index" = i, "all_layers" = info.all_layers, "dir" = NORTH))
-			// if this is bendable, add the bent version of the pipe (disposals)
-			if (info.dirtype == PIPE_BENDABLE)
-				r += list(list("pipe_name" = "Bent " + info.name, "pipe_index" = i, "all_layers" = info.all_layers, "dir" = NORTHEAST))
 		data["categories"] += list(list("cat_name" = c, "recipes" = r))
 	var/list/init_directions = list("north" = FALSE, "south" = FALSE, "east" = FALSE, "west" = FALSE)
 	for(var/direction in GLOB.cardinals)
@@ -73,11 +66,10 @@
 					if(wait < world.time)
 						var/datum/pipe_info/info = GLOB.atmos_pipe_recipes[params["category"]][params["pipe_type"]]
 						var/recipe_type = info.type
-						var/p_type = info.id
+
 
 						// No spawning arbitrary paths (literally 1984)
-						if(!verify_recipe(GLOB.atmos_pipe_recipes, p_type))
-							return
+
 
 						// If this is a meter, make that.
 						if(recipe_type == /datum/pipe_info/meter)
@@ -86,8 +78,7 @@
 							return
 
 						// Otherwise, make a pipe/device
-						var/p_dir = params["pipe_dir"]
-						var/obj/item/pipe/pipe_out = new (loc, p_type, p_dir)
+						var/obj/item/pipe/pipe_out = null
 						pipe_out.p_init_dir = p_init_dir
 						pipe_out.pipe_color = GLOB.pipe_paint_colors[paint_color]
 						pipe_out.add_atom_colour(GLOB.pipe_paint_colors[paint_color], FIXED_COLOUR_PRIORITY)
@@ -96,14 +87,9 @@
 						wait = world.time + 1 SECONDS
 				if(DISPOSAL_PIPEDISPENSER)
 					if(wait < world.time)
-						var/datum/pipe_info/info = GLOB.disposal_pipe_recipes[params["category"]][params["pipe_type"]]
-						var/p_type = info.id
-
 						// No spawning arbitrary paths (literally 1984)
-						if(!verify_recipe(GLOB.disposal_pipe_recipes, p_type))
-							return
 
-						var/obj/structure/disposalconstruct/disposal_out = new (loc, p_type)
+						var/obj/structure/disposalconstruct/disposal_out = null
 						if(!disposal_out.can_place())
 							to_chat(usr, span_warning("There's not enough room to build that here!"))
 							qdel(disposal_out)
@@ -113,20 +99,7 @@
 						disposal_out.update_appearance()
 						disposal_out.setDir(params["pipe_dir"])
 						wait = world.time + 1 SECONDS
-				if(TRANSIT_PIPEDISPENSER)
-					if(wait < world.time)
-						var/datum/pipe_info/info = GLOB.transit_tube_recipes[params["category"]][params["pipe_type"]]
-						var/p_type = info.id
 
-						// No spawning arbitrary paths (literally 1984)
-						if(!verify_recipe(GLOB.transit_tube_recipes, p_type))
-							return
-
-						var/obj/structure/c_transit_tube/tube_out = new p_type(loc)
-						tube_out.add_fingerprint(usr)
-						tube_out.update_appearance()
-						tube_out.setDir(params["pipe_dir"])
-						wait = world.time + 1 SECONDS
 		if("piping_layer")
 			piping_layer = text2num(params["piping_layer"])
 
@@ -159,12 +132,7 @@
 		return ..()
 
 /obj/machinery/pipedispenser/proc/verify_recipe(recipes, path)
-	for(var/category in recipes)
-		var/list/cat_recipes = recipes[category]
-		for(var/i in cat_recipes)
-			var/datum/pipe_info/info = i
-			if (path == info.id)
-				return TRUE
+
 	return FALSE
 
 /obj/machinery/pipedispenser/wrench_act(mob/living/user, obj/item/tool)

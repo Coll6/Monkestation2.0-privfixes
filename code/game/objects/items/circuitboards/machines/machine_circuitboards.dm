@@ -333,7 +333,7 @@
 /obj/item/circuitboard/machine/thermomachine
 	name = "Thermomachine"
 	greyscale_colors = CIRCUIT_COLOR_ENGINEERING
-	build_path = /obj/machinery/atmospherics/components/unary/thermomachine/freezer
+
 	var/pipe_layer = PIPING_LAYER_DEFAULT
 	req_components = list(
 		/datum/stock_part/matter_bin = 2,
@@ -353,28 +353,28 @@
 /obj/item/circuitboard/machine/HFR_fuel_input
 	name = "HFR Fuel Input"
 	greyscale_colors = CIRCUIT_COLOR_ENGINEERING
-	build_path = /obj/machinery/atmospherics/components/unary/hypertorus/fuel_input
+
 	req_components = list(
 		/obj/item/stack/sheet/plasteel = 5)
 
 /obj/item/circuitboard/machine/HFR_waste_output
 	name = "HFR Waste Output"
 	greyscale_colors = CIRCUIT_COLOR_ENGINEERING
-	build_path = /obj/machinery/atmospherics/components/unary/hypertorus/waste_output
+
 	req_components = list(
 		/obj/item/stack/sheet/plasteel = 5)
 
 /obj/item/circuitboard/machine/HFR_moderator_input
 	name = "HFR Moderator Input"
 	greyscale_colors = CIRCUIT_COLOR_ENGINEERING
-	build_path = /obj/machinery/atmospherics/components/unary/hypertorus/moderator_input
+
 	req_components = list(
 		/obj/item/stack/sheet/plasteel = 5)
 
 /obj/item/circuitboard/machine/HFR_core
 	name = "HFR core"
 	greyscale_colors = CIRCUIT_COLOR_ENGINEERING
-	build_path = /obj/machinery/atmospherics/components/unary/hypertorus/core
+
 	req_components = list(
 		/obj/item/stack/cable_coil = 10,
 		/obj/item/stack/sheet/glass = 10,
@@ -383,14 +383,14 @@
 /obj/item/circuitboard/machine/HFR_corner
 	name = "HFR Corner"
 	greyscale_colors = CIRCUIT_COLOR_ENGINEERING
-	build_path = /obj/machinery/hypertorus/corner
+
 	req_components = list(
 		/obj/item/stack/sheet/plasteel = 5)
 
 /obj/item/circuitboard/machine/HFR_interface
 	name = "HFR Interface"
 	greyscale_colors = CIRCUIT_COLOR_ENGINEERING
-	build_path = /obj/machinery/hypertorus/interface
+
 	req_components = list(
 		/obj/item/stack/cable_coil = 10,
 		/obj/item/stack/sheet/glass = 10,
@@ -399,7 +399,7 @@
 /obj/item/circuitboard/machine/crystallizer
 	name = "Crystallizer"
 	greyscale_colors = CIRCUIT_COLOR_ENGINEERING
-	build_path = /obj/machinery/atmospherics/components/binary/crystallizer
+
 	req_components = list(
 		/obj/item/stack/cable_coil = 10,
 		/obj/item/stack/sheet/glass = 10,
@@ -408,7 +408,7 @@
 /obj/item/circuitboard/machine/bluespace_sender
 	name = "Bluespace Sender"
 	greyscale_colors = CIRCUIT_COLOR_ENGINEERING
-	build_path = /obj/machinery/atmospherics/components/unary/bluespace_sender
+
 	req_components = list(
 		/obj/item/stack/cable_coil = 10,
 		/obj/item/stack/sheet/glass = 10,
@@ -812,7 +812,7 @@
 /obj/item/circuitboard/machine/cryo_tube
 	name = "Cryotube"
 	greyscale_colors = CIRCUIT_COLOR_MEDICAL
-	build_path = /obj/machinery/atmospherics/components/unary/cryo_cell
+
 	req_components = list(
 		/datum/stock_part/matter_bin = 1,
 		/obj/item/stack/cable_coil = 1,

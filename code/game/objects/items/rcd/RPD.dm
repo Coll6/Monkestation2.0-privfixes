@@ -16,38 +16,15 @@
 
 GLOBAL_LIST_INIT(atmos_pipe_recipes, list(
 	"Pipes" = list(
-		new /datum/pipe_info/pipe("Pipe", /obj/machinery/atmospherics/pipe/smart, TRUE),
-		new /datum/pipe_info/pipe("Layer Adapter", /obj/machinery/atmospherics/pipe/layer_manifold, TRUE),
-		new /datum/pipe_info/pipe("Color Adapter", /obj/machinery/atmospherics/pipe/color_adapter, TRUE),
-		new /datum/pipe_info/pipe("Bridge Pipe", /obj/machinery/atmospherics/pipe/bridge_pipe, TRUE),
-		new /datum/pipe_info/pipe("Multi-Deck Adapter", /obj/machinery/atmospherics/pipe/multiz, FALSE),
 	),
 	"Binary" = list(
-		new /datum/pipe_info/pipe("Manual Valve", /obj/machinery/atmospherics/components/binary/valve, TRUE),
-		new /datum/pipe_info/pipe("Digital Valve", /obj/machinery/atmospherics/components/binary/valve/digital, TRUE),
-		new /datum/pipe_info/pipe("Gas Pump", /obj/machinery/atmospherics/components/binary/pump, TRUE),
-		new /datum/pipe_info/pipe("Volume Pump", /obj/machinery/atmospherics/components/binary/volume_pump, TRUE),
-		new /datum/pipe_info/pipe("Passive Gate", /obj/machinery/atmospherics/components/binary/passive_gate, TRUE),
-		new /datum/pipe_info/pipe("Pressure Valve", /obj/machinery/atmospherics/components/binary/pressure_valve, TRUE),
-		new /datum/pipe_info/pipe("Temperature Gate", /obj/machinery/atmospherics/components/binary/temperature_gate, TRUE),
-		new /datum/pipe_info/pipe("Temperature Pump", /obj/machinery/atmospherics/components/binary/temperature_pump, TRUE),
+
 	),
 	"Devices" = list(
-		new /datum/pipe_info/pipe("Gas Filter", /obj/machinery/atmospherics/components/trinary/filter, TRUE),
-		new /datum/pipe_info/pipe("Gas Mixer", /obj/machinery/atmospherics/components/trinary/mixer, TRUE),
-		new /datum/pipe_info/pipe("Connector", /obj/machinery/atmospherics/components/unary/portables_connector, TRUE),
-		new /datum/pipe_info/pipe("Injector", /obj/machinery/atmospherics/components/unary/outlet_injector, TRUE),
-		new /datum/pipe_info/pipe("Scrubber", /obj/machinery/atmospherics/components/unary/vent_scrubber, TRUE),
-		new /datum/pipe_info/pipe("Unary Vent", /obj/machinery/atmospherics/components/unary/vent_pump, TRUE),
-		new /datum/pipe_info/pipe("Passive Vent", /obj/machinery/atmospherics/components/unary/passive_vent, TRUE),
-		new /datum/pipe_info/meter("Meter"),
+
 	),
 	"Heat Exchange" = list(
-		new /datum/pipe_info/pipe("Pipe", /obj/machinery/atmospherics/pipe/heat_exchanging/simple, FALSE),
-		new /datum/pipe_info/pipe("Manifold", /obj/machinery/atmospherics/pipe/heat_exchanging/manifold, FALSE),
-		new /datum/pipe_info/pipe("4-Way Manifold", /obj/machinery/atmospherics/pipe/heat_exchanging/manifold4w, FALSE),
-		new /datum/pipe_info/pipe("Junction", /obj/machinery/atmospherics/pipe/heat_exchanging/junction, FALSE),
-		new /datum/pipe_info/pipe("Heat Exchanger", /obj/machinery/atmospherics/components/unary/heat_exchanger, FALSE),
+
 	)
 ))
 
@@ -84,86 +61,26 @@ GLOBAL_LIST_INIT(transit_tube_recipes, list(
 ))
 
 /datum/pipe_info
-	var/name
-	var/icon_state
-	var/id = -1
-	var/dirtype = PIPE_BENDABLE
-	var/all_layers
+
 
 /datum/pipe_info/proc/get_preview(selected_dir, selected = FALSE)
-	var/list/dirs
-	switch(dirtype)
-		if(PIPE_STRAIGHT, PIPE_BENDABLE)
-			dirs = list("[NORTH]" = "Vertical", "[EAST]" = "Horizontal")
-			if(dirtype == PIPE_BENDABLE)
-				dirs += list("[NORTHWEST]" = "West to North", "[NORTHEAST]" = "North to East",
-							"[SOUTHWEST]" = "South to West", "[SOUTHEAST]" = "East to South")
-		if(PIPE_TRINARY)
-			dirs = list("[NORTH]" = "West South East", "[SOUTH]" = "East North West",
-						"[EAST]" = "North West South", "[WEST]" = "South East North")
-		if(PIPE_TRIN_M)
-			dirs = list("[NORTH]" = "North East South", "[SOUTHWEST]" = "North West South",
-						"[NORTHEAST]" = "South East North", "[SOUTH]" = "South West North",
-						"[WEST]" = "West North East", "[SOUTHEAST]" = "West South East",
-						"[NORTHWEST]" = "East North West", "[EAST]" = "East South West",)
-		if(PIPE_UNARY)
-			dirs = list("[NORTH]" = "North", "[SOUTH]" = "South", "[WEST]" = "West", "[EAST]" = "East")
-		if(PIPE_ONEDIR)
-			dirs = list("[SOUTH]" = name)
-		if(PIPE_UNARY_FLIPPABLE)
-			dirs = list("[NORTH]" = "North", "[EAST]" = "East", "[SOUTH]" = "South", "[WEST]" = "West",
-						"[NORTHEAST]" = "North Flipped", "[SOUTHEAST]" = "East Flipped", "[SOUTHWEST]" = "South Flipped", "[NORTHWEST]" = "West Flipped")
-		if(PIPE_ONEDIR_FLIPPABLE)
-			dirs = list("[SOUTH]" = name, "[SOUTHEAST]" = "[name] Flipped")
 
-	var/list/rows = list()
-	for(var/dir in dirs)
-		var/numdir = text2num(dir)
-		var/flipped = ((dirtype == PIPE_TRIN_M) || (dirtype == PIPE_UNARY_FLIPPABLE) || (dirtype == PIPE_ONEDIR_FLIPPABLE)) && (ISDIAGONALDIR(numdir))
-		var/is_variant_selected = selected && (!selected_dir ? FALSE : (dirtype == PIPE_ONEDIR ? TRUE : (numdir == selected_dir)))
-		rows += list(list(
-			"selected" = is_variant_selected,
-			"dir" = dir2text(numdir),
-			"dir_name" = dirs[dir],
-			"icon_state" = icon_state,
-			"flipped" = flipped,
-		))
-
-	return rows
 
 /datum/pipe_info/pipe/New(label, obj/machinery/atmospherics/path, use_five_layers)
-	name = label
-	id = path
-	all_layers = use_five_layers
-	icon_state = initial(path.pipe_state)
-	var/obj/item/pipe/c = initial(path.construction_type)
-	dirtype = initial(c.RPD_type)
+
+
+
 
 /datum/pipe_info/meter
-	icon_state = "meter"
-	dirtype = PIPE_ONEDIR
-	all_layers = TRUE // MONKESTATION ADDITION -- TG DOES NOT WANT YOU TO KNOW THIS ONE TRICK TO MAKE METERS WORK ON LAYERS 1 AND 5
 
 /datum/pipe_info/meter/New(label)
-	name = label
+
 
 /datum/pipe_info/disposal/New(label, obj/path, dt=PIPE_UNARY)
-	name = label
-	id = path
 
-	icon_state = initial(path.icon_state)
-	if(ispath(path, /obj/structure/disposalpipe))
-		icon_state = "con[icon_state]"
 
-	dirtype = dt
 
 /datum/pipe_info/transit/New(label, obj/path, dt=PIPE_UNARY)
-	name = label
-	id = path
-	dirtype = dt
-	icon_state = initial(path.icon_state)
-	if(dt == PIPE_UNARY_FLIPPABLE)
-		icon_state = "[icon_state]_preview"
 
 /obj/item/pipe_dispenser
 	name = "rapid pipe dispenser"
@@ -277,18 +194,12 @@ GLOBAL_LIST_INIT(transit_tube_recipes, list(
 /obj/item/pipe_dispenser/pre_attack_secondary(obj/machinery/atmospherics/target, mob/user, params)
 	if(!istype(target, /obj/machinery/atmospherics))
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
-	if(target.pipe_color && target.piping_layer)
-		paint_color = GLOB.pipe_color_name[target.pipe_color]
-		pipe_layers = PIPE_LAYER(target.piping_layer)
-		balloon_alert(user, "color/layer copied")
+
 	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 /obj/item/pipe_dispenser/add_item_context(obj/item/source, list/context, atom/target, mob/living/user)
 	. = ..()
-	if(istype(target, /obj/machinery/atmospherics))
-		var/obj/machinery/atmospherics/atmos_target = target
-		if(atmos_target.pipe_color && atmos_target.piping_layer)
-			context[SCREENTIP_CONTEXT_RMB] = "Copy piping color and layer"
+
 	return CONTEXTUAL_SCREENTIP_SET
 
 
@@ -320,7 +231,6 @@ GLOBAL_LIST_INIT(transit_tube_recipes, list(
 		"pipe_layers" = pipe_layers,
 		"ducting_layer" = ducting_layer,
 		"categories" = list(),
-		"selected_recipe" = recipe.name,
 		"selected_color" = paint_color,
 		"mode" = mode,
 	)
@@ -342,7 +252,6 @@ GLOBAL_LIST_INIT(transit_tube_recipes, list(
 			var/datum/pipe_info/info = subcategory_recipes[i]
 
 			available_recipe += list(list(
-				"pipe_name" = info.name,
 				"pipe_index" = i,
 				"previews" = info.get_preview(p_dir, info == recipe)
 			))
@@ -439,7 +348,6 @@ GLOBAL_LIST_INIT(transit_tube_recipes, list(
 	var/atom/attack_target = atom_to_attack
 
 	//So that changing the menu settings doesn't affect the pipes already being built.
-	var/queued_pipe_type = recipe.id
 	var/queued_pipe_dir = p_dir
 	var/queued_pipe_flipped = p_flipped
 
@@ -462,73 +370,34 @@ GLOBAL_LIST_INIT(transit_tube_recipes, list(
 		qdel(attack_target)
 		return
 
-	if(mode & REPROGRAM_MODE)
-		// If this is a placed smart pipe, try to reprogram it
-		var/obj/machinery/atmospherics/pipe/smart/target_smart_pipe = attack_target
-		if(istype(target_smart_pipe))
-			if(target_smart_pipe.dir == ALL_CARDINALS)
-				balloon_alert(user, "has no unconnected directions!")
-				return
-			var/old_init_dir = target_smart_pipe.get_init_directions()
-			if(old_init_dir == p_init_dir)
-				balloon_alert(user, "already configured!")
-				return
-			// Check for differences in unconnected directions
-			var/target_differences = (p_init_dir ^ old_init_dir) & ~target_smart_pipe.connections
-			if(!target_differences)
-				balloon_alert(user, "already configured for its directions!")
-				return
-
-			playsound(get_turf(src), 'sound/machines/click.ogg', 50, TRUE)
 
 			// Something else could have changed the target's state while we were waiting in do_after
 			// Most of the edge cases don't matter, but atmos components being able to have live connections not described by initializable directions sounds like a headache at best and an exploit at worst
 
 			// Double check to make sure that nothing has changed. If anything we were about to change was connected during do_after, abort
-			if(target_differences & target_smart_pipe.connections)
-				balloon_alert(user, "can't configure for its direction!")
-				return
+
 			// Grab the current initializable directions, which may differ from old_init_dir if someone else was working on the same pipe at the same time
-			var/current_init_dir = target_smart_pipe.get_init_directions()
+
 			// Access p_init_dir directly. The RPD can change target layer and initializable directions (though not pipe type or dir) while working to dispense and connect a component,
 			// and have it reflected in the final result. Reprogramming should be similarly consistent.
-			var/new_init_dir = (current_init_dir & ~target_differences) | (p_init_dir & target_differences)
+
 			// Don't make a smart pipe with only one connection
-			if(ISSTUB(new_init_dir))
-				balloon_alert(user, "no one directional pipes allowed!")
-				return
-			target_smart_pipe.set_init_directions(new_init_dir)
+
 			// We're now reconfigured.
 			// We can never disconnect from existing connections, but we can connect to previously unconnected directions, and should immediately do so
-			var/newly_permitted_connections = new_init_dir & ~current_init_dir
-			if(newly_permitted_connections)
+
 				// We're allowed to connect in new directions. Recompute our nodes
 				// Disconnect from everything that is currently connected
-				for(var/i in 1 to target_smart_pipe.device_type)
-					// This is basically pipe.nullifyNode, but using it here would create a pitfall for others attempting to
-					// copy and paste disconnection code for other components. Welcome to the atmospherics subsystem
-					var/obj/machinery/atmospherics/node = target_smart_pipe.nodes[i]
-					if(!node)
-						continue
-					node.disconnect(target_smart_pipe)
-					target_smart_pipe.nodes[i] = null
+
 				// Get our new connections
-				target_smart_pipe.atmos_init()
+
 				// Connect to our new connections
-				for(var/obj/machinery/atmospherics/connected_device in target_smart_pipe.nodes)
-					connected_device.atmos_init()
-					connected_device.add_member(target_smart_pipe)
-				SSair.add_to_rebuild_queue(target_smart_pipe)
+
 			// Finally, update our internal state - update_pipe_icon also updates dir and connections
-			target_smart_pipe.update_pipe_icon()
-			user.visible_message(span_notice("[user] reprograms \the [target_smart_pipe]."), span_notice("You reprogram \the [target_smart_pipe]."))
-			return
+
+
 		// If this is an unplaced smart pipe, try to reprogram it
-		var/obj/item/pipe/quaternary/target_unsecured_pipe = attack_target
-		if(istype(target_unsecured_pipe) && ispath(target_unsecured_pipe.pipe_type, /obj/machinery/atmospherics/pipe/smart))
-			// An unplaced pipe never has any existing connections, so just directly assign the new configuration
-			target_unsecured_pipe.p_init_dir = p_init_dir
-			target_unsecured_pipe.update()
+
 
 	if(mode & BUILD_MODE)
 		switch(category) //if we've gotten this var, the target is valid
@@ -545,7 +414,7 @@ GLOBAL_LIST_INIT(transit_tube_recipes, list(
 					return
 				playsound(get_turf(src), 'sound/machines/click.ogg', 50, TRUE)
 				if(do_after(user, disposal_build_speed, target = attack_target))
-					var/obj/structure/disposalconstruct/new_disposals_segment = new (attack_target, queued_pipe_type, queued_pipe_dir, queued_pipe_flipped)
+					var/obj/structure/disposalconstruct/new_disposals_segment = new (attack_target, null, queued_pipe_dir, queued_pipe_flipped)
 
 					if(!new_disposals_segment.can_place())
 						balloon_alert(user, "not enough room!")
@@ -574,26 +443,7 @@ GLOBAL_LIST_INIT(transit_tube_recipes, list(
 					return
 
 				playsound(get_turf(src), 'sound/machines/click.ogg', 50, TRUE)
-				if(do_after(user, transit_build_speed, target = attack_target))
-					playsound(get_turf(src), RPD_USE_SOUND, 50, TRUE)
-					if(queued_pipe_type == /obj/structure/c_transit_tube_pod)
-						var/obj/structure/c_transit_tube_pod/pod = new /obj/structure/c_transit_tube_pod(attack_target)
-						pod.add_fingerprint(usr)
-						if(mode & WRENCH_MODE)
-							pod.wrench_act(user, src)
 
-					else
-						var/obj/structure/c_transit_tube/tube = new queued_pipe_type(attack_target)
-						tube.setDir(queued_pipe_dir)
-
-						if(queued_pipe_flipped)
-							tube.setDir(turn(queued_pipe_dir, 45 + ROTATION_FLIP))
-							tube.AfterRotation(user, ROTATION_FLIP)
-
-						tube.add_fingerprint(usr)
-						if(mode & WRENCH_MODE)
-							tube.wrench_act(user, src)
-					return
 			else
 				return ..()
 
@@ -605,10 +455,6 @@ GLOBAL_LIST_INIT(transit_tube_recipes, list(
 
 /obj/item/pipe_dispenser/proc/do_pipe_build(atom/atom_to_target, mob/user, params)
 	//So that changing the menu settings doesn't affect the pipes already being built.
-	var/queued_pipe_type = recipe.id
-	var/queued_pipe_dir = p_dir
-	var/queued_pipe_flipped = p_flipped
-
 	var/can_make_pipe = check_can_make_pipe(atom_to_target)
 	var/list/pipe_layer_numbers = get_active_pipe_layers()
 	var/continued_build = FALSE
@@ -623,39 +469,13 @@ GLOBAL_LIST_INIT(transit_tube_recipes, list(
 		playsound(get_turf(src), 'sound/machines/click.ogg', 50, vary = TRUE)
 		if(!continued_build && !do_after(user, atmos_build_speed, target = atom_to_target))
 			return FALSE
-		if(!recipe.all_layers && (layer_to_build == 1 || layer_to_build == 5))
-			balloon_alert(user, "can't build on layer [layer_to_build]!")
-			if(multi_layer)
-				continue
-			return FALSE
+
 		playsound(get_turf(src), RPD_USE_SOUND, 50, TRUE)
 		if(recipe.type == /datum/pipe_info/meter)
 			var/obj/item/pipe_meter/new_meter = new /obj/item/pipe_meter(get_turf(atom_to_target))
 			new_meter.setAttachLayer(layer_to_build)
 			if(mode & WRENCH_MODE)
 				new_meter.wrench_act(user, src)
-		else
-			var/obj/machinery/atmospherics/path = queued_pipe_type
-			var/pipe_item_type = initial(path.construction_type) || /obj/item/pipe
-			var/obj/item/pipe/pipe_type = new pipe_item_type(
-				get_turf(atom_to_target),
-				queued_pipe_type,
-				queued_pipe_dir,
-				null,
-				GLOB.pipe_paint_colors[paint_color],
-				ispath(queued_pipe_type, /obj/machinery/atmospherics/pipe/smart) ? p_init_dir : null,
-			)
-			if(queued_pipe_flipped && istype(pipe_type, /obj/item/pipe/trinary/flippable))
-				var/obj/item/pipe/trinary/flippable/new_flippable_pipe = pipe_type
-				new_flippable_pipe.flipped = queued_pipe_flipped
-
-			pipe_type.update()
-			pipe_type.add_fingerprint(usr)
-			pipe_type.set_piping_layer(layer_to_build)
-			if(ispath(queued_pipe_type, /obj/machinery/atmospherics) && !ispath(queued_pipe_type, /obj/machinery/atmospherics/pipe/color_adapter))
-				pipe_type.add_atom_colour(GLOB.pipe_paint_colors[paint_color], FIXED_COLOUR_PRIORITY)
-			if(mode & WRENCH_MODE)
-				pipe_type.wrench_act(user, src)
 	return TRUE
 
 /obj/item/pipe_dispenser/attackby(obj/item/item, mob/user, params)

@@ -164,10 +164,6 @@
 
 		use_power(active_power_usage)
 
-	var/turf/griddle_loc = loc
-	if(isturf(griddle_loc))
-		griddle_loc.hotspot_expose(800, 100)
-
 /obj/machinery/griddle/update_icon_state()
 	icon_state = "griddle[variant]_[on ? "on" : "off"]"
 	return ..()

@@ -75,17 +75,9 @@
 		return
 	var/turf/t_loc = get_turf(src)
 	if(!t_loc)
-		return
 
-	for(var/turf/spread_turf in t_loc.get_atmos_adjacent_turfs())
-		if(group.total_size > group.target_size)
-			break
-		if(locate(type) in spread_turf)
-			continue // Don't spread smoke where there's already smoke!
-		for(var/mob/living/smoker in spread_turf)
-			smoke_mob(smoker, seconds_per_tick)
 
-		var/obj/effect/particle_effect/fluid/smoke/spread_smoke = new type(spread_turf, group, src)
+		var/obj/effect/particle_effect/fluid/smoke/spread_smoke = null
 		reagents.copy_to(spread_smoke, reagents.total_volume)
 		spread_smoke.add_atom_colour(color, FIXED_COLOUR_PRIORITY)
 		spread_smoke.lifetime = lifetime
@@ -282,27 +274,6 @@
 	if(!istype(chilly))
 		return
 
-	if(chilly.air)
-		var/datum/gas_mixture/air = chilly.air
-		air.temperature = temperature
-
-		var/list/gases = air.gases
-		if(gases[/datum/gas/plasma])
-			air.assert_gas(/datum/gas/nitrogen)
-			gases[/datum/gas/nitrogen][MOLES] += gases[/datum/gas/plasma][MOLES]
-			gases[/datum/gas/plasma][MOLES] = 0
-			air.garbage_collect()
-
-		for(var/obj/effect/hotspot/fire in chilly)
-			qdel(fire)
-		chilly.air_update_turf(FALSE, FALSE)
-
-	if(weldvents)
-		for(var/obj/machinery/atmospherics/components/unary/comp in chilly)
-			if(!comp.welded) //must be an unwelded vent pump or vent scrubber.
-				comp.welded = TRUE
-				comp.update_appearance()
-				comp.visible_message(span_danger("[comp] is frozen shut!"))
 
 	// Extinguishes everything in the turf
 	for(var/mob/living/potential_tinder in chilly)

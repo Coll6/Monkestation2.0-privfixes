@@ -279,15 +279,8 @@
 			"reaction_results" = list(),
 			"ref" = REF(singular_record)
 		)
-
-		var/list/reaction_data = singular_record.reaction_results
 		// Make sure the list is indexed first.
-		if(reaction_data.len)
-			for (var/path in reaction_data[TANK_RESULTS_REACTION])
-				var/datum/gas_reaction/reaction_path = path
-				record_data["reaction_results"] += initial(reaction_path.name)
-			if(TANK_MERGE_OVERPRESSURE in reaction_data[TANK_RESULTS_MISC])
-				record_data["reaction_results"] += "Tank overpressurized before reaction"
+
 
 		data["records"] += list(record_data)
 	return data

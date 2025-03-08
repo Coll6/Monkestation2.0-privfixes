@@ -15,7 +15,7 @@
 	if(isspaceturf(src) || !isopenturf(get_turf(src)))
 		return
 
-	var/turf/current_location = get_turf(src)
+
 	var/list/valid_turfs = list()
 	var/static/list/blacklisted_turfs = typecacheof(list(
 		/turf/closed,
@@ -24,7 +24,7 @@
 		/turf/open/chasm,
 		/turf/open/floor/iron/snowed))
 
-	current_location.atmos_spawn_air ("o2=2;freon=1;water_vapor=8;TEMP=180")
+
 
 	for(var/searched_turfs in circle_view_turfs(src, MAX_RANGE))
 		if(is_type_in_typecache(searched_turfs, blacklisted_turfs))
@@ -43,8 +43,6 @@
 	//The station holds its breath, waiting for whatever the end will bring.
 	if(isinspace(src) || !isopenturf(get_turf(src)))
 		return
-	var/turf/current_location = get_turf(src)
-	current_location.atmos_spawn_air("water_vapor=200;freon=100;o2=100;TEMP=140") //The cold will be brutal. The water in hydroponics will freeze. We'll have to make do with the food we've stockpiled.
 
 #undef MIN_REPLACEMENT
 #undef MAX_REPLACEMENT

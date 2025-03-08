@@ -5,8 +5,6 @@
 	icon_state = "reaction_chamber"
 	icon = 'icons/obj/plumbing/plumbers.dmi'
 
-	initialize_directions = EAST
-
 	var/static/list/pressurized_reaction_recipes = list()
 	var/datum/pressurized_reaction/chosen_recipe
 	var/processing = FALSE
@@ -15,18 +13,6 @@
 	. = ..()
 	create_reagents(1000, TRANSPARENT)
 	AddComponent(/datum/component/plumbing/pressurized_reaction_chamber)
-
-/obj/machinery/atmospherics/components/unary/pressurized_reaction_chamber/set_init_directions()
-	. = ..()
-	switch(dir)
-		if(SOUTH)
-			initialize_directions = EAST
-		if(NORTH)
-			initialize_directions = WEST
-		if(WEST)
-			initialize_directions = SOUTH
-		if(EAST)
-			initialize_directions = NORTH
 
 /obj/machinery/atmospherics/components/unary/pressurized_reaction_chamber/ui_interact(mob/user, datum/tgui/ui)
 	if(!length(pressurized_reaction_recipes))
@@ -58,8 +44,8 @@
 			break
 	if(!passes_all_chemicals)
 		return
-	var/datum/gas_mixture/mixture = airs[1]
-	var/pressure = mixture.return_pressure()
+
+	var/pressure
 	if(pressure < chosen_recipe.required_pressure)
 		return
 

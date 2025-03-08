@@ -28,13 +28,13 @@
 	var/facing = "l" //Does the windoor open to the left or right?
 	var/secure = FALSE //Whether or not this creates a secure windoor
 	var/state = "01" //How far the door assembly has progressed
-	can_atmos_pass = ATMOS_PASS_PROC
+
 
 /obj/structure/windoor_assembly/Initialize(mapload, set_dir)
 	. = ..()
 	if(set_dir)
 		setDir(set_dir)
-	air_update_turf(TRUE, TRUE)
+
 
 	var/static/list/loc_connections = list(
 		COMSIG_ATOM_EXIT = PROC_REF(on_exit),
@@ -45,13 +45,12 @@
 
 /obj/structure/windoor_assembly/Destroy()
 	set_density(FALSE)
-	air_update_turf(TRUE, FALSE)
+
 	return ..()
 
 /obj/structure/windoor_assembly/Move()
-	var/turf/T = loc
 	. = ..()
-	move_update_air(T)
+
 
 /obj/structure/windoor_assembly/update_icon_state()
 	icon_state = "[facing]_[secure ? "secure_" : ""]windoor_assembly[state]"
@@ -70,11 +69,7 @@
 	if(istype(mover, /obj/structure/windoor_assembly) || istype(mover, /obj/machinery/door/window))
 		return valid_build_direction(loc, mover.dir, is_fulltile = FALSE)
 
-/obj/structure/windoor_assembly/can_atmos_pass(turf/T, vertical = FALSE)
-	if(get_dir(loc, T) == dir)
-		return !density
-	else
-		return TRUE
+
 
 /obj/structure/windoor_assembly/proc/on_exit(datum/source, atom/movable/leaving, direction)
 	SIGNAL_HANDLER

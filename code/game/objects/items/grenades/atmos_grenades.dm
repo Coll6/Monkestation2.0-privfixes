@@ -66,9 +66,6 @@
 	for(var/turf/turf_loc in view(refill_range, loc))
 		if(!isopenturf(turf_loc))
 			continue
-		var/distance_from_center = max(get_dist(turf_loc, loc), 1)
-		var/turf/open/floor_loc = turf_loc
-		floor_loc.atmos_spawn_air("n2=[n2_gas_amount / distance_from_center];o2=[o2_gas_amount / distance_from_center];TEMP=273")
 	qdel(src)
 
 /obj/item/grenade/gas_crystal/nitrous_oxide_crystal
@@ -90,9 +87,6 @@
 	for(var/turf/turf_loc in view(fill_range, loc))
 		if(!isopenturf(turf_loc))
 			continue
-		var/distance_from_center = max(get_dist(turf_loc, loc), 1)
-		var/turf/open/floor_loc = turf_loc
-		floor_loc.atmos_spawn_air("n2o=[n2o_gas_amount / distance_from_center];TEMP=273")
 	qdel(src)
 
 /obj/item/grenade/gas_crystal/crystal_foam

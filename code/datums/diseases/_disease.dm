@@ -125,8 +125,7 @@ GLOBAL_LIST_INIT(inspectable_diseases, list())
 		if(end == start)
 			return TRUE
 		var/turf/Temp = get_step_towards(end, start)
-		if(!TURFS_CAN_SHARE(end, Temp)) //Don't go through a wall
-			return FALSE
+
 		end = Temp
 
 /datum/disease/proc/IsSame(datum/disease/D)

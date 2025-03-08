@@ -23,7 +23,7 @@
 	movement_type = FLYING
 	health = 25
 	maxHealth = 25
-	pressure_resistance = 200
+
 	istate = ISTATE_HARM|ISTATE_BLOCKING
 	obj_damage = 50
 	melee_damage_lower = 20

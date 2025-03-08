@@ -14,10 +14,10 @@
 	var/can_build_on = TRUE
 
 /turf/open/openspace/airless
-	initial_gas_mix = AIRLESS_ATMOS
+
 
 /turf/open/openspace/airless/planetary
-	planetary_atmos = TRUE
+
 
 // Reminder, any behavior code written here needs to be duped to /turf/open/space/openspace
 // I am so sorry
@@ -168,8 +168,7 @@
 /turf/open/openspace/icemoon
 	name = "ice chasm"
 	baseturfs = /turf/open/openspace/icemoon
-	initial_gas_mix = ICEMOON_DEFAULT_ATMOS
-	planetary_atmos = TRUE
+
 	/// Replaces itself with replacement_turf if the turf has the no ruins allowed flag (usually ruins themselves)
 	var/protect_ruin = TRUE
 	/// The turf that will replace this one if the turf below has the no ruins allowed flag. we use this one so we don't get any potential double whammies

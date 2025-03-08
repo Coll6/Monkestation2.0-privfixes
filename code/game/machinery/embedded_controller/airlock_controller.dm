@@ -45,10 +45,6 @@
 		stack_trace("exterior_door_tag is set to [exterior_door_tag], which is not a door ([exterior_door || "null"])")
 	exterior_door_ref = WEAKREF(exterior_door)
 
-	var/obj/machinery/atmospherics/components/binary/dp_vent_pump/pump = GLOB.objects_by_id_tag[airpump_tag]
-	if (!isnull(airpump_tag) && !istype(pump))
-		stack_trace("airpump_tag is set to [airpump_tag], which is not a pump ([pump || "null"])")
-	pump_ref = WEAKREF(pump)
 
 	var/obj/machinery/airlock_sensor/sensor = GLOB.objects_by_id_tag[sensor_tag]
 	if (!isnull(sensor_tag) && !istype(sensor))
@@ -84,12 +80,6 @@
 						process_again = TRUE
 					else
 						interior_airlock.secure_close()
-				else
-					var/obj/machinery/atmospherics/components/binary/dp_vent_pump/pump = pump_ref?.resolve()
-
-					if(pump?.on)
-						pump.on = FALSE
-						pump.update_appearance(UPDATE_ICON)
 
 			if(AIRLOCK_STATE_PRESSURIZE)
 				if(target_state == AIRLOCK_STATE_INOPEN)
@@ -107,17 +97,7 @@
 						else
 							state = AIRLOCK_STATE_INOPEN
 							process_again = TRUE
-					else
-						var/obj/machinery/atmospherics/components/binary/dp_vent_pump/pump = pump_ref?.resolve()
-						if (isnull(pump))
-							continue
 
-						if(pump.pump_direction == ATMOS_DIRECTION_SIPHONING)
-							pump.pressure_checks |= ATMOS_EXTERNAL_BOUND
-							pump.pump_direction = ATMOS_DIRECTION_RELEASING
-						else if(!pump.on)
-							pump.on = TRUE
-							pump.update_appearance(UPDATE_ICON)
 				else
 					state = AIRLOCK_STATE_CLOSED
 					process_again = TRUE
@@ -143,14 +123,7 @@
 						process_again = TRUE
 					else
 						exterior_airlock?.secure_close()
-				else
-					var/obj/machinery/atmospherics/components/binary/dp_vent_pump/pump = pump_ref?.resolve()
-					if (isnull(pump))
-						continue
 
-					if (!pump.on)
-						pump.on = TRUE
-						pump.update_appearance(UPDATE_ICON)
 
 			if(AIRLOCK_STATE_DEPRESSURIZE)
 				var/target_pressure = ONE_ATMOSPHERE*0.05
@@ -177,17 +150,7 @@
 				else if((target_state != AIRLOCK_STATE_OUTOPEN) && !sanitize_external)
 					state = AIRLOCK_STATE_CLOSED
 					process_again = TRUE
-				else
-					var/obj/machinery/atmospherics/components/binary/dp_vent_pump/pump = pump_ref?.resolve()
-					if (isnull(pump))
-						continue
 
-					if(pump.pump_direction == ATMOS_DIRECTION_RELEASING)
-						pump.pressure_checks &= ~ATMOS_EXTERNAL_BOUND
-						pump.pump_direction = ATMOS_DIRECTION_SIPHONING
-					else if(!pump.on)
-						pump.on = TRUE
-						pump.update_appearance(UPDATE_ICON)
 
 			if(AIRLOCK_STATE_OUTOPEN) //state 2
 				if(target_state != AIRLOCK_STATE_OUTOPEN)
@@ -204,14 +167,7 @@
 							process_again = TRUE
 					else
 						exterior_airlock.secure_close()
-				else
-					var/obj/machinery/atmospherics/components/binary/dp_vent_pump/pump = pump_ref?.resolve()
-					if (isnull(pump))
-						continue
 
-					if (pump.on)
-						pump.on = FALSE
-						pump.update_appearance(UPDATE_ICON)
 
 	processing = state != target_state
 
@@ -238,14 +194,7 @@
 	else
 		data["exteriorStatus"] = exterior_airlock.density ? "closed" : "open"
 
-	var/obj/machinery/atmospherics/components/binary/dp_vent_pump/pump = pump_ref?.resolve()
-	switch (pump?.pump_direction)
-		if (null)
-			data["pumpStatus"] = "----"
-		if (ATMOS_DIRECTION_RELEASING)
-			data["pumpStatus"] = "release"
-		if (ATMOS_DIRECTION_SIPHONING)
-			data["pumpStatus"] = "siphon"
+
 
 	return data
 
@@ -279,8 +228,7 @@
 	if (!isnull(sensor) && !sensor.on)
 		return last_pressure
 
-	var/datum/gas_mixture/air = sensor?.return_air()
-	last_pressure = air?.return_pressure()
+	last_pressure = null
 	return last_pressure
 
 /obj/machinery/airlock_controller/incinerator_ordmix

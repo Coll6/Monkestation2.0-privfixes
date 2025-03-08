@@ -257,16 +257,11 @@ GLOBAL_DATUM(main_supermatter_engine, /obj/machinery/power/supermatter_crystal)
 		return
 
 	// PART 2: GAS PROCESSING
-	var/datum/gas_mixture/env = local_turf.return_air()
-	absorbed_gasmix = env?.remove_ratio(absorption_ratio) || new()
-	absorbed_gasmix.volume = (env?.volume || CELL_VOLUME) * absorption_ratio // To match the pressure.
-	calculate_gases()
+
 	// Extra effects should always fire after the compositions are all finished
 	// Some extra effects like [/datum/sm_gas/carbon_dioxide/extra_effects]
 	// needs more than one gas and rely on a fully parsed gas_percentage.
-	for (var/gas_path in absorbed_gasmix.gases)
-		var/datum/sm_gas/sm_gas = current_gas_behavior[gas_path]
-		sm_gas?.extra_effects(src)
+
 
 	// PART 3: POWER PROCESSING
 	internal_energy_factors = calculate_internal_energy()
@@ -303,24 +298,12 @@ GLOBAL_DATUM(main_supermatter_engine, /obj/machinery/power/supermatter_crystal)
 
 	// PART 5: WASTE GAS PROCESSING
 	waste_multiplier_factors = calculate_waste_multiplier()
-	var/device_energy = internal_energy * REACTION_POWER_MODIFIER
 
 	/// Do waste on another gasmix so we can keep a copy of the gasmix we use for processing.
-	var/datum/gas_mixture/merged_gasmix = absorbed_gasmix.copy()
-	merged_gasmix.temperature += device_energy * waste_multiplier / THERMAL_RELEASE_MODIFIER
-	merged_gasmix.temperature = clamp(merged_gasmix.temperature, TCMB, 2500 * waste_multiplier)
-	merged_gasmix.assert_gases(/datum/gas/plasma, /datum/gas/oxygen)
-	merged_gasmix.gases[/datum/gas/plasma][MOLES] += max(device_energy * waste_multiplier / PLASMA_RELEASE_MODIFIER, 0)
-	merged_gasmix.gases[/datum/gas/oxygen][MOLES] += max(((device_energy + merged_gasmix.temperature * waste_multiplier) - T0C) / OXYGEN_RELEASE_MODIFIER, 0)
-	merged_gasmix.garbage_collect()
-	env.merge(merged_gasmix)
-	air_update_turf(FALSE, FALSE)
+
 
 	// PART 6: EXTRA BEHAVIOUR
-	emit_radiation()
-	processing_sound()
-	handle_high_power()
-	psychological_examination()
+
 
 	// handle the engineers that saved the engine from cascading, if there were any
 	if(get_status() < SUPERMATTER_EMERGENCY && !isnull(saviors))
@@ -410,12 +393,7 @@ GLOBAL_DATUM(main_supermatter_engine, /obj/machinery/power/supermatter_crystal)
 			"amount" = amount
 		))
 	data["absorbed_ratio"] = absorption_ratio
-	var/list/formatted_gas_percentage = list()
-	for (var/datum/gas/gas_path as anything in subtypesof(/datum/gas))
-		formatted_gas_percentage[gas_path] = gas_percentage?[gas_path] || 0
-	data["gas_composition"] = formatted_gas_percentage
-	data["gas_temperature"] = absorbed_gasmix.temperature
-	data["gas_total_moles"] = absorbed_gasmix.total_moles()
+
 	return data
 
 /obj/machinery/power/supermatter_crystal/ui_data(mob/user)
@@ -435,8 +413,7 @@ GLOBAL_DATUM(main_supermatter_engine, /obj/machinery/power/supermatter_crystal)
 		return SUPERMATTER_DANGER
 	if(damage >= warning_point)
 		return SUPERMATTER_WARNING
-	if(absorbed_gasmix.temperature > temp_limit * 0.8)
-		return SUPERMATTER_NOTIFY
+
 	if(internal_energy)
 		return SUPERMATTER_NORMAL
 	return SUPERMATTER_INACTIVE
@@ -583,18 +560,7 @@ GLOBAL_DATUM(main_supermatter_engine, /obj/machinery/power/supermatter_crystal)
 	gas_heat_power_generation = 0
 	gas_powerloss_inhibition = 0
 
-	var/total_moles = absorbed_gasmix.total_moles()
 
-	for (var/gas_path in absorbed_gasmix.gases)
-		gas_percentage[gas_path] = absorbed_gasmix.gases[gas_path][MOLES] / total_moles
-		var/datum/sm_gas/sm_gas = current_gas_behavior[gas_path]
-		if(!sm_gas)
-			continue
-		gas_power_transmission += sm_gas.power_transmission * gas_percentage[gas_path]
-		gas_heat_modifier += sm_gas.heat_modifier * gas_percentage[gas_path]
-		gas_heat_resistance += sm_gas.heat_resistance * gas_percentage[gas_path]
-		gas_heat_power_generation += sm_gas.heat_power_generation * gas_percentage[gas_path]
-		gas_powerloss_inhibition += sm_gas.powerloss_inhibition * gas_percentage[gas_path]
 
 	gas_heat_power_generation = clamp(gas_heat_power_generation, 0, 1)
 	gas_powerloss_inhibition = clamp(gas_powerloss_inhibition, 0, 1)
@@ -620,7 +586,7 @@ GLOBAL_DATUM(main_supermatter_engine, /obj/machinery/power/supermatter_crystal)
 	external_power_trickle -= min(additive_power[SM_POWER_EXTERNAL_TRICKLE], external_power_trickle)
 	additive_power[SM_POWER_EXTERNAL_IMMEDIATE] = external_power_immediate
 	external_power_immediate = 0
-	additive_power[SM_POWER_HEAT] = gas_heat_power_generation * absorbed_gasmix.temperature / 6
+
 	additive_power[SM_POWER_HEAT] && log_activation(who = "environmental factors")
 
 	// I'm sorry for this, but we need to calculate power lost immediately after power gain.
@@ -730,7 +696,6 @@ GLOBAL_DATUM(main_supermatter_engine, /obj/machinery/power/supermatter_crystal)
 	additive_temp_limit[SM_TEMP_LIMIT_BASE] = T0C + HEAT_PENALTY_THRESHOLD
 	additive_temp_limit[SM_TEMP_LIMIT_GAS] = gas_heat_resistance *  (T0C + HEAT_PENALTY_THRESHOLD)
 	additive_temp_limit[SM_TEMP_LIMIT_SOOTHED] = psy_coeff * 45
-	additive_temp_limit[SM_TEMP_LIMIT_LOW_MOLES] =  clamp(2 - absorbed_gasmix.total_moles() / 100, 0, 1) * (T0C + HEAT_PENALTY_THRESHOLD)
 
 	temp_limit = 0
 	for (var/resistance_type in additive_temp_limit)
@@ -753,27 +718,14 @@ GLOBAL_DATUM(main_supermatter_engine, /obj/machinery/power/supermatter_crystal)
 		return
 
 	var/list/additive_damage = list()
-	var/total_moles = absorbed_gasmix.total_moles()
+
 
 	// We dont let external factors deal more damage than the emergency point.
 	// Only cares about the damage before this proc is run. We ignore soon-to-be-applied damage.
 	additive_damage[SM_DAMAGE_EXTERNAL] = external_damage_immediate * clamp((emergency_point - damage) / emergency_point, 0, 1)
 	external_damage_immediate = 0
 
-	additive_damage[SM_DAMAGE_HEAT] = clamp((absorbed_gasmix.temperature - temp_limit) / 24000, 0, 0.15)
 	additive_damage[SM_DAMAGE_POWER] = clamp((internal_energy - POWER_PENALTY_THRESHOLD) / 40000, 0, 0.1)
-	additive_damage[SM_DAMAGE_MOLES] = clamp((total_moles - MOLE_PENALTY_THRESHOLD) / 3200, 0, 0.1)
-
-	var/is_spaced = FALSE
-	if(isturf(src.loc))
-		var/turf/local_turf = src.loc
-		for (var/turf/open/space/turf in ((local_turf.atmos_adjacent_turfs || list()) + local_turf))
-			additive_damage[SM_DAMAGE_SPACED] = clamp(internal_energy * 0.000125, 0, 1)
-			is_spaced = TRUE
-			break
-
-	if(total_moles > 0 && !is_spaced)
-		additive_damage[SM_DAMAGE_HEAL_HEAT] = clamp((absorbed_gasmix.temperature - temp_limit) / 6000, -0.1, 0)
 
 	var/total_damage = 0
 	for (var/damage_type in additive_damage)
@@ -942,10 +894,8 @@ GLOBAL_DATUM(main_supermatter_engine, /obj/machinery/power/supermatter_crystal)
 		zap_str = target.zap_act(zap_str, zap_flags)
 
 	//This gotdamn variable is a boomer and keeps giving me problems
-	var/turf/target_turf = get_turf(target)
 	var/pressure = 1
-	if(target_turf?.return_air())
-		pressure = max(1,target_turf.return_air().return_pressure())
+
 	//We get our range with the strength of the zap and the pressure, the higher the former and the lower the latter the better
 	var/new_range = clamp(zap_str / pressure * 10, 2, 7)
 	var/zap_count = 1

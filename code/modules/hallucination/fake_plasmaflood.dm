@@ -22,8 +22,7 @@
 	var/turf/center
 
 	for(var/obj/machinery/atmospherics/components/unary/vent_pump/nearby_pump in orange(7, hallucinator))
-		if(nearby_pump.welded)
-			continue
+
 
 		center = get_turf(nearby_pump)
 		break
@@ -64,8 +63,7 @@
 	for(var/turf/flooded_turf in flood_turfs)
 		for(var/dir in GLOB.cardinals)
 			var/turf/nearby_turf = get_step(flooded_turf, dir)
-			if((nearby_turf in flood_turfs) || !TURFS_CAN_SHARE(nearby_turf, flooded_turf) || isspaceturf(nearby_turf))
-				continue
+
 			create_new_plasma_image(nearby_turf)
 
 	hallucinator.client?.images |= flood_images

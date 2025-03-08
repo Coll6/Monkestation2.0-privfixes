@@ -700,9 +700,6 @@ the modular shield components(not generator) are climbable
 		qdel(src)
 		return
 
-	shield_generator.shield_drain(round(air.return_volume() / 400))//400 integer determines how much damage the shield takes from hot atmos (higher value = less damage)
-
-
 //Damage from direct attacks
 /obj/structure/emergency_shield/modular/take_damage(damage_amount, damage_type = BRUTE, damage_flag = 0, sound_effect = 1, attack_dir)
 	. = ..()

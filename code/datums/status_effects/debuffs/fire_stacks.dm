@@ -167,10 +167,7 @@
 		qdel(src)
 		return TRUE
 
-	var/list/gases = owner.loc?.return_air()?.gases
-	if(gases && (!gases[/datum/gas/oxygen] || gases[/datum/gas/oxygen][MOLES] < 1))
-		qdel(src)
-		return TRUE
+
 
 	deal_damage(seconds_per_tick)
 
@@ -205,8 +202,6 @@
 /datum/status_effect/fire_handler/fire_stacks/proc/deal_damage(seconds_per_tick, times_fired, no_protection = FALSE)
 	owner.on_fire_stack(seconds_per_tick, times_fired, src)
 
-	var/turf/location = get_turf(owner)
-	location.hotspot_expose(700, 25 * seconds_per_tick, TRUE)
 
 	if(ishuman(owner) && !no_protection)
 		var/mob/living/carbon/human/victim = owner

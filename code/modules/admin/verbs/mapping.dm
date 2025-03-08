@@ -442,8 +442,7 @@ GLOBAL_VAR_INIT(say_disabled, FALSE)
 		/obj/effect,
 		/obj/item/shard, // it's benign enough to where we don't need to error, yet common enough to filter. fuck.
 		/obj/machinery/airalarm,
-		/obj/machinery/atmospherics/components/unary, //don't wanna flag on the vent or scrubber itself.
-		/obj/machinery/atmospherics/pipe,
+
 		/obj/machinery/button,
 		/obj/machinery/camera,
 		/obj/machinery/door_buttons,

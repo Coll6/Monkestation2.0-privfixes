@@ -155,45 +155,6 @@
 	if(!powernet)
 		return
 
-	var/datum/gas_mixture/cold_air = cold_circ.return_transfer_air()
-	var/datum/gas_mixture/hot_air = hot_circ.return_transfer_air()
-
-
-	if(cold_air && hot_air)
-		var/cold_air_heat_capacity = cold_air.heat_capacity()
-		var/hot_air_heat_capacity = hot_air.heat_capacity()
-
-		var/delta_temperature = hot_air.temperature - cold_air.temperature
-
-		if(delta_temperature > 0 && cold_air_heat_capacity > 0 && hot_air_heat_capacity > 0)
-			var/efficiency = (1 - cold_air.temperature / hot_air.temperature) * return_efficiency_scale(delta_temperature, hot_air_heat_capacity, cold_air_heat_capacity)
-
-			var/energy_transfer = delta_temperature * hot_air_heat_capacity * cold_air_heat_capacity / (hot_air_heat_capacity + cold_air_heat_capacity - hot_air_heat_capacity * efficiency)
-			var/heat = energy_transfer * (1 - efficiency)
-			lastgen += energy_transfer * efficiency
-			hot_air.temperature -= energy_transfer / hot_air_heat_capacity
-
-			past_power_levels += lastgen
-			if (length(past_power_levels) > max_history)
-				past_power_levels.Cut(1, 2)
-
-			cold_air.temperature += heat / cold_air_heat_capacity
-
-	if(hot_air)
-		var/datum/gas_mixture/hot_circ_air1 = hot_circ.airs[1]
-		hot_circ_air1.merge(hot_air)
-
-	if(cold_air)
-		var/datum/gas_mixture/cold_circ_air1 = cold_circ.airs[1]
-		cold_circ_air1.merge(cold_air)
-
-	var/current_pressure = "[cold_circ?.last_pressure_delta > 0 ? "1" : "0"][hot_circ?.last_pressure_delta > 0 ? "1" : "0"]"
-	if(current_pressure != last_pressure_overlay)
-		//this requires an update to overlays.
-		last_pressure_overlay = current_pressure
-
-	update_appearance(UPDATE_ICON)
-
 /obj/machinery/power/thermoelectric_generator/proc/return_efficiency_scale(delta_temperature, heat_capacity, cold_capacity)
 	var/returned_scale = base_scale
 
@@ -216,30 +177,17 @@
 	var/list/data = list()
 	data["error_message"] = null
 
-	var/datum/gas_mixture/cold_circ_air1 = cold_circ?.airs[1]
-	var/datum/gas_mixture/cold_circ_air2 = cold_circ?.airs[2]
-
-	var/datum/gas_mixture/hot_circ_air1 = hot_circ?.airs[1]
-	var/datum/gas_mixture/hot_circ_air2 = hot_circ?.airs[2]
 
 	data["last_power_output"] = display_power(lastgenlev)
 
 	data["past_power_info"] = past_power_levels
 
 	var/list/cold_data = list()
-	if(cold_circ_air2 && cold_circ_air1)
-		cold_data["temperature_inlet"] = round(cold_circ_air2.temperature, 0.1)
-		cold_data["temperature_outlet"] = round(cold_circ_air1.temperature, 0.1)
-		cold_data["pressure_inlet"] = round(cold_circ_air2.return_pressure(), 0.1)
-		cold_data["pressure_outlet"] = round(cold_circ_air1.return_pressure(), 0.1)
+
 	data["cold_data"] = list(cold_data)
 
 	var/list/hot_data = list()
-	if(hot_circ_air1 && hot_circ_air2)
-		hot_data["temperature_inlet"] = round(hot_circ_air2.temperature, 0.1)
-		hot_data["temperature_outlet"] = round(hot_circ_air1.temperature, 0.1)
-		hot_data["pressure_inlet"] = round(hot_circ_air2.return_pressure(), 0.1)
-		hot_data["pressure_outlet"] = round(hot_circ_air1.return_pressure(), 0.1)
+
 	data["hot_data"] = list(hot_data)
 
 	if(!powernet)

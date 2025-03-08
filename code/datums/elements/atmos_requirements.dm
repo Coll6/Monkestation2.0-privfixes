@@ -40,36 +40,4 @@
 
 	if(!isopenturf(target.loc))
 		return TRUE
-
-	var/turf/open/open_turf = target.loc
-	if(!open_turf.air && (atmos_requirements["min_oxy"] || atmos_requirements["min_tox"] || atmos_requirements["min_n2"] || atmos_requirements["min_co2"]))
-		return FALSE
-
-	var/open_turf_gases = open_turf.air.gases
-	open_turf.air.assert_gases(/datum/gas/oxygen, /datum/gas/nitrogen, /datum/gas/carbon_dioxide, /datum/gas/plasma)
-
-	var/plas = open_turf_gases[/datum/gas/plasma][MOLES]
-	var/oxy = open_turf_gases[/datum/gas/oxygen][MOLES]
-	var/n2 = open_turf_gases[/datum/gas/nitrogen][MOLES]
-	var/co2 = open_turf_gases[/datum/gas/carbon_dioxide][MOLES]
-
-	open_turf.air.garbage_collect()
-
-	if(atmos_requirements["min_oxy"] && oxy < atmos_requirements["min_oxy"])
-		return FALSE
-	else if(atmos_requirements["max_oxy"] && oxy > atmos_requirements["max_oxy"])
-		return FALSE
-	else if(atmos_requirements["min_plas"] && plas < atmos_requirements["min_plas"])
-		return FALSE
-	else if(atmos_requirements["max_plas"] && plas > atmos_requirements["max_plas"])
-		return FALSE
-	else if(atmos_requirements["min_n2"] && n2 < atmos_requirements["min_n2"])
-		return FALSE
-	else if(atmos_requirements["max_n2"] && n2 > atmos_requirements["max_n2"])
-		return FALSE
-	else if(atmos_requirements["min_co2"] && co2 < atmos_requirements["min_co2"])
-		return FALSE
-	else if(atmos_requirements["max_co2"] && co2 > atmos_requirements["max_co2"])
-		return FALSE
-
 	return TRUE

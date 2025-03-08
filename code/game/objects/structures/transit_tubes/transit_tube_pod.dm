@@ -14,10 +14,7 @@
 
 /obj/structure/transit_tube_pod/Initialize(mapload)
 	. = ..()
-	air_contents.add_gases(/datum/gas/oxygen, /datum/gas/nitrogen)
-	air_contents.gases[/datum/gas/oxygen][MOLES] = MOLES_O2STANDARD
-	air_contents.gases[/datum/gas/nitrogen][MOLES] = MOLES_N2STANDARD
-	air_contents.temperature = T20C
+
 
 /obj/structure/transit_tube_pod/Destroy()
 	empty_pod()
@@ -171,10 +168,10 @@
 	return air_contents
 
 /obj/structure/transit_tube_pod/assume_air(datum/gas_mixture/giver)
-	return air_contents.merge(giver)
+	return
 
 /obj/structure/transit_tube_pod/remove_air(amount)
-	return air_contents.remove(amount)
+	return
 
 
 /obj/structure/transit_tube_pod/relaymove(mob/living/user, direction)
@@ -205,7 +202,7 @@
 
 
 /obj/structure/transit_tube_pod/return_temperature()
-	return air_contents.temperature
+	return
 
 //special pod made by the dispenser, it fizzles away when reaching a station.
 

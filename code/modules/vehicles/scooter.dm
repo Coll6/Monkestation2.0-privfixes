@@ -146,10 +146,7 @@
 	playsound(src, 'sound/vehicles/skateboard_roll.ogg', 50, TRUE)
 	var/turf/location = get_turf(src)
 
-	if(location)
-		if(prob(25))
-			location.hotspot_expose(1000,1000)
-			sparks.start() //the most radical way to start plasma fires
+
 	for(var/mob/living/carbon/victim in location)
 		if(victim.body_position == LYING_DOWN)
 			playsound(location, 'sound/items/trayhit2.ogg', 40)

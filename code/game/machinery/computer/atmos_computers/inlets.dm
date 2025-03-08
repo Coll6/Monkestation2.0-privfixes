@@ -1,6 +1,5 @@
 /obj/machinery/atmospherics/components/unary/outlet_injector/monitored
-	on = TRUE
-	volume_rate = MAX_TRANSFER_RATE
+
 	/// The air sensor type this injector is linked to
 	var/chamber_id
 
@@ -101,11 +100,11 @@
 	chamber_id = ATMOS_GAS_MONITOR_INCINERATOR
 
 /obj/machinery/atmospherics/components/unary/outlet_injector/monitored/ordnance_burn_chamber_input
-	on = FALSE
+
 	name = "ordnance burn chamber input injector"
 	chamber_id = ATMOS_GAS_MONITOR_ORDNANCE_BURN
 
 /obj/machinery/atmospherics/components/unary/outlet_injector/monitored/ordnance_freezer_chamber_input
-	on = FALSE
+
 	name = "ordnance freezer chamber input injector"
 	chamber_id = ATMOS_GAS_MONITOR_ORDNANCE_FREEZER

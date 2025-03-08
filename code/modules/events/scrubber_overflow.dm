@@ -70,35 +70,16 @@
 	priority_announce("The scrubbers network is experiencing a backpressure surge. Some ejection of contents may occur.", "[command_name()] Engineering Division")
 
 /datum/round_event/scrubber_overflow/setup()
-	for(var/obj/machinery/atmospherics/components/unary/vent_scrubber/temp_vent in GLOB.machines)
-		var/turf/scrubber_turf = get_turf(temp_vent)
-		if(!scrubber_turf)
-			continue
-		if(!is_station_level(scrubber_turf.z))
-			continue
-		if(temp_vent.welded)
-			continue
-		if(!prob(overflow_probability))
-			continue
-		scrubbers += temp_vent
 
-	if(!scrubbers.len)
-		return kill()
+
+
 	setup = TRUE //MONKESTATION ADDITION
 
 /datum/round_event_control/scrubber_overflow/can_spawn_event(players_amt, allow_magic = FALSE, fake_check = FALSE) //MONKESTATION ADDITION: fake_check = FALSE
 	. = ..()
 	if(!.)
 		return
-	for(var/obj/machinery/atmospherics/components/unary/vent_scrubber/temp_vent in GLOB.machines)
-		var/turf/scrubber_turf = get_turf(temp_vent)
-		if(!scrubber_turf)
-			continue
-		if(!is_station_level(scrubber_turf.z))
-			continue
-		if(temp_vent.welded)
-			continue
-		return TRUE //there's at least one. we'll let the codergods handle the rest with prob() i guess.
+
 	return FALSE
 
 /// proc that will run the prob check of the event and return a safe or dangerous reagent based off of that.

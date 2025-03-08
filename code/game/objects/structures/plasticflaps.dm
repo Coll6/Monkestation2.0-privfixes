@@ -7,7 +7,7 @@
 	armor_type = /datum/armor/structure_plasticflaps
 	density = FALSE
 	anchored = TRUE
-	can_atmos_pass = ATMOS_PASS_NO
+
 	can_astar_pass = CANASTARPASS_ALWAYS_PROC
 
 /obj/structure/plasticflaps/opaque
@@ -56,13 +56,13 @@
 		return TRUE
 	set_anchored(!anchored)
 	update_atmos_behaviour()
-	air_update_turf(TRUE)
+
 	to_chat(user, span_notice("You [uraction] the floor."))
 	return TRUE
 
 ///Update the flaps behaviour to gases, if not anchored will let air pass through
 /obj/structure/plasticflaps/proc/update_atmos_behaviour()
-	can_atmos_pass = anchored ? ATMOS_PASS_YES : ATMOS_PASS_NO
+
 
 /obj/structure/plasticflaps/wirecutter_act(mob/living/user, obj/item/W)
 	. = ..()
@@ -131,10 +131,8 @@
 
 /obj/structure/plasticflaps/Initialize(mapload)
 	. = ..()
-	air_update_turf(TRUE, TRUE)
+
 
 /obj/structure/plasticflaps/Destroy()
-	var/atom/oldloc = loc
 	. = ..()
-	if (oldloc)
-		oldloc.air_update_turf(TRUE, FALSE)
+

@@ -7,7 +7,7 @@
 	icon_state = "reaction_chamber"
 	icon = 'icons/obj/plumbing/plumbers.dmi'
 
-	initialize_directions = EAST
+
 
 	var/static/list/chemical_infuser_recipes = list()
 	var/datum/chemical_infuser_recipe/chosen_recipe
@@ -18,17 +18,7 @@
 	create_reagents(1000, TRANSPARENT)
 	AddComponent(/datum/component/plumbing/chemical_infuser)
 
-/obj/machinery/atmospherics/components/unary/chemical_infuser/set_init_directions()
-	. = ..()
-	switch(dir)
-		if(SOUTH)
-			initialize_directions = EAST
-		if(NORTH)
-			initialize_directions = WEST
-		if(WEST)
-			initialize_directions = SOUTH
-		if(EAST)
-			initialize_directions = NORTH
+
 
 /obj/machinery/atmospherics/components/unary/chemical_infuser/ui_interact(mob/user, datum/tgui/ui)
 	if(!length(chemical_infuser_recipes))
@@ -41,30 +31,10 @@
 
 /obj/machinery/atmospherics/components/unary/chemical_infuser/examine(mob/user)
 	. = ..()
-	if(chosen_recipe)
-		. += "[chosen_recipe.name] requires:"
-		for(var/datum/reagent/reagent as anything in chosen_recipe.required_reagents)
-			var/amount = reagents.get_reagent_amount(reagent)
-			. += "[reagent.name]: [amount] / [chosen_recipe.required_reagents[reagent]]"
-		for(var/datum/gas/gas as anything in chosen_recipe.required_gases)
-			var/datum/gas_mixture/mixture = airs[1]
-			mixture.assert_gas(gas)
-			var/gas_amount = mixture.gases[gas][MOLES]
-			. += "[gas.name]: [gas_amount] / [chosen_recipe.required_gases[gas]]"
+
 
 /obj/machinery/atmospherics/components/unary/chemical_infuser/process_atmos()
 	if(!chosen_recipe)
-		return
-
-	var/passes_all_gases = TRUE
-	for(var/datum/gas/gas as anything in chosen_recipe.required_gases)
-		var/datum/gas_mixture/mixture = airs[1]
-		mixture.assert_gas(gas)
-		var/gas_amount = mixture.gases[gas][MOLES]
-		if(gas_amount < chosen_recipe.required_gases[gas])
-			passes_all_gases = FALSE
-			break
-	if(!passes_all_gases)
 		return
 
 	var/passes_all_chemicals = TRUE
@@ -86,15 +56,7 @@
 
 /obj/machinery/atmospherics/components/unary/chemical_infuser/proc/create_recipe()
 	processing = FALSE
-	for(var/datum/reagent/reagent as anything in chosen_recipe.required_reagents)
-		reagents.remove_all_type(reagent, chosen_recipe.required_reagents[reagent])
-	var/datum/gas_mixture/mixture = airs[1]
 
-	for(var/datum/gas/gas as anything in chosen_recipe.required_gases)
-		mixture.remove_specific(gas, chosen_recipe.required_gases[gas])
-
-	for(var/datum/reagent/reagent as anything in chosen_recipe.outputs)
-		reagents.add_reagent(reagent, chosen_recipe.outputs[reagent])
 
 /datum/component/plumbing/chemical_infuser
 	demand_connects = NORTH

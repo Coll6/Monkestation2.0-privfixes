@@ -69,38 +69,6 @@
 	if(!hatching)
 		start_hatching()
 
-	if(lowest_possible_temp || highest_possible_temp || lowest_pressure || highest_pressure)
-		var/turf/open/turf = get_turf(parent)
-		var/datum/gas_mixture/turf_mixture = turf.return_air()
-
-		if(lowest_possible_temp || highest_possible_temp)
-			var/temp = turf_mixture.return_temperature()
-			if(lowest_possible_temp)
-				if(temp < lowest_possible_temp)
-					COOLDOWN_START(src, failed_cooldown, 10 SECONDS)
-					stop_hatching()
-					failures |= "too_cold"
-
-			if(highest_possible_temp)
-				if(temp > highest_possible_temp)
-					COOLDOWN_START(src, failed_cooldown, 10 SECONDS)
-					stop_hatching()
-					failures |= "too_hot"
-
-		if(lowest_pressure || highest_pressure)
-			var/pressure = turf_mixture.return_pressure()
-			if(lowest_pressure)
-				if(pressure < lowest_pressure)
-					COOLDOWN_START(src, failed_cooldown, 10 SECONDS)
-					stop_hatching()
-					failures |= "low_pressure"
-
-			if(highest_pressure)
-				if(pressure > highest_pressure)
-					COOLDOWN_START(src, failed_cooldown, 10 SECONDS)
-					stop_hatching()
-					failures |= "high_pressure"
-
 	if(length(needed_turfs))
 		var/passes = FALSE
 		for(var/turf/open/turf in range(2, parent))

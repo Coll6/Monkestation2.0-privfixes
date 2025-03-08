@@ -93,11 +93,7 @@
 
 /mob/living/basic/regal_rat/handle_environment(datum/gas_mixture/environment)
 	. = ..()
-	if(stat == DEAD || isnull(environment) || isnull(environment.gases[/datum/gas/miasma]))
-		return
-	var/miasma_percentage = environment.gases[/datum/gas/miasma][MOLES] / environment.total_moles()
-	if(miasma_percentage >= 0.25)
-		heal_bodypart_damage(1)
+
 
 /// Triggers an alert to all ghosts that the rat has become player controlled.
 /mob/living/basic/regal_rat/proc/became_player_controlled()

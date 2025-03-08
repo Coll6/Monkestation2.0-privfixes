@@ -9,10 +9,10 @@
 	. = ..()
 
 /obj/machinery/meter/monitored/layer2
-	target_layer = 2
+
 
 /obj/machinery/meter/monitored/layer4
-	target_layer = 4
+
 
 /obj/machinery/meter/monitored/waste_loop
 	name = "waste loop gas flow meter"

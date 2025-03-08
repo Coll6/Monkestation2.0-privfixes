@@ -24,12 +24,6 @@
 /obj/item/organ/external/wings/apid/proc/update_float_move()
 	SIGNAL_HANDLER
 
-	if(!isspaceturf(owner.loc))
-		var/datum/gas_mixture/current = owner.loc.return_air()
-		if(current && (current.return_pressure() >= ONE_ATMOSPHERE*0.85)) //as long as there's reasonable pressure and no gravity, flight is possible
-			ADD_TRAIT(owner, TRAIT_FREE_FLOAT_MOVEMENT, REF(src))
-			return
-
 	REMOVE_TRAIT(owner, TRAIT_FREE_FLOAT_MOVEMENT, REF(src))
 
 

@@ -38,8 +38,6 @@ GLOBAL_LIST_INIT(typecache_powerfailure_safe_areas, typecacheof(list(
 			if(break_if_found[checkT.type] || break_if_found[checkT.loc.type])
 				return FALSE
 			var/static/list/cardinal_cache = list("[NORTH]"=TRUE, "[EAST]"=TRUE, "[SOUTH]"=TRUE, "[WEST]"=TRUE)
-			if(!cardinal_cache["[dir]"] || !TURFS_CAN_SHARE(sourceT, checkT))
-				continue
 			found_turfs += checkT // Since checkT is connected, add it to the list to be processed
 
 /**
@@ -66,15 +64,12 @@ GLOBAL_LIST_INIT(typecache_powerfailure_safe_areas, typecacheof(list(
 			get_step(connected_turfs[counter], WEST)
 		)// get a tile in each cardinal direction at once and add that to the list
 		for(var/turf/valid_turf in adjacent_turfs)//loop through the list and check for atmos adjacency
-			var/turf/reference_turf = connected_turfs[counter]
 			if(valid_turf in connected_turfs)//if the turf is already added, skip
 				loops += 1
 				continue
 			if(length(connected_turfs) >= range)
 				return
-			if(TURFS_CAN_SHARE(reference_turf, valid_turf))
-				loops = 0
-				connected_turfs |= valid_turf//add that to the original list
+
 		if(loops >= 7)//if the loop has gone 7 consecutive times with no new turfs added, return the result. Number is arbitrary, subject to change
 			return
 		counter += 1 //increment by one so the next loop will start at the next position in the list
@@ -111,8 +106,7 @@ GLOBAL_LIST_INIT(typecache_powerfailure_safe_areas, typecacheof(list(
 			continue
 		if(!place.requires_power || (place.area_flags & NOTELEPORT) || (place.area_flags & HIDDEN_AREA))
 			continue // No expanding powerless rooms etc
-		if(!TURF_SHARES(the_turf)) // No expanding areas of walls/something blocking this turf because that defeats the whole point of them used to separate areas
-			continue
+
 		if(!isnull(place.apc))
 			apc_map[place.name] = place.apc
 		if(length(apc_map) > 1) // When merging 2 or more areas make sure we arent merging their apc into 1 area

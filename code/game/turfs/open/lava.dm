@@ -135,7 +135,7 @@
 	return
 
 /turf/open/lava/airless
-	initial_gas_mix = AIRLESS_ATMOS
+
 
 /turf/open/lava/Entered(atom/movable/arrived, atom/old_loc, list/atom/old_locs)
 	. = ..()
@@ -342,18 +342,17 @@
 	underfloor_accessibility = 2 //This avoids strangeness when routing pipes / wires along catwalks over lava
 
 /turf/open/lava/smooth/lava_land_surface
-	initial_gas_mix = LAVALAND_DEFAULT_ATMOS
-	planetary_atmos = TRUE
+
 	baseturfs = /turf/open/lava/smooth/lava_land_surface
 
 /turf/open/lava/smooth/airless
-	initial_gas_mix = AIRLESS_ATMOS
+
 
 /turf/open/lava/plasma
 	name = "liquid plasma"
 	desc = "A flowing stream of chilled liquid plasma. You probably shouldn't get in."
 	icon_state = "liquidplasma"
-	initial_gas_mix = "n2=82;plasma=24;TEMP=120"
+
 	baseturfs = /turf/open/lava/plasma
 	fish_source_type = /datum/fish_source/lavaland/icemoon
 
@@ -434,13 +433,13 @@
 
 //mafia specific tame happy plasma (normal atmos, no slowdown)
 /turf/open/lava/plasma/mafia
-	initial_gas_mix = OPENTURF_DEFAULT_ATMOS
+
 	baseturfs = /turf/open/lava/plasma/mafia
 	slowdown = 0
 	fish_source_type = null
 
 //basketball specific lava (normal atmos, no slowdown)
 /turf/open/lava/smooth/basketball
-	initial_gas_mix = OPENTURF_DEFAULT_ATMOS
+
 	slowdown = 0
 	fish_source_type = null

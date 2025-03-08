@@ -36,7 +36,6 @@
 
 /obj/machinery/am_shielding/proc/overheat()
 	visible_message(span_danger("[src] melts!"))
-	new /obj/effect/hotspot(loc)
 	qdel(src)
 
 /obj/machinery/am_shielding/proc/collapse()

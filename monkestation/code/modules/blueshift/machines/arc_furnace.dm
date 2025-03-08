@@ -167,20 +167,6 @@
 	time -= 1 SECONDS
 	use_power(active_power_usage)
 
-	var/turf/where_we_spawn_air = get_turf(src)
-	var/obj/item/stack/ore/ore_stack_to_check = contents[1]
-	switch(ore_stack_to_check.refined_type)
-		if(/obj/item/stack/sheet/mineral/silver)
-			where_we_spawn_air.atmos_spawn_air("n2=10;TEMP=1200")
-		if(/obj/item/stack/sheet/mineral/uranium)
-			where_we_spawn_air.atmos_spawn_air("co2=50;TEMP=1200")
-		if(/obj/item/stack/sheet/mineral/titanium)
-			where_we_spawn_air.atmos_spawn_air("n2=10;co2=10;TEMP=1200")
-		if(/obj/item/stack/sheet/mineral/plasma)
-			where_we_spawn_air.atmos_spawn_air("co2=75;TEMP=2000")
-		else
-			where_we_spawn_air.atmos_spawn_air("co2=20;TEMP=1200")
-
 	addtimer(CALLBACK(src, PROC_REF(loop), time), 1 SECONDS)
 
 /// Takes the ore contained and turns it into an equal stack amount of its smelt result

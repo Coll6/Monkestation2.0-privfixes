@@ -80,18 +80,16 @@
 			data["idcard_access"] += list(list("name" = accessname, "number" = idcode))
 		return data
 	ui_view.appearance = appearance
-	var/datum/gas_mixture/int_tank_air = internal_tank?.return_air()
 	data["name"] = name
 	data["integrity"] = atom_integrity/max_integrity
 	data["power_level"] = cell?.charge
 	data["power_max"] = cell?.maxcharge
 	data["mecha_flags"] = mecha_flags
 	data["internal_damage"] = internal_damage
-	data["airtank_present"] = !!internal_tank
+
 	data["air_source"] = use_internal_tank ? "Internal Airtank" : "Environment"
-	data["airtank_pressure"] = int_tank_air ? round(int_tank_air.return_pressure(), 0.01) : null
-	data["airtank_temp"] = int_tank_air?.temperature
-	data["port_connected"] = internal_tank?.connected_port ? TRUE : FALSE
+	data["airtank_pressure"] = null
+
 	data["cabin_pressure"] = round(return_pressure(), 0.01)
 	data["cabin_temp"] = return_temperature()
 	data["dna_lock"] = dna_lock
@@ -271,24 +269,13 @@
 			tgui_alert(usr, "Enzymes detected: " + dna_lock)
 			return FALSE
 		if("toggle_airsource")
-			if(!internal_tank)
-				return
+
 			use_internal_tank = !use_internal_tank
 			balloon_alert(usr, "taking air from [use_internal_tank ? "internal airtank" : "environment"]")
 			log_message("Now taking air from [use_internal_tank?"internal airtank":"environment"].", LOG_MECHA)
 		if("toggle_port")
-			if(internal_tank.connected_port)
-				if(internal_tank.disconnect())
-					to_chat(occupants, "[icon2html(src, occupants)][span_notice("Disconnected from the air system port.")]")
-					log_message("Disconnected from gas port.", LOG_MECHA)
-					return TRUE
-				to_chat(occupants, "[icon2html(src, occupants)][span_warning("Unable to disconnect from the air system port!")]")
-				return
-			var/obj/machinery/atmospherics/components/unary/portables_connector/possible_port = locate() in loc
-			if(internal_tank.connect(possible_port))
-				to_chat(occupants, "[icon2html(src, occupants)][span_notice("Connected to the air system port.")]")
-				log_message("Connected to gas port.", LOG_MECHA)
-				return TRUE
+
+
 			to_chat(occupants, "[icon2html(src, occupants)][span_warning("Unable to connect with air system port!")]")
 		if("toggle_maintenance")
 			if(construction_state)

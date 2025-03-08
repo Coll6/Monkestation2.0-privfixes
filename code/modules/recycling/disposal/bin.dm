@@ -99,11 +99,6 @@
 
 /obj/machinery/disposal/LateInitialize()
 	//this will get a copy of the air turf and take a SEND PRESSURE amount of air from it
-	var/atom/L = loc
-	var/datum/gas_mixture/env = new
-	env.copy_from(L.return_air())
-	var/datum/gas_mixture/removed = env.remove(SEND_PRESSURE + 1)
-	air_contents.merge(removed)
 	trunk_check()
 
 /obj/machinery/disposal/attackby(obj/item/I, mob/living/user, params)
@@ -365,7 +360,7 @@
 	data["full_pressure"] = full_pressure
 	data["pressure_charging"] = pressure_charging
 	data["panel_open"] = panel_open
-	data["per"] = CLAMP01(air_contents.return_pressure() / (SEND_PRESSURE))
+
 	data["isai"] = isAI(user)
 	return data
 
@@ -471,8 +466,6 @@
 				do_flush()
 		flush_count = 0
 
-	if(flush && air_contents.return_pressure() >= SEND_PRESSURE) // flush can happen even without power
-		do_flush()
 
 	if(machine_stat & NOPOWER) // won't charge if no power
 		return
@@ -485,26 +478,9 @@
 	// otherwise charge
 	use_power(idle_power_usage) // charging power usage
 
-	var/atom/L = loc //recharging from loc turf
-
-	var/datum/gas_mixture/env = L.return_air()
-	if(!env.temperature)
-		return
-	var/pressure_delta = (SEND_PRESSURE*1.01) - air_contents.return_pressure()
-
-	var/transfer_moles = 0.05 * seconds_per_tick * (pressure_delta*air_contents.volume)/(env.temperature * R_IDEAL_GAS_EQUATION)
-
 	//Actually transfer the gas
-	var/datum/gas_mixture/removed = env.remove(transfer_moles)
-	air_contents.merge(removed)
-	air_update_turf(FALSE, FALSE)
 
 	//if full enough, switch to ready mode
-	if(air_contents.return_pressure() >= SEND_PRESSURE)
-		full_pressure = TRUE
-		pressure_charging = FALSE
-		update_appearance()
-	return
 
 /obj/machinery/disposal/bin/get_remote_view_fullscreens(mob/user)
 	if(user.stat == DEAD || !(user.sight & (SEEOBJS|SEEMOBS)))

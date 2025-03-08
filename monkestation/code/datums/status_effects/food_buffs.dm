@@ -154,10 +154,7 @@
 			exposed_floor.make_plating()
 		else if(prob(10))
 			exposed_floor.burn_tile()
-		if(isfloorturf(exposed_floor))
-			for(var/turf/open/turf in RANGE_TURFS(1,exposed_floor))
-				if(!locate(/obj/effect/hotspot) in turf)
-					new /obj/effect/hotspot(exposed_floor)
+
 	if(iswallturf(exposed))
 		var/turf/closed/wall/exposed_wall = exposed
 		if(prob(10))

@@ -126,8 +126,6 @@
 						tally += 1
 					else
 						tally += 2//if we're sleeping in a bed, we get up to 4
-			else if(istype(host.loc, /obj/machinery/atmospherics/components/unary/cryo_cell))
-				tally += 2.5
 
 			tally *= boost
 
@@ -151,8 +149,6 @@
 						tally += 1
 					else
 						tally += 2//if we're sleeping in a bed, we get up to 5.5
-			else if(istype(host.loc, /obj/machinery/atmospherics/components/unary/cryo_cell))
-				tally += 3.5
 
 			if(!HAS_TRAIT(host, TRAIT_NOHUNGER))
 				switch(host.nutrition)

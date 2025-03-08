@@ -18,8 +18,7 @@
 	smoothing_groups = SMOOTH_GROUP_TURF_OPEN
 	canSmoothWith = SMOOTH_GROUP_TURF_OPEN + SMOOTH_GROUP_OPEN_FLOOR
 
-	thermal_conductivity = 0.04
-	heat_capacity = 10000
+
 	tiled_dirt = TRUE
 
 /turf/open/misc/attackby(obj/item/W, mob/user, params)
@@ -59,13 +58,8 @@
 				if(3)
 					if(prob(80))
 						ScrapeAway(flags = CHANGETURF_INHERIT_AIR)
-					else
-						break_tile()
-					hotspot_expose(1000,CELL_VOLUME)
-		if(EXPLODE_LIGHT)
-			if (prob(50))
-				break_tile()
-				hotspot_expose(1000,CELL_VOLUME)
+
+
 
 
 /turf/open/misc/is_shielded()

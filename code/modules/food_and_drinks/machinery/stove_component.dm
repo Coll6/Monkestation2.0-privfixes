@@ -83,10 +83,6 @@
 	container?.reagents.expose_temperature(SOUP_BURN_TEMP + 80, heat_coefficient)
 	real_parent.use_power(real_parent.active_power_usage)
 
-	var/turf/stove_spot = real_parent.loc
-	if(isturf(stove_spot))
-		stove_spot.hotspot_expose(SOUP_BURN_TEMP + 80, 100)
-
 /datum/component/stove/proc/turn_on()
 	var/obj/machinery/real_parent = parent
 	if(real_parent.machine_stat & (BROKEN|NOPOWER))

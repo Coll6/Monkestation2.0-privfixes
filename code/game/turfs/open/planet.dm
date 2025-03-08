@@ -6,8 +6,7 @@
 	icon_state = "dirt"
 	base_icon_state = "dirt"
 	baseturfs = /turf/open/chasm/jungle
-	initial_gas_mix = OPENTURF_LOW_PRESSURE
-	planetary_atmos = TRUE
+
 	footstep = FOOTSTEP_SAND
 	barefootstep = FOOTSTEP_SAND
 	clawfootstep = FOOTSTEP_SAND
@@ -18,12 +17,11 @@
 	name = "dirt flooring" //FOR THE LOVE OF GOD USE THIS INSTEAD OF DIRT FOR STATION MAPS
 	desc = "You heard this place was dirty, but this is just absurd."
 	baseturfs = /turf/open/floor/plating
-	initial_gas_mix = OPENTURF_DEFAULT_ATMOS
-	planetary_atmos = FALSE
+
 
 /turf/open/misc/dirt/jungle
 	slowdown = 0.5
-	initial_gas_mix = OPENTURF_DEFAULT_ATMOS
+
 
 /turf/open/misc/dirt/dark
 	icon_state = "greenerdirt"
@@ -31,16 +29,15 @@
 
 /turf/open/misc/dirt/dark/station
 	baseturfs = /turf/open/floor/plating
-	initial_gas_mix = OPENTURF_DEFAULT_ATMOS
-	planetary_atmos = FALSE
+
 
 /turf/open/misc/dirt/dark/station/airless
-	initial_gas_mix = AIRLESS_ATMOS
+
 	temperature = TCMB
 
 /turf/open/misc/dirt/dark/jungle
 	slowdown = 0.5
-	initial_gas_mix = OPENTURF_DEFAULT_ATMOS
+
 
 /turf/open/misc/dirt/jungle/dark
 	icon_state = "greenerdirt"
@@ -66,8 +63,7 @@
 
 /turf/open/misc/grass/jungle
 	name = "jungle grass"
-	initial_gas_mix = OPENTURF_DEFAULT_ATMOS
-	planetary_atmos = TRUE
+
 	baseturfs = /turf/open/misc/dirt
 	desc = "Greener on the other side."
 	icon_state = "junglegrass"

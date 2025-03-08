@@ -121,19 +121,12 @@
 	return ..()
 
 /obj/structure/glowshroom/proc/Spread(seconds_per_tick)
-	var/turf/ownturf = get_turf(src)
-	if(!TURF_SHARES(ownturf)) //If we are in a 1x1 room
-		last_successful_spread = INFINITY
-		return //Deal with it not now
 
 	var/list/possible_locs = list()
 	//Lets collect a list of possible viewable turfs BEFORE we iterate for yield so we don't call view multiple
 	//times when there's no real chance of the viewable range changing, really you could do this once on item
 	//spawn and most people probably would not notice.
-	for(var/turf/open/floor/earth in oview(2, src))
-		if(QDELING(earth) || !TURF_SHARES(earth) || is_type_in_typecache(earth, blacklisted_glowshroom_turfs))
-			continue
-		possible_locs += earth
+
 
 	//Lets not even try to spawn again if somehow we have ZERO possible locations
 	if(!length(possible_locs))

@@ -9,7 +9,7 @@
 	density = TRUE
 	mouse_opacity = MOUSE_OPACITY_OPAQUE
 	resistance_flags = INDESTRUCTIBLE
-	can_atmos_pass = ATMOS_PASS_DENSITY
+
 
 
 /obj/structure/artifact_forcefield/play_attack_sound(damage_amount, damage_type = BRUTE, damage_flag = 0)

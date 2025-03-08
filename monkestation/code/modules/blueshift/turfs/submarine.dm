@@ -29,7 +29,7 @@
 	turf_height = -30
 
 /turf/open/floor/iron/submarine_perf/airless
-	initial_gas_mix = AIRLESS_ATMOS
+
 
 /turf/open/floor/iron/submarine_perf/rust_heretic_act()
 	return
@@ -64,8 +64,7 @@
 	icon = 'monkestation/code/modules/blueshift/icons/unique/pool.dmi'
 	icon_state = "rocky"
 	baseturfs = /turf/open/water/overlay
-	initial_gas_mix = OPENTURF_DEFAULT_ATMOS
-	planetary_atmos = FALSE
+
 
 /turf/open/water/overlay/Initialize(mapload)
 	. = ..()
@@ -107,7 +106,7 @@
  */
 /turf/open/water/overlay/outdoors
 	baseturfs = /turf/open/water/overlay/outdoors
-	planetary_atmos = TRUE
+
 
 /**
  * Hotpsrings! They give a positive mood event.
@@ -117,14 +116,14 @@
 	desc = "A warm, steamy swimming pool."
 	icon_state = "hotspring_tile"
 	baseturfs = /turf/open/floor/plating
-	planetary_atmos = FALSE
+
 
 /turf/open/water/overlay/hotspring/indestructible
 	baseturfs = /turf/open/water/overlay/hotspring/indestructible
 
 /turf/open/water/overlay/hotspring/indestructible/outdoors
 	baseturfs = /turf/open/water/overlay/hotspring/indestructible/outdoors
-	planetary_atmos = TRUE
+
 
 /turf/open/water/overlay/hotspring/planet
 	name = "natural hotspring"
@@ -135,4 +134,4 @@
 
 /turf/open/water/overlay/hotspring/planet/outdoors
 	baseturfs = /turf/open/water/overlay/hotspring/planet/outdoors
-	planetary_atmos = TRUE
+

@@ -68,19 +68,13 @@
 	return process_obj(master, airs)
 
 /datum/component/gas_leaker/proc/process_component(obj/machinery/atmospherics/components/master, list/airs=list())
-	airs += master.airs
-	return process_machine(master, airs)
+
+	return
 
 /datum/component/gas_leaker/proc/process_leak(obj/master, list/airs)
 	var/current_integrity = master.get_integrity()
 	if(current_integrity > master.max_integrity * integrity_leak_percent)
 		return PROCESS_KILL
-	var/turf/location = get_turf(master)
-	var/true_rate = (1 - (current_integrity / master.max_integrity)) * leak_rate
-	for(var/datum/gas_mixture/mix as anything in airs)
-		var/pressure = mix.return_pressure()
-		if(mix.release_gas_to(location.return_air(), pressure, true_rate))
-			location.air_update_turf(FALSE, FALSE)
 
 #undef PROCESS_OBJ
 #undef PROCESS_MACHINE

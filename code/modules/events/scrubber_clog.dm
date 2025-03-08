@@ -26,15 +26,9 @@
 	var/clogged = TRUE
 
 /datum/round_event/scrubber_clog/announce()
-	priority_announce("Minor biological obstruction detected in the ventilation network. Blockage is believed to be in the [get_area_name(scrubber)].", "Custodial Notification")
 
 /datum/round_event/scrubber_clog/setup()
-	scrubber = get_scrubber()
-	if(!scrubber)
-		kill()
-		CRASH("Unable to find suitable scrubber.")
 
-	RegisterSignal(scrubber, COMSIG_QDELETING, PROC_REF(scrubber_move))
 
 	spawned_mob = get_mob()
 	end_when = rand(300, 600)
@@ -43,20 +37,13 @@
 	setup = TRUE //MONKESTATION ADDITION
 
 /datum/round_event/scrubber_clog/start() //Sets the scrubber up for unclogging/mob production.
-	scrubber.clog()
-	scrubber.produce_mob(spawned_mob, living_mobs) //The first one's free!
-	announce_to_ghosts(scrubber)
+
 
 /datum/round_event/scrubber_clog/tick() //Checks if spawn_interval is met, then sends signal to scrubber to produce a mob.
-	if(activeFor % spawn_delay == 0 && scrubber.clogged)
-		life_check()
-		if(living_mobs.len < maximum_spawns && clogged)
-			scrubber.produce_mob(spawned_mob, living_mobs)
+
 
 /datum/round_event/scrubber_clog/end() //No end announcement. If you want to take the easy way out and just leave the vent welded, you must open it at your own peril.
-	scrubber.unclog()
-	scrubber = null
-	living_mobs.Cut()
+
 
 /**
  * Selects which mob will be spawned for a given scrubber clog event.
@@ -80,21 +67,14 @@
  */
 
 /datum/round_event/scrubber_clog/proc/get_scrubber()
-	var/list/scrubber_list = list()
-	for(var/obj/machinery/atmospherics/components/unary/vent_scrubber/scrubber in GLOB.machines)
-		var/turf/scrubber_turf = get_turf(scrubber)
-		if(scrubber_turf && is_station_level(scrubber_turf.z) && !scrubber.welded && !scrubber.clogged)
-			scrubber_list += scrubber
-	return pick(scrubber_list)
+
+
 
 /datum/round_event_control/scrubber_clog/can_spawn_event(players_amt, allow_magic = FALSE, fake_check = FALSE) //MONKESTATION ADDITION: fake_check = FALSE
 	. = ..()
 	if(!.)
 		return
-	for(var/obj/machinery/atmospherics/components/unary/vent_scrubber/scrubber in GLOB.machines)
-		var/turf/scrubber_turf = get_turf(scrubber)
-		if(scrubber_turf && is_station_level(scrubber_turf.z) && !scrubber.welded && !scrubber.clogged)
-			return TRUE //make sure we have a valid scrubber to spawn from.
+
 	return FALSE
 
 /**
@@ -119,19 +99,6 @@
 
 /datum/round_event/scrubber_clog/proc/scrubber_move(datum/source)
 	SIGNAL_HANDLER
-	scrubber = null //If by some great calamity, the last valid scrubber is destroyed, the ref is cleared.
-	scrubber = get_scrubber()
-	if(!scrubber)
-		kill()
-		CRASH("Unable to find suitable scrubber.")
-
-	RegisterSignal(scrubber, COMSIG_QDELETING, PROC_REF(scrubber_move))
-
-	scrubber.clog()
-	scrubber.produce_mob(spawned_mob, living_mobs)
-
-	announce_to_ghosts(scrubber)
-	priority_announce("Lifesign readings have moved to a new location in the ventilation network. New Location: [prob(50) ? "Unknown.":"[get_area_name(scrubber)]."]", "Lifesign Notification")
 
 /datum/round_event_control/scrubber_clog/major
 	name = "Scrubber Clog: Major"
@@ -157,7 +124,6 @@
 	return pick(mob_list)
 
 /datum/round_event/scrubber_clog/major/announce()
-	priority_announce("Major biological obstruction detected in the ventilation network. Blockage is believed to be in the [get_area_name(scrubber)] area.", "Infestation Alert")
 
 /datum/round_event_control/scrubber_clog/critical
 	name = "Scrubber Clog: Critical"
@@ -178,7 +144,6 @@
 	spawn_delay = rand(15,25)
 
 /datum/round_event/scrubber_clog/critical/announce()
-	priority_announce("Potentially hazardous lifesigns detected in the [get_area_name(scrubber)] ventilation network.", "Security Alert")
 
 /datum/round_event/scrubber_clog/critical/get_mob()
 	var/static/list/mob_list = list(
@@ -207,7 +172,6 @@
 	spawn_delay = rand(6, 25) //Wide range, for maximum utility/comedy
 
 /datum/round_event/scrubber_clog/strange/announce()
-	priority_announce("Unusual lifesign readings detected in the [get_area_name(scrubber)] ventilation network.", "Lifesign Alert", ANNOUNCER_ALIENS)
 
 /datum/round_event/scrubber_clog/strange/get_mob()
 	var/static/list/mob_list = list(

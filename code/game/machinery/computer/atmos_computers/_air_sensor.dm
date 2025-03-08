@@ -97,12 +97,7 @@
 	else if(istype(multi_tool.buffer, /obj/machinery/atmospherics/components/unary/vent_pump))
 		var/obj/machinery/atmospherics/components/unary/vent_pump/output = multi_tool.buffer
 		//so its no longer controlled by air alarm
-		output.disconnect_from_area()
-		//configuration copied from /obj/machinery/atmospherics/components/unary/vent_pump/siphon
-		output.pump_direction = ATMOS_DIRECTION_SIPHONING
-		output.pressure_checks = ATMOS_INTERNAL_BOUND
-		output.internal_pressure_bound = 4000
-		output.external_pressure_bound = 0
+
 		//finally assign it to this sensor
 		outlet_id = output.id_tag
 		multi_tool.buffer = null

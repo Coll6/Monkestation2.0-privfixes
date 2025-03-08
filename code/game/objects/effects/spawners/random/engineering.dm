@@ -102,8 +102,7 @@
 	name = "air canister spawner"
 	icon_state = "canister"
 	loot = list( // use this for emergency storage areas and maint
-		/obj/machinery/portable_atmospherics/canister/air = 4,
-		/obj/machinery/portable_atmospherics/canister/oxygen = 1,
+
 	)
 
 /obj/effect/spawner/random/engineering/tank
@@ -125,10 +124,7 @@
 	name = "portable atmospherics machine spawner"
 	icon_state = "heater"
 	loot = list(
-		/obj/machinery/space_heater = 8,
-		/obj/machinery/shieldgen = 3,
-		/obj/machinery/portable_atmospherics/pump = 1,
-		/obj/machinery/portable_atmospherics/scrubber = 1,
+
 	)
 
 /obj/effect/spawner/random/engineering/tracking_beacon

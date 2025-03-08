@@ -41,8 +41,7 @@
 				continue
 			// Very basic check for atmos passability here
 			// We don't want to put our smoke inside something that can't spread it out, like airlocks
-			if(sick_device.can_atmos_pass() != ATMOS_PASS_YES)
-				continue
+
 
 			// We found something, we can just return now
 			picked_machine_ref = WEAKREF(sick_device)

@@ -114,9 +114,6 @@
 
 	for(var/turf/nearby_turf as anything in circle_range_turfs(src, 3))
 		if(valid_turf(our_turf, nearby_turf))
-			var/obj/effect/hotspot/fire_tile = locate(nearby_turf) || new(nearby_turf)
-			fire_tile.temperature = CELCIUS_TO_KELVIN(800 CELCIUS)
-			nearby_turf.hotspot_expose(CELCIUS_TO_KELVIN(800 CELCIUS), 125, 1)
 			for(var/mob/living/crispy_living in nearby_turf.contents)
 				crispy_living.apply_damage(30, BURN)
 				if(iscarbon(crispy_living))

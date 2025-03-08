@@ -245,16 +245,6 @@
 		eject_bomb()
 		return FALSE
 
-	if(reaction_increment == 0)
-		var/datum/gas_mixture/first_gasmix = inserted_bomb.tank_one.return_air()
-		var/datum/gas_mixture/second_gasmix = inserted_bomb.tank_two.return_air()
-
-		combined_gasmix = new(70)
-		combined_gasmix.volume = first_gasmix.volume + second_gasmix.volume
-		combined_gasmix.merge(first_gasmix.copy())
-		combined_gasmix.merge(second_gasmix.copy())
-	else
-		combined_gasmix.react()
 
 	reaction_increment += 1
 

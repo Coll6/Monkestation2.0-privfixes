@@ -1,6 +1,6 @@
 /datum/crafting_recipe/bluespace_vendor_mount
 	name = "Bluespace Vendor Wall Mount"
-	result = /obj/item/wallframe/bluespace_vendor_mount
+
 	time = 6 SECONDS
 	reqs = list(
 		/obj/item/stack/sheet/iron = 15,
@@ -54,7 +54,7 @@
 
 /datum/crafting_recipe/layer_adapter/on_craft_completion(mob/user, atom/result)
 	var/obj/item/pipe/crafted_pipe = result
-	crafted_pipe.pipe_type = /obj/machinery/atmospherics/pipe/layer_manifold
+
 	crafted_pipe.pipe_color = COLOR_VERY_LIGHT_GRAY
 	crafted_pipe.setDir(user.dir)
 	crafted_pipe.update()
@@ -75,7 +75,7 @@
 
 /datum/crafting_recipe/color_adapter/on_craft_completion(mob/user, atom/result)
 	var/obj/item/pipe/crafted_pipe = result
-	crafted_pipe.pipe_type = /obj/machinery/atmospherics/pipe/color_adapter
+
 	crafted_pipe.pipe_color = COLOR_VERY_LIGHT_GRAY
 	crafted_pipe.setDir(user.dir)
 	crafted_pipe.update()
@@ -96,7 +96,7 @@
 
 /datum/crafting_recipe/he_pipe/on_craft_completion(mob/user, atom/result)
 	var/obj/item/pipe/crafted_pipe = result
-	crafted_pipe.pipe_type = /obj/machinery/atmospherics/pipe/heat_exchanging/manifold4w
+
 	crafted_pipe.pipe_color = COLOR_VERY_LIGHT_GRAY
 	crafted_pipe.setDir(user.dir)
 	crafted_pipe.update()
@@ -117,7 +117,7 @@
 
 /datum/crafting_recipe/he_junction/on_craft_completion(mob/user, atom/result)
 	var/obj/item/pipe/crafted_pipe = result
-	crafted_pipe.pipe_type = /obj/machinery/atmospherics/pipe/heat_exchanging/junction
+
 	crafted_pipe.pipe_color = COLOR_VERY_LIGHT_GRAY
 	crafted_pipe.setDir(user.dir)
 	crafted_pipe.update()
@@ -139,7 +139,7 @@
 
 /datum/crafting_recipe/pressure_pump/on_craft_completion(mob/user, atom/result)
 	var/obj/item/pipe/crafted_pipe = result
-	crafted_pipe.pipe_type = /obj/machinery/atmospherics/components/binary/pump
+
 	crafted_pipe.pipe_color = COLOR_VERY_LIGHT_GRAY
 	crafted_pipe.setDir(user.dir)
 	crafted_pipe.update()
@@ -160,7 +160,7 @@
 
 /datum/crafting_recipe/manual_valve/on_craft_completion(mob/user, atom/result)
 	var/obj/item/pipe/crafted_pipe = result
-	crafted_pipe.pipe_type = /obj/machinery/atmospherics/components/binary/valve
+
 	crafted_pipe.pipe_color = COLOR_VERY_LIGHT_GRAY
 	crafted_pipe.setDir(user.dir)
 	crafted_pipe.update()
@@ -204,7 +204,7 @@
 
 /datum/crafting_recipe/scrubber/on_craft_completion(mob/user, atom/result)
 	var/obj/item/pipe/crafted_pipe = result
-	crafted_pipe.pipe_type = /obj/machinery/atmospherics/components/unary/vent_scrubber
+
 	crafted_pipe.pipe_color = COLOR_VERY_LIGHT_GRAY
 	crafted_pipe.setDir(user.dir)
 	crafted_pipe.update()
@@ -226,7 +226,7 @@
 
 /datum/crafting_recipe/filter/on_craft_completion(mob/user, atom/result)
 	var/obj/item/pipe/crafted_pipe = result
-	crafted_pipe.pipe_type = /obj/machinery/atmospherics/components/trinary/filter
+
 	crafted_pipe.pipe_color = COLOR_VERY_LIGHT_GRAY
 	crafted_pipe.setDir(user.dir)
 	crafted_pipe.update()
@@ -248,7 +248,7 @@
 
 /datum/crafting_recipe/mixer/on_craft_completion(mob/user, atom/result)
 	var/obj/item/pipe/crafted_pipe = result
-	crafted_pipe.pipe_type = /obj/machinery/atmospherics/components/trinary/mixer
+
 	crafted_pipe.pipe_color = COLOR_VERY_LIGHT_GRAY
 	crafted_pipe.setDir(user.dir)
 	crafted_pipe.update()
@@ -269,7 +269,7 @@
 
 /datum/crafting_recipe/connector/on_craft_completion(mob/user, atom/result)
 	var/obj/item/pipe/crafted_pipe = result
-	crafted_pipe.pipe_type = /obj/machinery/atmospherics/components/unary/portables_connector
+
 	crafted_pipe.pipe_color = COLOR_VERY_LIGHT_GRAY
 	crafted_pipe.setDir(user.dir)
 	crafted_pipe.update()
@@ -290,7 +290,7 @@
 
 /datum/crafting_recipe/passive_vent/on_craft_completion(mob/user, atom/result)
 	var/obj/item/pipe/crafted_pipe = result
-	crafted_pipe.pipe_type = /obj/machinery/atmospherics/components/unary/passive_vent
+
 	crafted_pipe.pipe_color = COLOR_VERY_LIGHT_GRAY
 	crafted_pipe.setDir(user.dir)
 	crafted_pipe.update()
@@ -333,7 +333,7 @@
 
 /datum/crafting_recipe/he_exchanger/on_craft_completion(mob/user, atom/result)
 	var/obj/item/pipe/crafted_pipe = result
-	crafted_pipe.pipe_type = /obj/machinery/atmospherics/components/unary/heat_exchanger
+
 	crafted_pipe.pipe_color = COLOR_VERY_LIGHT_GRAY
 	crafted_pipe.setDir(user.dir)
 	crafted_pipe.update()

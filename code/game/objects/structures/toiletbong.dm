@@ -35,8 +35,6 @@
 		return
 	user.visible_message(span_boldnotice("[user] takes a huge drag on the [src]."))
 	if (do_after(user, 2 SECONDS, target = src))
-		var/turf/toiletbong_location = loc
-		toiletbong_location.hotspot_expose(1000, 5)
 		for (var/obj/item/item in contents)
 			if (item.resistance_flags & INDESTRUCTIBLE)
 				user.balloon_alert(user, "[item.name] is blocking the pipes!")
@@ -83,8 +81,7 @@
 		return FALSE
 	new /obj/item/flamethrower(get_turf(src))
 	new /obj/item/stack/sheet/iron(get_turf(src))
-	var/obj/item/tank/internals/plasma/ptank = new /obj/item/tank/internals/plasma(get_turf(src))
-	ptank.air_contents.gases[/datum/gas/plasma][MOLES] = (0)
+
 	qdel(src)
 	return TRUE
 

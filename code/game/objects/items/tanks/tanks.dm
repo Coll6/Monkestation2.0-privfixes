@@ -18,7 +18,7 @@
 	slot_flags = ITEM_SLOT_BACK
 	worn_icon = 'icons/mob/clothing/back.dmi' //since these can also get thrown into suit storage slots. if something goes on the belt, set this to null.
 	hitsound = 'sound/weapons/smash.ogg'
-	pressure_resistance = ONE_ATMOSPHERE * 5
+
 	force = 5
 	throwforce = 10
 	throw_speed = 1
@@ -85,7 +85,7 @@
 /obj/item/tank/proc/get_status_tab_item(mob/living/source, list/items)
 	SIGNAL_HANDLER
 	items += "Internal Atmosphere Info: [name]"
-	items += "Tank Pressure: [air_contents.return_pressure()] kPa"
+
 	items += "Distribution Pressure: [distribute_pressure] kPa"
 
 /// Attempts to toggle the mob's internals on or off using this tank. Returns TRUE if successful.
@@ -102,7 +102,7 @@
 		AddComponent(/datum/component/container_item/tank_holder, tank_holder_icon_state)
 
 	air_contents = new(volume) //liters
-	air_contents.temperature = T20C
+
 
 	populate_gas()
 
@@ -135,23 +135,11 @@
 			. += span_notice("If you want any more information you'll need to get closer.")
 		return
 
-	. += span_notice("The pressure gauge reads [round(air_contents.return_pressure(),0.01)] kPa.")
 
-	var/celsius_temperature = air_contents.temperature-T0C
+
+
 	var/descriptive
 
-	if (celsius_temperature < 20)
-		descriptive = "cold"
-	else if (celsius_temperature < 40)
-		descriptive = "room temperature"
-	else if (celsius_temperature < 80)
-		descriptive = "lukewarm"
-	else if (celsius_temperature < 100)
-		descriptive = "warm"
-	else if (celsius_temperature < 300)
-		descriptive = "hot"
-	else
-		descriptive = "furiously hot"
 
 	. += span_notice("It feels [descriptive].")
 
@@ -166,7 +154,7 @@
 	var/mob/living/carbon/human/human_user = user
 	user.visible_message(span_suicide("[user] is putting [src]'s valve to [user.p_their()] lips! It looks like [user.p_theyre()] trying to commit suicide!"))
 	playsound(loc, 'sound/effects/spray.ogg', 10, TRUE, -3)
-	if(!QDELETED(human_user) && air_contents && air_contents.return_pressure() >= 1000)
+	if(!QDELETED(human_user) && air_contents)
 		ADD_TRAIT(human_user, TRAIT_DISFIGURED, TRAIT_GENERIC)
 		human_user.inflate_gib()
 		return MANUAL_SUICIDE
@@ -200,7 +188,6 @@
 
 /obj/item/tank/ui_data(mob/user)
 	. = list(
-		"tankPressure" = round(air_contents.return_pressure()),
 		"releasePressure" = round(distribute_pressure)
 	)
 
@@ -234,7 +221,7 @@
 
 /obj/item/tank/remove_air(amount)
 	START_PROCESSING(SSobj, src)
-	return air_contents.remove(amount)
+	return
 
 /obj/item/tank/return_air()
 	START_PROCESSING(SSobj, src)
@@ -245,7 +232,6 @@
 
 /obj/item/tank/assume_air(datum/gas_mixture/giver)
 	START_PROCESSING(SSobj, src)
-	air_contents.merge(giver)
 	handle_tolerances(ASSUME_AIR_DT_FACTOR)
 	return TRUE
 
@@ -259,8 +245,7 @@
 	if(!air_contents)
 		return null
 
-	var/tank_pressure = air_contents.return_pressure()
-	var/actual_distribute_pressure = clamp(tank_pressure, 0, distribute_pressure)
+
 
 	// Lets do some algebra to understand why this works, yeah?
 	// R_IDEAL_GAS_EQUATION is (kPa * L) / (K * mol) by the by, so the units in this equation look something like this
@@ -269,16 +254,15 @@
 	// (kpa * L * K * mol) / (kpa * L * K)
 	// If we cancel it all out, we get moles, which is the expected unit
 	// This sort of thing comes up often in atmos, keep the tool in mind for other bits of code
-	var/moles_needed = actual_distribute_pressure*volume_to_return/(R_IDEAL_GAS_EQUATION*air_contents.temperature)
 
-	return remove_air(moles_needed)
+
+	return
 
 /obj/item/tank/process(seconds_per_tick)
 	if(!air_contents)
 		return
 
 	//Allow for reactions
-	excited = (excited | air_contents.react(src))
 	excited = (excited | handle_tolerances(seconds_per_tick))
 	excited = (excited | leaking)
 
@@ -291,8 +275,8 @@
 	var/atom/location = loc
 	if(!location)
 		return
-	var/datum/gas_mixture/leaked_gas = air_contents.remove_ratio(0.25)
-	location.assume_air(leaked_gas)
+
+
 
 /**
  * Handles the minimum and maximum pressure tolerances of the tank.
@@ -305,18 +289,6 @@
 	if(!air_contents)
 		return FALSE
 
-	var/pressure = air_contents.return_pressure()
-	var/temperature = air_contents.return_temperature()
-	if(temperature >= TANK_MELT_TEMPERATURE)
-		var/temperature_damage_ratio = (temperature - TANK_MELT_TEMPERATURE) / temperature
-		take_damage(max_integrity * temperature_damage_ratio * seconds_per_tick, BURN, FIRE, FALSE, NONE)
-		if(QDELETED(src))
-			return TRUE
-
-	if(pressure >= TANK_LEAK_PRESSURE)
-		var/pressure_damage_ratio = (pressure - TANK_LEAK_PRESSURE) / (TANK_RUPTURE_PRESSURE - TANK_LEAK_PRESSURE)
-		take_damage(max_integrity * pressure_damage_ratio * seconds_per_tick, BRUTE, BOMB, FALSE, NONE)
-		return TRUE
 	return FALSE
 
 /// Handles the tank springing a leak.
@@ -338,25 +310,11 @@
 	if(!air_contents)
 		return ..()
 
-	/// Handle fragmentation
-	var/pressure = air_contents.return_pressure()
-	if(pressure > TANK_FRAGMENT_PRESSURE)
-		if(!istype(loc, /obj/item/transfer_valve))
-			log_bomber(get_mob_by_key(fingerprintslast), "was last key to touch", src, "which ruptured explosively")
-		//Give the gas a chance to build up more pressure through reacting
-		air_contents.react(src)
-		pressure = air_contents.return_pressure()
-
-		// As of writing this this is calibrated to maxcap at 140L and 160atm.
-		var/power = (air_contents.volume * (pressure - TANK_FRAGMENT_PRESSURE)) / TANK_FRAGMENT_SCALE
-		log_atmos("[type] exploded with a power of [power] and a mix of ", air_contents)
-		dyn_explosion(src, power, flash_range = 1.5, ignorecap = FALSE)
 	return ..()
 
 /obj/item/tank/proc/merging_information()
 	SIGNAL_HANDLER
-	if(air_contents.return_pressure() > TANK_FRAGMENT_PRESSURE)
-		explosion_info += TANK_MERGE_OVERPRESSURE
+
 
 /obj/item/tank/proc/explosion_information()
 	return list(TANK_RESULTS_REACTION = reaction_info, TANK_RESULTS_MISC = explosion_info)
@@ -369,64 +327,13 @@
 	// This is done in return_air call, but even then it actually makes zero sense, this tank is going to be deleted
 	// before ever getting a chance to process.
 	//START_PROCESSING(SSobj, src)
-	var/datum/gas_mixture/our_mix = return_air()
-
-	our_mix.assert_gases(/datum/gas/plasma, /datum/gas/oxygen)
-	var/fuel_moles = our_mix.gases[/datum/gas/plasma][MOLES] + our_mix.gases[/datum/gas/oxygen][MOLES]/6
-	our_mix.garbage_collect()
-	var/datum/gas_mixture/bomb_mixture = our_mix.copy()
-	var/strength = 1
-
-	var/turf/ground_zero = get_turf(loc)
-
-	if(bomb_mixture.temperature > (T0C + 400))
-		strength = (fuel_moles/15)
-
-		if(strength >= 2)
-			explosion(ground_zero, devastation_range = round(strength,1), heavy_impact_range = round(strength*2,1), light_impact_range = round(strength*3,1), flash_range = round(strength*4,1), explosion_cause = src)
-		else if(strength >= 1)
-			explosion(ground_zero, devastation_range = round(strength,1), heavy_impact_range = round(strength*2,1), light_impact_range = round(strength*2,1), flash_range = round(strength*3,1), explosion_cause = src)
-		else if(strength >= 0.5)
-			explosion(ground_zero, heavy_impact_range = 1, light_impact_range = 2, flash_range = 4, explosion_cause = src)
-		else if(strength >= 0.2)
-			explosion(ground_zero, devastation_range = -1, light_impact_range = 1, flash_range = 2, explosion_cause = src)
-		else
-			ground_zero.assume_air(bomb_mixture)
-			ground_zero.hotspot_expose(1000, 125)
-
-	else if(bomb_mixture.temperature > (T0C + 250))
-		strength = (fuel_moles/20)
-
-		if(strength >= 1)
-			explosion(ground_zero, heavy_impact_range = round(strength,1), light_impact_range = round(strength*2,1), flash_range = round(strength*3,1), explosion_cause = src)
-		else if(strength >= 0.5)
-			explosion(ground_zero, devastation_range = -1, light_impact_range = 1, flash_range = 2, explosion_cause = src)
-		else
-			ground_zero.assume_air(bomb_mixture)
-			ground_zero.hotspot_expose(1000, 125)
-
-	else if(bomb_mixture.temperature > (T0C + 100))
-		strength = (fuel_moles/25)
-
-		if(strength >= 1)
-			explosion(ground_zero, devastation_range = -1, light_impact_range = round(strength,1), flash_range = round(strength*3,1), explosion_cause = src)
-		else
-			ground_zero.assume_air(bomb_mixture)
-			ground_zero.hotspot_expose(1000, 125)
-
-	else
-		ground_zero.assume_air(bomb_mixture)
-		ground_zero.hotspot_expose(1000, 125)
-
 	if(master)
 		qdel(master)
 	qdel(src)
 
 /obj/item/tank/proc/release() //This happens when the bomb is not welded. Tank contents are just spat out.
-	var/datum/gas_mixture/our_mix = return_air()
-	var/datum/gas_mixture/removed = remove_air(our_mix.total_moles())
 	var/turf/T = get_turf(src)
 	if(!T)
 		return
-	T.assume_air(removed)
+
 #undef ASSUME_AIR_DT_FACTOR

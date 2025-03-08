@@ -21,7 +21,7 @@
 	/// Reference to a disk we are going to print to.
 	var/obj/item/computer_disk/inserted_disk
 
-	pipe_flags = PIPING_ONE_PER_TURF | PIPING_DEFAULT_LAYER_ONLY
+
 
 /obj/machinery/atmospherics/components/binary/tank_compressor/Initialize(mapload)
 	. = ..()
@@ -81,7 +81,6 @@
 /obj/machinery/atmospherics/components/binary/tank_compressor/default_change_direction_wrench(mob/user, obj/item/I)
 	if(!..())
 		return FALSE
-	set_init_directions()
 	update_appearance()
 	return TRUE
 
@@ -90,7 +89,6 @@
 		return FALSE
 	if(!default_deconstruction_screwdriver(user, "[base_icon_state]-open", "[base_icon_state]-open", tool))
 		return FALSE
-	change_nodes_connection(panel_open)
 	update_appearance()
 	return TRUE
 
@@ -103,33 +101,21 @@
 
 /// Glorified volume pump.
 /obj/machinery/atmospherics/components/binary/tank_compressor/process_atmos()
-	var/datum/gas_mixture/input_air = airs[2]
-	if(!input_air?.total_moles() || !active || !transfer_rate || !inserted_tank)
-		return
 
 	var/datum/gas_mixture/tank_air = inserted_tank.return_air()
 	if(!tank_air)
 		return
 
-	if(input_air.return_pressure() < 0.01 || tank_air.return_pressure() > TANK_COMPRESSOR_PRESSURE_LIMIT)
-		return
-
 	/// Prevent pumping if tank is taking damage but still below pressure limit. Here to prevent exploiting the buffer system.
-	if((inserted_tank.leaking) && (tank_air.return_pressure() <= TANK_LEAK_PRESSURE))
-		active = FALSE
-		return
 
-	var/datum/gas_mixture/removed = input_air.remove_ratio(transfer_rate / input_air.volume)
-	if(!removed)
-		return
 
-	tank_air.merge(removed)
-	update_parents()
+
+
 
 /obj/machinery/atmospherics/components/binary/tank_compressor/assume_air(datum/gas_mixture/giver)
 	if(!leaked_gas_buffer)
 		return ..()
-	leaked_gas_buffer.merge(giver)
+
 	return TRUE
 
 /// Recording of last pressure of the tank. Ran when a tank is about to explode or disintegrate. We dont care about last pressure if the tank is ejected.
@@ -138,8 +124,7 @@
 	if(inserted_tank.get_integrity() > 0)
 		return
 	flush_buffer()
-	var/datum/gas_mixture/tank_air = inserted_tank.return_air()
-	last_recorded_pressure = tank_air.return_pressure()
+
 	active = FALSE
 	return
 
@@ -155,15 +140,6 @@
  * Mole requirements in experiments are tracked by buffer data.
  */
 /obj/machinery/atmospherics/components/binary/tank_compressor/proc/flush_buffer()
-	if(!leaked_gas_buffer.total_moles())
-		return
-	if(leaked_gas_buffer.total_moles() > SIGNIFICANT_AMOUNT_OF_MOLES)
-		record_data()
-	else
-		say("Buffer data discarded. Required moles for storage: [SIGNIFICANT_AMOUNT_OF_MOLES] moles.")
-	var/datum/gas_mixture/removed = leaked_gas_buffer.remove_ratio(1)
-	airs[1].merge(removed)
-	say("Gas stored in buffer flushed to output port. Compressor ready to start the next experiment.")
 
 /// This proc should be called whenever we want to store our buffer data.
 /obj/machinery/atmospherics/components/binary/tank_compressor/proc/record_data()
@@ -171,8 +147,6 @@
 	new_record.name = "Log Recording #[record_number]"
 	new_record.experiment_source = inserted_tank.name
 	new_record.timestamp = station_time_timestamp()
-	for(var/gas_path in leaked_gas_buffer.gases)
-		new_record.gas_data[gas_path] = leaked_gas_buffer.gases[gas_path][MOLES]
 
 	compressor_record += new_record
 	record_number += 1
@@ -207,14 +181,10 @@
 /obj/machinery/atmospherics/components/binary/tank_compressor/proc/eject_tank(mob/user)
 	if(!inserted_tank)
 		return FALSE
-	var/datum/gas_mixture/tank_air = inserted_tank.return_air()
-	if(tank_air.return_pressure() >= (PUMP_MAX_PRESSURE + ONE_ATMOSPHERE))
-		return FALSE
+
 	flush_buffer()
 	if(user)
 		user.put_in_hands(inserted_tank)
-	else
-		inserted_tank.forceMove(drop_location())
 	active = FALSE
 	return TRUE
 
@@ -259,8 +229,7 @@
 
 /obj/machinery/atmospherics/components/binary/tank_compressor/update_overlays()
 	. = ..()
-	. += get_pipe_image(icon, "[base_icon_state]-pipe", dir, COLOR_VIBRANT_LIME, piping_layer)
-	. += get_pipe_image(icon, "[base_icon_state]-pipe", turn(dir, 180), COLOR_RED, piping_layer)
+
 	if(!istype(inserted_tank))
 		. += mutable_appearance(icon, "[base_icon_state]-doors",)
 	if(panel_open)
@@ -313,16 +282,14 @@
 /obj/machinery/atmospherics/components/binary/tank_compressor/ui_data(mob/user)
 	var/list/data = list()
 	data["tankPresent"] = inserted_tank ? TRUE : FALSE
-	var/datum/gas_mixture/tank_air = inserted_tank?.return_air()
-	data["tankPressure"] = tank_air?.return_pressure()
+
 	data["leaking"] = inserted_tank?.leaking
 
 	data["active"] = active
 	data["transferRate"] = transfer_rate
 	data["lastPressure"] = last_recorded_pressure
 
-	data["inputData"] = gas_mixture_parser(airs[2], "Input Port")
-	data["outputData"] = gas_mixture_parser(airs[1], "Ouput Port")
+
 	data["bufferData"] = gas_mixture_parser(leaked_gas_buffer, "Gas Buffer")
 
 	data["disk"] = inserted_disk?.name
@@ -336,9 +303,7 @@
 			"timestamp" = record.timestamp,
 			"gases" = list()
 		)
-		for (var/path in record.gas_data)
-			var/datum/gas/gas_path = path
-			single_record_data["gases"] += list(initial(gas_path.name) = record.gas_data[gas_path])
+
 		data["records"] += list(single_record_data)
 	return data
 

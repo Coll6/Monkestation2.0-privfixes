@@ -274,9 +274,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 /obj/item/clothing/mask/cigarette/proc/check_oxygen(mob/user)
 	if (reagents.has_reagent(/datum/reagent/oxygen))
 		return TRUE
-	var/datum/gas_mixture/air = return_air()
-	if (!isnull(air) && air.has_gas(/datum/gas/oxygen, 1))
-		return TRUE
+
 	if (!iscarbon(user))
 		return FALSE
 	var/mob/living/carbon/the_smoker = user

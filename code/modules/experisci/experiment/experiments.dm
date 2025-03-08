@@ -89,7 +89,7 @@
 	sanitized_misc = TRUE
 	sanitized_reactions = TRUE
 	require_all = FALSE
-	required_reactions = list(/datum/gas_reaction/h2fire, /datum/gas_reaction/tritfire)
+
 
 /datum/experiment/ordnance/explosive/nobliumbomb
 	name = "Noblium Explosives"
@@ -99,7 +99,7 @@
 	experiment_proper = TRUE
 	sanitized_misc = TRUE
 	sanitized_reactions = TRUE
-	required_reactions = list(/datum/gas_reaction/nobliumformation)
+
 
 /datum/experiment/ordnance/explosive/pressurebomb
 	name = "Reactionless Explosives"
@@ -116,7 +116,7 @@
 	gain = list(10,40)
 	target_amount = list(200,600)
 	experiment_proper = TRUE
-	required_gas = /datum/gas/nitrous_oxide
+
 
 /datum/experiment/ordnance/gaseous/bz
 	name = "BZ Gas Shells"
@@ -124,7 +124,7 @@
 	gain = list(10,30,60)
 	target_amount = list(50,125,400)
 	experiment_proper = TRUE
-	required_gas = /datum/gas/bz
+
 
 /datum/experiment/ordnance/gaseous/noblium
 	name = "Hypernoblium Gas Shells"
@@ -132,7 +132,7 @@
 	gain = list(10,40,80)
 	target_amount = list(15,55,250)
 	experiment_proper = TRUE
-	required_gas = /datum/gas/hypernoblium
+
 
 /datum/experiment/scanning/random/material/meat
 	name = "Biological Material Scanning Experiment"
@@ -224,7 +224,7 @@
 		/obj/machinery/biogenerator = 3,
 		/obj/machinery/gibber = 3,
 		/obj/machinery/chem_master = 3,
-		/obj/machinery/atmospherics/components/unary/cryo_cell = 3,
+
 		/obj/machinery/harvester = 5,
 		/obj/machinery/quantumpad = 5
 	)
@@ -302,7 +302,7 @@
 	required_atoms = list(
 		/obj/machinery/mecha_part_fabricator = 1,
 		/obj/machinery/microwave = 1,
-		/obj/machinery/atmospherics/components/unary/thermomachine/freezer = 2,
+
 		/obj/machinery/power/emitter = 2,
 		/obj/machinery/chem_heater = 2,
 		/obj/machinery/chem_mass_spec = 3

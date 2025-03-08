@@ -106,8 +106,8 @@
 
 	var/datum/gas_mixture/environment = user.loc?.return_air()
 	if(!isnull(environment))
-		var/affected_temperature = environment.return_temperature()
-		var/affected_pressure = environment.return_pressure()
+		var/affected_temperature
+		var/affected_pressure
 		if(affected_temperature <= T0C || affected_pressure < ONE_ATMOSPHERE)
 			user.add_traits(gain_traits, type)
 		else
@@ -277,10 +277,6 @@
 		else if(istype(thing_in_range, /obj/structure/window) || istype(thing_in_range, /obj/structure/grille))
 			var/obj/structure/affected_structure = thing_in_range
 			affected_structure.take_damage(rand(20, 40))
-
-		else if(isturf(thing_in_range))
-			var/turf/affected_turf = thing_in_range
-			affected_turf.return_air()?.temperature *= 0.9
 
 	// Telegraph the storm in every area on the station.
 	var/list/station_levels = SSmapping.levels_by_trait(ZTRAIT_STATION)

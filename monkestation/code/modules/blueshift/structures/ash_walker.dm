@@ -466,28 +466,6 @@
 	return ..()
 
 /obj/structure/plant_tank/process(seconds_per_tick)
-	if(operation_number <= 0) //we require "fuel" to actually produce stuff
-		return
-
-	if(!locate(/obj/structure/simple_farm) in get_turf(src)) //we require a plant to process the "fuel"
-		return
-
-	operation_number--
-
-	var/turf/open/src_turf = get_turf(src)
-	if(!isopenturf(src_turf) || isspaceturf(src_turf) || src_turf.planetary_atmos) //must be open turf, can't be space turf, and can't be a turf that regenerates its atmos
-		return
-
-	var/datum/gas_mixture/src_mixture = src_turf.return_air()
-
-	src_mixture.assert_gases(/datum/gas/carbon_dioxide, /datum/gas/oxygen, /datum/gas/nitrogen)
-
-	var/proportion = src_mixture.gases[/datum/gas/carbon_dioxide][MOLES]
-	if(proportion) //if there is carbon dioxide in the air, lets turn it into oxygen
-		src_mixture.gases[/datum/gas/carbon_dioxide][MOLES] -= proportion
-		src_mixture.gases[/datum/gas/oxygen][MOLES] += proportion
-
-	src_mixture.gases[/datum/gas/nitrogen][MOLES] += MOLES_CELLSTANDARD //the nitrogen cycle-- plants (and bacteria) participate in the nitrogen cycle
 
 /obj/structure/plant_tank/wrench_act(mob/living/user, obj/item/tool)
 	balloon_alert(user, "[anchored ? "un" : ""]bolting")

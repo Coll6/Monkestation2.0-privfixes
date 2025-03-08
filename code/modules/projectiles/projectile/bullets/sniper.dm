@@ -66,8 +66,7 @@
 		var/mob/living/carbon/poor_burning_dork = target
 		poor_burning_dork.adjust_fire_stacks(20)
 		poor_burning_dork.ignite_mob()
-	for(var/turf/nearby_turf as anything in RANGE_TURFS(2, target))
-		new /obj/effect/hotspot(nearby_turf)
+
 
 /obj/projectile/bullet/p50/penetrator
 	name = ".50 BMG penetrator round"

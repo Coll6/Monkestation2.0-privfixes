@@ -118,14 +118,14 @@
 	desc = "Did someone let the air out of the shuttle again? We've got you covered. \
 		Contains two portable air pumps."
 	cost = CARGO_CRATE_VALUE * 4.5
-	contains = list(/obj/machinery/portable_atmospherics/pump = 2)
+
 	crate_name = "portable air pump crate"
 
 /datum/supply_pack/engineering/portascrubber
 	name = "Portable Scrubber Crate"
 	desc = "Clean up that pesky plasma leak with your very own set of two portable scrubbers."
 	cost = CARGO_CRATE_VALUE * 4.5
-	contains = list(/obj/machinery/portable_atmospherics/scrubber = 2)
+
 	crate_name = "portable scrubber crate"
 
 /datum/supply_pack/engineering/hugescrubber
@@ -133,7 +133,7 @@
 	desc = "A huge portable scrubber for huge atmospherics mistakes."
 	cost = CARGO_CRATE_VALUE * 7.5
 	access_view = ACCESS_ATMOSPHERICS
-	contains = list(/obj/machinery/portable_atmospherics/scrubber/huge/movable/cargo)
+
 	crate_name = "huge portable scrubber crate"
 	crate_type = /obj/structure/closet/crate/large
 
@@ -276,12 +276,7 @@
 	desc = "The new and improved fusion reactor."
 	cost = CARGO_CRATE_VALUE * 23
 	access = ACCESS_CE
-	contains = list(/obj/item/hfr_box/corner = 4,
-					/obj/item/hfr_box/body/fuel_input,
-					/obj/item/hfr_box/body/moderator_input,
-					/obj/item/hfr_box/body/waste_output,
-					/obj/item/hfr_box/body/interface,
-					/obj/item/hfr_box/core,
+	contains = list(
 				)
 	crate_name = "HFR crate"
 	crate_type = /obj/structure/closet/crate/secure/engineering

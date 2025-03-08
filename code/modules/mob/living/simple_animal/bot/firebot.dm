@@ -157,10 +157,7 @@
 		if(M.on_fire || (bot_cover_flags & BOT_COVER_EMAGGED && !M.on_fire))
 			return TRUE
 
-	else if(isturf(target))
-		var/turf/open/T = target
-		if(T.active_hotspot)
-			return TRUE
+
 
 	return FALSE
 

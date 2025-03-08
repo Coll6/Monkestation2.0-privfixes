@@ -5,7 +5,7 @@ GLOBAL_LIST_EMPTY(elevator_doors)
 	desc = "Keeps idiots like you from walking into an open elevator shaft."
 	icon_state = "left"
 	base_state = "left"
-	can_atmos_pass = ATMOS_PASS_DENSITY // elevator shaft is airtight when closed
+
 	req_access = list(ACCESS_TCOMMS)
 
 /obj/machinery/door/window/elevator/right

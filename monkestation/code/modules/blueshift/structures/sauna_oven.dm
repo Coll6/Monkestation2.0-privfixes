@@ -99,9 +99,7 @@
 	if(water_amount)
 		water_amount--
 		update_steam_particles()
-		var/turf/open/pos = get_turf(src)
-		if(istype(pos) && pos.air.return_pressure() < 2*ONE_ATMOSPHERE)
-			pos.atmos_spawn_air("water_vapor=10;TEMP=[SAUNA_H2O_TEMP]")
+
 	fuel_amount--
 	if(fuel_amount <= 0)
 		lit = FALSE

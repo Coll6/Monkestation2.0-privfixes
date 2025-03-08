@@ -14,9 +14,6 @@
 		return
 	//Check atmos adjacency to cut off any disconnected groups
 	if(liquids.liquid_group)
-		var/assoc_atmos_turfs = list()
-		for(var/tur in get_atmos_adjacent_turfs())
-			assoc_atmos_turfs[tur] = TRUE
 		//Check any cardinals that may have a matching group
 		for(var/direction in GLOB.cardinals)
 			var/turf/T = get_step(src, direction)

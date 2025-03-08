@@ -96,12 +96,7 @@
 		return
 
 /obj/structure/bonfire/proc/check_oxygen()
-	if(isopenturf(loc))
-		var/turf/open/bonfire_turf = loc
-		if(bonfire_turf.air)
-			var/loc_gases = bonfire_turf.air.gases
-			if(loc_gases[/datum/gas/oxygen] && loc_gases[/datum/gas/oxygen][MOLES] >= 5)
-				return TRUE
+
 	return FALSE
 
 /obj/structure/bonfire/proc/start_burning()
@@ -137,8 +132,7 @@
 
 /obj/structure/bonfire/proc/bonfire_burn(seconds_per_tick = 2)
 	var/turf/current_location = get_turf(src)
-	if(!grill)
-		current_location.hotspot_expose(1000, 250 * seconds_per_tick, 1)
+
 	for(var/burn_target in current_location)
 		if(burn_target == src)
 			continue
@@ -158,9 +152,6 @@
 	if(!check_oxygen())
 		extinguish()
 		return
-	var/turf/open/my_turf = get_turf(src)
-	if(istype(my_turf) && !my_turf.planetary_atmos) //Pollute, but only when we're not on planetary atmos
-		my_turf.pollute_turf_list(list(/datum/pollutant/smoke = 15, /datum/pollutant/carbon_air_pollution = 5), POLLUTION_PASSIVE_EMITTER_CAP)
 	bonfire_burn(seconds_per_tick)
 
 /obj/structure/bonfire/extinguish()

@@ -78,11 +78,11 @@
 	desc = "A solid thick wall of web, airtight enough to block air flow."
 	icon_state = "sealedweb"
 	sealed = TRUE
-	can_atmos_pass = ATMOS_PASS_NO
+
 
 /obj/structure/spider/stickyweb/sealed/Initialize(mapload)
 	. = ..()
-	air_update_turf(TRUE, TRUE)
+
 
 /obj/structure/spider/stickyweb/genetic //for the spider genes in genetics
 	genetic = TRUE
@@ -110,7 +110,7 @@
 	icon = 'icons/effects/effects.dmi'
 	desc = "A solid wall of web, thick enough to block air flow."
 	icon_state = "solidweb"
-	can_atmos_pass = ATMOS_PASS_NO
+
 	opacity = TRUE
 	density = TRUE
 	max_integrity = 90
@@ -119,14 +119,14 @@
 
 /obj/structure/spider/solid/Initialize(mapload)
 	. = ..()
-	air_update_turf(TRUE, TRUE)
+
 
 /obj/structure/spider/passage
 	name = "web passage"
 	icon = 'icons/effects/effects.dmi'
 	desc = "A messy connection of webs blocking the other side, but not solid enough to prevent passage."
 	icon_state = "webpassage"
-	can_atmos_pass = ATMOS_PASS_NO
+
 	opacity = TRUE
 	max_integrity = 60
 	alpha = 200
@@ -135,7 +135,7 @@
 
 /obj/structure/spider/passage/Initialize(mapload)
 	. = ..()
-	air_update_turf(TRUE, TRUE)
+
 
 /obj/structure/spider/cocoon
 	name = "cocoon"

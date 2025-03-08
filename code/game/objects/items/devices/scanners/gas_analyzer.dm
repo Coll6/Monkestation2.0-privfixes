@@ -181,18 +181,18 @@
 			message += span_boldnotice("Node [mix_number]")
 			mix_name += " - Node [mix_number]"
 
-		var/total_moles = air.total_moles()
-		var/pressure = air.return_pressure()
-		var/volume = air.return_volume() //could just do mixture.volume... but safety, I guess?
-		var/temperature = air.return_temperature()
-		var/heat_capacity = air.heat_capacity()
-		var/thermal_energy = air.thermal_energy()
-		var/cached_scan_results = air.analyzer_results
+		var/total_moles
+		var/pressure
+		var/volume
+		var/temperature
+		var/heat_capacity
+		var/thermal_energy
+		var/cached_scan_results
 
 		if(total_moles > 0)
 			message += span_notice("Moles: [round(total_moles, 0.01)] mol")
 
-			var/list/cached_gases = air.gases
+			var/list/cached_gases
 			for(var/id in cached_gases)
 				var/gas_concentration = cached_gases[id][MOLES]/total_moles
 				message += span_notice("[cached_gases[id][GAS_META][META_GAS_NAME]]: [round(cached_gases[id][MOLES], 0.01)] mol ([round(gas_concentration*100, 0.01)] %)")

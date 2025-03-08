@@ -44,21 +44,7 @@
 
 /datum/action/cooldown/spell/olfaction/cast(mob/living/cast_on)
 	. = ..()
-	// Can we sniff? is there miasma in the air?
-	var/datum/gas_mixture/air = cast_on.loc.return_air()
-	var/list/cached_gases = air.gases
 
-	if(cached_gases[/datum/gas/miasma])
-		cast_on.adjust_disgust(sensitivity * 45)
-		to_chat(cast_on, span_warning("With your overly sensitive nose, \
-			you get a whiff of stench and feel sick! Try moving to a cleaner area!"))
-		return
-
-	var/atom/sniffed = cast_on.get_active_held_item()
-	if(sniffed)
-		pick_up_target(cast_on, sniffed)
-	else
-		follow_target(cast_on)
 
 /// Attempt to pick up a new target based on the fingerprints on [sniffed].
 /datum/action/cooldown/spell/olfaction/proc/pick_up_target(mob/living/caster, atom/sniffed)

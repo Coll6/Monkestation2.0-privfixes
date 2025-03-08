@@ -58,10 +58,10 @@
 	return
 
 /turf/open/floor/glass/icemoon
-	initial_gas_mix = ICEMOON_DEFAULT_ATMOS
+
 
 /turf/open/floor/glass/airless
-	initial_gas_mix = AIRLESS_ATMOS
+
 
 /turf/open/floor/glass/reinforced
 	name = "reinforced glass floor"
@@ -73,10 +73,10 @@
 	alpha_to_leave = 206
 
 /turf/open/floor/glass/reinforced/icemoon
-	initial_gas_mix = ICEMOON_DEFAULT_ATMOS
+
 
 /turf/open/floor/glass/reinforced/airless
-	initial_gas_mix = AIRLESS_ATMOS
+
 
 /turf/open/floor/glass/plasma
 	name = "plasma glass floor"
@@ -89,10 +89,10 @@
 	alpha_to_leave = 255
 
 /turf/open/floor/glass/plasma/icemoon
-	initial_gas_mix = ICEMOON_DEFAULT_ATMOS
+
 
 /turf/open/floor/glass/plasma/airless
-	initial_gas_mix = AIRLESS_ATMOS
+
 
 /turf/open/floor/glass/reinforced/plasma
 	name = "reinforced plasma glass floor"
@@ -105,7 +105,7 @@
 	alpha_to_leave = 206
 
 /turf/open/floor/glass/reinforced/plasma/icemoon
-	initial_gas_mix = ICEMOON_DEFAULT_ATMOS
+
 
 /turf/open/floor/glass/reinforced/plasma/airless
-	initial_gas_mix = AIRLESS_ATMOS
+

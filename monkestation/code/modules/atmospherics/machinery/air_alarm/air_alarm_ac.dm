@@ -71,7 +71,7 @@
 	SSair.stop_processing_machine(src)
 
 /obj/machinery/airalarm/process_atmos()
-	if(panel_open || (machine_stat & (NOPOWER | BROKEN)) || shorted)
+	if(panel_open || (machine_stat & (NOPOWER | BROKEN)))
 		return
 	if(!air_conditioning)
 		stop_ac()
@@ -86,7 +86,7 @@
 		update_use_power(IDLE_POWER_USE)
 		ac_active = FALSE
 		return
-	var/current_temp = environment.return_temperature()
+	var/current_temp
 	if(COOLDOWN_FINISHED(src, ac_switch_cooldown))
 		var/previous_active = ac_active
 		ac_active = !ISINRANGE_EX(current_temp, cached_target_min, cached_target_max)
@@ -95,28 +95,7 @@
 			playsound(src, 'sound/machines/terminal_on.ogg', vol = 30, vary = TRUE, extrarange = SILENCED_SOUND_EXTRARANGE, ignore_walls = FALSE)
 			update_use_power(ac_active ? ACTIVE_POWER_USE : IDLE_POWER_USE)
 		COOLDOWN_START(src, ac_switch_cooldown, AC_SWITCH_COOLDOWN)
-	if(ac_active)
-		if(current_temp < ac_temp_target)
-			environment.temperature = min(current_temp + ac_temp_inc, ac_temp_target)
-		else
-			environment.temperature = max(current_temp - ac_temp_inc, ac_temp_target)
-		air_update_turf(update = FALSE, remove = FALSE)
-		// Update the air of adjacent turfs too
-		if(!TURF_SHARES(location))
-			return
-		var/adjacent_inc = CEILING(ac_temp_inc * ac_adjacent_mul, 0.1)
-		for(var/turf/open/adjacent_turf in location.get_atmos_adjacent_turfs(alldir = TRUE))
-			if(QDELING(adjacent_turf) || isspaceturf(adjacent_turf))
-				continue
-			var/datum/gas_mixture/adj_environment = adjacent_turf.return_air()
-			if(QDELETED(adj_environment))
-				continue
-			var/adj_temp = adj_environment.return_temperature()
-			if(adj_temp < ac_temp_target)
-				adj_environment.temperature = min(adj_temp + adjacent_inc, ac_temp_target)
-			else
-				adj_environment.temperature = max(adj_temp - adjacent_inc, ac_temp_target)
-			adjacent_turf.air_update_turf(update = FALSE, remove = FALSE)
+
 
 #undef AC_ADJACENT_MUL
 #undef AC_DEFAULT_INC

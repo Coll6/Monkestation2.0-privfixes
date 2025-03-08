@@ -3,16 +3,13 @@
 	id = FOREST_DEFAULT_ATMOS
 
 	base_gases = list(
-		/datum/gas/oxygen=5,
-		/datum/gas/nitrogen=10,
+
 	)
 	normal_gases = list(
-		/datum/gas/oxygen=10,
-		/datum/gas/nitrogen=10,
-		/datum/gas/carbon_dioxide=10,
+
 	)
 	restricted_gases = list(
-		/datum/gas/water_vapor=0.1,
+
 	)
 	restricted_chance = 20
 

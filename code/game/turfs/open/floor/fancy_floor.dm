@@ -72,7 +72,7 @@
 	temperature = 180
 
 /turf/open/floor/wood/airless
-	initial_gas_mix = AIRLESS_ATMOS
+
 
 /turf/open/floor/wood/tile
 	icon_state = "wood_tile"
@@ -160,7 +160,7 @@
 	desc = "It turns out grass doesn't grow very well in hell."
 	icon_state = "sand"
 	broken = TRUE
-	initial_gas_mix = LAVALAND_DEFAULT_ATMOS
+
 
 /turf/open/floor/grass/lavaland/spawniconchange()
 	return
@@ -185,7 +185,7 @@
 	icon_state = "snow"
 	flags_1 = NONE
 	floor_tile = null
-	initial_gas_mix = FROZEN_ATMOS
+
 	bullet_bounce_sound = null
 	tiled_dirt = FALSE
 
@@ -378,34 +378,33 @@
 
 //*****Airless versions of all of the above.*****
 /turf/open/floor/carpet/airless
-	initial_gas_mix = AIRLESS_ATMOS
+
 
 /turf/open/floor/carpet/black/airless
-	initial_gas_mix = AIRLESS_ATMOS
+
 
 /turf/open/floor/carpet/blue/airless
-	initial_gas_mix = AIRLESS_ATMOS
 
 /turf/open/floor/carpet/cyan/airless
-	initial_gas_mix = AIRLESS_ATMOS
+
 
 /turf/open/floor/carpet/green/airless
-	initial_gas_mix = AIRLESS_ATMOS
+
 
 /turf/open/floor/carpet/orange/airless
-	initial_gas_mix = AIRLESS_ATMOS
+
 
 /turf/open/floor/carpet/purple/airless
-	initial_gas_mix = AIRLESS_ATMOS
+
 
 /turf/open/floor/carpet/red/airless
-	initial_gas_mix = AIRLESS_ATMOS
+
 
 /turf/open/floor/carpet/royalblack/airless
-	initial_gas_mix = AIRLESS_ATMOS
+
 
 /turf/open/floor/carpet/royalblue/airless
-	initial_gas_mix = AIRLESS_ATMOS
+
 
 /turf/open/floor/carpet/narsie_act(force, ignore_mobs, probability = 20)
 	. = (prob(probability) || force)
@@ -699,94 +698,94 @@
 	canSmoothWith = SMOOTH_GROUP_CARPET_SIMPLE_NEON_PINK_NODOTS
 
 /turf/open/floor/carpet/neon/airless
-	initial_gas_mix = AIRLESS_ATMOS
+
 
 /turf/open/floor/carpet/neon/simple/airless
-	initial_gas_mix = AIRLESS_ATMOS
+
 
 /turf/open/floor/carpet/neon/simple/white/airless
-	initial_gas_mix = AIRLESS_ATMOS
+
 
 /turf/open/floor/carpet/neon/simple/black/airless
-	initial_gas_mix = AIRLESS_ATMOS
+
 
 /turf/open/floor/carpet/neon/simple/red/airless
-	initial_gas_mix = AIRLESS_ATMOS
+
 
 /turf/open/floor/carpet/neon/simple/orange/airless
-	initial_gas_mix = AIRLESS_ATMOS
+
 
 /turf/open/floor/carpet/neon/simple/yellow/airless
-	initial_gas_mix = AIRLESS_ATMOS
+
 
 /turf/open/floor/carpet/neon/simple/lime/airless
-	initial_gas_mix = AIRLESS_ATMOS
+
 
 /turf/open/floor/carpet/neon/simple/green/airless
-	initial_gas_mix = AIRLESS_ATMOS
+
 
 /turf/open/floor/carpet/neon/simple/teal/airless
-	initial_gas_mix = AIRLESS_ATMOS
+
 
 /turf/open/floor/carpet/neon/simple/cyan/airless
-	initial_gas_mix = AIRLESS_ATMOS
+
 
 /turf/open/floor/carpet/neon/simple/blue/airless
-	initial_gas_mix = AIRLESS_ATMOS
+
 
 /turf/open/floor/carpet/neon/simple/purple/airless
-	initial_gas_mix = AIRLESS_ATMOS
+
 
 /turf/open/floor/carpet/neon/simple/violet/airless
-	initial_gas_mix = AIRLESS_ATMOS
+
 
 /turf/open/floor/carpet/neon/simple/pink/airless
-	initial_gas_mix = AIRLESS_ATMOS
+
 
 /turf/open/floor/carpet/neon/simple/nodots/airless
-	initial_gas_mix = AIRLESS_ATMOS
+
 
 /turf/open/floor/carpet/neon/simple/white/nodots/airless
-	initial_gas_mix = AIRLESS_ATMOS
+
 
 /turf/open/floor/carpet/neon/simple/black/nodots/airless
-	initial_gas_mix = AIRLESS_ATMOS
+
 
 /turf/open/floor/carpet/neon/simple/red/nodots/airless
-	initial_gas_mix = AIRLESS_ATMOS
+
 
 /turf/open/floor/carpet/neon/simple/orange/nodots/airless
-	initial_gas_mix = AIRLESS_ATMOS
+
 
 /turf/open/floor/carpet/neon/simple/yellow/nodots/airless
-	initial_gas_mix = AIRLESS_ATMOS
+
 
 /turf/open/floor/carpet/neon/simple/lime/nodots/airless
-	initial_gas_mix = AIRLESS_ATMOS
+
 
 /turf/open/floor/carpet/neon/simple/green/nodots/airless
-	initial_gas_mix = AIRLESS_ATMOS
+
 
 /turf/open/floor/carpet/neon/simple/teal/nodots/airless
-	initial_gas_mix = AIRLESS_ATMOS
+
 
 /turf/open/floor/carpet/neon/simple/cyan/nodots/airless
-	initial_gas_mix = AIRLESS_ATMOS
+
 
 /turf/open/floor/carpet/neon/simple/blue/nodots/airless
-	initial_gas_mix = AIRLESS_ATMOS
+
 
 /turf/open/floor/carpet/neon/simple/purple/nodots/airless
-	initial_gas_mix = AIRLESS_ATMOS
+
 
 /turf/open/floor/carpet/neon/simple/violet/nodots/airless
-	initial_gas_mix = AIRLESS_ATMOS
+
 
 /turf/open/floor/carpet/neon/simple/pink/nodots/airless
-	initial_gas_mix = AIRLESS_ATMOS
+
 
 /turf/open/floor/carpet/blue/lavaland
-	initial_gas_mix = LAVALAND_DEFAULT_ATMOS
+
 
 /turf/open/floor/fakepit
 	desc = "A clever illusion designed to look like a bottomless pit."

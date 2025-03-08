@@ -61,7 +61,6 @@
 		/datum/material/iron = SHEET_MATERIAL_AMOUNT * 7.5,
 		/datum/material/glass = SHEET_MATERIAL_AMOUNT * 3,
 	)
-	build_path = /obj/machinery/portable_atmospherics/pump
 	category = list(
 		RND_CATEGORY_INITIAL,
 		FABRICATOR_CATEGORY_APPLIANCES + FABRICATOR_SUBCATEGORY_ATMOS,
@@ -76,7 +75,7 @@
 		/datum/material/iron = SHEET_MATERIAL_AMOUNT * 7.5,
 		/datum/material/glass = SHEET_MATERIAL_AMOUNT * 3,
 	)
-	build_path = /obj/machinery/portable_atmospherics/scrubber
+
 	category = list(
 		RND_CATEGORY_INITIAL,
 		FABRICATOR_CATEGORY_APPLIANCES + FABRICATOR_SUBCATEGORY_ATMOS,

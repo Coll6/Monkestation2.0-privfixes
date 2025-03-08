@@ -94,9 +94,9 @@
 		return
 	var/range = 4
 	zap_cutoff = 1500
-	var/total_moles = absorbed_gasmix.total_moles()
-	var/pressure = absorbed_gasmix.return_pressure()
-	var/temp = absorbed_gasmix.temperature
+	var/total_moles
+	var/pressure
+	var/temp
 	if(pressure > 0 && temp > 0)
 		//You may be able to freeze the zapstate of the engine with good planning, we'll see
 		zap_cutoff = clamp(3000 - (internal_energy * total_moles / 10) / temp, 350, 3000)//If the core is cold, it's easier to jump, ditto if there are a lot of mols

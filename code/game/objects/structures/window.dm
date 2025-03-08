@@ -4,7 +4,7 @@
 	icon_state = "window"
 	density = TRUE
 	layer = ABOVE_OBJ_LAYER //Just above doors
-	pressure_resistance = 4*ONE_ATMOSPHERE
+
 	anchored = TRUE //initially is 0 for tile smoothing
 	flags_1 = ON_BORDER_1
 	obj_flags = CAN_BE_HIT | BLOCKS_CONSTRUCTION_DIR | IGNORE_DENSITY
@@ -12,7 +12,7 @@
 	can_be_unanchored = TRUE
 	resistance_flags = ACID_PROOF
 	armor_type = /datum/armor/structure_window
-	can_atmos_pass = ATMOS_PASS_PROC
+
 	rad_insulation = RAD_VERY_LIGHT_INSULATION
 	pass_flags_self = PASSGLASS
 	set_dir_on_move = FALSE
@@ -53,7 +53,7 @@
 	if(!reinf && anchored)
 		state = WINDOW_SCREWED_TO_FRAME
 
-	air_update_turf(TRUE, TRUE)
+
 
 	if(fulltile)
 		setDir()
@@ -299,7 +299,7 @@
 
 /obj/structure/window/set_anchored(anchorvalue)
 	..()
-	air_update_turf(TRUE, anchorvalue)
+
 	update_nearby_icons()
 
 /obj/structure/window/proc/check_state(checked_state)
@@ -372,7 +372,7 @@
 	return dropped_debris
 
 /obj/structure/window/proc/AfterRotation(mob/user, degrees)
-	air_update_turf(TRUE, FALSE)
+
 
 /obj/structure/window/proc/on_painted(obj/structure/window/source, is_dark_color)
 	SIGNAL_HANDLER
@@ -397,20 +397,15 @@
 
 /obj/structure/window/Destroy()
 	set_density(FALSE)
-	air_update_turf(TRUE, FALSE)
+
 	update_nearby_icons()
 	return ..()
 
 /obj/structure/window/Move()
-	var/turf/T = loc
 	. = ..()
-	if(anchored)
-		move_update_air(T)
 
-/obj/structure/window/can_atmos_pass(turf/T, vertical = FALSE)
-	if(!anchored || !density)
-		return TRUE
-	return !(fulltile || dir == get_dir(loc, T))
+
+
 
 //This proc is used to update the icons of nearby windows.
 /obj/structure/window/proc/update_nearby_icons()
@@ -440,7 +435,7 @@
 	return exposed_temperature > T0C + heat_resistance
 
 /obj/structure/window/atmos_expose(datum/gas_mixture/air, exposed_temperature)
-	take_damage(round(air.return_volume() / 100), BURN, 0, 0)
+
 
 /obj/structure/window/get_dumping_location()
 	return null
@@ -643,8 +638,7 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/window/plasma/spawner, 0)
 	fire = 99
 	acid = 100
 
-/obj/structure/window/reinforced/plasma/block_superconductivity()
-	return TRUE
+
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/window/reinforced/plasma/spawner, 0)
 
@@ -868,7 +862,7 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/window/reinforced/tinted/frosted/spaw
 	glass_type = /obj/item/stack/sheet/paperframes
 	heat_resistance = 233
 	decon_speed = 10
-	can_atmos_pass = ATMOS_PASS_YES
+
 	resistance_flags = FLAMMABLE
 	armor_type = /datum/armor/none
 	knock_sound = SFX_PAGE_TURN

@@ -81,8 +81,7 @@
 
 /datum/action/cooldown/spell/cone/staggered/fire_breath/do_turf_cone_effect(turf/target_turf, atom/caster, level)
 	// Further turfs experience less exposed_temperature and exposed_volume
-	new /obj/effect/hotspot(target_turf) // for style
-	target_turf.hotspot_expose(max(500, 900 - (100 * level)), max(50, 200 - (50 * level)), 1)
+
 
 /datum/action/cooldown/spell/cone/staggered/fire_breath/do_mob_cone_effect(mob/living/target_mob, atom/caster, level)
 	// Further out targets take less immediate burn damage and get less fire stacks.

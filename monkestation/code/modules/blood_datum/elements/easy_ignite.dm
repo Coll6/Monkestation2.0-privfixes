@@ -31,7 +31,6 @@
 	var/delete_after = TRUE
 
 	igniting.visible_message(span_warning("[igniting] ignite[igniting.p_s()]!"), span_warning("You ignite into flames!"))
-	new /obj/effect/hotspot(isturf(igniting) ? igniting : igniting.loc)
 
 	if(isturf(igniting))
 		var/turf/parent_turf = igniting

@@ -5,8 +5,7 @@
 /datum/hallucination/xeno_attack/start()
 	var/turf/xeno_attack_source
 	for(var/obj/machinery/atmospherics/components/unary/vent_pump/nearby_pump in orange(7, hallucinator))
-		if(nearby_pump.welded)
-			continue
+
 		xeno_attack_source = get_turf(nearby_pump)
 		break
 

@@ -39,7 +39,7 @@
 		var/obj/effect/abstract/copier = new(turf)
 		copier.appearance = chain_appearance
 		effects |= copier
-		turf.hotspot_expose(1000, 100)
+
 		animate(copier, alpha = 0, time = 0.6 SECONDS + power * 0.1 SECONDS, easing = BOUNCE_EASING | EASE_IN)
 
 

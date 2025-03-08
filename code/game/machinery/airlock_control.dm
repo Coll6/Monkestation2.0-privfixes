@@ -99,9 +99,4 @@
 	flick("airlock_sensor_cycle", src)
 
 /obj/machinery/airlock_sensor/process()
-	if(on)
-		var/datum/gas_mixture/air_sample = return_air()
-		var/pressure = round(air_sample.return_pressure(),0.1)
-		alert = (pressure < ONE_ATMOSPHERE*0.8)
-
 	update_appearance()

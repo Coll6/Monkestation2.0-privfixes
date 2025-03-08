@@ -222,14 +222,6 @@ GLOBAL_VAR_INIT(liquid_debug_colors, FALSE)
 			continue
 		remove_from_group(turf)
 
-	var/turf/open/open_turf = pick(members)
-	var/datum/gas_mixture/math_cache = open_turf.air
-
-	if(math_cache && total_reagent_volume)
-		if(!(group_temperature <= math_cache.return_temperature() + 5 && math_cache.return_temperature() - 5 <= group_temperature) && !temperature_shift_needs_action)
-			cached_temperature_shift =((math_cache.return_temperature() * max(1, math_cache.total_moles())) + ((group_temperature * max(1, (total_reagent_volume * 0.025))))) / (max(1, (total_reagent_volume * 0.025)) + max(1, math_cache.total_moles()))
-			temperature_shift_needs_action = TRUE
-
 	if(from_SS)
 		total_reagent_volume = reagents.total_volume
 		reagents.handle_reactions()
@@ -682,11 +674,7 @@ GLOBAL_VAR_INIT(liquid_debug_colors, FALSE)
 
 /datum/liquid_group/proc/check_adjacency(turf/member)
 	var/adjacent_liquid = 0
-	for(var/tur in member.get_atmos_adjacent_turfs())
-		var/turf/adjacent_turf = tur
-		if(!QDELETED(adjacent_turf.liquids))
-			if(adjacent_turf.liquids.liquid_group == member.liquids.liquid_group)
-				adjacent_liquid++
+
 	if(adjacent_liquid < 2)
 		return FALSE
 	return TRUE
@@ -696,10 +684,6 @@ GLOBAL_VAR_INIT(liquid_debug_colors, FALSE)
 		for(var/direction in cached_edge_turfs[cached_turf])
 			var/turf/directional_turf = get_step(cached_turf, direction)
 			if(isclosedturf(directional_turf))
-				continue
-			if(!(directional_turf in cached_turf.atmos_adjacent_turfs)) //i hate that this is needed
-				continue
-			if(!cached_turf.atmos_adjacent_turfs[directional_turf])
 				continue
 			if(spread_liquid(directional_turf, cached_turf))
 				cached_edge_turfs[cached_turf] -= direction
@@ -754,8 +738,7 @@ GLOBAL_VAR_INIT(liquid_debug_colors, FALSE)
 		for(var/turf/adjacent_turf in get_adjacent_open_turfs(queued_turf))
 			if(QDELETED(adjacent_turf.liquids) || !members[adjacent_turf])
 				continue
-			if(!(adjacent_turf in queued_turf.atmos_adjacent_turfs)) //i hate that this is needed
-				continue
+
 			visited_length = length(previously_visited)
 			previously_visited["[adjacent_turf.liquids.x]_[adjacent_turf.liquids.y]"] = adjacent_turf.liquids
 			if(length(previously_visited) != visited_length)
@@ -865,19 +848,7 @@ GLOBAL_VAR_INIT(liquid_debug_colors, FALSE)
 
 /datum/liquid_group/proc/try_bulk_split(list/input_turfs)
 	var/list/connected_array = list()
-	for(var/turf/listed_input in input_turfs)
-		for(var/turf/cardinal in listed_input.get_atmos_adjacent_turfs())
-			var/exists_already = FALSE
-			for(var/list/arrayed_item in connected_array)
-				if(cardinal in arrayed_item)
-					exists_already = TRUE
-					break
-			if(!exists_already)
-				if(!QDELETED(cardinal.liquids))
-					var/list/temp = return_connected_liquids(cardinal.liquids)
-					if(isnull(temp) || !length(temp) || (temp in connected_array))
-						continue
-					connected_array |= list(temp)
+
 
 	if(!length(connected_array))
 		return
@@ -956,14 +927,7 @@ GLOBAL_VAR_INIT(liquid_debug_colors, FALSE)
 	turf_reagents.expose(target, method, liquid = TRUE)
 
 /datum/liquid_group/proc/spread_liquid(turf/new_turf, turf/source_turf)
-	if(isclosedturf(new_turf) || !source_turf.atmos_adjacent_turfs)
-		return
-	if(HAS_TRAIT(new_turf, TRAIT_BLOCK_LIQUID_SPREAD))
-		return
-	if(!(new_turf in source_turf.atmos_adjacent_turfs)) //i hate that this is needed
-		return
-	if(!source_turf.atmos_adjacent_turfs[new_turf])
-		return
+
 
 	if(isopenspaceturf(new_turf))
 		var/turf/Z_turf_below = GET_TURF_BELOW(new_turf)
@@ -1052,17 +1016,3 @@ GLOBAL_VAR_INIT(liquid_debug_colors, FALSE)
 /datum/liquid_group/proc/act_on_queue(turf/member)
 	if(!temperature_shift_needs_action)
 		return
-
-	var/turf/open/member_open = member
-	var/datum/gas_mixture/gas = member_open.air
-	if(!gas)
-		return
-
-	gas.temperature = cached_temperature_shift
-	if(group_temperature != cached_temperature_shift)
-		group_temperature = cached_temperature_shift
-		reagents.chem_temp = cached_temperature_shift
-
-	current_temperature_queue -= member
-	if(!length(current_temperature_queue))
-		temperature_shift_needs_action = FALSE

@@ -70,12 +70,6 @@
 	if(!location)
 		return FALSE
 
-	var/datum/gas_mixture/environment = location.return_air()
-	if(environment?.return_pressure() < HAZARD_LOW_PRESSURE + 10)
-		to_chat(human, span_warning("The atmosphere is too thin for you to fly!"))
-		return FALSE
-	else
-		return TRUE
 
 ///Slipping but in the air?
 /obj/item/organ/external/wings/functional/proc/fly_slip(mob/living/carbon/human/human)

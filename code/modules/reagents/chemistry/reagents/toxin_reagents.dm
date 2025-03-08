@@ -128,16 +128,13 @@
 		return
 	if((holder.flags & SEALED_CONTAINER) && (holder.chem_temp < LIQUID_PLASMA_IG))
 		return
-	var/atom/A = holder.my_atom
-	A.atmos_spawn_air("plasma=[volume];TEMP=[holder.chem_temp]")
+
 	holder.del_reagent(type)
 
 /datum/reagent/toxin/plasma/expose_turf(turf/open/exposed_turf, reac_volume)
 	if(!istype(exposed_turf))
 		return
-	var/temp = holder ? holder.chem_temp : T20C
-	if(temp >= LIQUID_PLASMA_BP)
-		exposed_turf.atmos_spawn_air("plasma=[reac_volume];TEMP=[temp]")
+
 	return ..()
 
 #undef LIQUID_PLASMA_BP

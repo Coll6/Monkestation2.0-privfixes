@@ -6,9 +6,7 @@
 		and the benefit of being undeployable when you're done with it."
 	circuit = null
 	greyscale_config = /datum/greyscale_config/thermomachine/deployable
-	min_temperature = T0C
-	max_temperature = FIRE_MINIMUM_TEMPERATURE_TO_SPREAD + 50
-	heat_capacity = 10000
+
 	/// The item we turn into when repacked
 	var/repacked_type = /obj/item/flatpacked_machine/thermomachine
 	/// Soundloop for while the thermomachine is turned on
@@ -27,18 +25,13 @@
 
 /obj/machinery/atmospherics/components/unary/thermomachine/deployable/RefreshParts()
 	. = ..()
-	heat_capacity = 10000
-	min_temperature = T0C
-	max_temperature = FIRE_MINIMUM_TEMPERATURE_TO_SPREAD + 50
+
 
 /obj/machinery/atmospherics/components/unary/thermomachine/deployable/default_deconstruction_crowbar()
 	return
 
 /obj/machinery/atmospherics/components/unary/thermomachine/deployable/process_atmos()
-	if(on && !soundloop.loop_started)
-		soundloop.start()
-	else if(soundloop.loop_started)
-		soundloop.stop()
+
 	. = ..()
 
 // Item for creating the regulator and carrying it about
