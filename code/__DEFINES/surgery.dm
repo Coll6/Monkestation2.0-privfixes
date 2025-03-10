@@ -1,3 +1,8 @@
+/// Helper to figure out if an organ is organic
+//#define IS_ORGANIC_ORGAN(organ) (organ.organ_flags & ORGAN_ORGANIC) //Dont have an organic flag check this later.
+/// Helper to figure out if an organ is robotic
+#define IS_ROBOTIC_ORGAN(organ) (organ.organ_flags & ORGAN_SYNTHETIC)
+
 // Flags for the organ_flags var on /obj/item/organ
 ///Synthetic organs, or cybernetic organs. Reacts to EMPs and don't deteriorate or heal
 #define ORGAN_SYNTHETIC (1<<0)
@@ -27,6 +32,8 @@
 #define BODYPART_PSEUDOPART (1<<1)
 /// Bodypart did not match the owner's default bodypart limb_id when surgically implanted
 #define BODYPART_IMPLANTED (1<<2)
+/// An organ that is ostensibly dangerous when inside a body
+#define ORGAN_HAZARDOUS (1<<3)
 
 // Bodypart change blocking flags
 ///Bodypart does not get replaced during set_species()
