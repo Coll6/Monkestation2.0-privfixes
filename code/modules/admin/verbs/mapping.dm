@@ -23,15 +23,11 @@ GLOBAL_LIST_INIT(admin_verbs_debug_mapping, list(
 	/client/proc/camera_view, //-errorage
 	/client/proc/sec_camera_report, //-errorage
 	/client/proc/intercom_view, //-errorage
-	/client/proc/air_status, //Air things
 	/client/proc/Cell, //More air things
-	/client/proc/atmosscan, //check plumbing
-	/client/proc/powerdebug, //check power
 	/client/proc/count_objects_on_z_level,
 	/client/proc/count_objects_all,
 	/client/proc/cmd_assume_direct_control, //-errorage
 	/client/proc/cmd_give_direct_control,
-	/client/proc/set_server_fps, //allows you to set the ticklag.
 	/client/proc/cmd_admin_grantfullaccess,
 	/client/proc/cmd_admin_areatest_all,
 	/client/proc/cmd_admin_areatest_station,
@@ -40,12 +36,10 @@ GLOBAL_LIST_INIT(admin_verbs_debug_mapping, list(
 	/client/proc/see_dirty_varedits,
 	#endif
 	/client/proc/cmd_admin_rejuvenate,
-	/datum/admins/proc/show_traitor_panel,
 	/client/proc/disable_communication,
 	/client/proc/show_map_reports,
 	/client/proc/cmd_show_at_list,
 	/client/proc/cmd_show_at_markers,
-	/client/proc/manipulate_organs,
 	/client/proc/start_line_profiling,
 	/client/proc/stop_line_profiling,
 	/client/proc/show_line_profiling,

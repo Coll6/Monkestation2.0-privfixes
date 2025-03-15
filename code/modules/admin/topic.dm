@@ -764,20 +764,13 @@
 		AM.forceMove(get_turf(usr))
 
 	else if(href_list["adminplayerobservecoodjump"])
-		if(!isobserver(usr) && !check_rights(R_ADMIN))
-			return
-		if(isnewplayer(usr))
-			return
-
-		var/x = text2num(href_list["X"])
-		var/y = text2num(href_list["Y"])
-		var/z = text2num(href_list["Z"])
-
-		var/client/C = usr.client
-		if(!isobserver(usr))
-			C.admin_ghost()
-		sleep(0.2 SECONDS)
-		C.jumptocoord(x,y,z)
+		return SSadmin_verbs.dynamic_invoke_verb(
+			usr,
+			/datum/admin_verb/jump_to_coord,
+			text2num(href_list["X"]),
+			text2num(href_list["Y"]),
+			text2num(href_list["Z"]),
+		)
 
 	else if(href_list["adminchecklaws"])
 		if(!check_rights(R_ADMIN))
@@ -986,7 +979,7 @@
 			to_chat(usr, "This can only be used on instances of type /mob/living/carbon/human", confidential = TRUE)
 			return
 
-		usr.client.smite(H)
+		//usr.client.smite(H)
 
 	else if(href_list["CentComReply"])
 		if(!check_rights(R_ADMIN))
@@ -1016,27 +1009,13 @@
 		if(istype(charter))
 			charter.reject_proposed(usr)
 	else if(href_list["jumpto"])
-		if(!isobserver(usr) && !check_rights(R_ADMIN))
-			return
-
-		var/mob/M = locate(href_list["jumpto"])
-		usr.client.jumptomob(M)
+		return SSadmin_verbs.dynamic_invoke_verb(usr, /datum/admin_verb/jump_to_mob, locate(href_list["jumpto"]))
 
 	else if(href_list["getmob"])
-		if(!check_rights(R_ADMIN))
-			return
-
-		if(tgui_alert(usr, "Confirm?", "Message", list("Yes", "No")) != "Yes")
-			return
-		var/mob/M = locate(href_list["getmob"])
-		usr.client.Getmob(M)
+		return SSadmin_verbs.dynamic_invoke_verb(usr, /datum/admin_verb/get_mob, locate(href_list["getmob"]))
 
 	else if(href_list["sendmob"])
-		if(!check_rights(R_ADMIN))
-			return
-
-		var/mob/M = locate(href_list["sendmob"])
-		usr.client.sendmob(M)
+		return SSadmin_verbs.dynamic_invoke_verb(usr, /datum/admin_verb/send_mob, locate(href_list["sendmob"]))
 
 	else if(href_list["narrateto"])
 		if(!check_rights(R_ADMIN))
@@ -1059,7 +1038,7 @@
 		var/mob/M = locate(href_list["playsoundto"])
 		var/S = input("", "Select a sound file",) as null|sound
 		if(S)
-			usr.client.play_direct_mob_sound(S, M)
+			SSadmin_verbs.dynamic_invoke_verb(usr.client, /datum/admin_verb/play_direct_mob_sound, S, M)
 
 	else if(href_list["individuallog"])
 		if(!check_rights(R_ADMIN))
@@ -1099,7 +1078,7 @@
 			else
 				D.traitor_panel()
 		else
-			show_traitor_panel(M)
+			SSadmin_verbs.dynamic_invoke_verb(usr, /datum/admin_verb/show_traitor_panel, M)
 
 	else if(href_list["skill"])
 		if(!check_rights(R_ADMIN))
@@ -1119,7 +1098,7 @@
 		else
 			to_chat(usr, "This can only be used on instances of type /mob and /mind", confidential = TRUE)
 			return
-		show_skill_panel(target_mind)
+		SSadmin_verbs.dynamic_invoke_verb(usr, /datum/admin_verb/show_skill_panel, target_mind)
 
 	else if(href_list["borgpanel"])
 		if(!check_rights(R_ADMIN))
@@ -1129,7 +1108,7 @@
 		if(!iscyborg(M))
 			to_chat(usr, "This can only be used on cyborgs", confidential = TRUE)
 		else
-			open_borgopanel(M)
+			return SSadmin_verbs.dynamic_invoke_verb(usr, /datum/admin_verb/borg_panel, locate(href_list["borgpanel"]))
 
 	else if(href_list["initmind"])
 		if(!check_rights(R_ADMIN))
@@ -1294,7 +1273,7 @@
 	else if(href_list["check_antagonist"])
 		if(!check_rights(R_ADMIN))
 			return
-		usr.client.check_antagonists()
+		//usr.client.check_antagonists()
 
 	else if(href_list["kick_all_from_lobby"])
 		if(!check_rights(R_ADMIN))
@@ -1365,7 +1344,7 @@
 					log_admin("[key_name(usr)] turned a Lag Switch measure at index ([switch_index]) [LAZYACCESS(SSlag_switch.measures, switch_index) ? "ON" : "OFF"]")
 					message_admins("[key_name_admin(usr)] turned a Lag Switch measure [LAZYACCESS(SSlag_switch.measures, switch_index) ? "ON" : "OFF"]")
 
-		src.show_lag_switch_panel()
+		//src.show_lag_switch_panel()
 
 	else if(href_list["change_lag_switch_option"])
 		if(!check_rights(R_ADMIN))
@@ -1394,7 +1373,7 @@
 					log_admin("[key_name(usr)] set the Lag Switch slowmode cooldown to [new_num] seconds.")
 					message_admins("[key_name_admin(usr)] set the Lag Switch slowmode cooldown to [new_num] seconds.")
 
-		src.show_lag_switch_panel()
+		//src.show_lag_switch_panel()
 
 	else if(href_list["viewruntime"])
 		var/datum/error_viewer/error_viewer = locate(href_list["viewruntime"])
@@ -1735,7 +1714,7 @@
 	else if(href_list["show_tags"])
 		if(!check_rights(R_ADMIN))
 			return
-		return display_tags()
+		//return display_tags()
 
 	else if(href_list["mark_datum"])
 		if(!check_rights(R_ADMIN))

@@ -215,10 +215,12 @@
 
 	var/client/client = escape_menu.client
 
+/*
 	if (has_open_adminhelp())
 		client?.view_latest_ticket()
 	else
-		client?.adminhelp()
+*/
+	client?.adminhelp()
 
 /atom/movable/screen/escape_menu/home_button/admin_help/proc/has_open_adminhelp()
 	var/client/client = escape_menu.client

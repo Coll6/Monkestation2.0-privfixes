@@ -1434,13 +1434,13 @@
 					log_admin("[key_name(usr)] has added [amount] units of [chosen_id] to [src]")
 					message_admins(span_notice("[key_name(usr)] has added [amount] units of [chosen_id] to [src]"))
 
-	if(href_list[VV_HK_TRIGGER_EXPLOSION] && check_rights(R_FUN))
-		usr.client.cmd_admin_explosion(src)
+	if(href_list[VV_HK_TRIGGER_EXPLOSION])
+		return SSadmin_verbs.dynamic_invoke_verb(usr, /datum/admin_verb/admin_explosion, src)
 
 	if(href_list[VV_HK_TRIGGER_EMP] && check_rights(R_FUN))
-		usr.client.cmd_admin_emp(src)
+		return SSadmin_verbs.dynamic_invoke_verb(usr, /datum/admin_verb/admin_emp, src)
 
-	if(href_list[VV_HK_SHOW_HIDDENPRINTS] && check_rights(R_ADMIN))
+	if(href_list[VV_HK_SHOW_HIDDENPRINTS] && check_rights(R_ADMIN)) //TODO ADD THIS TO AVD
 		usr.client.cmd_show_hiddenprints(src)
 
 	if(href_list[VV_HK_ARMOR_MOD])

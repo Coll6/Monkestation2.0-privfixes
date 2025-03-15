@@ -108,7 +108,7 @@ GLOBAL_DATUM(everyone_an_antag, /datum/everyone_is_an_antag_controller)
 						continue
 					for(var/datum/disease/acute/disease as anything in living.diseases)
 						disease.cure(target = living)
-
+/*
 		if("list_bombers")
 			holder.list_bombers()
 
@@ -129,7 +129,7 @@ GLOBAL_DATUM(everyone_an_antag, /datum/everyone_is_an_antag_controller)
 
 		if("fingerprints")
 			holder.list_fingerprints()
-
+*/
 		if("ctfbutton")
 			toggle_id_ctf(holder, CTF_GHOST_CTF_GAME_ID)
 

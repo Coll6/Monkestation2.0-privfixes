@@ -1,3 +1,4 @@
+/*
 /client/proc/cmd_mentor_say(msg as text)
 	set category = "Mentor"
 	set name = "Mentorsay"
@@ -84,3 +85,4 @@
 		else
 			mentor_datum.not_active = TRUE
 			to_chat(src, span_notice("You will no longer recieve mentor helps!"))
+*/

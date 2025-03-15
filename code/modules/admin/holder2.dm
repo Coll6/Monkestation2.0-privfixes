@@ -119,7 +119,7 @@ GLOBAL_PROTECT(href_token)
 
 	if (!isnull(client))
 		disassociate()
-		add_verb(client, /client/proc/readmin)
+		//add_verb(client, /client/proc/readmin)
 		client.disable_combo_hud()
 		client.update_special_keybinds()
 
@@ -155,12 +155,12 @@ GLOBAL_PROTECT(href_token)
 	if (deadmined)
 		activate()
 
-	remove_verb(client, /client/proc/admin_2fa_verify)
+	//remove_verb(client, /client/proc/admin_2fa_verify)
 
 	owner = client
 	owner.holder = src
 	owner.add_admin_verbs()
-	remove_verb(owner, /client/proc/readmin)
+	//remove_verb(owner, /client/proc/readmin)
 	owner.init_verbs() //re-initialize the verb list
 	owner.update_special_keybinds()
 	GLOB.admins |= client
@@ -295,7 +295,7 @@ GLOBAL_PROTECT(href_token)
 #define ERROR_2FA_REQUEST_PERMISSIONS "<h1><b class='danger'>You could not be verified, and a DB connection couldn't be established. Please contact an admin with +PERMISSIONS to grant you permission.</b></h1>"
 
 /datum/admins/proc/start_2fa_process(client/client, id)
-	add_verb(client, /client/proc/admin_2fa_verify)
+	//add_verb(client, /client/proc/admin_2fa_verify)
 	client?.init_verbs()
 
 	var/admin_2fa_url = CONFIG_GET(string/admin_2fa_url)
