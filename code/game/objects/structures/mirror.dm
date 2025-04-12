@@ -47,7 +47,7 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/mirror, 28)
 
 	//handle facial hair (if necessary)
 	if(hairdresser.gender != FEMALE)
-		var/new_style = tgui_input_list(user, "Select a facial hairstyle", "Grooming", GLOB.facial_hairstyles_list)
+		var/new_style = tgui_input_list(user, "Select a facial hairstyle", "Grooming", SSaccessories.facial_hairstyles_list)
 		if(isnull(new_style))
 			return TRUE
 		if(!user.can_perform_action(src, FORBID_TELEKINESIS_REACH))
@@ -59,7 +59,7 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/mirror, 28)
 		hairdresser.facial_hairstyle = "Shaved"
 
 	//handle normal hair
-	var/new_style = tgui_input_list(user, "Select a hairstyle", "Grooming", GLOB.roundstart_hairstyles_list)
+	var/new_style = tgui_input_list(user, "Select a hairstyle", "Grooming", SSaccessories.hairstyles_list)
 	if(isnull(new_style))
 		return TRUE
 	if(!user.can_perform_action(src, FORBID_TELEKINESIS_REACH))

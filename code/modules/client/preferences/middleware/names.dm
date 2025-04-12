@@ -33,6 +33,7 @@
 	return data
 
 /datum/preference_middleware/names/proc/get_name_to_use()
+/*
 	var/highest_priority_job = preferences.get_highest_priority_job()
 
 	for (var/preference_type in GLOB.preference_entries)
@@ -47,6 +48,7 @@
 			return name_preference.savefile_key
 
 	return "real_name"
+*/
 
 /datum/preference_middleware/names/proc/randomize_name(list/params, mob/user)
 	var/datum/preference/name/name_preference = GLOB.preference_entries_by_key[params["preference"]]

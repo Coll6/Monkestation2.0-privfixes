@@ -29,178 +29,52 @@
 			return "#000000"
 
 /proc/random_underwear(gender)
-	if(!GLOB.underwear_list.len)
-		init_sprite_accessory_subtypes(/datum/sprite_accessory/underwear, GLOB.underwear_list, GLOB.underwear_m, GLOB.underwear_f)
+	if(length(SSaccessories.underwear_list) == 0)
+		CRASH("No underwear to choose from!")
 	switch(gender)
 		if(MALE)
-			return pick(GLOB.underwear_m)
+			return pick(SSaccessories.underwear_m)
 		if(FEMALE)
-			return pick(GLOB.underwear_f)
+			return pick(SSaccessories.underwear_f)
 		else
-			return pick(GLOB.underwear_list)
+			return pick(SSaccessories.underwear_list)
 
 /proc/random_undershirt(gender)
-	if(!GLOB.undershirt_list.len)
-		init_sprite_accessory_subtypes(/datum/sprite_accessory/undershirt, GLOB.undershirt_list, GLOB.undershirt_m, GLOB.undershirt_f)
+	if(length(SSaccessories.undershirt_list) == 0)
+		CRASH("No undershirts to choose from!")
 	switch(gender)
 		if(MALE)
-			return pick(GLOB.undershirt_m)
+			return pick(SSaccessories.undershirt_m)
 		if(FEMALE)
-			return pick(GLOB.undershirt_f)
+			return pick(SSaccessories.undershirt_f)
 		else
-			return pick(GLOB.undershirt_list)
+			return pick(SSaccessories.undershirt_list)
 
 /proc/random_socks()
-	if(!GLOB.socks_list.len)
-		init_sprite_accessory_subtypes(/datum/sprite_accessory/socks, GLOB.socks_list)
-	return pick(GLOB.socks_list)
+	if(length(SSaccessories.socks_list) == 0)
+		CRASH("No socks to choose from!")
+	return pick(SSaccessories.socks_list)
 
 /proc/random_backpack()
 	return pick(GLOB.backpacklist)
 
-/proc/random_features()
-	if(!length(GLOB.tails_list))
-		init_sprite_accessory_subtypes(/datum/sprite_accessory/tails/, GLOB.tails_list,  add_blank = TRUE)
-	if(!length(GLOB.tails_list_human))
-		init_sprite_accessory_subtypes(/datum/sprite_accessory/tails/human, GLOB.tails_list_human,  add_blank = TRUE)
-	if(!length(GLOB.tails_list_lizard))
-		init_sprite_accessory_subtypes(/datum/sprite_accessory/tails/lizard, GLOB.tails_list_lizard, add_blank = TRUE)
-	if(!length(GLOB.snouts_list))
-		init_sprite_accessory_subtypes(/datum/sprite_accessory/snouts, GLOB.snouts_list)
-	if(!length(GLOB.horns_list))
-		init_sprite_accessory_subtypes(/datum/sprite_accessory/horns, GLOB.horns_list)
-	if(!length(GLOB.tails_list_monkey))
-		init_sprite_accessory_subtypes(/datum/sprite_accessory/tails/monkey, GLOB.tails_list_monkey)
-	if(!length(GLOB.ears_list))
-		init_sprite_accessory_subtypes(/datum/sprite_accessory/ears, GLOB.horns_list)
-	if(!length(GLOB.frills_list))
-		init_sprite_accessory_subtypes(/datum/sprite_accessory/frills, GLOB.frills_list)
-	if(!length(GLOB.spines_list))
-		init_sprite_accessory_subtypes(/datum/sprite_accessory/spines, GLOB.spines_list)
-	if(!length(GLOB.legs_list))
-		init_sprite_accessory_subtypes(/datum/sprite_accessory/legs, GLOB.legs_list)
-	if(!length(GLOB.body_markings_list))
-		init_sprite_accessory_subtypes(/datum/sprite_accessory/body_markings, GLOB.body_markings_list)
-	if(!length(GLOB.wings_list))
-		init_sprite_accessory_subtypes(/datum/sprite_accessory/wings, GLOB.wings_list)
-	if(!length(GLOB.moth_wings_list))
-		init_sprite_accessory_subtypes(/datum/sprite_accessory/moth_wings, GLOB.moth_wings_list)
-	if(!length(GLOB.moth_antennae_list))
-		init_sprite_accessory_subtypes(/datum/sprite_accessory/moth_antennae, GLOB.moth_antennae_list)
-	if(!length(GLOB.moth_markings_list))
-		init_sprite_accessory_subtypes(/datum/sprite_accessory/moth_markings, GLOB.moth_markings_list)
-	if(!length(GLOB.pod_hair_list))
-		init_sprite_accessory_subtypes(/datum/sprite_accessory/pod_hair, GLOB.pod_hair_list)
-	if(!length(GLOB.pod_hair_list))
-		init_sprite_accessory_subtypes(/datum/sprite_accessory/pod_hair, GLOB.pod_hair_list)
-	if(!length(GLOB.pod_hair_list))
-		init_sprite_accessory_subtypes(/datum/sprite_accessory/pod_hair, GLOB.pod_hair_list)
-//Monkestation Addition Start
-	if(!length(GLOB.ethereal_horns_list))
-		init_sprite_accessory_subtypes(/datum/sprite_accessory/ethereal_horns, GLOB.ethereal_horns_list)
-	if(!length(GLOB.ethereal_tail_list))
-		init_sprite_accessory_subtypes(/datum/sprite_accessory/tails/ethereal, GLOB.ethereal_tail_list)
-	if(!length(GLOB.apid_antenna_list))
-		init_sprite_accessory_subtypes(/datum/sprite_accessory/apid_antenna, GLOB.apid_antenna_list)
-	if(!length(GLOB.apid_wings_list))
-		init_sprite_accessory_subtypes(/datum/sprite_accessory/apid_wings, GLOB.apid_wings_list)
-	if(!length(GLOB.ipc_screens_list))
-		init_sprite_accessory_subtypes(/datum/sprite_accessory/ipc_screens, GLOB.ipc_screens_list)
-	if(!length(GLOB.ipc_antennas_list))
-		init_sprite_accessory_subtypes(/datum/sprite_accessory/ipc_antennas, GLOB.ipc_antennas_list)
-	if(!length(GLOB.ipc_chassis_list))
-		init_sprite_accessory_subtypes(/datum/sprite_accessory/ipc_chassis, GLOB.ipc_chassis_list)
-	if(!length(GLOB.anime_top_list))
-		init_sprite_accessory_subtypes(/datum/sprite_accessory/anime_head, GLOB.anime_top_list)
-	if(!length(GLOB.anime_middle_list))
-		init_sprite_accessory_subtypes(/datum/sprite_accessory/anime_middle, GLOB.anime_middle_list)
-	if(!length(GLOB.anime_top_list))
-		init_sprite_accessory_subtypes(/datum/sprite_accessory/anime_bottom, GLOB.anime_bottom_list)
-	if(!length(GLOB.arachnid_appendages_list))
-		init_sprite_accessory_subtypes(/datum/sprite_accessory/arachnid_appendages, GLOB.arachnid_appendages_list)
-	if(!length(GLOB.arachnid_chelicerae_list))
-		init_sprite_accessory_subtypes(/datum/sprite_accessory/arachnid_chelicerae, GLOB.arachnid_chelicerae_list)
-	if(!length(GLOB.goblin_ears_list))
-		init_sprite_accessory_subtypes(/datum/sprite_accessory/goblin_ears, GLOB.goblin_ears_list)
-	if(!length(GLOB.goblin_nose_list))
-		init_sprite_accessory_subtypes(/datum/sprite_accessory/goblin_nose, GLOB.goblin_nose_list)
-	if(!length(GLOB.floran_leaves_list))
-		init_sprite_accessory_subtypes(/datum/sprite_accessory/floran_leaves, GLOB.floran_leaves_list)
-	if(!GLOB.satyr_fluff_list.len)
-		init_sprite_accessory_subtypes(/datum/sprite_accessory/satyr_fluff, GLOB.satyr_fluff_list)
-	if(!GLOB.satyr_tail_list.len)
-		init_sprite_accessory_subtypes(/datum/sprite_accessory/satyr_tail, GLOB.satyr_tail_list)
-	if(!GLOB.satyr_horns_list.len)
-		init_sprite_accessory_subtypes(/datum/sprite_accessory/satyr_horns, GLOB.satyr_horns_list)
-	if(!length(GLOB.arm_wings_list))
-		init_sprite_accessory_subtypes(/datum/sprite_accessory/arm_wings, GLOB.arm_wings_list)
-	if(!length(GLOB.arm_wingsopen_list))
-		init_sprite_accessory_subtypes(/datum/sprite_accessory/arm_wingsopen, GLOB.arm_wingsopen_list)
-	if(!length(GLOB.tails_list_avian))
-		init_sprite_accessory_subtypes(/datum/sprite_accessory/tails/avian, GLOB.tails_list_avian)
-	if(!length(GLOB.avian_ears_list))
-		init_sprite_accessory_subtypes(/datum/sprite_accessory/plumage, GLOB.avian_ears_list)
-//Monkestation Addition End
-
-	//For now we will always return none for tail_human and ears. | "For now" he says.
-	return(list(
-		"tail_cat" = "None",
-		"tail_lizard" = "Smooth",
-		"wings" = "None",
-		"snout" = pick(GLOB.snouts_list),
-		"horns" = pick(GLOB.horns_list),
-		"ears" = "None",
-		"frills" = pick(GLOB.frills_list),
-		"spines" = pick(GLOB.spines_list),
-		"body_markings" = pick(GLOB.body_markings_list),
-		"legs" = "Normal Legs",
-		"caps" = pick(GLOB.caps_list),
-		"moth_wings" = pick(GLOB.moth_wings_list),
-		"moth_antennae" = pick(GLOB.moth_antennae_list),
-		"moth_markings" = pick(GLOB.moth_markings_list),
-		"ethereal_horns" = pick(GLOB.ethereal_horns_list), //Monkestation Addition
-		"ethereal_tail" = pick(GLOB.ethereal_tail_list), //Monkestation Addition
-		"apid_antenna" = pick(GLOB.apid_antenna_list), //Monkestation Addition
-		"apid_wings" = pick(GLOB.apid_wings_list), //Monkestation Addition
-		"ipc_screen" = pick(GLOB.ipc_screens_list), //Monkestation Addition
-		"ipc_antenna" = pick(GLOB.ipc_antennas_list), //Monkestation Addition
-		"ipc_chassis" = pick(GLOB.ipc_chassis_list), //Monkestation Addition
-		"tail_monkey" = "Monkey", //Monkestation change: Default to monkey tail.
-		"pod_hair" = pick(GLOB.pod_hair_list),
-		"anime_top" = pick(GLOB.anime_top_list), //Monkestation Addition
-		"anime_middle" = pick(GLOB.anime_middle_list), //Monkestation Addition
-		"anime_bottom" = pick(GLOB.anime_bottom_list), //Monkestation Addition
-		"arachnid_appendages" = pick(GLOB.arachnid_appendages_list), //Monkestation Addition
-		"arachnid_chelicerae" = pick(GLOB.arachnid_chelicerae_list), //Monkestation Addition
-		"animecolor" = "#[pick("7F","FF")][pick("7F","FF")][pick("7F","FF")]", //Monkestation Addition
-		"goblin_ears" = pick(GLOB.goblin_ears_list), //Monkestation Addition
-		"goblin_nose" = pick(GLOB.goblin_nose_list), //Monkestation Addition
-		"floran_leaves" = pick(GLOB.floran_leaves_list), //Monkestation Addition
-		"satyr_fluff" = pick(GLOB.satyr_fluff_list), //Monkestation Addition
-		"satyr_tail" = pick(GLOB.satyr_tail_list), //Monkestation Addition
-		"satyr_horns" = pick(GLOB.satyr_horns_list), //Monkestation Addition
-		"arm_wings" = pick(GLOB.arm_wings_list),
-		"ears_avian" = pick(GLOB.avian_ears_list),
-		"tail_avian" = pick(GLOB.tails_list_avian),
-	))
-
 /proc/random_hairstyle(gender)
 	switch(gender)
 		if(MALE)
-			return pick(GLOB.hairstyles_male_list)
+			return pick(SSaccessories.hairstyles_male_list)
 		if(FEMALE)
-			return pick(GLOB.hairstyles_female_list)
+			return pick(SSaccessories.hairstyles_female_list)
 		else
-			return pick(GLOB.roundstart_hairstyles_list)
+			return pick(SSaccessories.hairstyles_list)
 
 /proc/random_facial_hairstyle(gender)
 	switch(gender)
 		if(MALE)
-			return pick(GLOB.facial_hairstyles_male_list)
+			return pick(SSaccessories.facial_hairstyles_male_list)
 		if(FEMALE)
-			return pick(GLOB.facial_hairstyles_female_list)
+			return pick(SSaccessories.facial_hairstyles_female_list)
 		else
-			return pick(GLOB.facial_hairstyles_list)
+			return pick(SSaccessories.facial_hairstyles_list)
 
 /proc/random_unique_name(gender, attempts_to_find_unique_name=10)
 	for(var/i in 1 to attempts_to_find_unique_name)

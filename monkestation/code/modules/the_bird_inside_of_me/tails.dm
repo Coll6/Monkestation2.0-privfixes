@@ -18,7 +18,7 @@
 	fallback_key = "feather_main"
 
 /datum/bodypart_overlay/mutant/tail/avian/get_global_feature_list()
-	return GLOB.tails_list_avian
+	//return GLOB.tails_list_avian
 
 /datum/sprite_accessory/tails/avian
 	icon = 'monkestation/code/modules/the_bird_inside_of_me/icons/ornithidfeatures.dmi'

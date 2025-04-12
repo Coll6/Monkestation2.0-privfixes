@@ -175,18 +175,18 @@
 	button_icon_state = "drone_vision"
 
 /datum/action/innate/change_screen/Activate()
-	var/screen_choice = tgui_input_list(usr, "Which screen do you want to use?", "Screen Change", GLOB.ipc_screens_list)
-	var/color_choice = tgui_color_picker(usr, "Which color do you want your screen to be", "Color Change")
-	if(!screen_choice)
-		return
-	if(!color_choice)
-		return
-	if(!ishuman(owner))
-		return
-	var/mob/living/carbon/human/H = owner
-	H.dna.features["ipc_screen"] = screen_choice
-	H.eye_color_left = sanitize_hexcolor(color_choice)
-	H.update_body()
+//	var/screen_choice = tgui_input_list(usr, "Which screen do you want to use?", "Screen Change", GLOB.ipc_screens_list)
+//	var/color_choice = tgui_color_picker(usr, "Which color do you want your screen to be", "Color Change")
+//	if(!screen_choice)
+//		return
+//	if(!color_choice)
+//		return
+//	if(!ishuman(owner))
+//		return
+//	var/mob/living/carbon/human/H = owner
+//	H.dna.features["ipc_screen"] = screen_choice
+//	H.eye_color_left = sanitize_hexcolor(color_choice)
+//	H.update_body()
 
 /datum/species/ipc/spec_revival(mob/living/carbon/human/H)
 	H.notify_ghost_cloning("You have been repaired!")
@@ -223,13 +223,13 @@
 	var/list/features = target.dna?.features
 	if(!features)
 		return
-	var/datum/sprite_accessory/ipc_chassis/chassis_of_choice = GLOB.ipc_chassis_list[features["ipc_chassis"]]
+	//var/datum/sprite_accessory/ipc_chassis/chassis_of_choice = GLOB.ipc_chassis_list[features["ipc_chassis"]]
 
-	if(!chassis_of_choice)
-		var/random_chassis = pick(GLOB.ipc_chassis_list)
-		chassis_of_choice = GLOB.ipc_chassis_list[random_chassis]
-		features["ipc_chassis"] = random_chassis
-
+	//if(!chassis_of_choice)
+	//	var/random_chassis = pick(GLOB.ipc_chassis_list)
+	//	chassis_of_choice = GLOB.ipc_chassis_list[random_chassis]
+	//	features["ipc_chassis"] = random_chassis
+/*
 	for(var/obj/item/bodypart/bodypart as anything in target.bodyparts) //Override bodypart data as necessary
 		if(QDELETED(bodypart))
 			return
@@ -238,6 +238,7 @@
 		bodypart.update_limb()
 		if(chassis_of_choice.palette_key == MUTANT_COLOR)
 			bodypart.should_draw_greyscale = TRUE
+*/
 
 /datum/species/ipc/proc/on_emag_act(mob/living/carbon/human/owner, mob/user)
 	SIGNAL_HANDLER

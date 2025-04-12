@@ -1,3 +1,4 @@
+/*
 /datum/preference/choiced/floran_leaves
 	savefile_key = "feature_floran_leaves"
 	savefile_identifier = PREFERENCE_CHARACTER
@@ -14,3 +15,4 @@
 
 /datum/preference/choiced/floran_leaves/apply_to_human(mob/living/carbon/human/target, value)
 	target.dna.features["floran_leaves"] = value
+*/

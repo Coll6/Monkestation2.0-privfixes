@@ -16,7 +16,7 @@
 	feature_key = "goblin_ears"
 
 /datum/bodypart_overlay/mutant/goblin_ears/get_global_feature_list()
-	return GLOB.goblin_ears_list
+	//return GLOB.goblin_ears_list
 
 /datum/bodypart_overlay/mutant/goblin_ears/get_base_icon_state()
 	return sprite_datum.icon_state
@@ -42,7 +42,7 @@
 	feature_key = "goblin_nose"
 
 /datum/bodypart_overlay/mutant/goblin_nose/get_global_feature_list()
-	return GLOB.goblin_nose_list
+	//return GLOB.goblin_nose_list
 
 /datum/bodypart_overlay/mutant/goblin_nose/get_base_icon_state()
 	return sprite_datum.icon_state

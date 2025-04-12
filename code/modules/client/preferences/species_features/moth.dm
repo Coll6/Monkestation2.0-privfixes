@@ -12,8 +12,8 @@
 	var/icon/moth_head = icon('icons/mob/species/moth/bodyparts.dmi', "moth_head")
 	moth_head.Blend(icon('icons/mob/species/human/human_face.dmi', "motheyes"), ICON_OVERLAY)
 
-	for (var/antennae_name in GLOB.moth_antennae_list)
-		var/datum/sprite_accessory/antennae = GLOB.moth_antennae_list[antennae_name]
+	for (var/antennae_name in SSaccessories.moth_antennae_list)
+		var/datum/sprite_accessory/antennae = SSaccessories.moth_antennae_list[antennae_name]
 		if(antennae.locked)
 			continue
 
@@ -57,8 +57,8 @@
 
 	moth_body.Blend(icon('icons/mob/species/human/human_face.dmi', "motheyes"), ICON_OVERLAY)
 
-	for (var/markings_name in GLOB.moth_markings_list)
-		var/datum/sprite_accessory/markings = GLOB.moth_markings_list[markings_name]
+	for (var/markings_name in SSaccessories.moth_markings_list)
+		var/datum/sprite_accessory/markings = SSaccessories.moth_markings_list[markings_name]
 		if(markings.locked)
 			continue
 		var/icon/icon_with_markings = new(moth_body)
@@ -93,7 +93,7 @@
 
 /datum/preference/choiced/moth_wings/init_possible_values()
 	return possible_values_for_sprite_accessory_list_for_body_part(
-		GLOB.moth_wings_list,
+		SSaccessories.moth_wings_list,
 		"moth_wings",
 		list("BEHIND", "FRONT"),
 	)

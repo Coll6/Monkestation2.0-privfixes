@@ -11,8 +11,8 @@
 
 	var/icon/pod_head = icon('icons/mob/species/human/bodyparts_greyscale.dmi', "pod_head_m")
 
-	for (var/pod_name in GLOB.pod_hair_list)
-		var/datum/sprite_accessory/pod_hair = GLOB.pod_hair_list[pod_name]
+	for (var/pod_name in SSaccessories.pod_hair_list)
+		var/datum/sprite_accessory/pod_hair = SSaccessories.pod_hair_list[pod_name]
 		if(pod_hair.locked)
 			continue
 
@@ -30,7 +30,7 @@
 	return values
 
 /datum/preference/choiced/pod_hair/create_default_value()
-	return pick(assoc_to_keys_features(GLOB.pod_hair_list))
+	return pick(assoc_to_keys_features(SSaccessories.pod_hair_list))
 
 /datum/preference/choiced/pod_hair/apply_to_human(mob/living/carbon/human/target, value)
 	target.dna.features["pod_hair"] = value

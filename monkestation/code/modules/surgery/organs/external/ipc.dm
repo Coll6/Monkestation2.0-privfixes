@@ -21,7 +21,7 @@
 	color_source = ORGAN_COLOR_MUTSECONDARY
 
 /datum/bodypart_overlay/mutant/antennae/ipc/get_global_feature_list()
-	return GLOB.ipc_antennas_list
+	//return GLOB.ipc_antennas_list
 
 /datum/bodypart_overlay/mutant/antennae/ipc/get_base_icon_state()
 	return sprite_datum.icon_state

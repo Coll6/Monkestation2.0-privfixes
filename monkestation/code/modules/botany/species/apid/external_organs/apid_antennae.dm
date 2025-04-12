@@ -18,7 +18,7 @@
 	feature_key = "apid_antenna"
 
 /datum/bodypart_overlay/mutant/antennae_apid/get_global_feature_list()
-	return GLOB.apid_antenna_list
+	//return GLOB.apid_antenna_list
 
 /datum/bodypart_overlay/mutant/antennae_apid/get_base_icon_state()
 	return sprite_datum.icon_state

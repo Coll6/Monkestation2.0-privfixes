@@ -1,4 +1,4 @@
-
+/*
 /datum/preference/color/anime_color
 	savefile_key = "feature_animecolor"
 	savefile_identifier = PREFERENCE_CHARACTER
@@ -187,3 +187,4 @@
 		if(item == "Anime")
 			return TRUE
 	return FALSE
+*/

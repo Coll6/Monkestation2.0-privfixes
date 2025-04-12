@@ -383,7 +383,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	// SAFETY: `load_character` performs sanitization on the slot number
 	if (!load_character(new_slot))
 		tainted_character_profiles = TRUE
-		randomise_appearance_prefs()
+		//randomise_appearance_prefs()
 		save_character()
 
 	for (var/datum/preference_middleware/preference_middleware as anything in middleware)

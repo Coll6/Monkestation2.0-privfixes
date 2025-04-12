@@ -132,7 +132,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 			loaded = TRUE
 			return
 	//we couldn't load character data so just randomize the character appearance + name
-	randomise_appearance_prefs() //let's create a random character then - rather than a fat, bald and naked man.
+	//randomise_appearance_prefs() //let's create a random character then - rather than a fat, bald and naked man.
 	if(parent)
 		apply_all_client_preferences()
 		parent.set_macros()
@@ -387,7 +387,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 		create_body()
 	else
 		body.wipe_state()
-	appearance = preferences.render_new_preview_appearance(body)
+	//appearance = preferences.render_new_preview_appearance(body)
 
 /atom/movable/screen/map_view/char_preview/proc/create_body()
 	QDEL_NULL(body)
@@ -465,7 +465,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 /// Sanitizes the preferences, applies the randomization prefs, and then applies the preference to the human mob.
 /datum/preferences/proc/safe_transfer_prefs_to(mob/living/carbon/human/character, icon_updates = TRUE, is_antag = FALSE)
-	apply_character_randomization_prefs(is_antag)
+	//apply_character_randomization_prefs(is_antag)
 	apply_prefs_to(character, icon_updates)
 
 /// Applies the given preferences to a human mob.

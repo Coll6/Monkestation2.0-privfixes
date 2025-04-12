@@ -29,7 +29,7 @@
 	color_source = ORGAN_COLOR_HAIR
 
 /datum/bodypart_overlay/mutant/satyr_fluff/get_global_feature_list()
-	return GLOB.satyr_fluff_list
+	//return GLOB.satyr_fluff_list
 
 /datum/bodypart_overlay/mutant/satyr_fluff/get_base_icon_state()
 	return sprite_datum.icon_state
@@ -54,7 +54,7 @@
 	feature_key = "satyr_horns"
 
 /datum/bodypart_overlay/mutant/satyr_horns/get_global_feature_list()
-	return GLOB.satyr_horns_list
+	//return GLOB.satyr_horns_list
 
 /datum/bodypart_overlay/mutant/satyr_horns/get_base_icon_state()
 	return sprite_datum.icon_state

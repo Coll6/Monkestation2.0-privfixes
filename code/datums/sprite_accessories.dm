@@ -16,39 +16,6 @@
 	from doing this unless you absolutely know what you are doing, and have defined a
 	conversion in savefile.dm
 */
-/proc/init_sprite_accessory_subtypes(prototype, list/L, list/male, list/female, add_blank, roundstart = FALSE)//Roundstart argument builds a specific list for roundstart parts where some parts may be locked
-	if(!istype(L))
-		L = list()
-	if(!istype(male))
-		male = list()
-	if(!istype(female))
-		female = list()
-
-	for(var/path in subtypesof(prototype))
-		if(roundstart)
-			var/datum/sprite_accessory/P = path
-			if(initial(P.locked))
-				continue
-
-		var/datum/sprite_accessory/D = new path()
-
-		if(D.icon_state)
-			L[D.name] = D
-		else
-			L += D.name
-
-		switch(D.gender)
-			if(MALE)
-				male += D.name
-			if(FEMALE)
-				female += D.name
-			else
-				male += D.name
-				female += D.name
-	if(add_blank)
-		L[SPRITE_ACCESSORY_NONE] = new /datum/sprite_accessory/blank
-
-	return L
 
 /datum/sprite_accessory
 	/// The icon file the accessory is located in.

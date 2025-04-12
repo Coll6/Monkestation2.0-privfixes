@@ -51,14 +51,14 @@
 	should_generate_icons = TRUE
 
 /datum/preference/choiced/ornithid_wings/init_possible_values()
-	return assoc_to_keys_features(GLOB.arm_wings_list)
+	//return assoc_to_keys_features(GLOB.arm_wings_list)
 
 /datum/preference/choiced/ornithid_wings/init_possible_values()
-	return possible_values_for_sprite_accessory_list_for_body_part(
-		GLOB.arm_wings_list,
-		"arm_wings",
-		list("FRONT"),
-	)
+	//return possible_values_for_sprite_accessory_list_for_body_part(
+	//	GLOB.arm_wings_list,
+	//	"arm_wings",
+	//	list("FRONT"),
+	//)
 
 /datum/preference/choiced/ornithid_wings/apply_to_human(mob/living/carbon/human/target, value)
 	target.dna.features["arm_wings"] = value
@@ -124,11 +124,11 @@
 	return data
 
 /datum/preference/choiced/tail_avian/init_possible_values()
-	return possible_values_for_sprite_accessory_list_for_body_part(
-		GLOB.tails_list_avian,
-		"tail_avian",
-		list("FRONT", "BEHIND"),
-		)
+	//return possible_values_for_sprite_accessory_list_for_body_part(
+	//	GLOB.tails_list_avian,
+	//	"tail_avian",
+	//	list("FRONT", "BEHIND"),
+	//	)
 
 /datum/preference/choiced/tail_avian/apply_to_human(mob/living/carbon/human/target, value)
 	target.dna.features["tail_avian"] = value
@@ -149,11 +149,11 @@
 	should_generate_icons = TRUE
 
 /datum/preference/choiced/plumage/init_possible_values()
-	return possible_values_for_sprite_accessory_list_for_body_part(
-		GLOB.avian_ears_list,
-		"ears_avian",
-		list("FRONT"),
-	)
+	//return possible_values_for_sprite_accessory_list_for_body_part(
+	//	GLOB.avian_ears_list,
+	//	"ears_avian",
+	//	list("FRONT"),
+	//)
 
 /datum/preference/choiced/plumage/apply_to_human(mob/living/carbon/human/target, value)
 	target.dna.features["ears_avian"] = value

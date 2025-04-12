@@ -1,3 +1,4 @@
+/*
 /datum/preference/choiced/ipc_antenna
 	savefile_key = "feature_ipc_antenna"
 	savefile_identifier = PREFERENCE_CHARACTER
@@ -26,7 +27,6 @@
 
 /datum/preference/choiced/ipc_antenna/apply_to_human(mob/living/carbon/human/target, value)
 	target.dna.features["ipc_antenna"] = value
-
 
 /datum/preference/choiced/ipc_chassis
 	savefile_key = "feature_ipc_chassis"
@@ -99,7 +99,7 @@
 /datum/preference/choiced/ipc_screen/apply_to_human(mob/living/carbon/human/target, value)
 	target.dna.features["ipc_screen"] = value
 
-
+*/
 /datum/preference/choiced/ipc_brain
 	savefile_key = "ipc_brain"
 	savefile_identifier = PREFERENCE_CHARACTER

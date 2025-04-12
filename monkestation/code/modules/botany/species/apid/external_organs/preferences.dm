@@ -6,11 +6,11 @@
 	should_generate_icons = TRUE
 
 /datum/preference/choiced/apid_wings/init_possible_values()
-	return possible_values_for_sprite_accessory_list_for_body_part(
-		GLOB.apid_wings_list,
-		"apid_wings",
-		list("BEHIND", "FRONT"),
-	)
+	//return possible_values_for_sprite_accessory_list_for_body_part(
+	//	GLOB.apid_wings_list,
+	//	"apid_wings",
+	//	list("BEHIND", "FRONT"),
+	//)
 
 /datum/preference/choiced/apid_wings/apply_to_human(mob/living/carbon/human/target, value)
 	target.dna.features["apid_wings"] = value
@@ -23,6 +23,7 @@
 	should_generate_icons = TRUE
 
 /datum/preference/choiced/apid_antenna/init_possible_values()
+/*
 	var/list/values = list()
 
 	var/icon/moth_head = icon('icons/mob/species/moth/bodyparts.dmi', "moth_head")
@@ -41,6 +42,7 @@
 		values[antennae.name] = icon_with_antennae
 
 	return values
+*/
 
 /datum/preference/choiced/apid_antenna/apply_to_human(mob/living/carbon/human/target, value)
 	target.dna.features["apid_antenna"] = value

@@ -71,7 +71,7 @@
 			var/mob/living/carbon/human/user = loc
 			var/obj/item/bodypart/head/head = user.get_bodypart(BODY_ZONE_HEAD)
 			if(head.head_flags & HEAD_HAIR)
-				var/datum/sprite_accessory/hair/hair_style = GLOB.hairstyles_list[user.hairstyle]
+				var/datum/sprite_accessory/hair/hair_style = SSaccessories.hairstyles_list[user.hairstyle]
 				if(hair_style?.vertical_offset)
 					standing.pixel_y = hair_style.vertical_offset
 

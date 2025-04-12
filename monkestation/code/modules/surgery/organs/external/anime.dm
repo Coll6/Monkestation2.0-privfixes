@@ -16,7 +16,7 @@
 	feature_key = "anime_top"
 
 /datum/bodypart_overlay/mutant/anime_head/get_global_feature_list()
-	return GLOB.anime_top_list
+	//return GLOB.anime_top_list
 
 /datum/bodypart_overlay/mutant/anime_head/get_base_icon_state()
 	return sprite_datum.icon_state
@@ -39,7 +39,7 @@
 	feature_key = "anime_middle"
 
 /datum/bodypart_overlay/mutant/anime_middle/get_global_feature_list()
-	return GLOB.anime_middle_list
+	//return GLOB.anime_middle_list
 
 /datum/bodypart_overlay/mutant/anime_middle/get_base_icon_state()
 	return sprite_datum.icon_state
@@ -62,7 +62,7 @@
 	feature_key = "anime_bottom"
 
 /datum/bodypart_overlay/mutant/anime_bottom/get_global_feature_list()
-	return GLOB.anime_bottom_list
+	//return GLOB.anime_bottom_list
 
 /datum/bodypart_overlay/mutant/anime_bottom/get_base_icon_state()
 	return sprite_datum.icon_state

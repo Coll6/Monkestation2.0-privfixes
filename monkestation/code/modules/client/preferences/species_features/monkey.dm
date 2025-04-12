@@ -20,8 +20,8 @@
 
 	var/icon/monkey_chest = icon('monkestation/icons/mob/species/monkey/bodyparts.dmi', "monkey_chest")
 
-	for (var/tail_name in GLOB.tails_list_monkey)
-		var/datum/sprite_accessory/tails/monkey/tail = GLOB.tails_list_monkey[tail_name]
+	for (var/tail_name in SSaccessories.tails_list_monkey)
+		var/datum/sprite_accessory/tails/monkey/tail = SSaccessories.tails_list_monkey[tail_name]
 		if(tail.locked)
 			continue
 

@@ -70,7 +70,7 @@
 		lip_overlay.color = lip_color
 
 	if(!facial_hair_hidden && facial_hairstyle && (head_flags & HEAD_FACIAL_HAIR))
-		sprite_accessory = GLOB.facial_hairstyles_list[facial_hairstyle]
+		sprite_accessory = SSaccessories.facial_hairstyles_list[facial_hairstyle]
 		if(sprite_accessory)
 			//Overlay
 			facial_overlay = mutable_appearance(sprite_accessory.icon, sprite_accessory.icon_state, -HAIR_LAYER)
@@ -79,12 +79,12 @@
 			facial_hair_gradient_style = LAZYACCESS(human_head_owner.grad_style, GRADIENT_FACIAL_HAIR_KEY)
 			if(facial_hair_gradient_style)
 				facial_hair_gradient_color = LAZYACCESS(human_head_owner.grad_color, GRADIENT_FACIAL_HAIR_KEY)
-				facial_gradient_overlay = make_gradient_overlay(sprite_accessory.icon, sprite_accessory.icon_state, HAIR_LAYER, GLOB.facial_hair_gradients_list[facial_hair_gradient_style], facial_hair_gradient_color)
+				facial_gradient_overlay = make_gradient_overlay(sprite_accessory.icon, sprite_accessory.icon_state, HAIR_LAYER, SSaccessories.facial_hair_gradients_list[facial_hair_gradient_style], facial_hair_gradient_color)
 			//Emissive
 			facial_overlay.overlays += emissive_blocker(facial_overlay.icon, facial_overlay.icon_state, location, alpha = facial_hair_alpha)
 
 	if(!show_debrained && !hair_hidden && hair_style && (head_flags & HEAD_HAIR))
-		sprite_accessory = GLOB.hairstyles_list[hair_style]
+		sprite_accessory = SSaccessories.hairstyles_list[hair_style]
 		if(sprite_accessory)
 			//Overlay
 			hair_overlay = mutable_appearance(sprite_accessory.icon, sprite_accessory.icon_state, -HAIR_LAYER)
@@ -93,7 +93,7 @@
 			hair_gradient_style = LAZYACCESS(human_head_owner.grad_style, GRADIENT_HAIR_KEY)
 			if(hair_gradient_style)
 				hair_gradient_color = LAZYACCESS(human_head_owner.grad_color, GRADIENT_HAIR_KEY)
-				hair_gradient_overlay = make_gradient_overlay(sprite_accessory.icon, sprite_accessory.icon_state, HAIR_LAYER, GLOB.hair_gradients_list[hair_gradient_style], hair_gradient_color)
+				hair_gradient_overlay = make_gradient_overlay(sprite_accessory.icon, sprite_accessory.icon_state, HAIR_LAYER, SSaccessories.hair_gradients_list[hair_gradient_style], hair_gradient_color)
 			//Emissive
 			hair_overlay.overlays += emissive_blocker(hair_overlay.icon, hair_overlay.icon_state, location, alpha = hair_alpha)
 

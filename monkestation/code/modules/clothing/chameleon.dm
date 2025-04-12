@@ -4,6 +4,7 @@
 	///storage for the original hairstyle string
 	var/actual_hairstyle
 
+/*
 /obj/item/clothing/head/chameleon/attack_self(mob/user)
 	var/hair_id = tgui_input_list(user, "How should your hair look while its disguised?", "Pick!", GLOB.hairstyles_list)
 	if(!hair_id || hair_id == "Bald")
@@ -25,6 +26,7 @@
 	actual_hairstyle = user.hairstyle
 	user.hairstyle = picked_hairstyle
 	user.update_body_parts()
+*/
 
 /obj/item/clothing/head/chameleon/dropped(mob/living/carbon/human/user)
 	. = ..()
