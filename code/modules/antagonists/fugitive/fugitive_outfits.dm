@@ -43,8 +43,8 @@
 	equipped_on.hairstyle = "Business Hair 3"
 	equipped_on.facial_hairstyle = "Shaved"
 	equipped_on.hair_color = "#000000"
-	equipped_on.facial_hair_color = equipped_on.hair_color
-	equipped_on.update_body()
+	equipped_on.facial_hair_color = "#000000"
+	equipped_on.update_body(is_creating = TRUE)
 
 	var/list/no_drops = list()
 	no_drops += equipped_on.get_item_by_slot(ITEM_SLOT_FEET)

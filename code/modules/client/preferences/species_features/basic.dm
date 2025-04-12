@@ -67,7 +67,7 @@
 //return generate_icon_with_head_accessory(SSaccessories.facial_hairstyles_list[value])
 
 /datum/preference/choiced/facial_hairstyle/apply_to_human(mob/living/carbon/human/target, value)
-	target.set_facial_hairstyle(value, update = FALSE)
+	target.set_facial_hairstyle(value, update = TRUE)
 
 /datum/preference/choiced/facial_hairstyle/compile_constant_data()
 	var/list/data = ..()
@@ -83,7 +83,7 @@
 	relevant_head_flag = HEAD_FACIAL_HAIR
 
 /datum/preference/color/facial_hair_color/apply_to_human(mob/living/carbon/human/target, value)
-	target.set_facial_haircolor(value, update = FALSE)
+	target.set_facial_haircolor(value, update = TRUE)
 
 /datum/preference/choiced/facial_hair_gradient
 	category = PREFERENCE_CATEGORY_FEATURES
@@ -97,7 +97,7 @@
 	return assoc_to_keys_features(SSaccessories.facial_hair_gradients_list)
 
 /datum/preference/choiced/facial_hair_gradient/apply_to_human(mob/living/carbon/human/target, value)
-	target.set_facial_hair_gradient_style(new_style = value, update = FALSE)
+	target.set_facial_hair_gradient_style(value, update = TRUE)
 
 /datum/preference/choiced/facial_hair_gradient/create_default_value()
 	return "None"
@@ -109,7 +109,7 @@
 	relevant_head_flag = HEAD_FACIAL_HAIR
 
 /datum/preference/color/facial_hair_gradient/apply_to_human(mob/living/carbon/human/target, value)
-	target.set_facial_hair_gradient_color(new_color = value, update = FALSE)
+	target.set_facial_hair_gradient_color(value, update = TRUE)
 
 /datum/preference/color/facial_hair_gradient/is_accessible(datum/preferences/preferences)
 	if (!..(preferences))
@@ -123,7 +123,7 @@
 	relevant_head_flag = HEAD_HAIR
 
 /datum/preference/color/hair_color/apply_to_human(mob/living/carbon/human/target, value)
-	target.set_haircolor(value, update = FALSE)
+	target.set_haircolor(value, update = TRUE)
 
 /datum/preference/choiced/hairstyle
 	savefile_key = "hairstyle_name"
@@ -137,7 +137,7 @@
 	return assoc_to_keys_features(SSaccessories.hairstyles_list)
 
 /datum/preference/choiced/hairstyle/apply_to_human(mob/living/carbon/human/target, value)
-	target.set_hairstyle(value, update = FALSE)
+	target.set_hairstyle(value, update = TRUE)
 
 /datum/preference/choiced/hairstyle/compile_constant_data()
 	var/list/data = ..()
@@ -158,7 +158,7 @@
 	return assoc_to_keys_features(SSaccessories.hair_gradients_list)
 
 /datum/preference/choiced/hair_gradient/apply_to_human(mob/living/carbon/human/target, value)
-	target.set_hair_gradient_style(new_style = value, update = FALSE)
+	target.set_hair_gradient_style(value, update = TRUE)
 
 /datum/preference/choiced/hair_gradient/create_default_value()
 	return "None"
@@ -170,7 +170,7 @@
 	relevant_head_flag = HEAD_HAIR
 
 /datum/preference/color/hair_gradient/apply_to_human(mob/living/carbon/human/target, value)
-	target.set_hair_gradient_color(new_color = value, update = FALSE)
+	target.set_hair_gradient_color(value, TRUE)
 
 /datum/preference/color/hair_gradient/is_accessible(datum/preferences/preferences)
 	if (!..(preferences))

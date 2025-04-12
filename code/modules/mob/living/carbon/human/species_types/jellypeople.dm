@@ -3,6 +3,7 @@
 	name = "\improper Jellyperson"
 	plural_form = "Jellypeople"
 	id = SPECIES_JELLYPERSON
+	examine_limb_id = SPECIES_JELLYPERSON
 	inherent_traits = list(
 		TRAIT_MUTANT_COLORS,
 	)

@@ -43,8 +43,8 @@
 	return ..()
 
 /datum/species/werewolf/prepare_human_for_preview(mob/living/carbon/human/human)
-	human.hair_color = "#bb9966" // brown
-	human.hairstyle = "Business Hair"
+	human.set_haircolor("#bb9966", update = FALSE) // brown
+	human.set_hairstyle("Business Hair", update = TRUE)
 
 /datum/species/werewolf/get_species_description()
 	return "N/A"
