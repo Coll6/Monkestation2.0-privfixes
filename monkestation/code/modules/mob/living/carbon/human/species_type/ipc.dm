@@ -106,9 +106,9 @@
 	if(L)
 		L.Remove(C)
 		QDEL_NULL(L)
-	if(ishuman(C) && !change_screen)
-		change_screen = new
-		change_screen.Grant(C)
+	//if(ishuman(C) && !change_screen)
+	//	change_screen = new
+	//	change_screen.Grant(C)
 
 	RegisterSignal(C, COMSIG_ATOM_EMAG_ACT, PROC_REF(on_emag_act))
 	RegisterSignal(C, COMSIG_LIVING_DEATH, PROC_REF(bsod_death)) // screen displays bsod on death, if they have one
@@ -155,7 +155,7 @@
  * * screen_name - The name of the screen to switch the ipc_screen mutant bodypart to. Defaults to BSOD.
  */
 /datum/species/ipc/proc/bsod_death(mob/living/carbon/human/transformer, screen_name = "BSOD")
-	saved_screen = change_screen // remember the old screen in case of revival
+	//saved_screen = change_screen // remember the old screen in case of revival
 	switch_to_screen(transformer, screen_name)
 	addtimer(CALLBACK(src, PROC_REF(switch_to_screen), transformer, "Blank"), 5 SECONDS)
 
@@ -163,11 +163,11 @@
 /datum/species/ipc/on_species_loss(mob/living/carbon/target)
 	. = ..()
 	UnregisterSignal(target, list(COMSIG_ATOM_EMAG_ACT, COMSIG_LIVING_DEATH))
-	change_screen?.Remove(target)
+	//change_screen?.Remove(target)
 
 /datum/species/ipc/proc/handle_speech(datum/source, list/speech_args)
 	speech_args[SPEECH_SPANS] |= SPAN_ROBOT //beep
-
+/*
 /datum/action/innate/change_screen
 	name = "Change Display"
 	check_flags = AB_CHECK_CONSCIOUS
@@ -187,7 +187,7 @@
 	H.dna.features["ipc_screen"] = screen_choice
 	H.eye_color_left = sanitize_hexcolor(color_choice)
 	H.update_body()
-
+*/
 /datum/species/ipc/spec_revival(mob/living/carbon/human/H)
 	H.notify_ghost_cloning("You have been repaired!")
 	H.grab_ghost()
@@ -210,13 +210,13 @@
 	switch_to_screen(H, "Console")
 	addtimer(CALLBACK(src, PROC_REF(switch_to_screen), H, saved_screen), 5 SECONDS)
 	playsound(H.loc, 'sound/machines/chime.ogg', 50, TRUE)
-	H.visible_message(span_notice("[H]'s [change_screen ? "monitor lights up" : "eyes flicker to life"]!"), span_notice("All systems nominal. You're back online!"))
+	//H.visible_message(span_notice("[H]'s [change_screen ? "monitor lights up" : "eyes flicker to life"]!"), span_notice("All systems nominal. You're back online!"))
 	return
 
 /datum/species/ipc/replace_body(mob/living/carbon/target, datum/species/new_species)
 	. = ..()
-	update_chassis(target)
-
+	//update_chassis(target)
+/*
 /datum/species/ipc/proc/update_chassis(mob/living/carbon/target)
 	if(!iscarbon(target) || QDELING(target))
 		return
@@ -238,7 +238,7 @@
 		bodypart.update_limb()
 		if(chassis_of_choice.palette_key == MUTANT_COLOR)
 			bodypart.should_draw_greyscale = TRUE
-
+*/
 /datum/species/ipc/proc/on_emag_act(mob/living/carbon/human/owner, mob/user)
 	SIGNAL_HANDLER
 	if(owner == user)
@@ -294,8 +294,8 @@
  * * screen_name - The name of the screen to switch the ipc_screen mutant bodypart to.
  */
 /datum/species/ipc/proc/switch_to_screen(mob/living/carbon/human/transformer, screen_name)
-	if(!change_screen)
-		return
+	//if(!change_screen)
+	//	return
 
 	transformer.dna.features["ipc_screen"] = screen_name
 	transformer.update_body()

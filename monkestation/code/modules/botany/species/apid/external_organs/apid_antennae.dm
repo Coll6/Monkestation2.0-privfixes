@@ -1,3 +1,4 @@
+/*
 /obj/item/organ/external/antennae_apid
 	name = "apid antennae"
 	desc = "A apids antennae. What is it telling them? What are they sensing?"
@@ -119,3 +120,4 @@
 /datum/sprite_accessory/apid_antenna/split
 	name = "Split"
 	icon_state = "split"
+*/

@@ -1,3 +1,4 @@
+/*
 /datum/preference/choiced/arachnid_appendages
 	savefile_key = "feature_arachnid_appendages"
 	savefile_identifier = PREFERENCE_CHARACTER
@@ -31,3 +32,4 @@
 
 /datum/preference/choiced/arachnid_chelicerae/apply_to_human(mob/living/carbon/human/target, value)
 	target.dna.features["arachnid_chelicerae"] = value
+*/

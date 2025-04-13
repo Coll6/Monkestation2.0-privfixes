@@ -1,3 +1,4 @@
+/*
 //Satyr Fluff
 /datum/preference/choiced/satyr_fluff
 	savefile_key = "feature_satyr_fluff"
@@ -51,3 +52,4 @@
 
 /datum/preference/choiced/satyr_horns/apply_to_human(mob/living/carbon/human/target, value)
 	target.dna.features["satyr_horns"] = value
+*/

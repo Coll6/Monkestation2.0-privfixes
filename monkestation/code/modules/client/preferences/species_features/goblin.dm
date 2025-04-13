@@ -1,3 +1,4 @@
+/*
 /datum/preference/choiced/goblin_ears
 	savefile_key = "feature_goblin_ears"
 	savefile_identifier = PREFERENCE_CHARACTER
@@ -31,3 +32,4 @@
 
 /datum/preference/choiced/goblin_nose/apply_to_human(mob/living/carbon/human/target, value)
 	target.dna.features["goblin_nose"] = value
+*/

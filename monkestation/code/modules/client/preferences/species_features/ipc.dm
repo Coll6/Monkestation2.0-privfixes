@@ -1,3 +1,4 @@
+/*
 /datum/preference/choiced/ipc_antenna
 	savefile_key = "feature_ipc_antenna"
 	savefile_identifier = PREFERENCE_CHARACTER
@@ -126,3 +127,4 @@
 
 /datum/preference/choiced/ipc_brain/is_accessible(datum/preferences/preferences)
 	return ..() && preferences.read_preference(/datum/preference/choiced/species) == /datum/species/ipc
+*/

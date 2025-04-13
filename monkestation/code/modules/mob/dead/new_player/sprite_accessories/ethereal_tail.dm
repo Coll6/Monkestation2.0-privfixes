@@ -1,3 +1,4 @@
+/*
 /datum/sprite_accessory/tails/ethereal
 	icon = 'monkestation/icons/mob/species/ethereal/ethereal_tail.dmi'
 	palette = /datum/color_palette/generic_colors
@@ -18,3 +19,4 @@
 /datum/sprite_accessory/tails/ethereal/stubby
 	name = "Stubby"
 	icon_state = "stubby"
+*/

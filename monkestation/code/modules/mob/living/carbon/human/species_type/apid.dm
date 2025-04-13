@@ -34,12 +34,12 @@
 
 	changesource_flags = MIRROR_BADMIN | WABBAJACK | MIRROR_MAGIC | MIRROR_PRIDE | ERT_SPAWN | RACE_SWAP | SLIME_EXTRACT
 	species_language_holder = /datum/language_holder/apid
-
+/*
 	external_organs = list(
 		/obj/item/organ/external/wings/apid = "Normal",
 		/obj/item/organ/external/antennae_apid = "Moth",
 	)
-
+*/
 	mutanteyes = /obj/item/organ/internal/eyes/apid
 	mutanttongue =  /obj/item/organ/internal/tongue/apid
 

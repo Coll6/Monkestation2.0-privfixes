@@ -1,3 +1,4 @@
+/*
 /datum/sprite_accessory/ipc_screens
 	icon = 'monkestation/icons/mob/species/ipc/ipc_screens.dmi'
 	color_src = EYE_COLOR // We pull from the eye color for RGB-enabled screens, but some aren't, so they get FALSE.
@@ -173,3 +174,4 @@
 /datum/sprite_accessory/ipc_screens/badapple
 	name = "Old Animation"
 	icon_state = "bad_apple"
+*/

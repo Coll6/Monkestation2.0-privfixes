@@ -1,4 +1,5 @@
 // begin armwings code
+/*
 /obj/item/organ/external/wings/functional/arm_wings
 	name = "Arm Wings"
 	desc = "They're wings, that go on your arm. Get your chicken wings jokes out now."
@@ -104,3 +105,4 @@
 	if(!(human.wear_suit?.flags_inv & HIDEMUTWINGS))
 		return TRUE
 	return FALSE
+*/

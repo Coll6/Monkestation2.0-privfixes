@@ -1,3 +1,4 @@
+/*
 // ear code here
 /obj/item/organ/internal/ears/avian
 	name = "avian ears"
@@ -44,3 +45,4 @@
 /* /datum/sprite_accessory/plumage/kresnik // similar to tails (originally!), this is commented out for the time being.
 	name = "Kresnik"
 	icon_state = "kresnik" */
+*/

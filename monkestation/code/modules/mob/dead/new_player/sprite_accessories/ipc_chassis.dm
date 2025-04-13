@@ -1,3 +1,4 @@
+/*
 /datum/sprite_accessory/ipc_chassis // Used for changing limb icons, doesn't need to hold the actual icon. That's handled in ipc.dm
 	icon = null
 	icon_state = "blegh" // In order to pull the chassis correctly, we need AN icon_state. It doesn't have to be useful, because it isn't used.
@@ -59,3 +60,4 @@
 /datum/sprite_accessory/ipc_chassis/star_industrial
 	name = "Star Industrial"
 	icon_state = "staripc"
+*/

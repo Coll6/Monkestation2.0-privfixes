@@ -1,4 +1,5 @@
 ///ANIME ACCESSORIES GO HERE
+/*
 /datum/sprite_accessory/anime_head
 	icon = 'monkestation/icons/mob/anime/anime_head.dmi'
 	color_src = ANIME_COLOR
@@ -181,3 +182,4 @@
 	name = "Plug"
 	icon_state = "plug"
 	hasinner = TRUE
+*/

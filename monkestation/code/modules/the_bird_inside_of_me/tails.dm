@@ -1,5 +1,5 @@
 
-
+/*
 /obj/item/organ/external/tail/avian
 	name = "avian tail"
 	desc = "This tail belongs to an ornithid. Used to."
@@ -30,5 +30,5 @@
 /datum/sprite_accessory/tails/avian/swallow
 	name = "Swallow"
 	icon_state = "swallow"
-
+*/
 // continue additional tails from here

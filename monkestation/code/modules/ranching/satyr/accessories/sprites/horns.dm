@@ -1,3 +1,4 @@
+/*
 /datum/sprite_accessory/satyr_horns
 	icon = 'monkestation/code/modules/ranching/icons/satyr_horns.dmi'
 	color_src = null
@@ -41,3 +42,4 @@
 /datum/sprite_accessory/satyr_horns/bull
 	name = "Bull Horns"
 	icon_state = "crippledbull"
+*/

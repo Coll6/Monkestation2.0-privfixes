@@ -1,4 +1,5 @@
 ///Moth wings! They can flutter in low-grav and burn off in heat
+/*
 /obj/item/organ/external/wings/apid
 	name = "apid wings"
 	desc = "Spread your wings and FLOOOOAAAAAT!"
@@ -59,3 +60,4 @@
 	name = "Normal"
 	icon_state = "normal"
 
+*/

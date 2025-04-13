@@ -5,7 +5,7 @@
 	reagents_list = list(/datum/reagent/medicine/c2/synthflesh = 10)
 	build_path = /obj/item/organ/internal/spleen
 	category = list(SPECIES_HUMAN, RND_CATEGORY_INITIAL)
-
+/*
 /// Apid Organs
 /datum/design/apid_eyes
 	name = "Apid Eyes"
@@ -235,3 +235,4 @@
 	desc = "Contains designs for organs for the limbgrower of all around the rim - Satyr Fluff, Floran Leaves, Apid Wings, Ornithid Tongues"
 	id = "limbdesign_other"
 	build_path = /obj/item/disk/design_disk/limbs/other
+*/

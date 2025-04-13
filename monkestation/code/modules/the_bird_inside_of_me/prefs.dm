@@ -24,6 +24,7 @@
 
 	return base_icon
 
+/*
 /proc/generate_ornithid_side_shots(list/sprite_accessories, key, list/sides)
 	var/list/values = list()
 
@@ -160,3 +161,4 @@
 
 /datum/preference/choiced/plumage/create_default_value()
 	return /datum/sprite_accessory/plumage::name
+*/

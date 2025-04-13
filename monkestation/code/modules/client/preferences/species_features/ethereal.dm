@@ -1,3 +1,4 @@
+/*
 /datum/preference/choiced/ethereal_horns
 	savefile_key = "feature_ethereal_horns"
 	savefile_identifier = PREFERENCE_CHARACTER
@@ -31,3 +32,4 @@
 
 /datum/preference/choiced/ethereal_tail/apply_to_human(mob/living/carbon/human/target, value)
 	target.dna.features["ethereal_tail"] = value
+*/

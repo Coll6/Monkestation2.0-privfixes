@@ -1,3 +1,4 @@
+/*
 /datum/sprite_accessory/floran_leaves
 	icon = 'monkestation/icons/mob/species/floran/floran_leaves.dmi'
 	palette = /datum/color_palette/generic_colors
@@ -24,3 +25,4 @@
 /datum/sprite_accessory/floran_leaves/survivalist
 	name = "Survivalist"
 	icon_state = "survivalist"
+*/
