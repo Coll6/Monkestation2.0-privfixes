@@ -141,8 +141,9 @@
 /datum/preference/choiced/hairstyle/init_possible_values()
 	return assoc_to_keys_features(SSaccessories.hairstyles_list)
 
-/datum/preference/choiced/hairstyle/apply_to_human(mob/living/carbon/human/target, value)
-	target.set_hairstyle(value, update = FALSE)
+/datum/preference/choiced/hairstyle/icon_for(value)
+	var/datum/sprite_accessory/hair/hairstyle = SSaccessories.hairstyles_list[value]
+	return generate_icon_with_head_accessory(hairstyle)
 
 /datum/preference/choiced/hairstyle/compile_constant_data()
 	var/list/data = ..()

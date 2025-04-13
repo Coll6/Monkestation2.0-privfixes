@@ -38,7 +38,6 @@
 /datum/sprite_accessory/arm_wings
 	icon = 'monkestation/code/modules/the_bird_inside_of_me/icons/armwings.dmi'
 
-
 /datum/sprite_accessory/arm_wingsopen
 	icon = 'monkestation/code/modules/the_bird_inside_of_me/icons/armwings.dmi'
 
@@ -93,14 +92,15 @@
 	open_feature_key = "arm_wingsopen"
 	palette = /datum/color_palette/ornithids
 	palette_key = "feather_main"
-/*
+
 /datum/bodypart_overlay/mutant/wings/functional/arm_wings/get_global_feature_list()
 	if(wings_open)
-		return GLOB.arm_wingsopen_list
+		return SSaccessories.arm_wingsopen_list
 	else
-		return GLOB.arm_wings_list
-*/
+		return SSaccessories.arm_wings_list
+
 /datum/bodypart_overlay/mutant/wings/functional/arm_wings/can_draw_on_bodypart(mob/living/carbon/human/human)
+	//When masking is implemented it might be possible to just mask off the missing arm wing.
 	if(!(human.wear_suit?.flags_inv & HIDEMUTWINGS))
 		return TRUE
 	return FALSE

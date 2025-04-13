@@ -8,9 +8,9 @@
 	mutanttongue = /obj/item/organ/internal/tongue/ethereal
 	mutantheart = /obj/item/organ/internal/heart/ethereal
 	mutantspleen = null
-	external_organs = list(
-		/obj/item/organ/external/ethereal_horns = "None",
-		/obj/item/organ/external/tail/ethereal = "None")
+	//external_organs = list(
+	//	/obj/item/organ/external/ethereal_horns = "None",
+	//	/obj/item/organ/external/tail/ethereal = "None")
 	exotic_bloodtype = /datum/blood_type/crew/ethereal
 
 	// Body temperature for ethereals is much higher then humans as they like hotter environments

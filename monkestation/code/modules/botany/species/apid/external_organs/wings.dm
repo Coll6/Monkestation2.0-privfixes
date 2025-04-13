@@ -40,7 +40,7 @@
 	layers = EXTERNAL_BEHIND | EXTERNAL_FRONT
 
 /datum/bodypart_overlay/mutant/wings/apid/get_global_feature_list()
-	//return GLOB.apid_wings_list
+	return SSaccessories.apid_wings_list
 
 /datum/bodypart_overlay/mutant/wings/apid/can_draw_on_bodypart(mob/living/carbon/human/human)
 	if(!(human.wear_suit?.flags_inv & HIDEMUTWINGS))

@@ -56,6 +56,43 @@ SUBSYSTEM_DEF(accessories) // just 'accessories' for brevity
 	var/list/caps_list
 	var/list/pod_hair_list
 
+	//MONKE EDIT START
+	var/list/anime_top_list
+	var/list/anime_middle_list
+	var/list/anime_bottom_list
+	var/list/tails_list_avian
+	var/list/avian_ears_list
+	var/list/arm_wings_list
+	var/list/arm_wingsopen_list
+	var/list/floran_leaves_list
+
+	//Mutant Archnid bits
+	var/list/arachnid_appendages_list
+	var/list/arachnid_chelicerae_list
+
+	//Mutant Apid bits
+	var/list/apid_wings_list
+	var/list/apid_antennae_list
+
+	//Mutant Ethereal bits
+	//var/list/tails_list_ethereal
+	//var/list/ethereal_horns_list
+
+	//Mutant IPC bits
+	var/list/ipc_antennas_list
+	var/list/ipc_chassis_list
+	var/list/ipc_screens_list
+
+	//Mutant Goblin bits
+	var/list/goblin_ears_list
+	var/list/goblin_nose_list
+
+	//Mutant Satyr bits
+	var/list/tails_list_satyr
+	var/list/satyr_fluff_list
+	var/list/satyr_horns_list
+	//MONKE EDIT END
+
 /datum/controller/subsystem/accessories/PreInit() // this stuff NEEDS to be set up before GLOB for preferences and stuff to work so this must go here. sorry
 	setup_lists()
 	init_hair_gradients()
@@ -105,6 +142,31 @@ SUBSYSTEM_DEF(accessories) // just 'accessories' for brevity
 	moth_antennae_list = init_sprite_accessory_subtypes(/datum/sprite_accessory/moth_antennae)[DEFAULT_SPRITE_LIST]
 	moth_markings_list = init_sprite_accessory_subtypes(/datum/sprite_accessory/moth_markings)[DEFAULT_SPRITE_LIST]
 	pod_hair_list = init_sprite_accessory_subtypes(/datum/sprite_accessory/pod_hair)[DEFAULT_SPRITE_LIST]
+
+	//MONKE EDIT START
+	//anime_top_list = init_sprite_accessory_subtypes(/datum/sprite_accessory/anime_head)[DEFAULT_SPRITE_LIST]
+	//anime_middle_list = init_sprite_accessory_subtypes(/datum/sprite_accessory/anime_middle)[DEFAULT_SPRITE_LIST]
+	//anime_bottom_list = init_sprite_accessory_subtypes(/datum/sprite_accessory/anime_bottom)[DEFAULT_SPRITE_LIST]
+	tails_list_avian = init_sprite_accessory_subtypes(/datum/sprite_accessory/tails/avian)[DEFAULT_SPRITE_LIST]
+	avian_ears_list = init_sprite_accessory_subtypes(/datum/sprite_accessory/plumage)[DEFAULT_SPRITE_LIST]
+	arm_wings_list = init_sprite_accessory_subtypes(/datum/sprite_accessory/arm_wings)[DEFAULT_SPRITE_LIST]
+	arm_wingsopen_list = init_sprite_accessory_subtypes(/datum/sprite_accessory/arm_wingsopen)[DEFAULT_SPRITE_LIST]
+	floran_leaves_list = init_sprite_accessory_subtypes(/datum/sprite_accessory/floran_leaves)[DEFAULT_SPRITE_LIST]
+	arachnid_appendages_list = init_sprite_accessory_subtypes(/datum/sprite_accessory/arachnid_appendages)[DEFAULT_SPRITE_LIST]
+	arachnid_chelicerae_list = init_sprite_accessory_subtypes(/datum/sprite_accessory/arachnid_chelicerae)[DEFAULT_SPRITE_LIST]
+	apid_wings_list = init_sprite_accessory_subtypes(/datum/sprite_accessory/apid_wings)[DEFAULT_SPRITE_LIST]
+	apid_antennae_list = init_sprite_accessory_subtypes(/datum/sprite_accessory/apid_antenna)[DEFAULT_SPRITE_LIST]
+	//tails_list_ethereal = init_sprite_accessory_subtypes(/datum/sprite_accessory/tails/ethereal)[DEFAULT_SPRITE_LIST]
+	//ethereal_horns_list = init_sprite_accessory_subtypes(/datum/sprite_accessory/ethereal_horns)[DEFAULT_SPRITE_LIST]
+	ipc_antennas_list = init_sprite_accessory_subtypes(/datum/sprite_accessory/ipc_antennas)[DEFAULT_SPRITE_LIST]
+	ipc_chassis_list = init_sprite_accessory_subtypes(/datum/sprite_accessory/ipc_chassis)[DEFAULT_SPRITE_LIST]
+	ipc_screens_list = init_sprite_accessory_subtypes(/datum/sprite_accessory/ipc_screens)[DEFAULT_SPRITE_LIST]
+	goblin_ears_list = init_sprite_accessory_subtypes(/datum/sprite_accessory/goblin_ears)[DEFAULT_SPRITE_LIST]
+	goblin_nose_list = init_sprite_accessory_subtypes(/datum/sprite_accessory/goblin_nose)[DEFAULT_SPRITE_LIST]
+	tails_list_satyr = init_sprite_accessory_subtypes(/datum/sprite_accessory/satyr_tail)[DEFAULT_SPRITE_LIST]
+	satyr_fluff_list = init_sprite_accessory_subtypes(/datum/sprite_accessory/satyr_fluff)[DEFAULT_SPRITE_LIST]
+	satyr_horns_list = init_sprite_accessory_subtypes(/datum/sprite_accessory/satyr_horns)[DEFAULT_SPRITE_LIST]
+	//MONKE EDIT END
 
 /// This proc just intializes all /datum/sprite_accessory/hair_gradient into an list indexed by gradient-style name
 /datum/controller/subsystem/accessories/proc/init_hair_gradients()

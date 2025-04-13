@@ -16,7 +16,7 @@
 	feature_key = "arachnid_appendages"
 
 /datum/bodypart_overlay/mutant/arachnid_appendages/get_global_feature_list()
-	//return GLOB.arachnid_appendages_list
+	return SSaccessories.arachnid_appendages_list
 
 /datum/bodypart_overlay/mutant/arachnid_appendages/get_base_icon_state()
 	return sprite_datum.icon_state //i hate you

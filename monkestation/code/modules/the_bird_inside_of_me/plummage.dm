@@ -28,7 +28,7 @@
 	fallback_key = "feather_main"
 
 /datum/bodypart_overlay/mutant/plumage/get_global_feature_list()
-	//return GLOB.avian_ears_list
+	return SSaccessories.avian_ears_list
 
 /datum/sprite_accessory/plumage
 	icon = 'monkestation/code/modules/the_bird_inside_of_me/icons/ornithidfeatures.dmi'

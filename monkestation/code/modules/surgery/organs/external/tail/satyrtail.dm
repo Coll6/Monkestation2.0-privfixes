@@ -15,7 +15,7 @@
 	color_source = ORGAN_COLOR_HAIR
 
 /datum/bodypart_overlay/mutant/satyr_tail/get_global_feature_list()
-	//return SSaccessoriesOB.satyr_tail_list
+	return SSaccessories.tails_list_satyr
 
 /datum/bodypart_overlay/mutant/satyr_tail/get_base_icon_state()
 	return sprite_datum.icon_state

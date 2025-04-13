@@ -2,7 +2,6 @@
 	name = "ipcs antennae"
 	desc = "An ipc's antennae. What is it telling them? What are they sensing?"
 	icon_state = "antennae"
-
 	zone = BODY_ZONE_HEAD
 
 	preference = "feature_ipc_antenna"
@@ -21,7 +20,7 @@
 	color_source = ORGAN_COLOR_MUTSECONDARY
 
 /datum/bodypart_overlay/mutant/antennae/ipc/get_global_feature_list()
-	//return GLOB.ipc_antennas_list
+	return SSaccessories.ipc_antennas_list
 
 /datum/bodypart_overlay/mutant/antennae/ipc/get_base_icon_state()
 	return sprite_datum.icon_state

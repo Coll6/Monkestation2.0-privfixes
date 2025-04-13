@@ -16,7 +16,7 @@
 	feature_key = "arachnid_chelicerae"
 
 /datum/bodypart_overlay/mutant/arachnid_chelicerae/get_global_feature_list()
-	//return GLOB.arachnid_chelicerae_list
+	return SSaccessories.arachnid_chelicerae_list
 
 /datum/bodypart_overlay/mutant/arachnid_chelicerae/get_base_icon_state()
 	return sprite_datum.icon_state //i still hate you
