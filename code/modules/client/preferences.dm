@@ -132,7 +132,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 			loaded = TRUE
 			return
 	//we couldn't load character data so just randomize the character appearance + name
-	//randomise_appearance_prefs() //let's create a random character then - rather than a fat, bald and naked man.
+	randomise_appearance_prefs() //let's create a random character then - rather than a fat, bald and naked man.
 	if(parent)
 		apply_all_client_preferences()
 		parent.set_macros()
@@ -185,20 +185,29 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	return data
 
 /datum/preferences/ui_static_data(mob/user)
-	var/list/data = list()
+    var/list/data = list()
+    data["character_profiles"] = create_character_profiles()
+    data["character_preview_view"] = character_preview_view.assigned_map
+    data["overflow_role"] = SSjob.GetJobType(SSjob.overflow_role).title
+    data["window"] = current_window
+    data["content_unlocked"] = unlock_content
 
-	data["character_profiles"] = create_character_profiles()
+    for (var/datum/preference_middleware/preference_middleware as anything in middleware)
+        var/list/middleware_data = preference_middleware.get_ui_static_data(user)
+        data += middleware_data
 
-	data["character_preview_view"] = character_preview_view.assigned_map
-	data["overflow_role"] = SSjob.GetJobType(SSjob.overflow_role).title
-	data["window"] = current_window
+    // Debug check for null/undefined values that might cause TGUI errors
+    for(var/key in data)
+        if(isnull(data[key]))
+            CRASH("Found null value for key [key] in preferences ui_static_data")
+        // Check nested lists too if this is a list
+        if(istype(data[key], /list))
+            var/list/sublist = data[key]
+            for(var/subkey in sublist)
+                if(isnull(sublist[subkey]))
+                    CRASH("Found null value for nested key [key].[subkey] in preferences ui_static_data")
 
-	data["content_unlocked"] = unlock_content
-
-	for (var/datum/preference_middleware/preference_middleware as anything in middleware)
-		data += preference_middleware.get_ui_static_data(user)
-
-	return data
+    return data
 
 /datum/preferences/ui_assets(mob/user)
 	var/list/assets = list(
@@ -387,7 +396,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 		create_body()
 	else
 		body.wipe_state()
-	//appearance = preferences.render_new_preview_appearance(body)
+	appearance = preferences.render_new_preview_appearance(body)
 
 /atom/movable/screen/map_view/char_preview/proc/create_body()
 	QDEL_NULL(body)
@@ -465,7 +474,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 /// Sanitizes the preferences, applies the randomization prefs, and then applies the preference to the human mob.
 /datum/preferences/proc/safe_transfer_prefs_to(mob/living/carbon/human/character, icon_updates = TRUE, is_antag = FALSE)
-	//apply_character_randomization_prefs(is_antag)
+	apply_character_randomization_prefs(is_antag)
 	apply_prefs_to(character, icon_updates)
 
 /// Applies the given preferences to a human mob.
