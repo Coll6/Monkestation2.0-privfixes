@@ -14,7 +14,7 @@
 	///Our associated terrorize spell, for antagonist nightmares
 	var/datum/action/cooldown/spell/pointed/terrorize/terrorize_spell
 
-/obj/item/organ/internal/brain/shadow/nightmare/on_insert(mob/living/carbon/brain_owner)
+/obj/item/organ/internal/brain/shadow/nightmare/on_insert(mob/living/carbon/brain_owner, special = FALSE, drop_if_replaced = TRUE, no_id_transfer = FALSE)
 	. = ..()
 	if(brain_owner.dna.species.id != SPECIES_NIGHTMARE)
 		brain_owner.set_species(/datum/species/shadow/nightmare)
@@ -29,7 +29,7 @@
 
 	RegisterSignal(brain_owner, COMSIG_ATOM_PRE_BULLET_ACT, PROC_REF(dodge_bullets))
 
-/obj/item/organ/internal/brain/shadow/nightmare/on_remove(mob/living/carbon/brain_owner)
+/obj/item/organ/internal/brain/shadow/nightmare/on_remove(mob/living/carbon/brain_owner, special = FALSE, drop_if_replaced = TRUE, no_id_transfer = FALSE)
 	. = ..()
 	QDEL_NULL(our_jaunt)
 	QDEL_NULL(terrorize_spell)

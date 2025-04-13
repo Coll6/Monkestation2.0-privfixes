@@ -94,7 +94,6 @@
 	savefile_key = "facial_hair_gradient"
 	main_feature_name = "Facial hair Gradient"
 	relevant_head_flag = HEAD_FACIAL_HAIR
-	should_generate_icons = TRUE
 
 /datum/preference/choiced/facial_hair_gradient/init_possible_values()
 	return assoc_to_keys_features(SSaccessories.facial_hair_gradients_list)
@@ -158,7 +157,6 @@
 	savefile_identifier = PREFERENCE_CHARACTER
 	savefile_key = "hair_gradient"
 	main_feature_name = "Hairstyle Gradient"
-	should_generate_icons = TRUE
 	relevant_head_flag = HEAD_HAIR
 
 /datum/preference/choiced/hair_gradient/init_possible_values()

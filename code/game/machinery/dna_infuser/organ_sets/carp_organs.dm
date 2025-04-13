@@ -18,7 +18,6 @@
 	desc = "Carp DNA infused into what was once some normal lungs."
 	// Oxygen causes suffocation.
 	safe_oxygen_min = 0
-	safe_oxygen_max = 15
 
 	icon = 'icons/obj/medical/organs/infuser_organs.dmi'
 	icon_state = "lungs"
