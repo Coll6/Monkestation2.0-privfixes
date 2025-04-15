@@ -168,7 +168,7 @@
 	category = list(SPECIES_MOTH, RND_CATEGORY_INITIAL)
 
 /// Ornithid Organs
-
+*/
 /datum/design/ornithid_tongue
 	name = "ornithid "
 	id = "ornithid"
@@ -200,7 +200,7 @@
 	reagents_list = list(/datum/reagent/medicine/c2/synthflesh = 10)
 	build_path = /obj/item/organ/external/wings/functional/arm_wings
 	category = list(SPECIES_ORNITHID)
-
+/*
 /// Satyr
 /datum/design/satyr_horns
 	name = "Satyr Horns"

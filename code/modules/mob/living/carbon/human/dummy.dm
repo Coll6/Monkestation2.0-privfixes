@@ -146,9 +146,9 @@ INITIALIZE_IMMEDIATE(/mob/living/carbon/human/dummy)
 	target.dna.features["satyr_tail"] = get_consistent_feature_entry(GLOB.satyr_tail_list) //Monkestation Addition
 	target.dna.features["satyr_horns"] = get_consistent_feature_entry(GLOB.satyr_horns_list) //Monkestation Addition
 	*/
-	target.dna.features["arm_wings"] = get_consistent_feature_entry(GLOB.arm_wings_list) //Monkestation Addition
-	target.dna.features["ears_avian"] = get_consistent_feature_entry(GLOB.avian_ears_list) //Monkestation Addition
-	target.dna.features["tail_avian"] = get_consistent_feature_entry(GLOB.tails_list_avian) //Monkestation Addition
+	target.dna.features["arm_wings"] = get_consistent_feature_entry(SSaccessories.avian_wings_list) //Monkestation Addition
+	target.dna.features["ears_avian"] = get_consistent_feature_entry(SSaccessories.ears_list_avian) //Monkestation Addition
+	target.dna.features["tail_avian"] = get_consistent_feature_entry(SSaccessories.tails_list_avian) //Monkestation Addition
 
 	var/datum/color_palette/generic_colors/palette = target.dna.color_palettes[/datum/color_palette/generic_colors]
 	palette.mutant_color = COLOR_VIBRANT_LIME

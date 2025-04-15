@@ -24,7 +24,6 @@
 
 	return base_icon
 
-/*
 /proc/generate_ornithid_side_shots(list/sprite_accessories, key, list/sides)
 	var/list/values = list()
 
@@ -52,14 +51,15 @@
 	should_generate_icons = TRUE
 
 /datum/preference/choiced/ornithid_wings/init_possible_values()
-	return assoc_to_keys_features(GLOB.arm_wings_list)
+	return assoc_to_keys_features(SSaccessories.avian_wings_list)
 
 /datum/preference/choiced/ornithid_wings/init_possible_values()
-	return possible_values_for_sprite_accessory_list_for_body_part(
-		GLOB.arm_wings_list,
-		"arm_wings",
-		list("FRONT"),
-	)
+	return assoc_to_keys_features(SSaccessories.avian_wings_list)
+
+/datum/preference/choiced/ornithid_wings/icon_for(value)
+	var/datum/sprite_accessory/ornithid_wings = SSaccessories.avian_wings_list[value]
+	var/icon/final_icon = icon(ornithid_wings.icon, "m_arm_wings_[ornithid_wings.icon_state]_FRONT")
+	return final_icon
 
 /datum/preference/choiced/ornithid_wings/apply_to_human(mob/living/carbon/human/target, value)
 	target.dna.features["arm_wings"] = value
@@ -125,11 +125,14 @@
 	return data
 
 /datum/preference/choiced/tail_avian/init_possible_values()
-	return possible_values_for_sprite_accessory_list_for_body_part(
-		GLOB.tails_list_avian,
-		"tail_avian",
-		list("FRONT", "BEHIND"),
-		)
+	return assoc_to_keys_features(SSaccessories.tails_list_avian)
+
+/datum/preference/choiced/tail_avian/icon_for(value)
+	var/datum/sprite_accessory/tail_avian = SSaccessories.tails_list_avian[value]
+	var/icon/final_icon = icon(tail_avian.icon, "m_tail_avian_[tail_avian.icon_state]_FRONT")
+	final_icon.Blend(icon(tail_avian.icon, "m_tail_avian_[tail_avian.icon_state]_BEHIND"), ICON_OVERLAY)
+	return final_icon
+
 
 /datum/preference/choiced/tail_avian/apply_to_human(mob/living/carbon/human/target, value)
 	target.dna.features["tail_avian"] = value
@@ -150,15 +153,15 @@
 	should_generate_icons = TRUE
 
 /datum/preference/choiced/plumage/init_possible_values()
-	return possible_values_for_sprite_accessory_list_for_body_part(
-		GLOB.avian_ears_list,
-		"ears_avian",
-		list("FRONT"),
-	)
+	return assoc_to_keys_features(SSaccessories.ears_list_avian)
+
+/datum/preference/choiced/plumage/icon_for(value)
+	var/datum/sprite_accessory/plumage = SSaccessories.ears_list_avian[value]
+	var/icon/final_icon = icon(plumage.icon, "m_ears_avian_[plumage.icon_state]_FRONT")
+	return final_icon
 
 /datum/preference/choiced/plumage/apply_to_human(mob/living/carbon/human/target, value)
 	target.dna.features["ears_avian"] = value
 
 /datum/preference/choiced/plumage/create_default_value()
 	return /datum/sprite_accessory/plumage::name
-*/

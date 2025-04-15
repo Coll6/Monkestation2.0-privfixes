@@ -1,10 +1,3 @@
-/// GLOB list of armwings sprites / options
-GLOBAL_LIST_EMPTY(arm_wings_list)
-GLOBAL_LIST_EMPTY(arm_wingsopen_list)
-/// GLOB list of other features (ears, tails)
-GLOBAL_LIST_EMPTY(avian_ears_list)
-GLOBAL_LIST_EMPTY(tails_list_avian)
-
 /datum/species/ornithid
 	// the biggest bird
 	name = "\improper Ornithid"
@@ -17,13 +10,13 @@ GLOBAL_LIST_EMPTY(tails_list_avian)
 		TRAIT_USES_SKINTONES,
 	)
 	mutanttongue = /obj/item/organ/internal/tongue/ornithid
-/*
+
 	external_organs = list(
 		/obj/item/organ/external/wings/functional/arm_wings = "Monochrome",
 		/obj/item/organ/external/plumage = "Hermes",
 		/obj/item/organ/external/tail/avian = "Eagle",
 	)
-*/
+
 	bodypart_overrides = list(
 		BODY_ZONE_L_ARM = /obj/item/bodypart/arm/left/ornithid,
 		BODY_ZONE_R_ARM = /obj/item/bodypart/arm/right/ornithid,

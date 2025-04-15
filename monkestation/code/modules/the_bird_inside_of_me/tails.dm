@@ -1,5 +1,3 @@
-
-/*
 /obj/item/organ/external/tail/avian
 	name = "avian tail"
 	desc = "This tail belongs to an ornithid. Used to."
@@ -18,7 +16,7 @@
 	fallback_key = "feather_main"
 
 /datum/bodypart_overlay/mutant/tail/avian/get_global_feature_list()
-	return GLOB.tails_list_avian
+	return SSaccessories.tails_list_avian
 
 /datum/sprite_accessory/tails/avian
 	icon = 'monkestation/code/modules/the_bird_inside_of_me/icons/ornithidfeatures.dmi'
@@ -30,5 +28,5 @@
 /datum/sprite_accessory/tails/avian/swallow
 	name = "Swallow"
 	icon_state = "swallow"
-*/
+
 // continue additional tails from here

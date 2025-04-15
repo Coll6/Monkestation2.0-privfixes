@@ -232,11 +232,11 @@ GLOBAL_LIST_INIT(total_uf_len_by_block, populate_total_uf_len_by_block())
 	if(features["pod_hair"])
 		L[DNA_POD_HAIR_BLOCK] = construct_block(SSaccessories.pod_hair_list.Find(features["pod_hair"]), length(SSaccessories.pod_hair_list))
 	if(features["arm_wings"]) // NON-MODULE CHANGE
-		L[DNA_ARM_WINGS_BLOCK] = construct_block(GLOB.arm_wings_list.Find(features["arm_wings"]), GLOB.arm_wings_list.len)
+		L[DNA_ARM_WINGS_BLOCK] = construct_block(SSaccessories.avian_wings_list.Find(features["arm_wings"]), length(SSaccessories.avian_wings_list))
 	if(features["tail_avian"]) // NON-MODULE CHANGE
-		L[DNA_AVIAN_TAIL_BLOCK] = construct_block(GLOB.tails_list_avian.Find(features["tail_avian"]), GLOB.tails_list_avian.len)
+		L[DNA_AVIAN_TAIL_BLOCK] = construct_block(SSaccessories.tails_list_avian.Find(features["tail_avian"]), length(SSaccessories.tails_list_avian))
 	if(features["ears_avian"]) // NON-MODULE CHANGE
-		L[DNA_AVIAN_EARS_BLOCK] = construct_block(GLOB.avian_ears_list.Find(features["ears_avian"]), GLOB.avian_ears_list.len)
+		L[DNA_AVIAN_EARS_BLOCK] = construct_block(SSaccessories.ears_list_avian.Find(features["ears_avian"]), length(SSaccessories.ears_list_avian))
 	for(var/blocknum in 1 to DNA_FEATURE_BLOCKS)
 		. += L[blocknum] || random_string(GET_UI_BLOCK_LEN(blocknum), GLOB.hex_characters)
 
@@ -373,11 +373,11 @@ GLOBAL_LIST_INIT(total_uf_len_by_block, populate_total_uf_len_by_block())
 		if(DNA_POD_HAIR_BLOCK)
 			set_uni_feature_block(blocknumber, construct_block(SSaccessories.pod_hair_list.Find(features["pod_hair"]), length(SSaccessories.pod_hair_list)))
 		if(DNA_ARM_WINGS_BLOCK) // NON-MODULE CHANGE
-			set_uni_feature_block(blocknumber, construct_block(GLOB.arm_wings_list.Find(features["arm_wings"]), GLOB.arm_wings_list.len))
+			set_uni_feature_block(blocknumber, construct_block(SSaccessories.avian_wings_list.Find(features["arm_wings"]), length(SSaccessories.avian_wings_list)))
 		if(DNA_AVIAN_TAIL_BLOCK) // NON-MODULE CHANGE
-			set_uni_feature_block(blocknumber, construct_block(GLOB.tails_list_avian.Find(features["tail_avian"]), GLOB.tails_list_avian.len))
+			set_uni_feature_block(blocknumber, construct_block(SSaccessories.tails_list_avian.Find(features["tail_avian"]), length(SSaccessories.tails_list_avian)))
 		if(DNA_AVIAN_EARS_BLOCK) // NON-MODULE CHANGE
-			set_uni_feature_block(blocknumber, construct_block(GLOB.avian_ears_list.Find(features["ears_avian"]), GLOB.avian_ears_list.len))
+			set_uni_feature_block(blocknumber, construct_block(SSaccessories.ears_list_avian.Find(features["ears_avian"]), length(SSaccessories.ears_list_avian)))
 //Please use add_mutation or activate_mutation instead
 /datum/dna/proc/force_give(datum/mutation/human/human_mutation)
 	if(holder && human_mutation)
@@ -664,11 +664,11 @@ GLOBAL_LIST_INIT(total_uf_len_by_block, populate_total_uf_len_by_block())
 	if(dna.features["pod_hair"])
 		dna.features["pod_hair"] = SSaccessories.pod_hair_list[deconstruct_block(get_uni_feature_block(features, DNA_POD_HAIR_BLOCK), length(SSaccessories.pod_hair_list))]
 	if(dna.features["arm_wings"]) // NON-MODULE CHANGE
-		dna.features["arm_wings"] = GLOB.arm_wings_list[deconstruct_block(get_uni_feature_block(features, DNA_ARM_WINGS_BLOCK), GLOB.arm_wings_list.len)]
+		dna.features["arm_wings"] = SSaccessories.avian_wings_list[deconstruct_block(get_uni_feature_block(features, DNA_ARM_WINGS_BLOCK), length(SSaccessories.avian_wings_list))]
 	if(dna.features["tail_avian"]) // NON-MODULE CHANGE
-		dna.features["tail_avian"] = GLOB.tails_list_avian[deconstruct_block(get_uni_feature_block(features, DNA_AVIAN_TAIL_BLOCK), GLOB.tails_list_avian.len)]
+		dna.features["tail_avian"] = SSaccessories.tails_list_avian[deconstruct_block(get_uni_feature_block(features, DNA_AVIAN_TAIL_BLOCK), length(SSaccessories.tails_list_avian))]
 	if(dna.features["ears_avian"]) // NON-MODULE CHANGE
-		dna.features["ears_avian"] = GLOB.avian_ears_list[deconstruct_block(get_uni_feature_block(features, DNA_AVIAN_EARS_BLOCK), GLOB.avian_ears_list.len)]
+		dna.features["ears_avian"] = SSaccessories.ears_list_avian[deconstruct_block(get_uni_feature_block(features, DNA_AVIAN_EARS_BLOCK), length(SSaccessories.ears_list_avian))]
 
 	for(var/obj/item/organ/external/external_organ in organs)
 		external_organ.mutate_feature(features, src)

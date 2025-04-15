@@ -1,4 +1,3 @@
-/*
 // ear code here
 /obj/item/organ/internal/ears/avian
 	name = "avian ears"
@@ -29,7 +28,7 @@
 	fallback_key = "feather_main"
 
 /datum/bodypart_overlay/mutant/plumage/get_global_feature_list()
-	return GLOB.avian_ears_list
+	return SSaccessories.ears_list_avian
 
 /datum/sprite_accessory/plumage
 	icon = 'monkestation/code/modules/the_bird_inside_of_me/icons/ornithidfeatures.dmi'
@@ -45,4 +44,3 @@
 /* /datum/sprite_accessory/plumage/kresnik // similar to tails (originally!), this is commented out for the time being.
 	name = "Kresnik"
 	icon_state = "kresnik" */
-*/

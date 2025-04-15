@@ -1,5 +1,5 @@
 // begin armwings code
-/*
+
 /obj/item/organ/external/wings/functional/arm_wings
 	name = "Arm Wings"
 	desc = "They're wings, that go on your arm. Get your chicken wings jokes out now."
@@ -97,12 +97,11 @@
 
 /datum/bodypart_overlay/mutant/wings/functional/arm_wings/get_global_feature_list()
 	if(wings_open)
-		return GLOB.arm_wingsopen_list
+		return SSaccessories.avian_wingsopen_list
 	else
-		return GLOB.arm_wings_list
+		return SSaccessories.avian_wings_list
 
 /datum/bodypart_overlay/mutant/wings/functional/arm_wings/can_draw_on_bodypart(mob/living/carbon/human/human)
 	if(!(human.wear_suit?.flags_inv & HIDEMUTWINGS))
 		return TRUE
 	return FALSE
-*/

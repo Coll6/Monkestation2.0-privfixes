@@ -56,6 +56,11 @@ SUBSYSTEM_DEF(accessories) // just 'accessories' for brevity
 	var/list/caps_list
 	var/list/pod_hair_list
 
+	var/list/tails_list_avian
+	var/list/avian_wings_list
+	var/list/avian_wingsopen_list
+	var/list/ears_list_avian
+
 /datum/controller/subsystem/accessories/PreInit() // this stuff NEEDS to be set up before GLOB for preferences and stuff to work so this must go here. sorry
 	setup_lists()
 	init_hair_gradients()
@@ -105,6 +110,11 @@ SUBSYSTEM_DEF(accessories) // just 'accessories' for brevity
 	moth_antennae_list = init_sprite_accessory_subtypes(/datum/sprite_accessory/moth_antennae)[DEFAULT_SPRITE_LIST]
 	moth_markings_list = init_sprite_accessory_subtypes(/datum/sprite_accessory/moth_markings)[DEFAULT_SPRITE_LIST]
 	pod_hair_list = init_sprite_accessory_subtypes(/datum/sprite_accessory/pod_hair)[DEFAULT_SPRITE_LIST]
+
+	tails_list_avian = init_sprite_accessory_subtypes(/datum/sprite_accessory/tails/avian)[DEFAULT_SPRITE_LIST]
+	avian_wings_list = init_sprite_accessory_subtypes(/datum/sprite_accessory/arm_wings)[DEFAULT_SPRITE_LIST]
+	avian_wingsopen_list = init_sprite_accessory_subtypes(/datum/sprite_accessory/arm_wingsopen)[DEFAULT_SPRITE_LIST]
+	ears_list_avian = init_sprite_accessory_subtypes(/datum/sprite_accessory/plumage)[DEFAULT_SPRITE_LIST]
 
 /// This proc just intializes all /datum/sprite_accessory/hair_gradient into an list indexed by gradient-style name
 /datum/controller/subsystem/accessories/proc/init_hair_gradients()
