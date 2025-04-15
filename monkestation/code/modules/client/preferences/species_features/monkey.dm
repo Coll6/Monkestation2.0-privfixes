@@ -16,6 +16,12 @@
 	should_generate_icons = TRUE
 
 /datum/preference/choiced/monkey_tail/init_possible_values()
+	return SSaccessories.tails_list_monkey
+
+/datum/preference/choiced/monkey_tail/icon_for(value)
+	var/datum/sprite_accessory/tails/monkey/tail = SSaccessories.tails_list_monkey[value]
+	return icon('monkestation/icons/mob/species/monkey/bodyparts.dmi', "m_tail_monkey_[tail.icon_state]_FRONT", NORTH)
+/*
 	var/list/values = list()
 
 	var/icon/monkey_chest = icon('monkestation/icons/mob/species/monkey/bodyparts.dmi', "monkey_chest")
@@ -34,6 +40,7 @@
 		values[tail.name] = final_icon
 
 	return values
+*/
 
 /datum/preference/choiced/monkey_tail/apply_to_human(mob/living/carbon/human/target, value)
 	target.dna.features["tail_monkey"] = value
