@@ -5,7 +5,7 @@
 	reagents_list = list(/datum/reagent/medicine/c2/synthflesh = 10)
 	build_path = /obj/item/organ/internal/spleen
 	category = list(SPECIES_HUMAN, RND_CATEGORY_INITIAL)
-/*
+
 /// Apid Organs
 /datum/design/apid_eyes
 	name = "Apid Eyes"
@@ -30,7 +30,7 @@
 	reagents_list = list(/datum/reagent/medicine/c2/synthflesh = 20)
 	build_path = /obj/item/organ/external/wings/apid
 	category = list(SPECIES_APID)
-
+/*
 /datum/design/apid_antennae
 	name = "Apid Antennae"
 	id = "apid_antennae"
@@ -38,9 +38,8 @@
 	reagents_list = list(/datum/reagent/medicine/c2/synthflesh = 5)
 	build_path = /obj/item/organ/external/antennae_apid
 	category = list(SPECIES_APID, RND_CATEGORY_INITIAL)
-
+*/
 /// Arachnid Organs
-
 /datum/design/arachnid_eyes // Gives nightvision so not initial for now
 	name = "Arachnid Eyes"
 	id = "arachnid_eyes"
@@ -72,9 +71,8 @@
 	reagents_list = list(/datum/reagent/medicine/c2/synthflesh = 10)
 	build_path = /obj/item/organ/external/arachnid_appendages
 	category = list(SPECIES_ARACHNIDS, RND_CATEGORY_INITIAL)
-*/
-/// Ethereal Organs
 
+/// Ethereal Organs
 /datum/design/ethereal_tail
 	name = "Ethereal Tail"
 	id = "ethereal_tail"
@@ -98,7 +96,7 @@
 	reagents_list = list(/datum/reagent/medicine/c2/synthflesh = 10, /datum/reagent/consumable/liquidelectricity = 20)
 	build_path = /obj/item/organ/internal/eyes/ethereal
 	category = list(SPECIES_ETHEREAL, RND_CATEGORY_INITIAL)
-/*
+
 /// Floran Organs
 /datum/design/floran_eyes
 	name = "Phytoid Eyes"
@@ -150,7 +148,6 @@
 	category = list(SPECIES_GOBLIN, RND_CATEGORY_INITIAL)
 
 /// Moth
-
 /datum/design/moth_eyes
 	name = "Moth Eyes "
 	id = "moth_eyes"
@@ -168,7 +165,6 @@
 	category = list(SPECIES_MOTH, RND_CATEGORY_INITIAL)
 
 /// Ornithid Organs
-*/
 /datum/design/ornithid_tongue
 	name = "ornithid "
 	id = "ornithid"
@@ -200,7 +196,7 @@
 	reagents_list = list(/datum/reagent/medicine/c2/synthflesh = 10)
 	build_path = /obj/item/organ/external/wings/functional/arm_wings
 	category = list(SPECIES_ORNITHID)
-/*
+
 /// Satyr
 /datum/design/satyr_horns
 	name = "Satyr Horns"
@@ -235,4 +231,3 @@
 	desc = "Contains designs for organs for the limbgrower of all around the rim - Satyr Fluff, Floran Leaves, Apid Wings, Ornithid Tongues"
 	id = "limbdesign_other"
 	build_path = /obj/item/disk/design_disk/limbs/other
-*/

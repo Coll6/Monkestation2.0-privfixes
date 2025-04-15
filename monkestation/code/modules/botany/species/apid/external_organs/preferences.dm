@@ -16,7 +16,7 @@
 
 /datum/preference/choiced/apid_wings/apply_to_human(mob/living/carbon/human/target, value)
 	target.dna.features["apid_wings"] = value
-
+/*
 /datum/preference/choiced/apid_antenna
 	savefile_key = "feature_apid_antenna"
 	savefile_identifier = PREFERENCE_CHARACTER
@@ -48,3 +48,4 @@
 
 /datum/preference/choiced/apid_antenna/apply_to_human(mob/living/carbon/human/target, value)
 	target.dna.features["apid_antenna"] = value
+*/

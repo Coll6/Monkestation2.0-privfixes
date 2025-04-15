@@ -1,5 +1,4 @@
 ///Moth wings! They can flutter in low-grav and burn off in heat
-/*
 /obj/item/organ/external/wings/apid
 	name = "apid wings"
 	desc = "Spread your wings and FLOOOOAAAAAT!"
@@ -8,7 +7,6 @@
 	preference = "feature_apid_wings"
 
 	bodypart_overlay = /datum/bodypart_overlay/mutant/wings/apid
-
 
 /obj/item/organ/external/wings/apid/on_insert(mob/living/carbon/receiver)
 	. = ..()
@@ -34,14 +32,13 @@
 
 	REMOVE_TRAIT(owner, TRAIT_FREE_FLOAT_MOVEMENT, REF(src))
 
-
 ///Moth wing bodypart overlay, including burn functionality!
 /datum/bodypart_overlay/mutant/wings/apid
 	feature_key = "apid_wings"
 	layers = EXTERNAL_BEHIND | EXTERNAL_FRONT
 
 /datum/bodypart_overlay/mutant/wings/apid/get_global_feature_list()
-	return GLOB.apid_wings_list
+	return null //SSaccessories.apid_wings_list
 
 /datum/bodypart_overlay/mutant/wings/apid/can_draw_on_bodypart(mob/living/carbon/human/human)
 	if(!(human.wear_suit?.flags_inv & HIDEMUTWINGS))
@@ -59,5 +56,3 @@
 /datum/sprite_accessory/apid_wings/normal
 	name = "Normal"
 	icon_state = "normal"
-
-*/

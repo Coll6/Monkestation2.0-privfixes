@@ -12,18 +12,20 @@
 	restyle_flags = EXTERNAL_RESTYLE_FLESH
 
 	bodypart_overlay = /datum/bodypart_overlay/mutant/antennae_apid
-
+*/
 ///Moth antennae datum, with full burning functionality
+/*
 /datum/bodypart_overlay/mutant/antennae_apid
 	layers = EXTERNAL_ADJACENT
 	feature_key = "apid_antenna"
 
 /datum/bodypart_overlay/mutant/antennae_apid/get_global_feature_list()
-	return GLOB.apid_antenna_list
+	return null
 
 /datum/bodypart_overlay/mutant/antennae_apid/get_base_icon_state()
 	return sprite_datum.icon_state
-
+*/
+/*
 /datum/sprite_accessory/apid_antenna
 	icon = 'monkestation/code/modules/botany/icons/apid_sprites.dmi'
 	color_src = null

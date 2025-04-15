@@ -76,6 +76,9 @@ SUBSYSTEM_DEF(accessories) // just 'accessories' for brevity
 	var/list/goblin_nose_list
 	var/list/ears_list_goblin
 
+	var/list/apid_wings_list
+	var/list/apid_antennae_list
+
 /datum/controller/subsystem/accessories/PreInit() // this stuff NEEDS to be set up before GLOB for preferences and stuff to work so this must go here. sorry
 	setup_lists()
 	init_hair_gradients()
@@ -145,6 +148,9 @@ SUBSYSTEM_DEF(accessories) // just 'accessories' for brevity
 
 	goblin_nose_list = init_sprite_accessory_subtypes(/datum/sprite_accessory/goblin_nose)[DEFAULT_SPRITE_LIST]
 	ears_list_goblin = init_sprite_accessory_subtypes(/datum/sprite_accessory/goblin_ears)[DEFAULT_SPRITE_LIST]
+
+	//apid_wings_list = init_sprite_accessory_subtypes(/datum/sprite_accessory/apid_wings)[DEFAULT_SPRITE_LIST]
+	//apid_antennae_list = init_sprite_accessory_subtypes(/datum/sprite_accessory/apid_antenna)[DEFAULT_SPRITE_LIST]
 
 /// This proc just intializes all /datum/sprite_accessory/hair_gradient into an list indexed by gradient-style name
 /datum/controller/subsystem/accessories/proc/init_hair_gradients()

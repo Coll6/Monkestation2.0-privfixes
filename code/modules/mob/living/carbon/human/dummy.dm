@@ -128,7 +128,7 @@ INITIALIZE_IMMEDIATE(/mob/living/carbon/human/dummy)
 	target.dna.features["tail_lizard"] = get_consistent_feature_entry(SSaccessories.tails_list_lizard)
 	target.dna.features["tail_monkey"] = get_consistent_feature_entry(SSaccessories.tails_list_monkey)
 	target.dna.features["pod_hair"] = get_consistent_feature_entry(SSaccessories.pod_hair_list)
-	//target.dna.features["fur"] = COLOR_MONKEY_BROWN //Monkestation Addition
+	target.dna.features["fur"] = COLOR_MONKEY_BROWN //Monkestation Addition
 	target.dna.features["ethereal_horns"] = get_consistent_feature_entry(SSaccessories.ethereal_horns_list) //Monkestation Addition
 	target.dna.features["ethereal_tail"] = get_consistent_feature_entry(SSaccessories.tails_list_ethereal) //Monkestation Addition
 
