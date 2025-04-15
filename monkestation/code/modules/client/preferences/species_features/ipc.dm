@@ -1,4 +1,3 @@
-/*
 /datum/preference/choiced/ipc_antenna
 	savefile_key = "feature_ipc_antenna"
 	savefile_identifier = PREFERENCE_CHARACTER
@@ -7,23 +6,31 @@
 	should_generate_icons = TRUE
 
 /datum/preference/choiced/ipc_antenna/init_possible_values()
-	var/list/values = list()
+	return assoc_to_keys_features(SSaccessories.ipc_antennae_list)
 
-	var/icon/ipc_head = icon('monkestation/icons/mob/species/ipc/bodyparts.dmi', "synth_head")
+/datum/preference/choiced/ipc_antenna/icon_for(value)
+	var/static/icon/ipc_head
 
-	for (var/antennae_name in GLOB.ipc_antennas_list)
-		var/datum/sprite_accessory/antennae = GLOB.ipc_antennas_list[antennae_name]
-		if(antennae.locked)
-			continue
+	if (isnull(ipc_head))
+		ipc_head = icon('monkestation/icons/mob/species/ipc/bodyparts.dmi', "synth_head")
+		ipc_head.Blend(icon('icons/mob/species/human/human_face.dmi', "eyes_l"), ICON_OVERLAY)
+		ipc_head.Blend(icon('icons/mob/species/human/human_face.dmi', "eyes_r"), ICON_OVERLAY)
 
-		var/icon/icon_with_antennae = new(ipc_head)
-		icon_with_antennae.Blend(icon(antennae.icon, "m_ipc_antenna_[antennae.icon_state]_FRONT"), ICON_OVERLAY)
-		icon_with_antennae.Scale(64, 64)
-		icon_with_antennae.Crop(15, 64, 15 + 31, 64 - 31)
+	var/datum/sprite_accessory/sprite_accessory = SSaccessories.ipc_antennae_list[value]
+	var/icon/final_icon = new(ipc_head)
+	if (sprite_accessory.icon_state != "none")
+		var/icon/antennae= icon(
+			sprite_accessory.icon,
+			"m_ipc_antenna_[sprite_accessory.icon_state]_FRONT",
+		)
 
-		values[antennae.name] = icon_with_antennae
+		final_icon.Blend(antennae, ICON_OVERLAY)
 
-	return values
+	final_icon.Blend(COLOR_VIBRANT_LIME, ICON_MULTIPLY)
+	final_icon.Scale(64, 64)
+	final_icon.Crop(15, 64, 15 + 31, 64 - 31)
+
+	return final_icon
 
 /datum/preference/choiced/ipc_antenna/apply_to_human(mob/living/carbon/human/target, value)
 	target.dna.features["ipc_antenna"] = value
@@ -38,28 +45,25 @@
 	relevant_mutant_bodypart = "ipc_chassis"
 
 /datum/preference/choiced/ipc_chassis/init_possible_values()
-	var/list/values = list()
+	return assoc_to_keys_features(SSaccessories.ipc_chasis_list)
 
-	var/icon/ipc = icon('monkestation/icons/mob/species/ipc/bodyparts.dmi', "blank")
-	for (var/chassis_name in GLOB.ipc_chassis_list)
-		var/datum/sprite_accessory/chassis = GLOB.ipc_chassis_list[chassis_name]
-		if(chassis.locked)
-			continue
+/datum/preference/choiced/ipc_chassis/icon_for(value)
+	var/datum/sprite_accessory/sprite_accessory = SSaccessories.ipc_chasis_list[value]
 
-		var/icon/chassis_icon = icon(
-			'monkestation/icons/mob/species/ipc/ipc_chassis.dmi',
-			"m_ipc_chassis_[chassis.icon_state]_FRONT")
+	var/icon/ipc_chasis = icon('monkestation/icons/mob/species/ipc/bodyparts.dmi', "blank")
 
-		var/icon/final_icon = icon(ipc)
-		final_icon.Blend(chassis_icon, ICON_OVERLAY)
+	var/icon/chassis_icon = icon(
+			sprite_accessory.icon,
+			"m_ipc_chassis_[sprite_accessory.icon_state]_FRONT")
 
-		final_icon.Crop(10, 8, 22, 23)
-		final_icon.Scale(26, 32)
-		final_icon.Crop(-2, 1, 29, 32)
+	var/icon/final_icon = icon(ipc_chasis)
+	final_icon.Blend(chassis_icon, ICON_OVERLAY)
 
-		values[chassis.name] = final_icon
+	final_icon.Crop(10, 8, 22, 23)
+	final_icon.Scale(26, 32)
+	final_icon.Crop(-2, 1, 29, 32)
 
-	return values
+	return final_icon
 
 /datum/preference/choiced/ipc_chassis/apply_to_human(mob/living/carbon/human/target, value)
 	var/list/features = target.dna.features
@@ -79,23 +83,22 @@
 	should_generate_icons = TRUE
 
 /datum/preference/choiced/ipc_screen/init_possible_values()
-	var/list/values = list()
+	return assoc_to_keys_features(SSaccessories.ipc_antennae_list)
 
-	var/icon/ipc_head = icon('monkestation/icons/mob/species/ipc/bodyparts.dmi', "synth_head")
+/datum/preference/choiced/ipc_screen/icon_for(value)
+	var/static/icon/ipc_screen
 
-	for (var/screen_name in GLOB.ipc_screens_list)
-		var/datum/sprite_accessory/screen = GLOB.ipc_screens_list[screen_name]
-		if(screen.locked)
-			continue
+	if (isnull(ipc_screen))
+		ipc_screen = icon('monkestation/icons/mob/species/ipc/bodyparts.dmi', "synth_head")
 
-		var/icon/icon_with_screen = new(ipc_head)
-		icon_with_screen.Blend(icon(screen.icon, "m_ipc_screen_[screen.icon_state]_ADJ"), ICON_OVERLAY)
-		icon_with_screen.Scale(64, 64)
-		icon_with_screen.Crop(15, 64, 15 + 31, 64 - 31)
+	var/datum/sprite_accessory/antennae = SSaccessories.ipc_antennae_list[value]
 
-		values[screen.name] = icon_with_screen
+	var/icon/icon_with_antennae = new(ipc_screen)
+	icon_with_antennae.Blend(icon(antennae.icon, "m_ipc_screen_[antennae.icon_state]_ADJ"), ICON_OVERLAY)
+	icon_with_antennae.Scale(64, 64)
+	icon_with_antennae.Crop(15, 64, 15 + 31, 64 - 31)
 
-	return values
+	return icon_with_antennae
 
 /datum/preference/choiced/ipc_screen/apply_to_human(mob/living/carbon/human/target, value)
 	target.dna.features["ipc_screen"] = value
@@ -127,4 +130,3 @@
 
 /datum/preference/choiced/ipc_brain/is_accessible(datum/preferences/preferences)
 	return ..() && preferences.read_preference(/datum/preference/choiced/species) == /datum/species/ipc
-*/

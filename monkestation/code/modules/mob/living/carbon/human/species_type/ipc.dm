@@ -106,9 +106,9 @@
 	if(L)
 		L.Remove(C)
 		QDEL_NULL(L)
-	//if(ishuman(C) && !change_screen)
-	//	change_screen = new
-	//	change_screen.Grant(C)
+	if(ishuman(C) && !change_screen)
+		change_screen = new
+		change_screen.Grant(C)
 
 	RegisterSignal(C, COMSIG_ATOM_EMAG_ACT, PROC_REF(on_emag_act))
 	RegisterSignal(C, COMSIG_LIVING_DEATH, PROC_REF(bsod_death)) // screen displays bsod on death, if they have one
@@ -163,11 +163,11 @@
 /datum/species/ipc/on_species_loss(mob/living/carbon/target)
 	. = ..()
 	UnregisterSignal(target, list(COMSIG_ATOM_EMAG_ACT, COMSIG_LIVING_DEATH))
-	//change_screen?.Remove(target)
+	change_screen?.Remove(target)
 
 /datum/species/ipc/proc/handle_speech(datum/source, list/speech_args)
 	speech_args[SPEECH_SPANS] |= SPAN_ROBOT //beep
-/*
+
 /datum/action/innate/change_screen
 	name = "Change Display"
 	check_flags = AB_CHECK_CONSCIOUS
@@ -175,7 +175,7 @@
 	button_icon_state = "drone_vision"
 
 /datum/action/innate/change_screen/Activate()
-	var/screen_choice = tgui_input_list(usr, "Which screen do you want to use?", "Screen Change", GLOB.ipc_screens_list)
+	var/screen_choice = tgui_input_list(usr, "Which screen do you want to use?", "Screen Change", SSaccessories.ipc_screens_list)
 	var/color_choice = tgui_color_picker(usr, "Which color do you want your screen to be", "Color Change")
 	if(!screen_choice)
 		return
@@ -187,7 +187,7 @@
 	H.dna.features["ipc_screen"] = screen_choice
 	H.eye_color_left = sanitize_hexcolor(color_choice)
 	H.update_body()
-*/
+
 /datum/species/ipc/spec_revival(mob/living/carbon/human/H)
 	H.notify_ghost_cloning("You have been repaired!")
 	H.grab_ghost()
@@ -215,19 +215,19 @@
 
 /datum/species/ipc/replace_body(mob/living/carbon/target, datum/species/new_species)
 	. = ..()
-	//update_chassis(target)
-/*
+	update_chassis(target)
+
 /datum/species/ipc/proc/update_chassis(mob/living/carbon/target)
 	if(!iscarbon(target) || QDELING(target))
 		return
 	var/list/features = target.dna?.features
 	if(!features)
 		return
-	var/datum/sprite_accessory/ipc_chassis/chassis_of_choice = GLOB.ipc_chassis_list[features["ipc_chassis"]]
+	var/datum/sprite_accessory/ipc_chassis/chassis_of_choice = SSaccessories.ipc_chasis_list[features["ipc_chassis"]]
 
 	if(!chassis_of_choice)
-		var/random_chassis = pick(GLOB.ipc_chassis_list)
-		chassis_of_choice = GLOB.ipc_chassis_list[random_chassis]
+		var/random_chassis = pick(SSaccessories.ipc_chasis_list)
+		chassis_of_choice = SSaccessories.ipc_chasis_list[random_chassis]
 		features["ipc_chassis"] = random_chassis
 
 	for(var/obj/item/bodypart/bodypart as anything in target.bodyparts) //Override bodypart data as necessary
@@ -238,7 +238,7 @@
 		bodypart.update_limb()
 		if(chassis_of_choice.palette_key == MUTANT_COLOR)
 			bodypart.should_draw_greyscale = TRUE
-*/
+
 /datum/species/ipc/proc/on_emag_act(mob/living/carbon/human/owner, mob/user)
 	SIGNAL_HANDLER
 	if(owner == user)
@@ -294,12 +294,11 @@
  * * screen_name - The name of the screen to switch the ipc_screen mutant bodypart to.
  */
 /datum/species/ipc/proc/switch_to_screen(mob/living/carbon/human/transformer, screen_name)
-	//if(!change_screen)
-	//	return
+	if(!change_screen)
+		return
 
 	transformer.dna.features["ipc_screen"] = screen_name
 	transformer.update_body()
-
 
 /obj/item/apc_powercord
 	name = "power cord"

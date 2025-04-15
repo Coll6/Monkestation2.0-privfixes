@@ -1,4 +1,3 @@
-/*
 /datum/sprite_accessory/ipc_antennas
 	icon = 'monkestation/icons/mob/species/ipc/ipc_antennas.dmi'
 	palette = /datum/color_palette/generic_colors
@@ -79,4 +78,3 @@
 /datum/sprite_accessory/ipc_antennas/ram
 	name = "Synthetic Horns - Ram"
 	icon_state = "ram_synth"
-*/

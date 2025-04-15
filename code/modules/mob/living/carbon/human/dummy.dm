@@ -139,13 +139,14 @@ INITIALIZE_IMMEDIATE(/mob/living/carbon/human/dummy)
 	target.dna.features["arachnid_appendages"] = get_consistent_feature_entry(SSaccessories.arachnid_appendages_list) //Monkestation Addition
 	target.dna.features["arachnid_chelicerae"] = get_consistent_feature_entry(SSaccessories.arachnid_chelicerae_list) //Monkestation Addition
 /*
-	target.dna.features["ipc_screen"] = get_consistent_feature_entry(GLOB.ipc_screens_list) //Monkestation Addition
-	target.dna.features["ipc_chassis"] = get_consistent_feature_entry(GLOB.ipc_chassis_list) //Monkestation Addition
-	target.dna.features["ipc_antenna"] = get_consistent_feature_entry(GLOB.ipc_antennas_list) //Monkestation Addition
 	target.dna.features["anime_top"] = get_consistent_feature_entry(GLOB.anime_top_list) //Monkestation Addition
 	target.dna.features["anime_middle"] = get_consistent_feature_entry(GLOB.anime_middle_list) //Monkestation Addition
 	target.dna.features["anime_bottom"] = get_consistent_feature_entry(GLOB.anime_bottom_list) //Monkestation Addition
 */
+
+	target.dna.features["ipc_screen"] = get_consistent_feature_entry(SSaccessories.ipc_screens_list) //Monkestation Addition
+	target.dna.features["ipc_chassis"] = get_consistent_feature_entry(SSaccessories.ipc_chasis_list) //Monkestation Addition
+	target.dna.features["ipc_antenna"] = get_consistent_feature_entry(SSaccessories.ipc_antennae_list) //Monkestation Addition
 
 	target.dna.features["goblin_ears"] = get_consistent_feature_entry(SSaccessories.ears_list_goblin) //Monkestation Addition
 	target.dna.features["goblin_nose"] = get_consistent_feature_entry(SSaccessories.goblin_nose_list) //Monkestation Addition
