@@ -10,8 +10,8 @@
 	slot = ORGAN_SLOT_EXTERNAL_FLORAN_LEAVES
 
 	use_mob_sprite_as_obj_sprite = TRUE
-	bodypart_overlay = /datum/bodypart_overlay/mutant/floran_leaves
-
+//	bodypart_overlay = /datum/bodypart_overlay/mutant/floran_leaves
+/*
 /datum/bodypart_overlay/mutant/floran_leaves
 	layers = EXTERNAL_ADJACENT
 	feature_key = "floran_leaves"
@@ -40,3 +40,4 @@
 	. = ..()
 	if(human.wear_suit && (human.wear_suit.flags_inv & HIDEJUMPSUIT))
 		return FALSE
+*/

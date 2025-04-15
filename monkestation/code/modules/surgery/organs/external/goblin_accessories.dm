@@ -9,8 +9,8 @@
 	slot = ORGAN_SLOT_EXTERNAL_FRILLS
 
 	use_mob_sprite_as_obj_sprite = TRUE
-	bodypart_overlay = /datum/bodypart_overlay/mutant/goblin_ears
-
+//	bodypart_overlay = /datum/bodypart_overlay/mutant/goblin_ears
+/*
 /datum/bodypart_overlay/mutant/goblin_ears
 	layers = EXTERNAL_ADJACENT | EXTERNAL_FRONT
 	feature_key = "goblin_ears"
@@ -23,7 +23,7 @@
 
 /datum/bodypart_overlay/mutant/goblin_ears/can_draw_on_bodypart(mob/living/carbon/human/human)
 	return TRUE
-
+*/
 /obj/item/organ/external/goblin_nose
 	name = "goblin nose"
 	desc = "It doesn't actually let you smell better."
@@ -35,8 +35,8 @@
 	slot = ORGAN_SLOT_EXTERNAL_SNOUT
 
 	use_mob_sprite_as_obj_sprite = TRUE
-	bodypart_overlay = /datum/bodypart_overlay/mutant/goblin_nose
-
+//	bodypart_overlay = /datum/bodypart_overlay/mutant/goblin_nose
+/*
 /datum/bodypart_overlay/mutant/goblin_nose
 	layers = EXTERNAL_ADJACENT | EXTERNAL_FRONT
 	feature_key = "goblin_nose"
@@ -49,3 +49,4 @@
 
 /datum/bodypart_overlay/mutant/goblin_nose/can_draw_on_bodypart(mob/living/carbon/human/human)
 	return TRUE
+*/

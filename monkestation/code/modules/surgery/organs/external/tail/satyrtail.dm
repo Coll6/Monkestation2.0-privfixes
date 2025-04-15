@@ -7,8 +7,8 @@
 	preference = "feature_satyr_tail"
 
 	use_mob_sprite_as_obj_sprite = TRUE
-	bodypart_overlay = /datum/bodypart_overlay/mutant/satyr_tail
-
+//	bodypart_overlay = /datum/bodypart_overlay/mutant/satyr_tail
+/*
 /datum/bodypart_overlay/mutant/satyr_tail
 	layers = EXTERNAL_ADJACENT | EXTERNAL_BEHIND
 	feature_key = "satyr_tail"
@@ -22,3 +22,4 @@
 
 /datum/bodypart_overlay/mutant/satyr_tail/can_draw_on_bodypart(mob/living/carbon/human/human)
 	return TRUE
+*/

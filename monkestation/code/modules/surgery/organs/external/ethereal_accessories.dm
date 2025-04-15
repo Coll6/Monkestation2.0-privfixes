@@ -9,8 +9,8 @@
 	slot = ORGAN_SLOT_EXTERNAL_HORNS
 
 	use_mob_sprite_as_obj_sprite = TRUE
-	bodypart_overlay = /datum/bodypart_overlay/mutant/ethereal_horns
-
+//	bodypart_overlay = /datum/bodypart_overlay/mutant/ethereal_horns
+/*
 /datum/bodypart_overlay/mutant/ethereal_horns
 	layers = EXTERNAL_FRONT|EXTERNAL_ADJACENT
 	feature_key = "ethereal_horns"
@@ -25,7 +25,7 @@
 		return FALSE
 
 	return TRUE
-
+*/
 /obj/item/organ/external/tail/ethereal
 	name = "ethereal tail"
 	desc = "A severed ethereal tail, it reminds you of a bundle of fiber optic cable."
@@ -35,8 +35,8 @@
 	preference = "feature_ethereal_tail"
 
 	use_mob_sprite_as_obj_sprite = TRUE
-	bodypart_overlay = /datum/bodypart_overlay/mutant/tail/ethereal
-
+//	bodypart_overlay = /datum/bodypart_overlay/mutant/tail/ethereal
+/*
 /datum/bodypart_overlay/mutant/tail/ethereal
 	layers = EXTERNAL_FRONT|EXTERNAL_BEHIND
 	feature_key = "ethereal_tail"
@@ -45,3 +45,4 @@
 
 /datum/bodypart_overlay/mutant/tail/ethereal/get_global_feature_list()
 	return GLOB.ethereal_tail_list
+*/
