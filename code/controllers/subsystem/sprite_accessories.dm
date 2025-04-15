@@ -64,6 +64,13 @@ SUBSYSTEM_DEF(accessories) // just 'accessories' for brevity
 	var/list/tails_list_ethereal
 	var/list/ethereal_horns_list
 
+	var/list/tails_list_satyr
+	var/list/satyr_horns_list
+	var/list/satyr_fluff_list
+
+	var/list/arachnid_appendages_list
+	var/list/arachnid_chelicerae_list
+
 /datum/controller/subsystem/accessories/PreInit() // this stuff NEEDS to be set up before GLOB for preferences and stuff to work so this must go here. sorry
 	setup_lists()
 	init_hair_gradients()
@@ -121,6 +128,13 @@ SUBSYSTEM_DEF(accessories) // just 'accessories' for brevity
 
 	tails_list_ethereal = init_sprite_accessory_subtypes(/datum/sprite_accessory/tails/ethereal)[DEFAULT_SPRITE_LIST]
 	ethereal_horns_list = init_sprite_accessory_subtypes(/datum/sprite_accessory/ethereal_horns)[DEFAULT_SPRITE_LIST]
+
+	tails_list_satyr = init_sprite_accessory_subtypes(/datum/sprite_accessory/satyr_tail)[DEFAULT_SPRITE_LIST]
+	satyr_horns_list = init_sprite_accessory_subtypes(/datum/sprite_accessory/satyr_horns)[DEFAULT_SPRITE_LIST]
+	satyr_fluff_list = init_sprite_accessory_subtypes(/datum/sprite_accessory/satyr_fluff)[DEFAULT_SPRITE_LIST]
+
+	arachnid_appendages_list = init_sprite_accessory_subtypes(/datum/sprite_accessory/arachnid_appendages)[DEFAULT_SPRITE_LIST]
+	arachnid_chelicerae_list = init_sprite_accessory_subtypes(/datum/sprite_accessory/arachnid_chelicerae)[DEFAULT_SPRITE_LIST]
 
 /// This proc just intializes all /datum/sprite_accessory/hair_gradient into an list indexed by gradient-style name
 /datum/controller/subsystem/accessories/proc/init_hair_gradients()

@@ -132,6 +132,12 @@ INITIALIZE_IMMEDIATE(/mob/living/carbon/human/dummy)
 	target.dna.features["ethereal_horns"] = get_consistent_feature_entry(SSaccessories.ethereal_horns_list) //Monkestation Addition
 	target.dna.features["ethereal_tail"] = get_consistent_feature_entry(SSaccessories.tails_list_ethereal) //Monkestation Addition
 
+	target.dna.features["satyr_fluff"] = get_consistent_feature_entry(SSaccessories.satyr_fluff_list) //Monkestation Addition
+	target.dna.features["satyr_tail"] = get_consistent_feature_entry(SSaccessories.tails_list_satyr) //Monkestation Addition
+	target.dna.features["satyr_horns"] = get_consistent_feature_entry(SSaccessories.satyr_horns_list) //Monkestation Addition
+
+	target.dna.features["arachnid_appendages"] = get_consistent_feature_entry(SSaccessories.arachnid_appendages_list) //Monkestation Addition
+	target.dna.features["arachnid_chelicerae"] = get_consistent_feature_entry(SSaccessories.arachnid_chelicerae_list) //Monkestation Addition
 /*
 	target.dna.features["ipc_screen"] = get_consistent_feature_entry(GLOB.ipc_screens_list) //Monkestation Addition
 	target.dna.features["ipc_chassis"] = get_consistent_feature_entry(GLOB.ipc_chassis_list) //Monkestation Addition
@@ -139,14 +145,10 @@ INITIALIZE_IMMEDIATE(/mob/living/carbon/human/dummy)
 	target.dna.features["anime_top"] = get_consistent_feature_entry(GLOB.anime_top_list) //Monkestation Addition
 	target.dna.features["anime_middle"] = get_consistent_feature_entry(GLOB.anime_middle_list) //Monkestation Addition
 	target.dna.features["anime_bottom"] = get_consistent_feature_entry(GLOB.anime_bottom_list) //Monkestation Addition
-	target.dna.features["arachnid_appendages"] = get_consistent_feature_entry(GLOB.arachnid_appendages_list) //Monkestation Addition
-	target.dna.features["arachnid_chelicerae"] = get_consistent_feature_entry(GLOB.arachnid_chelicerae_list) //Monkestation Addition
 	target.dna.features["goblin_ears"] = get_consistent_feature_entry(GLOB.goblin_ears_list) //Monkestation Addition
 	target.dna.features["goblin_nose"] = get_consistent_feature_entry(GLOB.goblin_nose_list) //Monkestation Addition
 	target.dna.features["floran_leaves"] = get_consistent_feature_entry(GLOB.floran_leaves_list) //Monkestation Addition
-	target.dna.features["satyr_fluff"] = get_consistent_feature_entry(GLOB.satyr_fluff_list) //Monkestation Addition
-	target.dna.features["satyr_tail"] = get_consistent_feature_entry(GLOB.satyr_tail_list) //Monkestation Addition
-	target.dna.features["satyr_horns"] = get_consistent_feature_entry(GLOB.satyr_horns_list) //Monkestation Addition
+
 	*/
 	target.dna.features["arm_wings"] = get_consistent_feature_entry(SSaccessories.avian_wings_list) //Monkestation Addition
 	target.dna.features["ears_avian"] = get_consistent_feature_entry(SSaccessories.ears_list_avian) //Monkestation Addition

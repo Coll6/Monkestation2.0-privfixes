@@ -1,4 +1,3 @@
-/*
 //Satyr Fluff
 /datum/preference/choiced/satyr_fluff
 	savefile_key = "feature_satyr_fluff"
@@ -8,11 +7,12 @@
 	should_generate_icons = TRUE
 
 /datum/preference/choiced/satyr_fluff/init_possible_values()
-	return possible_values_for_sprite_accessory_list_for_body_part(
-		GLOB.satyr_fluff_list,
-		"satyr_fluff",
-		list("ADJ"),
-	)
+	return assoc_to_keys_features(SSaccessories.satyr_fluff_list)
+
+/datum/preference/choiced/satyr_fluff/icon_for(value)
+	var/datum/sprite_accessory/satyr_fluff = SSaccessories.satyr_fluff_list[value]
+	var/icon/final_icon = icon(satyr_fluff.icon, "m_satyr_fluff_[satyr_fluff.icon_state]_ADJ")
+	return final_icon
 
 /datum/preference/choiced/satyr_fluff/apply_to_human(mob/living/carbon/human/target, value)
 	target.dna.features["satyr_fluff"] = value
@@ -26,11 +26,12 @@
 	should_generate_icons = TRUE
 
 /datum/preference/choiced/satyr_tail/init_possible_values()
-	return possible_values_for_sprite_accessory_list_for_body_part(
-		GLOB.satyr_tail_list,
-		"satyr_tail",
-		list("BEHIND"),
-	)
+	return assoc_to_keys_features(SSaccessories.tails_list_satyr)
+
+/datum/preference/choiced/satyr_tail/icon_for(value)
+	var/datum/sprite_accessory/satyr_tail = SSaccessories.tails_list_satyr[value]
+	var/icon/final_icon = icon(satyr_tail.icon, "m_satyr_tail_[satyr_tail.icon_state]_BEHIND")
+	return final_icon
 
 /datum/preference/choiced/satyr_tail/apply_to_human(mob/living/carbon/human/target, value)
 	target.dna.features["satyr_tail"] = value
@@ -44,12 +45,12 @@
 	should_generate_icons = TRUE
 
 /datum/preference/choiced/satyr_horns/init_possible_values()
-	return possible_values_for_sprite_accessory_list_for_body_part(
-		GLOB.satyr_horns_list,
-		"satyr_horns",
-		list("FRONT"),
-	)
+	return assoc_to_keys_features(SSaccessories.satyr_horns_list)
+
+/datum/preference/choiced/satyr_horns/icon_for(value)
+	var/datum/sprite_accessory/satyr_horns = SSaccessories.satyr_horns_list[value]
+	var/icon/final_icon = icon(satyr_horns.icon, "m_satyr_horns_[satyr_horns.icon_state]_FRONT")
+	return final_icon
 
 /datum/preference/choiced/satyr_horns/apply_to_human(mob/living/carbon/human/target, value)
 	target.dna.features["satyr_horns"] = value
-*/

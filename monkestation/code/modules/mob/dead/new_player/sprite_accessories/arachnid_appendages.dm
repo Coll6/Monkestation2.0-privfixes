@@ -1,4 +1,3 @@
-/*
 /datum/sprite_accessory/arachnid_appendages
 	icon = 'monkestation/icons/mob/species/arachnid/arachnid_appendages.dmi'
 	palette = /datum/color_palette/generic_colors
@@ -27,4 +26,3 @@
 /datum/sprite_accessory/arachnid_appendages/curled
 	name = "Curled"
 	icon_state = "curled"
-*/
