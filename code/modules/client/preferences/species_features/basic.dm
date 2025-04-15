@@ -96,6 +96,9 @@
 /datum/preference/choiced/facial_hair_gradient/init_possible_values()
 	return assoc_to_keys_features(SSaccessories.facial_hair_gradients_list)
 
+/datum/preference/choiced/facial_hair_gradient/icon_for(value)
+	return generate_icon_with_head_accessory(SSaccessories.facial_hair_gradients_list[value])
+
 /datum/preference/choiced/facial_hair_gradient/apply_to_human(mob/living/carbon/human/target, value)
 	target.set_facial_hair_gradient_style(value, update = FALSE)
 
@@ -163,6 +166,9 @@
 
 /datum/preference/choiced/hair_gradient/init_possible_values()
 	return assoc_to_keys_features(SSaccessories.hair_gradients_list)
+
+/datum/preference/choiced/hair_gradient/icon_for(value)
+	return generate_icon_with_head_accessory(SSaccessories.hair_gradients_list[value])
 
 /datum/preference/choiced/hair_gradient/apply_to_human(mob/living/carbon/human/target, value)
 	target.set_hair_gradient_style(value, update = FALSE)

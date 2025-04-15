@@ -72,7 +72,7 @@
 	reagents_list = list(/datum/reagent/medicine/c2/synthflesh = 10)
 	build_path = /obj/item/organ/external/arachnid_appendages
 	category = list(SPECIES_ARACHNIDS, RND_CATEGORY_INITIAL)
-
+*/
 /// Ethereal Organs
 
 /datum/design/ethereal_tail
@@ -98,7 +98,7 @@
 	reagents_list = list(/datum/reagent/medicine/c2/synthflesh = 10, /datum/reagent/consumable/liquidelectricity = 20)
 	build_path = /obj/item/organ/internal/eyes/ethereal
 	category = list(SPECIES_ETHEREAL, RND_CATEGORY_INITIAL)
-
+/*
 /// Floran Organs
 /datum/design/floran_eyes
 	name = "Phytoid Eyes"

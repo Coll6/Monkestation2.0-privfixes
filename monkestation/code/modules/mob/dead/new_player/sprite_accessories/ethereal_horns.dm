@@ -1,4 +1,3 @@
-/*
 /datum/sprite_accessory/ethereal_horns
 	icon = 'monkestation/icons/mob/species/ethereal/ethereal_horns.dmi'
 	palette = /datum/color_palette/generic_colors
@@ -35,4 +34,3 @@
 /datum/sprite_accessory/ethereal_horns/sharp
 	name = "Sharp"
 	icon_state = "sharp"
-*/
