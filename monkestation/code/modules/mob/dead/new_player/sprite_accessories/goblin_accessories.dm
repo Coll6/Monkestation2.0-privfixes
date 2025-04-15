@@ -1,4 +1,3 @@
-/*
 /datum/sprite_accessory/goblin_ears
 	icon = 'monkestation/icons/mob/species/goblin/goblin_ears.dmi'
 	palette = /datum/color_palette/generic_colors
@@ -48,4 +47,3 @@
 /datum/sprite_accessory/goblin_nose/wobble
 	name = "Wobble"
 	icon_state = "wobble"
-*/

@@ -53,9 +53,6 @@
 /datum/preference/choiced/ornithid_wings/init_possible_values()
 	return assoc_to_keys_features(SSaccessories.avian_wings_list)
 
-/datum/preference/choiced/ornithid_wings/init_possible_values()
-	return assoc_to_keys_features(SSaccessories.avian_wings_list)
-
 /datum/preference/choiced/ornithid_wings/icon_for(value)
 	var/datum/sprite_accessory/ornithid_wings = SSaccessories.avian_wings_list[value]
 	var/icon/final_icon = icon(ornithid_wings.icon, "m_arm_wings_[ornithid_wings.icon_state]_FRONT")

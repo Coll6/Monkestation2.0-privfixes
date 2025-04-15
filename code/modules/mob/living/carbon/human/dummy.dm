@@ -145,11 +145,13 @@ INITIALIZE_IMMEDIATE(/mob/living/carbon/human/dummy)
 	target.dna.features["anime_top"] = get_consistent_feature_entry(GLOB.anime_top_list) //Monkestation Addition
 	target.dna.features["anime_middle"] = get_consistent_feature_entry(GLOB.anime_middle_list) //Monkestation Addition
 	target.dna.features["anime_bottom"] = get_consistent_feature_entry(GLOB.anime_bottom_list) //Monkestation Addition
-	target.dna.features["goblin_ears"] = get_consistent_feature_entry(GLOB.goblin_ears_list) //Monkestation Addition
-	target.dna.features["goblin_nose"] = get_consistent_feature_entry(GLOB.goblin_nose_list) //Monkestation Addition
-	target.dna.features["floran_leaves"] = get_consistent_feature_entry(GLOB.floran_leaves_list) //Monkestation Addition
+*/
 
-	*/
+	target.dna.features["goblin_ears"] = get_consistent_feature_entry(SSaccessories.ears_list_goblin) //Monkestation Addition
+	target.dna.features["goblin_nose"] = get_consistent_feature_entry(SSaccessories.goblin_nose_list) //Monkestation Addition
+
+	target.dna.features["floran_leaves"] = get_consistent_feature_entry(SSaccessories.floran_leaves_list) //Monkestation Addition
+
 	target.dna.features["arm_wings"] = get_consistent_feature_entry(SSaccessories.avian_wings_list) //Monkestation Addition
 	target.dna.features["ears_avian"] = get_consistent_feature_entry(SSaccessories.ears_list_avian) //Monkestation Addition
 	target.dna.features["tail_avian"] = get_consistent_feature_entry(SSaccessories.tails_list_avian) //Monkestation Addition

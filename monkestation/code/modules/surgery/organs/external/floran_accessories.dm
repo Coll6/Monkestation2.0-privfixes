@@ -10,8 +10,8 @@
 	slot = ORGAN_SLOT_EXTERNAL_FLORAN_LEAVES
 
 	use_mob_sprite_as_obj_sprite = TRUE
-//	bodypart_overlay = /datum/bodypart_overlay/mutant/floran_leaves
-/*
+	bodypart_overlay = /datum/bodypart_overlay/mutant/floran_leaves
+
 /datum/bodypart_overlay/mutant/floran_leaves
 	layers = EXTERNAL_ADJACENT
 	feature_key = "floran_leaves"
@@ -21,7 +21,7 @@
 	var/color_inverse_base = 255//Remove when MUTCOLORS_SECONDARY works
 
 /datum/bodypart_overlay/mutant/floran_leaves/get_global_feature_list()
-	return GLOB.floran_leaves_list
+	return SSaccessories.floran_leaves_list
 
 /datum/bodypart_overlay/mutant/floran_leaves/color_image(image/overlay, draw_layer, obj/item/bodypart/limb)//Remove when MUTCOLORS_SECONDARY works
 	if(draw_layer != bitflag_to_layer(color_swapped_layer))
@@ -40,4 +40,3 @@
 	. = ..()
 	if(human.wear_suit && (human.wear_suit.flags_inv & HIDEJUMPSUIT))
 		return FALSE
-*/

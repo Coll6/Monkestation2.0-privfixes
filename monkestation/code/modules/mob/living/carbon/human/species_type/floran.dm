@@ -13,7 +13,7 @@
 	)
 	external_organs = list(
 		/obj/item/organ/external/pod_hair = "None",
-		//obj/item/organ/external/floran_leaves = "Furnivour",
+		/obj/item/organ/external/floran_leaves = "Furnivour",
 	)
 	inherent_biotypes = MOB_ORGANIC | MOB_HUMANOID | MOB_PLANT
 	inherent_factions = list(FACTION_PLANTS, FACTION_VINES)
@@ -106,7 +106,6 @@
 		)
 
 	return to_add
-
 
 /obj/item/organ/external/floran_leaves
 	name = "floran leaves"

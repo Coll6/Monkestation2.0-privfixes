@@ -25,9 +25,10 @@
 	should_generate_icons = TRUE
 
 /datum/preference/choiced/apid_antenna/init_possible_values()
-	return assoc_to_keys_features(SSaccessories.apid_antennae_list)
+	return null //assoc_to_keys_features(SSaccessories.apid_antennae_list)
 
 /datum/preference/choiced/apid_antenna/icon_for(value)
+/*
 	var/static/icon/apid_head
 
 	if (isnull(apid_head))
@@ -43,6 +44,7 @@
 	icon_with_antennae.Crop(15, 64, 15 + 31, 64 - 31)
 
 	return icon_with_antennae
+*/
 
 /datum/preference/choiced/apid_antenna/apply_to_human(mob/living/carbon/human/target, value)
 	target.dna.features["apid_antenna"] = value
