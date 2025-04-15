@@ -115,21 +115,21 @@ INITIALIZE_IMMEDIATE(/mob/living/carbon/human/dummy)
 	target.dna.features["mcolor"] = COLOR_VIBRANT_LIME
 	target.dna.features["ethcolor"] = COLOR_WHITE
 	*/
-	target.dna.features["body_markings"] = get_consistent_feature_entry(GLOB.body_markings_list)
-	target.dna.features["ears"] = get_consistent_feature_entry(GLOB.ears_list)
-	target.dna.features["frills"] = get_consistent_feature_entry(GLOB.frills_list)
-	target.dna.features["horns"] = get_consistent_feature_entry(GLOB.horns_list)
-	target.dna.features["moth_antennae"] = get_consistent_feature_entry(GLOB.moth_antennae_list)
-	target.dna.features["moth_markings"] = get_consistent_feature_entry(GLOB.moth_markings_list)
-	target.dna.features["moth_wings"] = get_consistent_feature_entry(GLOB.moth_wings_list)
-	target.dna.features["snout"] = get_consistent_feature_entry(GLOB.snouts_list)
-	target.dna.features["spines"] = get_consistent_feature_entry(GLOB.spines_list)
-	target.dna.features["tail_cat"] = get_consistent_feature_entry(GLOB.tails_list_human) // it's a lie
-	target.dna.features["tail_lizard"] = get_consistent_feature_entry(GLOB.tails_list_lizard)
-	target.dna.features["tail_monkey"] = get_consistent_feature_entry(GLOB.tails_list_monkey)
-	target.dna.features["pod_hair"] = get_consistent_feature_entry(GLOB.pod_hair_list)
-	target.dna.features["fur"] = COLOR_MONKEY_BROWN //Monkestation Addition
-	target.dna.features["ethereal_horns"] = get_consistent_feature_entry(GLOB.ethereal_horns_list) //Monkestation Addition
+	target.dna.features["body_markings"] = get_consistent_feature_entry(SSaccessories.body_markings_list)
+	target.dna.features["ears"] = get_consistent_feature_entry(SSaccessories.ears_list)
+	target.dna.features["frills"] = get_consistent_feature_entry(SSaccessories.frills_list)
+	target.dna.features["horns"] = get_consistent_feature_entry(SSaccessories.horns_list)
+	target.dna.features["moth_antennae"] = get_consistent_feature_entry(SSaccessories.moth_antennae_list)
+	target.dna.features["moth_markings"] = get_consistent_feature_entry(SSaccessories.moth_markings_list)
+	target.dna.features["moth_wings"] = get_consistent_feature_entry(SSaccessories.moth_wings_list)
+	target.dna.features["snout"] = get_consistent_feature_entry(SSaccessories.snouts_list)
+	target.dna.features["spines"] = get_consistent_feature_entry(SSaccessories.spines_list)
+	target.dna.features["tail_cat"] = get_consistent_feature_entry(SSaccessories.tails_list_human) // it's a lie
+	target.dna.features["tail_lizard"] = get_consistent_feature_entry(SSaccessories.tails_list_lizard)
+	target.dna.features["tail_monkey"] = get_consistent_feature_entry(SSaccessories.tails_list_monkey)
+	target.dna.features["pod_hair"] = get_consistent_feature_entry(SSaccessories.pod_hair_list)
+	//target.dna.features["fur"] = COLOR_MONKEY_BROWN //Monkestation Addition
+/*	target.dna.features["ethereal_horns"] = get_consistent_feature_entry(GLOB.ethereal_horns_list) //Monkestation Addition
 	target.dna.features["ethereal_tail"] = get_consistent_feature_entry(GLOB.ethereal_tail_list) //Monkestation Addition
 	target.dna.features["ipc_screen"] = get_consistent_feature_entry(GLOB.ipc_screens_list) //Monkestation Addition
 	target.dna.features["ipc_chassis"] = get_consistent_feature_entry(GLOB.ipc_chassis_list) //Monkestation Addition
@@ -145,6 +145,7 @@ INITIALIZE_IMMEDIATE(/mob/living/carbon/human/dummy)
 	target.dna.features["satyr_fluff"] = get_consistent_feature_entry(GLOB.satyr_fluff_list) //Monkestation Addition
 	target.dna.features["satyr_tail"] = get_consistent_feature_entry(GLOB.satyr_tail_list) //Monkestation Addition
 	target.dna.features["satyr_horns"] = get_consistent_feature_entry(GLOB.satyr_horns_list) //Monkestation Addition
+	*/
 	target.dna.features["arm_wings"] = get_consistent_feature_entry(GLOB.arm_wings_list) //Monkestation Addition
 	target.dna.features["ears_avian"] = get_consistent_feature_entry(GLOB.avian_ears_list) //Monkestation Addition
 	target.dna.features["tail_avian"] = get_consistent_feature_entry(GLOB.tails_list_avian) //Monkestation Addition

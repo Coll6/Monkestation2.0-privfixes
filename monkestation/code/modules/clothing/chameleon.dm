@@ -5,7 +5,7 @@
 	var/actual_hairstyle
 
 /obj/item/clothing/head/chameleon/attack_self(mob/user)
-	var/hair_id = tgui_input_list(user, "How should your hair look while its disguised?", "Pick!", GLOB.hairstyles_list)
+	var/hair_id = tgui_input_list(user, "How should your hair look while its disguised?", "Pick!", SSaccessories.hairstyles_list)
 	if(!hair_id || hair_id == "Bald")
 		balloon_alert(user, "error!")
 		return

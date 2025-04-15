@@ -93,7 +93,7 @@
 	return ..()
 
 /obj/item/clothing/head/hair_tie/attack_self(mob/user)
-	var/hair_id = tgui_input_list(user, "How does your hair look when its up?", "Pick!", GLOB.hairstyles_list)
+	var/hair_id = tgui_input_list(user, "How does your hair look when its up?", "Pick!", SSaccessories.hairstyles_list)
 	if(!hair_id || hair_id == "Bald")
 		balloon_alert(user, "error!")
 		return
@@ -230,7 +230,7 @@
 			balloon_alert(user, "They have no hair to cut!")
 			return
 
-		var/hair_id = tgui_input_list(user, "Please select what hairstyle you'd like to sculpt!", "Select masterpiece", GLOB.hairstyles_list)
+		var/hair_id = tgui_input_list(user, "Please select what hairstyle you'd like to sculpt!", "Select masterpiece", SSaccessories.hairstyles_list)
 		if(!hair_id)
 			return
 
@@ -251,7 +251,7 @@
 			balloon_alert(user, "They have no facial hair to cut!")
 			return
 
-		var/facial_hair_id = tgui_input_list(user, "Please select what facial hairstyle you'd like to sculpt!", "Select masterpiece", GLOB.facial_hairstyles_list)
+		var/facial_hair_id = tgui_input_list(user, "Please select what facial hairstyle you'd like to sculpt!", "Select masterpiece", SSaccessories.facial_hairstyles_list)
 		if(!facial_hair_id)
 			return
 

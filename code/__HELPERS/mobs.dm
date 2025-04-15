@@ -29,106 +29,73 @@
 			return "#000000"
 
 /proc/random_underwear(gender)
-	if(!GLOB.underwear_list.len)
-		init_sprite_accessory_subtypes(/datum/sprite_accessory/underwear, GLOB.underwear_list, GLOB.underwear_m, GLOB.underwear_f)
+	if(length(SSaccessories.underwear_list) == 0)
+		CRASH("No underwear to choose from!")
 	switch(gender)
 		if(MALE)
-			return pick(GLOB.underwear_m)
+			return pick(SSaccessories.underwear_m)
 		if(FEMALE)
-			return pick(GLOB.underwear_f)
+			return pick(SSaccessories.underwear_f)
 		else
-			return pick(GLOB.underwear_list)
+			return pick(SSaccessories.underwear_list)
 
 /proc/random_undershirt(gender)
-	if(!GLOB.undershirt_list.len)
-		init_sprite_accessory_subtypes(/datum/sprite_accessory/undershirt, GLOB.undershirt_list, GLOB.undershirt_m, GLOB.undershirt_f)
+	if(length(SSaccessories.undershirt_list) == 0)
+		CRASH("No undershirts to choose from!")
 	switch(gender)
 		if(MALE)
-			return pick(GLOB.undershirt_m)
+			return pick(SSaccessories.undershirt_m)
 		if(FEMALE)
-			return pick(GLOB.undershirt_f)
+			return pick(SSaccessories.undershirt_f)
 		else
-			return pick(GLOB.undershirt_list)
+			return pick(SSaccessories.undershirt_list)
 
 /proc/random_socks()
-	if(!GLOB.socks_list.len)
-		init_sprite_accessory_subtypes(/datum/sprite_accessory/socks, GLOB.socks_list)
-	return pick(GLOB.socks_list)
+	if(length(SSaccessories.socks_list) == 0)
+		CRASH("No socks to choose from!")
+	return pick(SSaccessories.socks_list)
 
 /proc/random_backpack()
 	return pick(GLOB.backpacklist)
 
 /proc/random_features()
-	if(!length(GLOB.tails_list))
-		init_sprite_accessory_subtypes(/datum/sprite_accessory/tails/, GLOB.tails_list,  add_blank = TRUE)
-	if(!length(GLOB.tails_list_human))
-		init_sprite_accessory_subtypes(/datum/sprite_accessory/tails/human, GLOB.tails_list_human,  add_blank = TRUE)
-	if(!length(GLOB.tails_list_lizard))
-		init_sprite_accessory_subtypes(/datum/sprite_accessory/tails/lizard, GLOB.tails_list_lizard, add_blank = TRUE)
-	if(!length(GLOB.snouts_list))
-		init_sprite_accessory_subtypes(/datum/sprite_accessory/snouts, GLOB.snouts_list)
-	if(!length(GLOB.horns_list))
-		init_sprite_accessory_subtypes(/datum/sprite_accessory/horns, GLOB.horns_list)
-	if(!length(GLOB.tails_list_monkey))
-		init_sprite_accessory_subtypes(/datum/sprite_accessory/tails/monkey, GLOB.tails_list_monkey)
-	if(!length(GLOB.ears_list))
-		init_sprite_accessory_subtypes(/datum/sprite_accessory/ears, GLOB.horns_list)
-	if(!length(GLOB.frills_list))
-		init_sprite_accessory_subtypes(/datum/sprite_accessory/frills, GLOB.frills_list)
-	if(!length(GLOB.spines_list))
-		init_sprite_accessory_subtypes(/datum/sprite_accessory/spines, GLOB.spines_list)
-	if(!length(GLOB.legs_list))
-		init_sprite_accessory_subtypes(/datum/sprite_accessory/legs, GLOB.legs_list)
-	if(!length(GLOB.body_markings_list))
-		init_sprite_accessory_subtypes(/datum/sprite_accessory/body_markings, GLOB.body_markings_list)
-	if(!length(GLOB.wings_list))
-		init_sprite_accessory_subtypes(/datum/sprite_accessory/wings, GLOB.wings_list)
-	if(!length(GLOB.moth_wings_list))
-		init_sprite_accessory_subtypes(/datum/sprite_accessory/moth_wings, GLOB.moth_wings_list)
-	if(!length(GLOB.moth_antennae_list))
-		init_sprite_accessory_subtypes(/datum/sprite_accessory/moth_antennae, GLOB.moth_antennae_list)
-	if(!length(GLOB.moth_markings_list))
-		init_sprite_accessory_subtypes(/datum/sprite_accessory/moth_markings, GLOB.moth_markings_list)
-	if(!length(GLOB.pod_hair_list))
-		init_sprite_accessory_subtypes(/datum/sprite_accessory/pod_hair, GLOB.pod_hair_list)
-
 	//For now we will always return none for tail_human and ears. | "For now" he says.
 	return(list(
 		"tail_cat" = "None",
 		"tail_lizard" = "Smooth",
 		"wings" = "None",
-		"snout" = pick(GLOB.snouts_list),
-		"horns" = pick(GLOB.horns_list),
+		"snout" = pick(SSaccessories.snouts_list),
+		"horns" = pick(SSaccessories.horns_list),
 		"ears" = "None",
-		"frills" = pick(GLOB.frills_list),
-		"spines" = pick(GLOB.spines_list),
-		"body_markings" = pick(GLOB.body_markings_list),
+		"frills" = pick(SSaccessories.frills_list),
+		"spines" = pick(SSaccessories.spines_list),
+		"body_markings" = pick(SSaccessories.body_markings_list),
 		"legs" = "Normal Legs",
-		"caps" = pick(GLOB.caps_list),
-		"moth_wings" = pick(GLOB.moth_wings_list),
-		"moth_antennae" = pick(GLOB.moth_antennae_list),
-		"moth_markings" = pick(GLOB.moth_markings_list),
+		"caps" = pick(SSaccessories.caps_list),
+		"moth_wings" = pick(SSaccessories.moth_wings_list),
+		"moth_antennae" = pick(SSaccessories.moth_antennae_list),
+		"moth_markings" = pick(SSaccessories.moth_markings_list),
 		"tail_monkey" = "Monkey", //Monkestation change: Default to monkey tail.
-		"pod_hair" = pick(GLOB.pod_hair_list),
+		"pod_hair" = pick(SSaccessories.pod_hair_list),
 	))
 
 /proc/random_hairstyle(gender)
 	switch(gender)
 		if(MALE)
-			return pick(GLOB.hairstyles_male_list)
+			return pick(SSaccessories.hairstyles_male_list)
 		if(FEMALE)
-			return pick(GLOB.hairstyles_female_list)
+			return pick(SSaccessories.hairstyles_female_list)
 		else
-			return pick(GLOB.roundstart_hairstyles_list)
+			return pick(SSaccessories.hairstyles_list)
 
 /proc/random_facial_hairstyle(gender)
 	switch(gender)
 		if(MALE)
-			return pick(GLOB.facial_hairstyles_male_list)
+			return pick(SSaccessories.facial_hairstyles_male_list)
 		if(FEMALE)
-			return pick(GLOB.facial_hairstyles_female_list)
+			return pick(SSaccessories.facial_hairstyles_female_list)
 		else
-			return pick(GLOB.facial_hairstyles_list)
+			return pick(SSaccessories.facial_hairstyles_list)
 
 /proc/random_unique_name(gender, attempts_to_find_unique_name=10)
 	for(var/i in 1 to attempts_to_find_unique_name)
