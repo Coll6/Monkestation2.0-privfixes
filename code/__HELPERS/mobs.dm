@@ -76,24 +76,6 @@
 		"moth_antennae" = pick(SSaccessories.moth_antennae_list),
 		"moth_markings" = pick(SSaccessories.moth_markings_list),
 		"pod_hair" = pick(SSaccessories.pod_hair_list),
-
-		"tail_monkey" = "Monkey", //Monkestation change: Default to monkey tail.
-		"ethereal_horns" = pick(SSaccessories.ethereal_horns_list), //Monkestation Addition
-		"ethereal_tail" = pick(SSaccessories.tails_list_ethereal), //Monkestation Addition
-
-		"arm_wings" = pick(SSaccessories.avian_wings_list),
-		"ears_avian" = pick(SSaccessories.ears_list_avian),
-		"tail_avian" = pick(SSaccessories.tails_list_avian),
-
-		//"apid_antenna" = pick(SSaccessories.apid_antennae_list), //Monkestation Addition
-		//"apid_wings" = pick(SSaccessories.apid_wings_list), //Monkestation Addition
-
-		"satyr_fluff" = pick(SSaccessories.satyr_fluff_list), //Monkestation Addition
-		"satyr_tail" = pick(SSaccessories.tails_list_satyr), //Monkestation Addition
-		"satyr_horns" = pick(SSaccessories.satyr_horns_list), //Monkestation Addition
-
-		"arachnid_appendages" = pick(SSaccessories.arachnid_appendages_list), //Monkestation Addition
-		"arachnid_chelicerae" = pick(SSaccessories.arachnid_chelicerae_list), //Monkestation
 	))
 
 /proc/random_hairstyle(gender)

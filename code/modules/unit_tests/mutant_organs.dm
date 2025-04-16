@@ -6,7 +6,6 @@
 /datum/unit_test/mutant_organs/Run()
 	var/list/ignore = list(
 		/datum/species/dullahan,
-		/datum/species/ipc,
 	)
 	var/list/species = subtypesof(/datum/species) - ignore
 	var/static/list/organs_we_care_about = list(

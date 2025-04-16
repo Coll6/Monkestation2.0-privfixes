@@ -284,9 +284,7 @@
 	if(HAS_TRAIT(stalked_human, TRAIT_USES_SKINTONES))
 		stalked_human.skin_tone = "albino"
 		stalked_human.dna.update_ui_block(DNA_SKIN_TONE_BLOCK)
-	else
-		var/datum/color_palette/generic_colors/located = stalked_human.dna.color_palettes[/datum/color_palette/generic_colors]
-		located.mutant_color = "#FFFFFF"
+
 	to_chat(stalked_human, span_warning("YOU FEEL COLD, AS IF YOUR SOUL HAS BEEN RIPPED FROM YOUR BODY."))
 	stalked_human.apply_damage(100, damagetype = BRUTE, spread_damage = TRUE)
 	stalked_human.set_jitter_if_lower(10 SECONDS)

@@ -32,9 +32,7 @@
 		limb_owner.blood_volume -= 60 //Makes for 120 when you regenerate it. monkeedit it actually it costs 100 limbs are 40 right now.
 
 // MONKESTATION ADDITION START
-	if(isipc(owner))
-		owner.dna.features["ipc_screen"] = "Blank"
-		playsound(get_turf(owner), 'sound/vox_fem/swhitenoise.ogg', 60, TRUE)
+
 // MONKESTATION ADDITION END
 
 	drop_limb()

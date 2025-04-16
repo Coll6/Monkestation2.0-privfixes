@@ -129,38 +129,34 @@ INITIALIZE_IMMEDIATE(/mob/living/carbon/human/dummy)
 	target.dna.features["tail_monkey"] = get_consistent_feature_entry(SSaccessories.tails_list_monkey)
 	target.dna.features["pod_hair"] = get_consistent_feature_entry(SSaccessories.pod_hair_list)
 	target.dna.features["fur"] = COLOR_MONKEY_BROWN //Monkestation Addition
-	target.dna.features["ethereal_horns"] = get_consistent_feature_entry(SSaccessories.ethereal_horns_list) //Monkestation Addition
-	target.dna.features["ethereal_tail"] = get_consistent_feature_entry(SSaccessories.tails_list_ethereal) //Monkestation Addition
+//	target.dna.features["ethereal_horns"] = get_consistent_feature_entry(SSaccessories.ethereal_horns_list) //Monkestation Addition
+//	target.dna.features["ethereal_tail"] = get_consistent_feature_entry(SSaccessories.tails_list_ethereal) //Monkestation Addition
 
-	target.dna.features["satyr_fluff"] = get_consistent_feature_entry(SSaccessories.satyr_fluff_list) //Monkestation Addition
-	target.dna.features["satyr_tail"] = get_consistent_feature_entry(SSaccessories.tails_list_satyr) //Monkestation Addition
-	target.dna.features["satyr_horns"] = get_consistent_feature_entry(SSaccessories.satyr_horns_list) //Monkestation Addition
-
-	target.dna.features["arachnid_appendages"] = get_consistent_feature_entry(SSaccessories.arachnid_appendages_list) //Monkestation Addition
-	target.dna.features["arachnid_chelicerae"] = get_consistent_feature_entry(SSaccessories.arachnid_chelicerae_list) //Monkestation Addition
+//	target.dna.features["satyr_fluff"] = get_consistent_feature_entry(SSaccessories.satyr_fluff_list) //Monkestation Addition
+//	target.dna.features["satyr_tail"] = get_consistent_feature_entry(SSaccessories.tails_list_satyr) //Monkestation Addition
+//	target.dna.features["satyr_horns"] = get_consistent_feature_entry(SSaccessories.satyr_horns_list) //Monkestation Addition
+//
+//	target.dna.features["arachnid_appendages"] = get_consistent_feature_entry(SSaccessories.arachnid_appendages_list) //Monkestation Addition
+//	target.dna.features["arachnid_chelicerae"] = get_consistent_feature_entry(SSaccessories.arachnid_chelicerae_list) //Monkestation Addition
 /*
 	target.dna.features["anime_top"] = get_consistent_feature_entry(GLOB.anime_top_list) //Monkestation Addition
 	target.dna.features["anime_middle"] = get_consistent_feature_entry(GLOB.anime_middle_list) //Monkestation Addition
 	target.dna.features["anime_bottom"] = get_consistent_feature_entry(GLOB.anime_bottom_list) //Monkestation Addition
 */
 
-	target.dna.features["ipc_screen"] = get_consistent_feature_entry(SSaccessories.ipc_screens_list) //Monkestation Addition
-	target.dna.features["ipc_chassis"] = get_consistent_feature_entry(SSaccessories.ipc_chasis_list) //Monkestation Addition
-	target.dna.features["ipc_antenna"] = get_consistent_feature_entry(SSaccessories.ipc_antennae_list) //Monkestation Addition
+	//target.dna.features["ipc_screen"] = get_consistent_feature_entry(SSaccessories.ipc_screens_list) //Monkestation Addition
+	//target.dna.features["ipc_chassis"] = get_consistent_feature_entry(SSaccessories.ipc_chasis_list) //Monkestation Addition
+	//target.dna.features["ipc_antenna"] = get_consistent_feature_entry(SSaccessories.ipc_antennae_list) //Monkestation Addition
 
-	target.dna.features["goblin_ears"] = get_consistent_feature_entry(SSaccessories.ears_list_goblin) //Monkestation Addition
-	target.dna.features["goblin_nose"] = get_consistent_feature_entry(SSaccessories.goblin_nose_list) //Monkestation Addition
+//	target.dna.features["goblin_ears"] = get_consistent_feature_entry(SSaccessories.ears_list_goblin) //Monkestation Addition
+	//target.dna.features["goblin_nose"] = get_consistent_feature_entry(SSaccessories.goblin_nose_list) //Monkestation Addition
 
-	target.dna.features["floran_leaves"] = get_consistent_feature_entry(SSaccessories.floran_leaves_list) //Monkestation Addition
+	//target.dna.features["floran_leaves"] = get_consistent_feature_entry(SSaccessories.floran_leaves_list) //Monkestation Addition
 
-	target.dna.features["arm_wings"] = get_consistent_feature_entry(SSaccessories.avian_wings_list) //Monkestation Addition
-	target.dna.features["ears_avian"] = get_consistent_feature_entry(SSaccessories.ears_list_avian) //Monkestation Addition
-	target.dna.features["tail_avian"] = get_consistent_feature_entry(SSaccessories.tails_list_avian) //Monkestation Addition
+	//target.dna.features["arm_wings"] = get_consistent_feature_entry(SSaccessories.avian_wings_list) //Monkestation Addition
+	//target.dna.features["ears_avian"] = get_consistent_feature_entry(SSaccessories.ears_list_avian) //Monkestation Addition
+	//target.dna.features["tail_avian"] = get_consistent_feature_entry(SSaccessories.tails_list_avian) //Monkestation Addition
 
-	var/datum/color_palette/generic_colors/palette = target.dna.color_palettes[/datum/color_palette/generic_colors]
-	palette.mutant_color = COLOR_VIBRANT_LIME
-	palette.mutant_color_secondary = COLOR_VIBRANT_LIME
-	palette.ethereal_color = COLOR_WHITE
 
 /// Provides a dummy that is consistently bald, white, naked, etc.
 /mob/living/carbon/human/dummy/consistent

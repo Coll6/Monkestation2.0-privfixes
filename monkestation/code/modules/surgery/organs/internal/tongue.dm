@@ -344,31 +344,3 @@
 	///this is our spewer component
 	var/datum/component/particle_spewer/music_notes/music
 
-/obj/item/organ/internal/tongue/ornithid/Initialize(mapload)
-	. = ..()
-	song = new(src, allowed_instrument_ids, instrument_range)
-	RegisterSignal(src, COMSIG_INSTRUMENT_START, PROC_REF(start_sound_particles))
-	RegisterSignal(src, COMSIG_INSTRUMENT_END, PROC_REF(stop_sound_particles))
-
-/obj/item/organ/internal/tongue/ornithid/Destroy()
-	QDEL_NULL(song)
-	UnregisterSignal(src, list(COMSIG_INSTRUMENT_START, COMSIG_INSTRUMENT_END))
-	return ..()
-
-/obj/item/organ/internal/tongue/ornithid/Insert(mob/living/carbon/tongue_owner, special, drop_if_replaced)
-	. = ..()
-	if(QDELETED(sing))
-		sing = new
-	sing.Grant(tongue_owner)
-
-/obj/item/organ/internal/tongue/ornithid/Remove(mob/living/carbon/tongue_owner, special)
-	. = ..()
-	sing?.Remove(tongue_owner)
-	song?.stop_playing()
-	stop_sound_particles()
-
-/obj/item/organ/internal/tongue/ornithid/proc/start_sound_particles()
-	music ||= owner.AddComponent(/datum/component/particle_spewer/music_notes)
-
-/obj/item/organ/internal/tongue/ornithid/proc/stop_sound_particles()
-	QDEL_NULL(music)

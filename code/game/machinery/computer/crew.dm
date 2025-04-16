@@ -271,8 +271,7 @@ GLOBAL_DATUM_INIT(crewmonitor, /datum/crewmonitor, new)
 				entry["ijob"] = jobs[trim_assignment]
 
 		// MONKESTATION EDIT ADDITION START - Checking for robotic race
-		if (isipc(tracked_living_mob))
-			entry["is_robot"] = TRUE
+
 		// MONKESTATION EDIT ADDITION END
 
 		// Current status

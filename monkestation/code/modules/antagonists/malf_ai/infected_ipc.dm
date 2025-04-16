@@ -28,11 +28,7 @@
 	if(!owner_ai)
 		to_chat(admin, "Invalid AI selected!")
 		return
-	if(!is_species(target, /datum/species/ipc))
-		var/do_robotize = tgui_alert(admin, "Target is not currently an IPC, turn them into one? This is not mandatory.", "Caution", list("Yes", "No"))
-		if(do_robotize == "Yes")
-			var/mob/living/carbon/human/new_ipc = target
-			new_ipc.set_species(/datum/species/ipc)
+
 
 	message_admins("[key_name_admin(admin)] made [key_name_admin(new_owner)] into [name].")
 	log_admin("[key_name(admin)] made [key_name(new_owner)] into [name].")
@@ -169,9 +165,7 @@
 	if(user.incapacitated())
 		unset_ranged_ability(user)
 		return FALSE
-	if(!isipc(clicked_on))
-		to_chat(user, span_warning("You can only hack IPCs!"))
-		return FALSE
+
 	var/mob/living/carbon/human/ipc = clicked_on
 	if(ipc.client?.prefs && (!(ROLE_MALF in ipc.client.prefs.be_special) || !(ROLE_MALF_MIDROUND in ipc.client.prefs.be_special)))
 		to_chat(user, span_warning("Target seems unwilling to be hacked, find another target."))

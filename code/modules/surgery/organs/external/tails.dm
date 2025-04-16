@@ -107,20 +107,6 @@
 /datum/bodypart_overlay/mutant/tail/cat/get_global_feature_list()
 	return SSaccessories.tails_list_human
 
-/obj/item/organ/external/tail/monkey
-	name = "monkey tail"
-	preference = "feature_monkey_tail"
-	bodypart_overlay = /datum/bodypart_overlay/mutant/tail/monkey
-
-	dna_block = null
-
-///Monkey tail bodypart overlay
-/datum/bodypart_overlay/mutant/tail/monkey
-	feature_key = "tail_monkey"
-
-/datum/bodypart_overlay/mutant/tail/monkey/get_global_feature_list()
-	return SSaccessories.tails_list_monkey
-
 /obj/item/organ/external/tail/lizard
 	name = "lizard tail"
 	desc = "A severed lizard tail. Somewhere, no doubt, a lizard hater is very pleased with themselves."

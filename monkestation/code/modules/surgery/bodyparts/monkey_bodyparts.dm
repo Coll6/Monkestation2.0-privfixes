@@ -11,7 +11,7 @@
 	is_dimorphic = FALSE
 	should_draw_greyscale = TRUE
 	head_flags = HEAD_EYESPRITES | HEAD_EYEHOLES | HEAD_DEBRAIN | HEAD_EYECOLOR
-	palette = /datum/color_palette/generic_colors
+
 	palette_key = "fur_color"
 
 /obj/item/bodypart/chest/monkey
@@ -28,7 +28,7 @@
 	bodytype = BODYTYPE_MONKEY | BODYTYPE_ORGANIC
 	acceptable_bodytype = BODYTYPE_MONKEY
 	dmg_overlay_type = SPECIES_MONKEY
-	palette = /datum/color_palette/generic_colors
+
 	palette_key = "fur_color"
 
 /obj/item/bodypart/arm/left/monkey
@@ -48,7 +48,7 @@
 	unarmed_damage_low = 2 // monkey punches must be really weak, considering they bite people instead and their bites are weak as hell.
 	unarmed_damage_high = 2
 	unarmed_stun_threshold = 3
-	palette = /datum/color_palette/generic_colors
+
 	palette_key = "fur_color"
 
 /obj/item/bodypart/arm/right/monkey
@@ -68,7 +68,7 @@
 	unarmed_damage_low = 2
 	unarmed_damage_high = 2
 	unarmed_stun_threshold = 3
-	palette = /datum/color_palette/generic_colors
+
 	palette_key = "fur_color"
 
 /obj/item/bodypart/leg/left/monkey
@@ -89,7 +89,7 @@
 	unarmed_stun_threshold = 4
 	footprint_sprite = FOOTPRINT_SPRITE_PAWS
 	speed_modifier = -0.05
-	palette = /datum/color_palette/generic_colors
+
 	palette_key = "fur_color"
 
 /obj/item/bodypart/leg/right/monkey
@@ -110,5 +110,5 @@
 	unarmed_stun_threshold = 4
 	footprint_sprite = FOOTPRINT_SPRITE_PAWS
 	speed_modifier = -0.05
-	palette = /datum/color_palette/generic_colors
+
 	palette_key = "fur_color"

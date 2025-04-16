@@ -73,8 +73,7 @@ GLOBAL_DATUM_INIT(blueshield_crewmonitor, /datum/crewmonitor/blueshield, new)
 			else
 				continue
 
-			if (isipc(tracked_living_mob))
-				entry["is_robot"] = TRUE
+
 
 			if (sensor_mode >= SENSOR_LIVING)
 				entry["life_status"] = (tracked_living_mob.stat != DEAD)

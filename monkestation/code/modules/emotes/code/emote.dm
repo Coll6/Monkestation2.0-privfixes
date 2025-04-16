@@ -9,8 +9,6 @@
 /datum/emote/living/click/get_sound(mob/living/user)
 	if(ismoth(user) || isflyperson(user) || isarachnid(user) || istype(user, /mob/living/basic/mothroach))
 		return 'monkestation/sound/creatures/rattle.ogg'
-	else if(isipc(user))
-		return 'sound/machines/click.ogg'
 	else
 		return FALSE
 
@@ -49,7 +47,7 @@
 	emote_type = EMOTE_AUDIBLE
 
 /datum/emote/living/hiss/get_sound(mob/living/user)
-	if(islizard(user) || isipc(user) || isAI(user) || iscyborg(user))
+	if(islizard(user) || isAI(user) || iscyborg(user))
 		return pick('sound/voice/hiss1.ogg', 'sound/voice/hiss2.ogg', 'sound/voice/hiss3.ogg', 'sound/voice/hiss4.ogg', 'sound/voice/hiss5.ogg', 'sound/voice/hiss6.ogg')
 	else if(is_cat_enough(user, include_all_anime = TRUE))
 		return pick('monkestation/sound/voice/feline/hiss1.ogg', 'monkestation/sound/voice/feline/hiss2.ogg', 'monkestation/sound/voice/feline/hiss3.ogg')
@@ -143,7 +141,7 @@
 	return ..()
 
 /datum/emote/living/scream/get_sound(mob/living/user)
-	if ((is_cat_enough(user, TRUE) && issilicon(user)) || (is_cat_enough(user, FALSE) && isipc(user)))
+	if ((is_cat_enough(user, TRUE) && issilicon(user)) || (is_cat_enough(user, FALSE)))
 		return pick(
 			'monkestation/sound/voice/screams/silicon/catscream1.ogg',
 			'monkestation/sound/voice/screams/silicon/catscream2.ogg',
@@ -202,7 +200,7 @@
 	return ..() && is_cat_enough(user, include_all_anime = TRUE)
 
 /datum/emote/living/meow/get_sound(mob/living/user)
-	if(issilicon(user) || isipc(user))
+	if(issilicon(user))
 		return pick(
 			'monkestation/sound/voice/feline/silicon/meow1.ogg',
 			'monkestation/sound/voice/feline/silicon/meow2.ogg',

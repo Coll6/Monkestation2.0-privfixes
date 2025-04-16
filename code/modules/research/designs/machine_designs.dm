@@ -752,15 +752,7 @@
 	)
 	departmental_flags = DEPARTMENT_BITFLAG_ENGINEERING | DEPARTMENT_BITFLAG_SCIENCE
 
-/datum/design/board/limbgrower
-	name = "Limb Grower Board"
-	desc = "The circuit board for a limb grower."
-	id = "limbgrower"
-	build_path = /obj/item/circuitboard/machine/limbgrower
-	category = list(
-		RND_CATEGORY_MACHINE + RND_SUBCATEGORY_MACHINE_MEDICAL
-	)
-	departmental_flags = DEPARTMENT_BITFLAG_MEDICAL | DEPARTMENT_BITFLAG_ENGINEERING //Monkestation edit: Engi circuit
+
 
 /datum/design/board/harvester
 	name = "Organ Harvester Board"

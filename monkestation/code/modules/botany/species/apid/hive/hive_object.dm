@@ -68,8 +68,6 @@ GLOBAL_LIST_INIT(hive_exits, list())
 		return
 
 	var/enter_time = 4 SECONDS
-	if(is_species(user, /datum/species/apid))
-		enter_time = 2 SECONDS
 
 	if(!do_after(user, enter_time, src))
 		return
@@ -126,8 +124,6 @@ GLOBAL_LIST_INIT(hive_exits, list())
 		return
 
 	var/enter_time = 4 SECONDS
-	if(is_species(user, /datum/species/apid))
-		enter_time = 2 SECONDS
 
 	if(!do_after(user, enter_time, src))
 		return

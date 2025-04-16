@@ -20,7 +20,7 @@
 	if (!..())
 		return FALSE
 
-	if(!istype(brain) && !isipc(target))
+	if(!istype(brain))
 		return FALSE
 	else
 		return TRUE

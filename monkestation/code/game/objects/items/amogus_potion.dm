@@ -12,7 +12,7 @@
 		to_chat(impostor, span_userdanger("You know better than to drink it..."))
 		return
 
-	if(!ismonkey(impostor) && !isgoblin(impostor))
+	if(!ismonkey(impostor))
 		impostor.visible_message(span_notice("[impostor] drinks the strange red liquid from [src] as they shrink!"), span_notice("You drink [src]."))
 		to_chat(impostor, span_userdanger("You have a strange feeling as the world seems to grow around you!"))
 		impostor.apply_displacement_icon(/obj/effect/distortion/large/amogus)

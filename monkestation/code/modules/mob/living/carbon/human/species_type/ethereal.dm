@@ -8,9 +8,7 @@
 	mutanttongue = /obj/item/organ/internal/tongue/ethereal
 	mutantheart = /obj/item/organ/internal/heart/ethereal
 	mutantspleen = null
-	external_organs = list(
-		/obj/item/organ/external/ethereal_horns = "None",
-		/obj/item/organ/external/tail/ethereal = "None")
+
 	exotic_bloodtype = /datum/blood_type/crew/ethereal
 
 	// Body temperature for ethereals is much higher then humans as they like hotter environments
@@ -70,8 +68,7 @@
 	if(!ishuman(new_ethereal))
 		return
 	var/mob/living/carbon/human/ethereal = new_ethereal
-	var/datum/color_palette/generic_colors/palette = ethereal.dna.color_palettes[/datum/color_palette/generic_colors]
-	default_color = palette.ethereal_color
+
 	r1 = GETREDPART(default_color)
 	g1 = GETGREENPART(default_color)
 	b1 = GETBLUEPART(default_color)
@@ -107,39 +104,10 @@
 	return randname
 
 /datum/species/ethereal/randomize_features(mob/living/carbon/human/human_mob)
-	var/datum/color_palette/generic_colors/palette = human_mob.dna.color_palettes[/datum/color_palette/generic_colors]
-	palette.ethereal_color = GLOB.color_list_ethereal[pick(GLOB.color_list_ethereal)]
+
 
 /datum/species/ethereal/spec_updatehealth(mob/living/carbon/human/ethereal)
-	. = ..()
-	var/datum/color_palette/generic_colors/palette = ethereal.dna.color_palettes[/datum/color_palette/generic_colors]
-	if(!ethereal_light)
-		return
-	if(default_color != palette.ethereal_color)
-		var/new_color = palette.ethereal_color
-		r1 = GETREDPART(new_color)
-		g1 = GETGREENPART(new_color)
-		b1 = GETBLUEPART(new_color)
-	if(ethereal.stat != DEAD && !EMPeffect)
-		var/healthpercent = max(ethereal.health, 0) / 100
-		if(!emageffect)
-			current_color = rgb(r2 + ((r1-r2)*healthpercent), g2 + ((g1-g2)*healthpercent), b2 + ((b1-b2)*healthpercent))
-		ethereal_light.set_light_range_power_color(1 + (2 * healthpercent), 1 + round(0.5 * healthpercent), current_color)
-		ethereal_light.set_light_on(TRUE)
-		fixed_mut_color = current_color
-	else
-		ethereal_light.set_light_on(FALSE)
-		current_color = rgb(230, 230, 230)
-		fixed_mut_color = current_color
-	ethereal.set_facial_haircolor(current_color, update = FALSE)
-	ethereal.set_haircolor(current_color, update = TRUE)
-	if(ethereal.organs_slot["horns"])
-		var/obj/item/organ/external/horms = ethereal.organs_slot["horns"]
-		horms.bodypart_overlay.draw_color = current_color
-	if(ethereal.organs_slot["tail"])
-		var/obj/item/organ/external/tail = ethereal.organs_slot["tail"]
-		tail.bodypart_overlay.draw_color = current_color
-	ethereal.update_body()
+
 
 /datum/species/ethereal/proc/on_emp_act(mob/living/carbon/human/H, severity)
 	SIGNAL_HANDLER

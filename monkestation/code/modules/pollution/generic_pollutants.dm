@@ -12,9 +12,6 @@
 	if(prob(20))
 		victim.emote("cough")
 
-	if(is_species(victim, /datum/species/apid))
-		victim.adjust_drowsiness(2 SECONDS)
-
 ///From smoking weed
 /datum/pollutant/smoke/cannabis
 	name = "Cannabis"

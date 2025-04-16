@@ -8,9 +8,7 @@
 		TRAIT_MUTANT_COLORS,
 	)
 	inherent_biotypes = MOB_ORGANIC|MOB_HUMANOID|MOB_BUG
-	external_organs = list(
-		/obj/item/organ/external/arachnid_appendages = "long",
-		/obj/item/organ/external/chelicerae = "basic")
+
 	meat = /obj/item/food/meat/slab/spider
 	species_language_holder = /datum/language_holder/fly
 	mutanttongue = /obj/item/organ/internal/tongue/arachnid

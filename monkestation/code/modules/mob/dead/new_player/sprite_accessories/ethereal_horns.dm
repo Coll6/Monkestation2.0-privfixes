@@ -1,6 +1,6 @@
 /datum/sprite_accessory/ethereal_horns
 	icon = 'monkestation/icons/mob/species/ethereal/ethereal_horns.dmi'
-	palette = /datum/color_palette/generic_colors
+
 	palette_key = MUTANT_COLOR
 
 /datum/sprite_accessory/ethereal_horns/none

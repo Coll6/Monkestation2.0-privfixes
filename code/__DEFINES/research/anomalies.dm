@@ -25,7 +25,6 @@ GLOBAL_LIST_INIT(bioscrambler_parts_blacklist, typecacheof(list(
 /// Blacklist of limb IDs which should not appear when bioscrambled, mostly because they looks awful and buggy.
 GLOBAL_LIST_INIT(bioscrambler_limb_id_blacklist, list(
 	BODYPART_ID_PSYKER,
-	SPECIES_GOBLIN,
 	SPECIES_TERATOMA,
 ))
 
@@ -58,9 +57,7 @@ GLOBAL_LIST_INIT(bioscrambler_organs_blacklist, typecacheof(list(
 	/obj/item/organ/internal/heart/gland/slime,
 	/obj/item/organ/internal/heart/gland/trauma,
 	/obj/item/organ/internal/heart/gland/viral,
-	/obj/item/organ/external/anime_head,
-	/obj/item/organ/external/anime_middle,
-	/obj/item/organ/external/anime_bottom,
+
 	/obj/item/organ/internal/tongue/fly,
 	/obj/item/organ/internal/stomach/fly,
 	/obj/item/organ/internal/legion_tumour,

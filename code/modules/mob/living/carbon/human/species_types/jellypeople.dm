@@ -182,8 +182,7 @@
 
 	spare.underwear = "Nude"
 	H.dna.transfer_identity(spare, transfer_SE=1)
-	var/datum/color_palette/generic_colors/palette = spare.dna.color_palettes[/datum/color_palette/generic_colors]
-	palette.mutant_color = "#[pick("7F", "FF")][pick("7F", "FF")][pick("7F", "FF")]"
+
 	spare.real_name = spare.dna.real_name
 	spare.name = spare.dna.real_name
 	spare.updateappearance(mutcolor_update=1)
@@ -257,8 +256,7 @@
 			continue
 
 		var/list/L = list()
-		var/datum/color_palette/generic_colors/palette = body.dna.color_palettes[/datum/color_palette/generic_colors]
-		L["htmlcolor"] = palette?.mutant_color
+		L["htmlcolor"] = "#000000"
 		L["area"] = get_area_name(body, TRUE)
 		var/stat = "error"
 		switch(body.stat)
@@ -425,10 +423,7 @@
 
 /// Updates the glow of our internal glow object
 /datum/species/jelly/luminescent/proc/update_glow(mob/living/carbon/human/glowie, intensity)
-	if(intensity)
-		glow_intensity = intensity
-	var/datum/color_palette/generic_colors/palette = glowie.dna.color_palettes[/datum/color_palette/generic_colors]
-	glow.set_light_range_power_color(glow_intensity, glow_intensity, palette.return_color(MUTANT_COLOR))
+
 
 /datum/action/innate/integrate_extract
 	name = "Integrate Extract"

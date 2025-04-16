@@ -492,9 +492,6 @@
 			owner.add_mood_event("Eigentrip", /datum/mood_event/eigentrip)
 			if(QDELETED(human_mob))
 				return
-			if(prob(1))//low chance of the alternative reality returning to monkey
-				var/obj/item/organ/external/tail/monkey/monkey_tail = new()
-				monkey_tail.Insert(human_mob, drop_if_replaced = FALSE)
 			var/datum/species/human_species = human_mob.dna?.species
 			if(human_species)
 				human_species.randomize_features(human_mob)

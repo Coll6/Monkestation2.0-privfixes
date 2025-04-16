@@ -62,8 +62,6 @@ GLOBAL_DATUM_INIT(security_crewmonitor, /datum/crewmonitor/security, new)
 			else
 				continue
 
-			if (isipc(tracked_living_mob))
-				entry["is_robot"] = TRUE
 			if (sensor_mode >= SENSOR_LIVING)
 				entry["life_status"] = (tracked_living_mob.stat != DEAD)
 			if (sensor_mode >= SENSOR_VITALS)

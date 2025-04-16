@@ -150,14 +150,3 @@
 	overcharge = overcharge || mutable_appearance('icons/effects/effects.dmi', "electricity", EFFECTS_LAYER)
 	ethereal.add_overlay(overcharge)
 
-	if(do_after(ethereal, 5 SECONDS, timed_action_flags = (IGNORE_USER_LOC_CHANGE|IGNORE_HELD_ITEM|IGNORE_INCAPACITATED)))
-		var/datum/color_palette/generic_colors/located = ethereal.dna.color_palettes[/datum/color_palette/generic_colors]
-		ethereal.flash_lighting_fx(5, 7, ethereal.dna.species.fixed_mut_color ? ethereal.dna.species.fixed_mut_color : located.return_color(MUTANT_COLOR))
-
-		playsound(ethereal, 'sound/magic/lightningshock.ogg', 100, TRUE, extrarange = 5)
-		ethereal.cut_overlay(overcharge)
-		tesla_zap(ethereal, 2, ethereal.blood_volume*9, ZAP_OBJ_DAMAGE | ZAP_GENERATES_POWER | ZAP_ALLOW_DUPLICATES)
-		adjust_charge(ETHEREAL_BLOOD_CHARGE_FULL - ethereal.blood_volume)
-		ethereal.visible_message(span_danger("[ethereal] violently discharges energy!"), span_warning("You violently discharge energy!"))
-
-		ethereal.Paralyze(100)

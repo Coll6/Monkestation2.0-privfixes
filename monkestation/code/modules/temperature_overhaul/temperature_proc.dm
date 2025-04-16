@@ -116,11 +116,7 @@
  */
 /mob/living/proc/get_skin_temperature()
 	var/area_temperature = get_temperature(loc?.return_air())
-	if(!(mob_biotypes & MOB_ORGANIC) && !isipc(src))
-		// non-organic mobs likely don't feel or regulate temperature
-		// so we can just report the area temp... probably
-		// there's an argument to be made for putting the cold blooded check here
-		return round(area_temperature, 0.01)
+
 
 	// calculate skin temp based on a weight average between body temp and area temp plus a multiplier
 	// this weighting gives us about 34.4c for a 37c body temp in a 20c room which is about average
