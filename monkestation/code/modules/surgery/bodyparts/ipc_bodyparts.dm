@@ -135,7 +135,6 @@
 	icon_state = "synth_r_leg"
 	flags_1 = CONDUCT_1
 	should_draw_greyscale = FALSE
-
 	palette = /datum/color_palette/generic_colors
 	palette_key = MUTANT_COLOR
 	biological_state = BIO_ROBOTIC | BIO_JOINTED | BIO_BLOODED

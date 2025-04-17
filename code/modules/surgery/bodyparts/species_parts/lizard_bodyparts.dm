@@ -4,7 +4,7 @@
 	is_dimorphic = FALSE
 	head_flags = HEAD_HAIR| HEAD_EYESPRITES | HEAD_EYEHOLES | HEAD_DEBRAIN | HEAD_EYECOLOR
 	composition_effects = list(TRAIT_COLD_BLOODED = 0.5)
-
+	palette = /datum/color_palette/generic_colors
 	palette_key = MUTANT_COLOR
 
 /obj/item/bodypart/chest/lizard
@@ -14,7 +14,7 @@
 	ass_image = 'icons/ass/asslizard.png'
 	composition_effects = list(TRAIT_COLD_BLOODED = 0.5)
 	wing_types = list(/obj/item/organ/external/wings/functional/dragon)
-
+	palette = /datum/color_palette/generic_colors
 	palette_key = MUTANT_COLOR
 
 /obj/item/bodypart/arm/left/lizard
@@ -25,7 +25,7 @@
 	unarmed_attack_sound = 'sound/weapons/slash.ogg'
 	unarmed_miss_sound = 'sound/weapons/slashmiss.ogg'
 	composition_effects = list(TRAIT_COLD_BLOODED = 0.5)
-
+	palette = /datum/color_palette/generic_colors
 	palette_key = MUTANT_COLOR
 
 /obj/item/bodypart/arm/right/lizard
@@ -36,7 +36,7 @@
 	unarmed_attack_sound = 'sound/weapons/slash.ogg'
 	unarmed_miss_sound = 'sound/weapons/slashmiss.ogg'
 	composition_effects = list(TRAIT_COLD_BLOODED = 0.5)
-
+	palette = /datum/color_palette/generic_colors
 	palette_key = MUTANT_COLOR
 
 /obj/item/bodypart/arm/left/lizard/ashwalker
@@ -52,7 +52,7 @@
 	digitigrade_id = "digitigrade"
 	footprint_sprite = FOOTPRINT_SPRITE_CLAWS
 	composition_effects = list(TRAIT_COLD_BLOODED = 0.5)
-
+	palette = /datum/color_palette/generic_colors
 	palette_key = MUTANT_COLOR
 	step_sounds = list(
 		'sound/effects/footstep/hardclaw1.ogg',
@@ -68,7 +68,7 @@
 	digitigrade_id = "digitigrade"
 	footprint_sprite = FOOTPRINT_SPRITE_CLAWS
 	composition_effects = list(TRAIT_COLD_BLOODED = 0.5)
-
+	palette = /datum/color_palette/generic_colors
 	palette_key = MUTANT_COLOR
 	step_sounds = list(
 		'sound/effects/footstep/hardclaw1.ogg',
