@@ -185,7 +185,7 @@
 	biological_state = (BIO_FLESH|BIO_BLOODED|BIO_JOINTED)
 	limb_id = SPECIES_SLIMEPERSON
 	composition_effects = list(/datum/element/soft_landing = 0.5)
-
+	palette = /datum/color_palette/generic_colors
 	palette_key = MUTANT_COLOR
 
 ///LUMINESCENT
@@ -225,7 +225,7 @@
 /obj/item/bodypart/leg/right/luminescent
 	biological_state = (BIO_FLESH|BIO_BLOODED|BIO_JOINTED)
 	limb_id = SPECIES_LUMINESCENT
-
+	palette = /datum/color_palette/generic_colors
 	palette_key = MUTANT_COLOR
 
 ///ZOMBIE

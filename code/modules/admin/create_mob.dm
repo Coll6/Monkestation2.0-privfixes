@@ -28,7 +28,9 @@
 
 	human.dna.human_blood_type = random_human_blood_type()
 	human.dna.species.randomize_active_underwear_only(human)
-
+	var/datum/color_palette/generic_colors/palette = human.dna.color_palettes[/datum/color_palette/generic_colors]
+	palette.mutant_color = "#[random_color()]"
+	palette.mutant_color_secondary = "#[random_color()]"
 	for(var/datum/species/species_path as anything in subtypesof(/datum/species))
 		var/datum/species/new_species = new species_path
 		new_species.randomize_features(human)

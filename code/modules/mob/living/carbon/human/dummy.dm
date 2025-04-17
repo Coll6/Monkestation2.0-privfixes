@@ -157,6 +157,10 @@ INITIALIZE_IMMEDIATE(/mob/living/carbon/human/dummy)
 	//target.dna.features["ears_avian"] = get_consistent_feature_entry(SSaccessories.ears_list_avian) //Monkestation Addition
 	//target.dna.features["tail_avian"] = get_consistent_feature_entry(SSaccessories.tails_list_avian) //Monkestation Addition
 
+	var/datum/color_palette/generic_colors/palette = target.dna.color_palettes[/datum/color_palette/generic_colors]
+	palette.mutant_color = COLOR_VIBRANT_LIME
+	palette.mutant_color_secondary = COLOR_VIBRANT_LIME
+	palette.ethereal_color = COLOR_WHITE
 
 /// Provides a dummy that is consistently bald, white, naked, etc.
 /mob/living/carbon/human/dummy/consistent

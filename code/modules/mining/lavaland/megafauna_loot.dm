@@ -735,6 +735,8 @@
 	switch(random)
 		if(1)
 			to_chat(user, span_danger("Your appearance morphs to that of a very small humanoid ash dragon! You get to look like a freak without the cool abilities."))
+			var/datum/color_palette/generic_colors/located = consumer.dna.color_palettes[/datum/color_palette/generic_colors]
+			located.mutant_color = "#A02720"
 			consumer.dna.features = list(
 				"tail_lizard" = "Dark Tiger",
 				"tail_human" = "None",
