@@ -144,7 +144,10 @@
 	RegisterSignal(organ_owner, COMSIG_MOB_STATCHANGE, PROC_REF(on_stat_change))
 
 /obj/item/organ/internal/brain/slime/proc/colorize()
-
+	if(isoozeling(owner))
+		var/datum/color_palette/generic_colors/located = owner.dna.color_palettes[/datum/color_palette/generic_colors]
+		core_color = located.return_color(MUTANT_COLOR)
+		add_atom_colour(core_color, FIXED_COLOUR_PRIORITY)
 
 /obj/item/organ/internal/brain/slime/proc/on_stat_change(mob/living/victim, new_stat, turf/loc_override)
 	SIGNAL_HANDLER
