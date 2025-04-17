@@ -1756,7 +1756,7 @@ MONKESTATION EDIT
 	name = "Cat"
 	icon = 'icons/mob/species/human/cat_features.dmi'
 	icon_state = "default"
-	//palette = /datum/color_palette/generic_colors
+	palette = /datum/color_palette/generic_colors
 	palette_key = MUTANT_COLOR
 
 /datum/sprite_accessory/tails/monkey
@@ -1893,7 +1893,7 @@ MONKESTATION EDIT
 	name = "Cat"
 	icon_state = "cat"
 	hasinner = TRUE
-
+	palette = /datum/color_palette/generic_colors
 	palette_key = HAIR_COLOR
 
 /datum/sprite_accessory/ears/fox
@@ -1902,7 +1902,7 @@ MONKESTATION EDIT
 	icon_state = "fox"
 	hasinner = TRUE
 	locked = TRUE
-
+	palette = /datum/color_palette/generic_colors
 	palette_key = MUTANT_COLOR
 
 /datum/sprite_accessory/wings/none
