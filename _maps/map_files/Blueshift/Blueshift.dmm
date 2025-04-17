@@ -20013,6 +20013,7 @@
 /turf/open/floor/iron,
 /area/station/ai_monitored/command/storage/eva/upper)
 "dPO" = (
+/obj/item/organ/external/tail/monkey,
 /turf/open/floor/cult,
 /area/station/maintenance/department/science/xenobiology)
 "dPP" = (

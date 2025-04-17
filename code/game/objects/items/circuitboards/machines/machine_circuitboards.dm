@@ -855,6 +855,24 @@
 	. = ..()
 	. += "The cost to use this kiosk is set to [custom_cost]."
 
+/obj/item/circuitboard/machine/limbgrower
+	name = "Limb Grower"
+	greyscale_colors = CIRCUIT_COLOR_MEDICAL
+	build_path = /obj/machinery/limbgrower
+	req_components = list(
+		/datum/stock_part/manipulator = 1,
+		/obj/item/reagent_containers/cup/beaker = 2,
+		/obj/item/stack/sheet/glass = 1)
+
+/obj/item/circuitboard/machine/limbgrower/fullupgrade
+	name = "Limb Grower"
+	greyscale_colors = CIRCUIT_COLOR_MEDICAL
+	build_path = /obj/machinery/limbgrower
+	req_components = list(
+		/datum/stock_part/manipulator/tier4  = 1,
+		/obj/item/reagent_containers/cup/beaker/bluespace = 2,
+		/obj/item/stack/sheet/glass = 1)
+
 /obj/item/circuitboard/machine/protolathe/department/medical
 	name = "Departmental Protolathe - Medical"
 	greyscale_colors = CIRCUIT_COLOR_MEDICAL

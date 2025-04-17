@@ -2109,7 +2109,7 @@ MONKESTATION EDIT
 /datum/sprite_accessory/caps
 	icon = 'icons/mob/species/mush_cap.dmi'
 	em_block = TRUE
-
+	palette = /datum/color_palette/generic_colors
 	palette_key = MUTANT_COLOR
 
 /datum/sprite_accessory/caps/round
