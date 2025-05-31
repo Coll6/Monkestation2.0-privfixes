@@ -244,6 +244,45 @@
 
 /obj/structure/mecha_wreckage/devitt
 	name = "\improper Devitt Mk3 Wreckage"
-	icon = 'monkestation/icons/mecha/tanks.dmi'
+	icon = 'icons/mecha/tanks.dmi'
 	icon_state = "devitt-broken"
-	welder_salvage = list(/obj/item/stack/sheet/plasteel, /obj/item/stack/sheet/iron, /obj/item/stack/rods) //get it, it's a glass cannon
+	welder_salvage = list(/obj/item/stack/sheet/plasteel, /obj/item/stack/sheet/iron, /obj/item/stack/rods)
+
+/obj/structure/mecha_wreckage/kingspire
+	name = "\improper Kingspire Mk1 Wreckage"
+	icon = 'icons/mecha/tanks.dmi'
+	icon_state = "kingspire-broken"
+	welder_salvage = list(/obj/item/stack/sheet/plasteel, /obj/item/stack/sheet/iron, /obj/item/stack/rods)
+	parts = list(/obj/item/gun/ballistic/automatic/malone)
+
+/obj/structure/mecha_wreckage/talos
+	name = "\improper 85V-g Talos Wreckage"
+	icon = 'icons/mecha/largetanks.dmi'
+	icon_state = "talos-broken"
+	welder_salvage = list(/obj/item/stack/sheet/plasteel, /obj/item/stack/sheet/iron, /obj/item/stack/rods)
+
+/obj/structure/mecha_wreckage/percutio
+	name = "\improper T5 Percutio Wreckage"
+	icon = 'icons/mecha/tanks.dmi'
+	icon_state = "percutio-broken"
+	welder_salvage = list(/obj/item/stack/sheet/plasteel, /obj/item/stack/sheet/iron, /obj/item/stack/rods)
+	parts = list(/obj/item/gun/ballistic/automatic/neville)
+
+/obj/structure/mecha_wreckage/firebrand
+	name = "\improper Noble Firebrand Mk.XVII Wreckage"
+	icon = 'icons/mecha/tanks.dmi'
+	icon_state = "firebrand-broken"
+	welder_salvage = list(/obj/item/stack/sheet/plasteel, /obj/item/stack/sheet/iron, /obj/item/stack/rods)
+
+
+/obj/structure/mecha_wreckage/callahan
+	name = "\improper Sinking Callahan Class Battleship"
+	desc = "Worship whoever has just killed this, they have preformed a miracale"
+	icon = 'icons/mecha/callahan.dmi'
+	icon_state = "callahan-broken"
+	SET_BASE_PIXEL(-141, 0)
+	move_resist = INFINITY
+	welder_salvage = list()
+/obj/structure/mecha_wreckage/callahan/Initialize(mapload)
+	. = ..()
+	playsound(loc, 'sound/effects/explosion3.ogg', 250)

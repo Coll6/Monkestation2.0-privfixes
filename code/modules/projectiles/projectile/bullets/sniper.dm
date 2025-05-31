@@ -115,3 +115,15 @@
 	ricochet_incidence_leeway = 90
 	ricochet_decay_damage = 1
 	ricochet_shoots_firer = FALSE
+
+/obj/projectile/bullet/neville
+	name ="fukin 20mm bullet"
+	speed = 0.65
+	range = 50 // Its not accurate, its fucking powerful
+	damage = 35
+	paralyze = 10 // Its goin clean through, no spreading to really cause you to get KOed
+	dismemberment = 50
+	catastropic_dismemberment = TRUE
+	armour_penetration = 100
+	var/object_damage = 80
+	var/mecha_damage = 65
