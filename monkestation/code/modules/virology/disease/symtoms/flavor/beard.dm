@@ -6,7 +6,6 @@
 	badness = EFFECT_DANGER_FLAVOR
 	severity = 1
 
-
 /datum/symptom/beard/activate(mob/living/mob)
 	if(istype(mob, /mob/living/carbon/human))
 		var/mob/living/carbon/human/victim = mob
@@ -22,6 +21,5 @@
 				if(multiplier >= 4)
 					beard_name = "Beard (Dwarf)"
 				if(beard_name != "" && victim.facial_hairstyle != beard_name)
-					victim.facial_hairstyle = beard_name
+					victim.set_facial_hairstyle(beard_name, update = TRUE)
 					to_chat(victim, span_warning("Your chin itches."))
-					victim.update_body_parts()

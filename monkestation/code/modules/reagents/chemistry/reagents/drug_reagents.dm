@@ -8,7 +8,6 @@
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 	addiction_types = list(/datum/addiction/opioids = 18) //7.2 per 2 seconds
 
-
 /datum/reagent/drug/krokodil/on_mob_life(mob/living/carbon/affected_mob, seconds_per_tick, times_fired)
 	var/high_message = pick("You feel calm.", "You feel collected.", "You feel like you need to relax.")
 	if(SPT_PROB(2.5, seconds_per_tick))
@@ -18,9 +17,8 @@
 		if(!istype(affected_mob.dna.species, /datum/species/human/krokodil_addict))
 			to_chat(affected_mob, span_userdanger("Your skin falls off easily!"))
 			var/mob/living/carbon/human/affected_human = affected_mob
-			affected_human.facial_hairstyle = "Shaved"
-			affected_human.hairstyle = "Bald"
-			affected_human.update_body_parts() // makes you loose hair as well
+			affected_human.set_facial_hairstyle("Shaved", update = FALSE)
+			affected_human.set_hairstyle("Bald", update = FALSE)
 			affected_mob.set_species(/datum/species/human/krokodil_addict)
 			affected_mob.adjustBruteLoss(50 * REM, FALSE, required_bodytype = affected_bodytype) // holy shit your skin just FELL THE FUCK OFF
 	..()

@@ -72,6 +72,8 @@
 	corpse = new_corpse
 	update_appearance(UPDATE_ICON)
 	set_up_zombie_appearance()
+	new_corpse.set_facial_hairstyle("Shaved", update = FALSE)
+	new_corpse.set_hairstyle("Bald", update = TRUE)
 	RegisterSignal(corpse, COMSIG_LIVING_REVIVE, PROC_REF(on_corpse_revived))
 
 /// Dynamic changeling reentry

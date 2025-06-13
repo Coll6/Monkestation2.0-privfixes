@@ -103,6 +103,8 @@
 	..()
 	. = TRUE
 
+/*
+ * defined in monkestation\code\modules\reagents\chemistry\reagents\drug_reagents.dm
 /datum/reagent/drug/krokodil
 	name = "Krokodil"
 	description = "Cools and calms you down. If overdosed it will deal significant Brain and Toxin damage."
@@ -112,7 +114,6 @@
 	ph = 9
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 	addiction_types = list(/datum/addiction/opioids = 18) //7.2 per 2 seconds
-
 
 /datum/reagent/drug/krokodil/on_mob_life(mob/living/carbon/affected_mob, seconds_per_tick, times_fired)
 	var/high_message = pick("You feel calm.", "You feel collected.", "You feel like you need to relax.")
@@ -135,8 +136,7 @@
 	affected_mob.adjustToxLoss(0.25 * REM * seconds_per_tick, FALSE, required_biotype = affected_biotype)
 	..()
 	. = TRUE
-
-
+*/
 
 /datum/reagent/drug/methamphetamine
 	name = "Methamphetamine"

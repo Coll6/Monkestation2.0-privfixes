@@ -80,5 +80,4 @@
 			span_notice("You successfully change [original_target == trimmer ? "your" : original_target.name + "'s"] [name].")
 		)
 
-
 		simple_change_sprite(restyles[new_style]) //turn name to type and pass it on

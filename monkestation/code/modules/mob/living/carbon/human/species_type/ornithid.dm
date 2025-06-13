@@ -45,8 +45,8 @@ GLOBAL_LIST_EMPTY(tails_list_avian)
 
 /datum/species/ornithid/prepare_human_for_preview(mob/living/carbon/human/human)
 	human.skin_tone = "asian1"
-	human.hairstyle = "Half-banged Hair"
-	human.set_haircolor(COLOR_BROWNER_BROWN)
+	human.set_hairstyle("Half-banged Hair", update = FALSE)
+	human.set_haircolor(COLOR_BROWNER_BROWN, update = FALSE)
 	human.update_body(TRUE)
 
 // section for lore/perk descs
