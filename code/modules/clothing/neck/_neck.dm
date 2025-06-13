@@ -501,3 +501,23 @@
 	desc = "A delicate silk scarf with tiny sparkling fragments woven into the fabric."
 	icon_state = "starshawl"
 	icon = 'icons/obj/clothing/neck.dmi'
+
+/obj/item/clothing/neck/bluespace_necklace
+	icon = 'icons/obj/clothing/neck.dmi'
+	icon_state = "bluespace_necklace"
+	inhand_icon_state = ""
+
+/obj/item/clothing/neck/silver_necklace
+	icon = 'icons/obj/clothing/neck.dmi'
+	icon_state = "silver_necklace"
+	inhand_icon_state = ""
+
+/obj/item/clothing/neck/gold_necklace
+	icon = 'icons/obj/clothing/neck.dmi'
+	icon_state = "gold_necklace"
+	inhand_icon_state = ""
+
+/obj/item/clothing/neck/diamond_necklace
+	icon = 'icons/obj/clothing/neck.dmi'
+	icon_state = "diamond_necklace"
+	inhand_icon_state = ""
