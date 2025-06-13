@@ -539,10 +539,10 @@ SUBSYSTEM_DEF(ticker)
 		SSchallenges.apply_challenges(persistent_client)
 		for(var/processing_reward_bitflags in bitflags_to_reward)//you really should use department bitflags if possible
 			if(living.mind.assigned_role.departments_bitflags & processing_reward_bitflags)
-				persistent_client.roundend_monkecoin_bonus += 150
+				persistent_client.roundend_monkecoin_bonus += 425
 		for(var/processing_reward_jobs in jobs_to_reward)//just in case you really only want to reward a specific job
 			if(living.job == processing_reward_jobs)
-				persistent_client.roundend_monkecoin_bonus += 150
+				persistent_client.roundend_monkecoin_bonus += 425
 
 /datum/controller/subsystem/ticker/proc/transfer_characters()
 	var/list/livings = list()
@@ -807,6 +807,7 @@ SUBSYSTEM_DEF(ticker)
 	gather_newscaster() //called here so we ensure the log is created even upon admin reboot
 	save_admin_data()
 	update_everything_flag_in_db()
+	save_mentor_data() //MONKE EDIT
 	if(!round_end_sound)
 		round_end_sound = choose_round_end_song()
 	///The reference to the end of round sound that we have chosen.
