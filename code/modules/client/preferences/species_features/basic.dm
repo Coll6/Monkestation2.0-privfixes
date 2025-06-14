@@ -98,13 +98,11 @@
 
 /datum/preference/choiced/facial_hair_gradient/icon_for(value)
 	var/static/icon/head_icon
-	var/datum/sprite_accessory/hair_accessory = GLOB.facial_hairstyles_list["Beard (Very Long)"]
-	var/icon/hair_icon = icon(hair_accessory.icon, hair_accessory.icon_state, dir = SOUTH)
-	hair_icon.Blend("#080501", ICON_MULTIPLY)
+	if (isnull(head_icon))
+		head_icon = icon('icons/mob/species/human/bodyparts_greyscale.dmi', "human_head_m")
+		head_icon.Blend(skintone2hex("caucasian1"), ICON_MULTIPLY)
 
-	var/icon/final_icon = new(head_icon)
-
-	return final_icon
+	return head_icon
 
 /datum/preference/choiced/facial_hair_gradient/apply_to_human(mob/living/carbon/human/target, value)
 	target.set_facial_hair_gradient_style(new_style = value, update = FALSE)
@@ -176,13 +174,11 @@
 
 /datum/preference/choiced/hair_gradient/icon_for(value)
 	var/static/icon/head_icon
-	var/datum/sprite_accessory/hair_accessory = GLOB.facial_hairstyles_list["Beard (Very Long)"]
-	var/icon/hair_icon = icon(hair_accessory.icon, hair_accessory.icon_state, dir = SOUTH)
-	hair_icon.Blend("#080501", ICON_MULTIPLY)
+	if (isnull(head_icon))
+		head_icon = icon('icons/mob/species/human/bodyparts_greyscale.dmi', "human_head_m")
+		head_icon.Blend(skintone2hex("caucasian1"), ICON_MULTIPLY)
 
-	var/icon/final_icon = new(head_icon)
-
-	return final_icon
+	return head_icon
 
 /datum/preference/choiced/hair_gradient/apply_to_human(mob/living/carbon/human/target, value)
 	target.set_hair_gradient_style(new_style = value, update = FALSE)
