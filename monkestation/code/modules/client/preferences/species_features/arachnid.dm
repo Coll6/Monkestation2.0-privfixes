@@ -3,6 +3,7 @@
 	savefile_identifier = PREFERENCE_CHARACTER
 	category = PREFERENCE_CATEGORY_FEATURES
 	main_feature_name = "Arachnid Appendages"
+	relevant_external_organ = /obj/item/organ/external/arachnid_appendages
 	should_generate_icons = TRUE
 
 /datum/preference/choiced/arachnid_appendages/init_possible_values()
@@ -22,6 +23,7 @@
 	savefile_identifier = PREFERENCE_CHARACTER
 	category = PREFERENCE_CATEGORY_FEATURES
 	main_feature_name = "Arachnid Chelicerae"
+	relevant_external_organ = /obj/item/organ/external/chelicerae
 	should_generate_icons = TRUE
 
 /datum/preference/choiced/arachnid_chelicerae/init_possible_values()

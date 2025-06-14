@@ -4,6 +4,7 @@
 	savefile_identifier = PREFERENCE_CHARACTER
 	category = PREFERENCE_CATEGORY_FEATURES
 	main_feature_name = "Satyr Fluff"
+	relevant_external_organ = /obj/item/organ/external/satyr_fluff
 	should_generate_icons = TRUE
 
 /datum/preference/choiced/satyr_fluff/init_possible_values()
@@ -22,6 +23,7 @@
 	savefile_identifier = PREFERENCE_CHARACTER
 	category = PREFERENCE_CATEGORY_FEATURES
 	main_feature_name = "Satyr Tail"
+	relevant_external_organ = /obj/item/organ/external/tail/satyr_tail
 	should_generate_icons = TRUE
 
 /datum/preference/choiced/satyr_tail/init_possible_values()
@@ -40,6 +42,7 @@
 	savefile_identifier = PREFERENCE_CHARACTER
 	category = PREFERENCE_CATEGORY_FEATURES
 	main_feature_name = "Satyr Horns"
+	relevant_external_organ = /obj/item/organ/external/horns/satyr_horns
 	should_generate_icons = TRUE
 
 /datum/preference/choiced/satyr_horns/init_possible_values()

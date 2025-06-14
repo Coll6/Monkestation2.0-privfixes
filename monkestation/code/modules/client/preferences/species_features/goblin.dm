@@ -3,6 +3,7 @@
 	savefile_identifier = PREFERENCE_CHARACTER
 	category = PREFERENCE_CATEGORY_FEATURES
 	main_feature_name = "Goblin Ears"
+	relevant_external_organ = /obj/item/organ/external/goblin_ears
 	should_generate_icons = TRUE
 
 /datum/preference/choiced/goblin_ears/init_possible_values()
@@ -22,6 +23,7 @@
 	savefile_identifier = PREFERENCE_CHARACTER
 	category = PREFERENCE_CATEGORY_FEATURES
 	main_feature_name = "Goblin Nose"
+	relevant_external_organ = /obj/item/organ/external/goblin_nose
 	should_generate_icons = TRUE
 
 /datum/preference/choiced/goblin_nose/init_possible_values()

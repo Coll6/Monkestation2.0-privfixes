@@ -3,6 +3,7 @@
 	savefile_identifier = PREFERENCE_CHARACTER
 	category = PREFERENCE_CATEGORY_FEATURES
 	main_feature_name = "Apid wings"
+	relevant_external_organ = /obj/item/organ/external/wings/apid
 	should_generate_icons = TRUE
 
 /datum/preference/choiced/apid_wings/init_possible_values()
@@ -22,6 +23,7 @@
 	savefile_identifier = PREFERENCE_CHARACTER
 	category = PREFERENCE_CATEGORY_FEATURES
 	main_feature_name = "Apid Antennae"
+	relevant_external_organ = /obj/item/organ/external/antennae_apid
 	should_generate_icons = TRUE
 
 /datum/preference/choiced/apid_antenna/init_possible_values()

@@ -3,6 +3,7 @@
 	savefile_identifier = PREFERENCE_CHARACTER
 	category = PREFERENCE_CATEGORY_FEATURES
 	main_feature_name = "Ethereal Horns"
+	relevant_external_organ = /obj/item/organ/external/ethereal_horns
 	should_generate_icons = TRUE
 
 /datum/preference/choiced/ethereal_horns/init_possible_values()
@@ -20,6 +21,7 @@
 	savefile_identifier = PREFERENCE_CHARACTER
 	category = PREFERENCE_CATEGORY_FEATURES
 	main_feature_name = "Ethereal Tail"
+	relevant_external_organ = /obj/item/organ/external/tail/ethereal
 	should_generate_icons = TRUE
 
 /datum/preference/choiced/ethereal_tail/init_possible_values()

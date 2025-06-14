@@ -3,6 +3,7 @@
 	savefile_identifier = PREFERENCE_CHARACTER
 	category = PREFERENCE_CATEGORY_FEATURES
 	main_feature_name = "IPC Antenna"
+	relevant_external_organ = /obj/item/organ/external/antennae/ipc
 	should_generate_icons = TRUE
 
 /datum/preference/choiced/ipc_antenna/init_possible_values()

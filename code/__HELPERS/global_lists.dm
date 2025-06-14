@@ -4,7 +4,7 @@
 
 /proc/init_sprite_accessories()
 	///roundstart hair
-	init_sprite_accessory_subtypes(/datum/sprite_accessory/hair, GLOB.roundstart_hairstyles_list, GLOB.hairstyles_male_list, GLOB.hairstyles_female_list, roundstart = TRUE)
+	init_sprite_accessory_subtypes(/datum/sprite_accessory/hair, GLOB.roundstart_hairstyles_list, GLOB.hairstyles_male_list, GLOB.hairstyles_female_list)
 	//hair - includes all locked hair
 	init_sprite_accessory_subtypes(/datum/sprite_accessory/hair, GLOB.hairstyles_list)
 	//facial hair
