@@ -16,24 +16,23 @@
 	should_generate_icons = TRUE
 
 /datum/preference/choiced/monkey_tail/init_possible_values()
-	var/list/values = list()
+	return assoc_to_keys_features(GLOB.tails_list_monkey)
 
-	var/icon/monkey_chest = icon('monkestation/icons/mob/species/monkey/bodyparts.dmi', "monkey_chest")
+/datum/preference/choiced/monkey_tail/icon_for(value)
+	var/datum/sprite_accessory/sprite_accessory = GLOB.tails_list_monkey[value]
 
-	for (var/tail_name in GLOB.tails_list_monkey)
-		var/datum/sprite_accessory/tails/monkey/tail = GLOB.tails_list_monkey[tail_name]
-		if(tail.locked)
-			continue
+	var/icon/final_icon = icon('monkestation/icons/mob/species/monkey/bodyparts.dmi', "monkey_chest")
 
-		var/icon/final_icon = icon(monkey_chest)
-		if(tail.icon_state != "none")
-			var/icon/tail_icon = icon(tail.icon, "m_tail_monkey_[tail.icon_state]_FRONT", NORTH)
-			final_icon.Blend(tail_icon, ICON_OVERLAY)
-		final_icon.Crop(8, 8, 30, 30)
-		final_icon.Scale(32, 32)
-		values[tail.name] = final_icon
+	if (sprite_accessory.icon_state != "none")
+		var/icon/tail_icon = icon(sprite_accessory.icon, "m_tail_monkey_[sprite_accessory.icon_state]_FRONT", NORTH)
 
-	return values
+		final_icon.Blend(tail_icon, ICON_OVERLAY)
+
+	final_icon.Crop(10, 8, 22, 23)
+	final_icon.Scale(26, 32)
+	final_icon.Crop(-2, 1, 29, 32)
+
+	return final_icon
 
 /datum/preference/choiced/monkey_tail/apply_to_human(mob/living/carbon/human/target, value)
 	target.dna.features["tail_monkey"] = value
@@ -41,4 +40,3 @@
 /datum/preference/choiced/monkey_tail/create_default_value()
 	var/datum/sprite_accessory/tails/monkey/tail = /datum/sprite_accessory/tails/monkey/default
 	return initial(tail.name)
-

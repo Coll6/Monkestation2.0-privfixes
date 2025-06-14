@@ -6,11 +6,15 @@
 	should_generate_icons = TRUE
 
 /datum/preference/choiced/floran_leaves/init_possible_values()
-	return possible_values_for_sprite_accessory_list_for_body_part(
-		GLOB.floran_leaves_list,
-		"floran_leaves",
-		list("ADJ"),
-	)
+	return assoc_to_keys_features(GLOB.floran_leaves_list)
+
+/datum/preference/choiced/floran_leaves/icon_for(value)
+	var/datum/sprite_accessory/floran_leaves = GLOB.floran_leaves_list[value]
+	return icon(floran_leaves.icon, "m_floran_leaves_[floran_leaves.icon_state]_ADJ")
+
+/datum/preference/choiced/floran_leaves/apply_to_human(mob/living/carbon/human/target, value)
+	target.dna.features["floran_leaves"] = value
+
 /datum/preference/numeric/hiss_length
 	savefile_key = "hiss_length"
 	savefile_identifier = PREFERENCE_CHARACTER
@@ -31,6 +35,3 @@
 	if(!istype(tongue))
 		return
 	tongue.draw_length = value
-
-/datum/preference/choiced/floran_leaves/apply_to_human(mob/living/carbon/human/target, value)
-	target.dna.features["floran_leaves"] = value

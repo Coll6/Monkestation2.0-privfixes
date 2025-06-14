@@ -1,5 +1,3 @@
-
-
 /obj/item/organ/external/tail/avian
 	name = "avian tail"
 	desc = "This tail belongs to an ornithid. Used to."
