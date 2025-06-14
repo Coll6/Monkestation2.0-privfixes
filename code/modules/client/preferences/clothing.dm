@@ -107,6 +107,14 @@
 
 	return generate_underwear_icon(GLOB.socks_list[value], lower_half)
 
+/datum/preference/choiced/socks/is_accessible(datum/preferences/preferences)
+	if (!..(preferences))
+		return FALSE
+
+	var/species_type = preferences.read_preference(/datum/preference/choiced/species)
+	var/datum/species/species = new species_type
+	return !(TRAIT_NO_UNDERWEAR in species.inherent_traits)
+
 /datum/preference/choiced/socks/apply_to_human(mob/living/carbon/human/target, value)
 	target.socks = value
 
