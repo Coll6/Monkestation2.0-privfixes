@@ -7,6 +7,7 @@
 	spawn_interval = 0.3 SECONDS
 	burst_amount = 0
 	offsets = FALSE
+	var/sparkle_color = ""
 
 /datum/component/particle_spewer/sparkle/animate_particle(obj/effect/abstract/particle/spawned)
 	var/matrix/first = matrix()
@@ -14,6 +15,7 @@
 	spawned.pixel_y += rand(-12, 12)
 	first.Turn(rand(-90, 90))
 	first.Scale(0.1, 0.1)
+	spawned.color = sparkle_color
 	spawned.transform = first
 
 	first.Scale(10)
