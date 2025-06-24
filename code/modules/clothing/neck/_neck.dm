@@ -503,25 +503,53 @@
 	icon = 'icons/obj/clothing/neck.dmi'
 
 /obj/item/clothing/neck/bluespace_necklace
+	name = "bluespace necklace"
+	desc = "Some say this necklace has doomed many empires and civilizations, taking lives and cursing the living for just having this thing in their possession."
 	icon = 'icons/obj/clothing/neck.dmi'
 	icon_state = "bluespace_necklace"
 	worn_icon = 'icons/mob/clothing/neck.dmi'
 	inhand_icon_state = ""
 
+/obj/item/clothing/neck/bluespace_necklace/Initialize(mapload)
+	. = ..()
+	AddComponent(/datum/component/particle_spewer/sparkle)
+
+//AddComponent(/datum/component/omen/quirk)
+
 /obj/item/clothing/neck/silver_necklace
+	name = "silver necklace"
+	desc = "A delicate silver necklace. It is simple yet eye catching."
 	icon = 'icons/obj/clothing/neck.dmi'
 	icon_state = "silver_necklace"
 	worn_icon = 'icons/mob/clothing/neck.dmi'
 	inhand_icon_state = ""
 
+/obj/item/clothing/neck/silver_necklace/Initialize(mapload)
+	. = ..()
+	var/datum/component/particle_spewer/sparkle/sparkles = AddComponent(/datum/component/particle_spewer/sparkle)
+	sparkles.sparkle_color = "#a2a8a7"
+
 /obj/item/clothing/neck/gold_necklace
+	name = "gold necklace"
+	desc = "A delicate gold necklace with a golden pendant accentuating it."
 	icon = 'icons/obj/clothing/neck.dmi'
 	icon_state = "gold_necklace"
 	worn_icon = 'icons/mob/clothing/neck.dmi'
 	inhand_icon_state = ""
 
+/obj/item/clothing/neck/gold_necklace/Initialize(mapload)
+	. = ..()
+	var/datum/component/particle_spewer/sparkle/sparkles = AddComponent(/datum/component/particle_spewer/sparkle)
+	sparkles.sparkle_color = "#fffcad"
+
 /obj/item/clothing/neck/diamond_necklace
+	name = "diamond necklace"
+	desc = "An extravagant series of diamonds laced together by sterling silver. It's debated whether or not this is genuine diamond mined or lab made."
 	icon = 'icons/obj/clothing/neck.dmi'
 	icon_state = "diamond_necklace"
 	worn_icon = 'icons/mob/clothing/neck.dmi'
 	inhand_icon_state = ""
+
+/obj/item/clothing/neck/diamond_necklace/Initialize(mapload)
+	. = ..()
+	AddComponent(/datum/component/particle_spewer/sparkle)
