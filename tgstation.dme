@@ -865,6 +865,8 @@
 #include "code\controllers\subsystem\processing\tramprocess.dm"
 #include "code\controllers\subsystem\processing\wet_floors.dm"
 #include "code\controllers\subsystem\processing\xenobio.dm"
+#include "code\controllers\tickets\_ticket.dm"
+#include "code\controllers\tickets\tickets.dm"
 #include "code\datums\alarm.dm"
 #include "code\datums\beam.dm"
 #include "code\datums\browser.dm"
@@ -8890,5 +8892,7 @@
 #include "monkestation\code\modules\wiremod_chem\housing\_chem_housing.dm"
 #include "monkestation\code\modules\wiremod_chem\housing\chemical_circuit.dm"
 #include "monkestation\code\modules\wiremod_chem\housing\precursor_tank.dm"
+#include "monkestation\code\ticketstuff\ticketsystemorganize.dm"
+#include "monkestation\code\ticketstuff\ui.dm"
 #include "monkestation\interface\interface.dm"
 // END_INCLUDE
