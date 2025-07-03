@@ -118,6 +118,11 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 		no_tgui_adminhelp(input(src, "Enter your ahelp", "Ahelp") as null|message)
 		return
 
+	// TGUIless mentorhelp
+	if(href_list["tguiless_mentorhelp"])
+		no_tgui_mentorhelp(input(src, "Enter your mhelp", "Mhelp") as null|message)
+		return
+
 	if(href_list["commandbar_typing"])
 		handle_commandbar_typing(href_list)
 
