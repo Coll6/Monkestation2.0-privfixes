@@ -4614,6 +4614,7 @@
 #include "code\modules\mob\living\basic\farm_animals\honey_bee\_hbee.dm"
 #include "code\modules\mob\living\basic\farm_animals\honey_bee\hbee_ai_behavior.dm"
 #include "code\modules\mob\living\basic\farm_animals\honey_bee\hbee_ai_subtree.dm"
+#include "code\modules\mob\living\basic\farm_animals\honey_bee\structures.dm"
 #include "code\modules\mob\living\basic\guardian\guardian.dm"
 #include "code\modules\mob\living\basic\guardian\guardian_creator.dm"
 #include "code\modules\mob\living\basic\guardian\guardian_fluff.dm"

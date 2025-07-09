@@ -41,6 +41,16 @@
 	ai_controller = /datum/ai_controller/basic_controller/honey_bee
 
 	var/icon_base = "bee" ///our icon base
+	var/dead_icon_base = "dead_bee"
+	var/is_queen = FALSE
+
+/mob/living/basic/honey_bee/queen
+	name = "queen honey bee"
+	desc = ""
+	icon_base = "queen"
+	dead_icon_base = "dead_queen_bee"
+	is_queen = TRUE /// the bee is a queen?
+	ai_controller = /datum/ai_controller/basic_controller/queen_honey_bee
 
 /mob/living/basic/honey_bee/Initialize(mapload)
 	. = ..()
