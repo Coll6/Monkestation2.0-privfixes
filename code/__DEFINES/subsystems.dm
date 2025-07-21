@@ -184,6 +184,7 @@
 #define INIT_ORDER_OVERLAY -8
 #define INIT_ORDER_XKEYSCORE -10
 #define INIT_ORDER_STICKY_BAN -10
+#define INIT_ORDER_TICKETS -12
 #define INIT_ORDER_LIGHTING -20
 #define INIT_ORDER_STARLIGHT -21
 #define INIT_ORDER_OUTDOOR_EFFECTS -22
@@ -203,6 +204,7 @@
 // Subsystem fire priority, from lowest to highest priority
 // If the subsystem isn't listed here it's either DEFAULT or PROCESS (if it's a processing subsystem child)
 #define FIRE_PRIORITY_PING 10
+#define FIRE_PRIORITY_TICKETS 10
 #define FIRE_PRIORITY_TWITCH 10
 #define FIRE_PRIORITY_SERVER_MAINT 10
 #define FIRE_PRIORITY_RESEARCH 10
