@@ -46,4 +46,12 @@ SUBSYSTEM_DEF(tickets)
 /datum/controller/subsystem/tickets/Initialize()
 	return SS_INIT_SUCCESS
 
+/datum/controller/subsystem/tickets/stat_entry(msg)
+
+/datum/controller/subsystem/tickets/Recover()
+
 /datum/controller/subsystem/tickets/fire()
+
+/datum/controller/subsystem/tickets/proc/newTicket()
+
+/datum/controller/subsystem/tickets/proc/ticket_panel()

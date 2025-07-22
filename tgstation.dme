@@ -6151,6 +6151,7 @@
 #include "monkestation\code\controllers\subsystem\job.dm"
 #include "monkestation\code\controllers\subsystem\memory_stats.dm"
 #include "monkestation\code\controllers\subsystem\tickets\_ticket.dm"
+#include "monkestation\code\controllers\subsystem\tickets\client.dm"
 #include "monkestation\code\controllers\subsystem\tickets\tickets.dm"
 #include "monkestation\code\datums\action.dm"
 #include "monkestation\code\datums\dna.dm"

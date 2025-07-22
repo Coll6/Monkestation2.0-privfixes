@@ -108,7 +108,6 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 		cmd_admin_pm(href_list["priv_msg"],null)
 		return
 
-
 	if (href_list["player_ticket_panel"])
 		view_latest_ticket()
 		return
@@ -116,6 +115,11 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 	// TGUIless adminhelp
 	if(href_list["tguiless_adminhelp"])
 		no_tgui_adminhelp(input(src, "Enter your ahelp", "Ahelp") as null|message)
+		return
+
+	// TGUIless mentorhelp
+	if(href_list["tguiless_mentorhelp"])
+		no_tgui_mentorhelp(input(src, "Enter your ahelp", "Ahelp") as null|message)
 		return
 
 	if(href_list["commandbar_typing"])
