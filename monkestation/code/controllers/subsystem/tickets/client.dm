@@ -73,4 +73,4 @@ GLOBAL_DATUM_INIT(mentor_help_ui_handler, /datum/mentor_help_ui_handler, new)
 
 	message = trim(message)
 
-	GLOB.mentor_help_ui_handler.perform_mentorhelp(src, message, FALSE)
+	GLOB.mentor_help_ui_handler.perform_mentorhelp(src, message)
