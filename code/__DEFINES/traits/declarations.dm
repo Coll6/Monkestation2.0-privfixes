@@ -1279,7 +1279,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 /* #define TRAIT_BIRTHDAY_BOY "birthday_boy" */
 
 ///Trait given to a turf that should not be allowed to be terraformed, such as turfs holding ore vents.
-/* #define TRAIT_NO_TERRAFORM "no_terraform" */
+#define TRAIT_NO_TERRAFORM "no_terraform"
 
 ///Mobs with these trait do not get italicized/quiet speech when speaking in low pressure
 /* #define TRAIT_SPEECH_BOOSTER "speech_booster" */
@@ -1298,6 +1298,9 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 
 /// Prevents the affected object from opening a loot window via alt click. See atom/AltClick()
 #define TRAIT_ALT_CLICK_BLOCKER "no_alt_click"
+
+/// Trait that says you're shaded by something (ie partially in the dark)
+#define TRAIT_SHADED "shaded"
 
 /// Trait that allows humanoids to always punch borgs regardless of limb bodytype or damage.
 /// Can either be applied to the attacker or an individual limb.
