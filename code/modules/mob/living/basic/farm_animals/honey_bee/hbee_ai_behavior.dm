@@ -26,7 +26,6 @@
 	if(!succeeded)
 		controller.clear_blackboard_key(target_key) //failed to make it our home so find another
 
-
 /datum/ai_behavior/find_and_set/hbee_hive
 	action_cooldown = 10 SECONDS
 

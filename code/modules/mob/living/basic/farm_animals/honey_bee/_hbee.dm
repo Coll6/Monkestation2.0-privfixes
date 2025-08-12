@@ -81,6 +81,8 @@
 	add_overlay("[icon_base]_wings")
 
 /mob/living/basic/honey_bee/proc/handle_habitation(obj/structure/hbeebox/hive)
+	if(!istype(hive))
+		return
 	var/return_point = null
 	if(istype(rally_point, /mob/living/basic/honey_bee/queen))
 		var/mob/living/basic/honey_bee/queen/queen = rally_point
