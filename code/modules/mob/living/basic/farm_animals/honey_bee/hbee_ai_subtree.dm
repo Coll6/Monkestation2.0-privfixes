@@ -9,6 +9,7 @@
 	planning_subtrees = list(
 		/datum/ai_planning_subtree/find_valid_home/honeybee,
 		/datum/ai_planning_subtree/return_to_rally,
+		/datum/ai_planning_subtree/find_and_hunt_target/hpollinate
 	)
 
 /datum/ai_controller/basic_controller/queen_honey_bee
@@ -32,7 +33,16 @@
 		controller.queue_behavior(/datum/ai_behavior/find_and_set/hbee_hive, BB_CURRENT_HOME, /obj/structure/hbeebox)
 		return
 
-	if(!istype(current_home, /obj/structure/hbeebox) || (controller.pawn in current_home.contents))
+	var/atom/return_point = null
+	if(istype(current_home, /mob/living/basic/honey_bee/queen))
+		var/mob/living/basic/honey_bee/queen/queen = current_home
+		if(controller.pawn in queen.bees)
+			return
+		return_point = queen.rally_point
+	else
+		return_point = current_home
+
+	if(!istype(return_point, /obj/structure/hbeebox) || (controller.pawn in current_home.contents))
 		return
 
 	controller.queue_behavior(/datum/ai_behavior/inhabit_honeyhive, BB_CURRENT_HOME)
@@ -73,3 +83,26 @@
 /datum/ai_planning_subtree/return_to_rally/queen
 	flyback_chance = 85
 	exit_chance = 5
+
+/datum/ai_planning_subtree/find_and_hunt_target/hpollinate
+	target_key = BB_TARGET_HYDRO
+	hunting_behavior = /datum/ai_behavior/hunt_target/hpollinate
+	finding_behavior = /datum/ai_behavior/find_hunt_target/hpollinate
+	hunt_targets = list(/obj/machinery/growing)
+	hunt_range = 10
+	hunt_chance = 85
+
+/datum/ai_planning_subtree/find_and_hunt_target/hpollinate/SelectBehaviors(datum/ai_controller/controller, seconds_per_tick)
+	var/atom/current_home = controller.blackboard[BB_CURRENT_HOME]
+	if(QDELETED(current_home))
+		return
+
+	var/atom/return_point = null
+	if(istype(current_home, /mob/living/basic/honey_bee/queen))
+		var/mob/living/basic/honey_bee/queen/queen = current_home
+		return_point = queen.rally_point
+	else
+		return_point = current_home
+
+	if(istype(return_point, /obj/structure/hbeebox))
+		return ..()

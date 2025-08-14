@@ -109,6 +109,17 @@
 		rally_point = hive
 		hive.queen_bee = src
 
+/mob/living/basic/honey_bee/proc/pollinate(atom/movable/hydro)
+	if(src.is_queen)
+		return
+
+	var/mob/living/basic/honey_bee/queen = rally_point
+
+	SEND_SIGNAL(hydro, COMSIG_TRY_POLLINATE)
+	var/obj/structure/hbeebox/hive = queen.rally_point
+	//if(istype(hive))
+	//	//beehome.bee_resources = min(beehome.bee_resources + health, 100)
+
 /mob/living/basic/honey_bee/queen
 	name = "queen honey bee"
 	desc = ""
