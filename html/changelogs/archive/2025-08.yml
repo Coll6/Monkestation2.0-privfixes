@@ -281,6 +281,7 @@
   - refactor: Slightly refactored brain trauma.
   - balance: Nanites and viruses can no longer cure an obsession or hypnosis.
   - map: The centcom firing range floors are now indestructible.
+  - balance: Revenge Vassals now also resist mindshields, just like Favorite Vassals.
   Absolucy, Maximal08, FlufflesTheDog:
   - qol: Using a multitool inhand tells you where the area APC is.
   Aniantan, Bomberman66Dev:
@@ -291,6 +292,36 @@
   ThePooba:
   - bugfix: less monkeycoins from roundend for mentors and fixed donator monkecoins
   - balance: also buffed slasher again so i didnt forgor
+  Wernerses:
+  - map: Added the missing disk compartamentalizer to Icebox Botany
+  - map: Added heated nesting boxes to some maps that did not have it before
+  - map: Replaced all ranching railings with reinforced thin glass walls and windoors
+      for easy access for simians
+  - map: Chicken nest boxes are now all close to windoors for easy access to eggs
   notghosti:
   - bugfix: Contractor bundles should now still be purchasable after an objective
       times out
+2025-08-13:
+  ThePooba:
+  - balance: jugg + minigun costs less
+  - balance: suit and minigun less slowdown
+  - balance: suit has more armor for lasers
+  - balance: minigun more damage shoots slower slightly less loud because it huwts
+      my ears
+  ancient-engineer:
+  - bugfix: fixed attacking a mirror giving you /datum/component/ instead of /datum/component/omen
+  notghosti:
+  - code_imp: Nuked sentient disease code.
+2025-08-14:
+  BingusSS13:
+  - qol: Service borgs can now hold beakers, bottles, and coffeepots.
+  - bugfix: Service borgs are now capable of cooking eggs on griddles, let's get cracking!
+  Tractor Maam:
+  - rscadd: Departmental Bells have replaced the desk bells at the front desk of every
+      station. These bells ring onto the respective department channel when rung (60
+      second cooldown.)
+  - rscadd: All bells can now be anchored with a wrench left click.
+  - rscadd: Maps that did not contain a bell for certain departments have been updated.
+  - image: desk bells have had their sprites replaced with Yogstation ones.
+  Wisemonster:
+  - balance: Lone Op's minimum/starting weight decreased to 0
