@@ -7,8 +7,8 @@
 	idle_behavior = /datum/idle_behavior/idle_random_walk
 
 	planning_subtrees = list(
-		/datum/ai_planning_subtree/find_valid_home/honeybee,
 		/datum/ai_planning_subtree/return_to_rally,
+		/datum/ai_planning_subtree/find_valid_home/honeybee,
 		/datum/ai_planning_subtree/find_and_hunt_target/hpollinate
 	)
 
@@ -28,6 +28,9 @@
 /datum/ai_planning_subtree/find_valid_home/honeybee
 
 /datum/ai_planning_subtree/find_valid_home/honeybee/SelectBehaviors(datum/ai_controller/controller, seconds_per_tick)
+	if(controller.blackboard_key_exists(BB_BASIC_MOB_CURRENT_TARGET))
+		return
+
 	var/atom/current_home = controller.blackboard[BB_CURRENT_HOME] /// These bees treat their homes as rally points.
 	if(QDELETED(current_home))
 		controller.queue_behavior(/datum/ai_behavior/find_and_set/hbee_hive, BB_CURRENT_HOME, /obj/structure/hbeebox)
@@ -93,6 +96,9 @@
 	hunt_chance = 85
 
 /datum/ai_planning_subtree/find_and_hunt_target/hpollinate/SelectBehaviors(datum/ai_controller/controller, seconds_per_tick)
+	if(controller.blackboard_key_exists(BB_BASIC_MOB_CURRENT_TARGET))
+		return
+
 	var/atom/current_home = controller.blackboard[BB_CURRENT_HOME]
 	if(QDELETED(current_home))
 		return
