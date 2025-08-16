@@ -70,6 +70,14 @@
 	UnregisterSignal(src, COMSIG_AI_BLACKBOARD_KEY_CLEARED(BB_BASIC_MOB_CURRENT_TARGET))
 	..()
 
+/mob/living/basic/bee/death(gibbed)
+	icon_base = dead_icon_base
+	generate_bee_visuals()
+
+	//if(rally_point)
+
+	return ..()
+
 /mob/living/basic/honey_bee/proc/generate_bee_visuals()
 	cut_overlays()
 
@@ -95,14 +103,24 @@
 	src.ai_controller.CancelActions()
 	src.ai_controller.queue_behavior(/datum/ai_behavior/basic_melee_attack, BB_BASIC_MOB_CURRENT_TARGET, BB_TARGETING_STRATEGY, BB_BASIC_MOB_CURRENT_TARGET_HIDING_LOCATION)
 
+/**
+ * Juggles idling and icon setting. Removing idle while under attack makes the mob far more responsive.
+ */
 /mob/living/basic/honey_bee/proc/handle_aggression()
 	if (!src.ai_controller || src.is_queen)
 		return
 
+	var/original_icon = initial(src.icon_base)
 	if(src.ai_controller.blackboard_key_exists(BB_BASIC_MOB_CURRENT_TARGET) || src.ai_controller.blackboard_key_exists(BB_BASIC_MOB_RETALIATE_LIST))
 		src.ai_controller.can_idle = FALSE
+		if(icon_base == original_icon)
+			icon_base = "angry_bee"
+			generate_bee_visuals()
 	else
 		src.ai_controller.can_idle = TRUE
+		if(icon_base != original_icon)
+			icon_base = original_icon
+			generate_bee_visuals()
 
 /mob/living/basic/honey_bee/proc/handle_habitation(obj/structure/hbeebox/hive)
 	if(!istype(hive))
