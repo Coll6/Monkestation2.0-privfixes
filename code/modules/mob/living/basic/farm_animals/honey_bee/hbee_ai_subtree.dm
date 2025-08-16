@@ -1,5 +1,7 @@
 /datum/ai_controller/basic_controller/honey_bee
 	blackboard = list(
+		BB_TARGETING_STRATEGY = /datum/targeting_strategy/basic/bee,
+		BB_PET_TARGETING_STRATEGY = /datum/targeting_strategy/basic/not_friends,
 	)
 
 	ai_traits = STOP_MOVING_WHEN_PULLED
@@ -7,6 +9,9 @@
 	idle_behavior = /datum/idle_behavior/idle_random_walk
 
 	planning_subtrees = list(
+		/datum/ai_planning_subtree/capricious_retaliate,
+		/datum/ai_planning_subtree/target_retaliate,
+		/datum/ai_planning_subtree/basic_melee_attack_subtree,
 		/datum/ai_planning_subtree/return_to_rally,
 		/datum/ai_planning_subtree/find_valid_home/honeybee,
 		/datum/ai_planning_subtree/find_and_hunt_target/hpollinate
@@ -28,7 +33,7 @@
 /datum/ai_planning_subtree/find_valid_home/honeybee
 
 /datum/ai_planning_subtree/find_valid_home/honeybee/SelectBehaviors(datum/ai_controller/controller, seconds_per_tick)
-	if(controller.blackboard_key_exists(BB_BASIC_MOB_CURRENT_TARGET))
+	if(controller.blackboard_key_exists(BB_BASIC_MOB_CURRENT_TARGET) || controller.blackboard_key_exists(BB_BASIC_MOB_RETALIATE_LIST))
 		return
 
 	var/atom/current_home = controller.blackboard[BB_CURRENT_HOME] /// These bees treat their homes as rally points.
@@ -58,6 +63,9 @@
 	var/exit_chance = 35
 
 /datum/ai_planning_subtree/return_to_rally/SelectBehaviors(datum/ai_controller/controller, seconds_per_tick)
+	if(controller.blackboard_key_exists(BB_BASIC_MOB_CURRENT_TARGET) || controller.blackboard_key_exists(BB_BASIC_MOB_RETALIATE_LIST))
+		return
+
 	var/atom/current_home = controller.blackboard[BB_CURRENT_HOME]
 	if(QDELETED(current_home))
 		return
@@ -96,7 +104,7 @@
 	hunt_chance = 85
 
 /datum/ai_planning_subtree/find_and_hunt_target/hpollinate/SelectBehaviors(datum/ai_controller/controller, seconds_per_tick)
-	if(controller.blackboard_key_exists(BB_BASIC_MOB_CURRENT_TARGET))
+	if(controller.blackboard_key_exists(BB_BASIC_MOB_CURRENT_TARGET) || controller.blackboard_key_exists(BB_BASIC_MOB_RETALIATE_LIST))
 		return
 
 	var/atom/current_home = controller.blackboard[BB_CURRENT_HOME]

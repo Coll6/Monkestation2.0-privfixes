@@ -49,6 +49,9 @@
 /mob/living/basic/honey_bee/Initialize(mapload)
 	. = ..()
 	generate_bee_visuals()
+	AddComponent(/datum/component/ai_retaliate_advanced, CALLBACK(src, PROC_REF(immediate_retaliation)))
+	RegisterSignal(src, COMSIG_AI_BLACKBOARD_KEY_SET(BB_BASIC_MOB_CURRENT_TARGET), PROC_REF(handle_aggression))
+	RegisterSignal(src, COMSIG_AI_BLACKBOARD_KEY_CLEARED(BB_BASIC_MOB_CURRENT_TARGET), PROC_REF(handle_aggression))
 
 /mob/living/basic/honey_bee/examine(mob/user)
 	. = ..()
@@ -63,6 +66,8 @@
 			if(istype(queen_bee) && (src in queen_bee.bees))
 				queen_bee.bees -= src
 		rally_point = null
+	UnregisterSignal(src, COMSIG_AI_BLACKBOARD_KEY_SET(BB_BASIC_MOB_CURRENT_TARGET))
+	UnregisterSignal(src, COMSIG_AI_BLACKBOARD_KEY_CLEARED(BB_BASIC_MOB_CURRENT_TARGET))
 	..()
 
 /mob/living/basic/honey_bee/proc/generate_bee_visuals()
@@ -79,6 +84,25 @@
 	add_overlay(greyscale_overlay)
 
 	add_overlay("[icon_base]_wings")
+
+/mob/living/basic/honey_bee/proc/immediate_retaliation(mob/living/threat)
+	if (!src.ai_controller || src.is_queen)
+		return
+
+	//If we are hit by something we should immediately hit them back and focus them.
+	src.ai_controller.set_blackboard_key(BB_BASIC_MOB_CURRENT_TARGET, threat)
+	src.ai_controller.can_idle = FALSE
+	src.ai_controller.CancelActions()
+	src.ai_controller.queue_behavior(/datum/ai_behavior/basic_melee_attack, BB_BASIC_MOB_CURRENT_TARGET, BB_TARGETING_STRATEGY, BB_BASIC_MOB_CURRENT_TARGET_HIDING_LOCATION)
+
+/mob/living/basic/honey_bee/proc/handle_aggression()
+	if (!src.ai_controller || src.is_queen)
+		return
+
+	if(src.ai_controller.blackboard_key_exists(BB_BASIC_MOB_CURRENT_TARGET) || src.ai_controller.blackboard_key_exists(BB_BASIC_MOB_RETALIATE_LIST))
+		src.ai_controller.can_idle = FALSE
+	else
+		src.ai_controller.can_idle = TRUE
 
 /mob/living/basic/honey_bee/proc/handle_habitation(obj/structure/hbeebox/hive)
 	if(!istype(hive))
