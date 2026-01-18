@@ -1273,6 +1273,7 @@
 #include "code\datums\components\parry.dm"
 #include "code\datums\components\payment.dm"
 #include "code\datums\components\pellet_cloud.dm"
+#include "code\datums\components\perfect_mimicry.dm"
 #include "code\datums\components\phylactery.dm"
 #include "code\datums\components\pinata.dm"
 #include "code\datums\components\plundering_attacks.dm"
