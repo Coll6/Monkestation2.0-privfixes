@@ -6,6 +6,8 @@
 
 	var/list/allowed_objects = list() // typecache of allowed objects to mimic
 	var/list/applied_traits = list() // List of traits applied to mob when mimicking to make it "intangible".
+	/// List of /datum/action instance that we've registered `COMSIG_ACTION_TRIGGER` on.
+	//var/list/datum/action/registered_actions
 
 	var/currently_disguised = UNDISGUISED // Simple flag to track if we are disguised or not
 	var/obj/item/mimic_target // The object we are currently mimicking
@@ -29,14 +31,15 @@
 /datum/component/perfect_mimicry/RegisterWithParent()
 	. = ..()
 	RegisterSignal(parent, COMSIG_MOVABLE_PRE_MOVE, PROC_REF(block_normal_movement))
-	//RegisterSignal(parent, COMSIG_MOB_CLICKON, PROC_REF(block_normal_clicks))
+	RegisterSignal(parent, COMSIG_MOB_CLICKON, PROC_REF(block_normal_clicks))
+
 	var/datum/action/cooldown/mimic_ability/mimic_object/action = new(src)
 	action.Grant(parent)
 
 /datum/component/perfect_mimicry/UnregisterFromParent()
 	. = ..()
 	UnregisterSignal(parent, list(COMSIG_MOVABLE_PRE_MOVE))
-	//UnregisterSignal(parent, list(COMSIG_MOVABLE_PRE_MOVE, COMSIG_MOB_CLICKON))
+	UnregisterSignal(parent, list(COMSIG_MOVABLE_PRE_MOVE, COMSIG_MOB_CLICKON))
 
 /datum/component/perfect_mimicry/proc/is_allowed_object(obj/item/target_item)
 	if(!isitem(target_item))
@@ -73,6 +76,8 @@
 	RegisterSignal(mimic_target, COMSIG_QDELETING, PROC_REF(mimic_target_deleted))
 	if(ismovable(target_item))
 		tracker = new(mimic_target, CALLBACK(src, PROC_REF(sync_mimic_position)))
+	ADD_TRAIT(mimic, TRAIT_UNDENSE, REF(src))
+	mimic.SetInvisibility(INVISIBILITY_MAXIMUM, id=REF(src), priority=INVISIBILITY_PRIORITY_ABSTRACT)
 	currently_disguised = DISGUISED
 	return mimic_target
 
@@ -83,15 +88,24 @@
 			UnregisterSignal(mimic_target, COMSIG_QDELETING)
 			QDEL_NULL(mimic_target)
 		return FALSE
+	var/mob/living/mimic = parent
+	var/drop_loc
 	if(!isnull(mimic_target))
 		QDEL_NULL(tracker)
 		UnregisterSignal(mimic_target, COMSIG_QDELETING)
+		mimic_target.transfer_observers_to(parent)
+		drop_loc = mimic_target.drop_location()
+		if(!get_turf(drop_loc))
+			drop_loc = mimic.loc
 		if(!QDELETED(mimic_target))
 			QDEL_NULL(mimic_target)
 
 	if(currently_disguised == UNDISGUISED)
 		return FALSE // Already undisguised
-
+	if(!isnull(drop_loc))
+		mimic.abstract_move(drop_loc)
+	REMOVE_TRAIT(mimic, TRAIT_UNDENSE, REF(src))
+	mimic.RemoveInvisibility(REF(src))
 	currently_disguised = UNDISGUISED
 	return TRUE
 
@@ -102,13 +116,11 @@
 	SIGNAL_HANDLER
 	if(currently_disguised == DISGUISED)
 		return COMPONENT_MOVABLE_BLOCK_PRE_MOVE
-	return
 
 /datum/component/perfect_mimicry/proc/block_normal_clicks(datum/source, atom/target, list/modifiers)
 	SIGNAL_HANDLER
 	if(currently_disguised == DISGUISED)
 		return COMSIG_MOB_CANCEL_CLICKON
-	return
 
 /datum/component/perfect_mimicry/proc/mimic_target_deleted(datum/source, force)
 	SIGNAL_HANDLER
@@ -123,7 +135,20 @@
  * Tracker callback
  */
 /datum/component/perfect_mimicry/proc/sync_mimic_position(atom/movable/master, atom/mover, atom/oldloc, direction)
+	var/mob/living/mimic = parent
+	if(master.loc == oldloc)
+		return
 
+	var/turf/newturf = get_turf(master)
+	if(!newturf)
+		mimic.abstract_move(oldloc)
+		QDEL_NULL(master)
+		return
+
+	if(QDELETED(mimic) || mimic.loc == newturf)
+		return
+
+	mimic.abstract_move(newturf)
 /*
  * Mimicry actions
  */
