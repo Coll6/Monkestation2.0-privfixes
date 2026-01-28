@@ -13,6 +13,8 @@
 	var/obj/item/mimic_target // The object we are currently mimicking
 	var/datum/movement_detector/tracker	// Tracker to keep the mob "glued" to the mimic target
 
+	var/list/applied_mob_traits = list(TRAIT_UNDENSE) // Applied traits when mimicking. Attempts to abstract mob during mimicking.
+
 //if(SEND_SIGNAL(src, COMSIG_ACTION_TRIGGER, src) & COMPONENT_ACTION_BLOCK_TRIGGER)
 
 /datum/component/perfect_mimicry/Initialize(list/allowed_objects = list())
@@ -40,6 +42,13 @@
 	. = ..()
 	UnregisterSignal(parent, list(COMSIG_MOVABLE_PRE_MOVE))
 	UnregisterSignal(parent, list(COMSIG_MOVABLE_PRE_MOVE, COMSIG_MOB_CLICKON))
+
+/datum/component/perfect_mimicry/proc/RegisterWithTarget()
+	RegisterSignal(src.mimic_target, COMSIG_QDELETING, PROC_REF(mimic_target_deleted))
+//COMSIG_ATOM_TAKE_DAMAGE
+
+/datum/component/perfect_mimicry/proc/UnregisterFromTarget()
+	UnregisterSignal(src.mimic_target, COMSIG_QDELETING)
 
 /datum/component/perfect_mimicry/proc/is_allowed_object(obj/item/target_item)
 	if(!isitem(target_item))
@@ -73,10 +82,10 @@
 	if(QDELETED(mimic_target))
 		mimic_target = null
 		return // Failed to create mimic target
-	RegisterSignal(mimic_target, COMSIG_QDELETING, PROC_REF(mimic_target_deleted))
+	RegisterWithTarget()
 	if(ismovable(target_item))
 		tracker = new(mimic_target, CALLBACK(src, PROC_REF(sync_mimic_position)))
-	ADD_TRAIT(mimic, TRAIT_UNDENSE, REF(src))
+	mimic.add_traits(applied_mob_traits, REF(src))
 	mimic.SetInvisibility(INVISIBILITY_MAXIMUM, id=REF(src), priority=INVISIBILITY_PRIORITY_ABSTRACT)
 	currently_disguised = DISGUISED
 	return mimic_target
@@ -85,14 +94,14 @@
 	if(QDELETED(parent) || !isliving(parent))
 		QDEL_NULL(tracker)
 		if(!QDELETED(mimic_target))
-			UnregisterSignal(mimic_target, COMSIG_QDELETING)
+			UnregisterFromTarget()
 			QDEL_NULL(mimic_target)
 		return FALSE
 	var/mob/living/mimic = parent
 	var/drop_loc
 	if(!isnull(mimic_target))
 		QDEL_NULL(tracker)
-		UnregisterSignal(mimic_target, COMSIG_QDELETING)
+		UnregisterFromTarget()
 		mimic_target.transfer_observers_to(parent)
 		drop_loc = mimic_target.drop_location()
 		if(!get_turf(drop_loc))
@@ -104,13 +113,13 @@
 		return FALSE // Already undisguised
 	if(!isnull(drop_loc))
 		mimic.abstract_move(drop_loc)
-	REMOVE_TRAIT(mimic, TRAIT_UNDENSE, REF(src))
+	mimic.remove_traits(applied_mob_traits, REF(src))
 	mimic.RemoveInvisibility(REF(src))
 	currently_disguised = UNDISGUISED
 	return TRUE
 
 /*
- * Signal handlers
+ * Signal handlers for the mob
  */
 /datum/component/perfect_mimicry/proc/block_normal_movement(datum/source, atom/entering_loc)
 	SIGNAL_HANDLER
@@ -130,6 +139,16 @@
 		for(var/datum/action/cooldown/mimic_ability/mimic_object/A in mimic.actions)
 			A.click_to_activate = TRUE
 			A.StartCooldown(A.cooldown_after_use)
+
+/*
+ * Signal handlers for the mimic_target
+ */
+
+/*
+/datum/component/perfect_mimicry/proc/on_take_damage(obj/target, damage_amt, danage_type, damage_flag, sound_effect, attack_dir, armour_penetration)
+	SIGNAL_HANDLER
+	to_chat(world, span_adminsay("Item took [damage_amt] damage"))
+*/
 
 /*
  * Tracker callback
