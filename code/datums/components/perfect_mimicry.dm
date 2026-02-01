@@ -1,173 +1,7 @@
-#define DISGUISED TRUE
-#define UNDISGUISED FALSE
-
-/datum/component/perfect_mimicry
-	dupe_mode = COMPONENT_DUPE_UNIQUE
-
-	var/list/allowed_objects = list() // typecache of allowed objects to mimic
-	var/list/applied_traits = list() // List of traits applied to mob when mimicking to make it "intangible".
-	/// List of /datum/action instance that we've registered `COMSIG_ACTION_TRIGGER` on.
-	//var/list/datum/action/registered_actions
-
-	var/currently_disguised = UNDISGUISED // Simple flag to track if we are disguised or not
-	var/obj/item/mimic_target // The object we are currently mimicking
-	var/datum/movement_detector/tracker	// Tracker to keep the mob "glued" to the mimic target
-
-	var/list/applied_mob_traits = list(TRAIT_UNDENSE) // Applied traits when mimicking. Attempts to abstract mob during mimicking.
-
-//if(SEND_SIGNAL(src, COMSIG_ACTION_TRIGGER, src) & COMPONENT_ACTION_BLOCK_TRIGGER)
-
-/datum/component/perfect_mimicry/Initialize(list/allowed_objects = list())
-	. = ..()
-	if(!isliving(parent))
-		return COMPONENT_INCOMPATIBLE
-
-	src.allowed_objects = typecacheof(allowed_objects)
-
-/datum/component/perfect_mimicry/Destroy(force)
-	stop_mimicry()
-	allowed_objects = null
-	applied_traits = null
-	return ..()
-
-/datum/component/perfect_mimicry/RegisterWithParent()
-	. = ..()
-	RegisterSignal(parent, COMSIG_MOVABLE_PRE_MOVE, PROC_REF(block_normal_movement))
-	RegisterSignal(parent, COMSIG_MOB_CLICKON, PROC_REF(block_normal_clicks))
-
+/mob/living/proc/grant_mimicry()
 	var/datum/action/cooldown/mimic_ability/mimic_object/action = new(src)
-	action.Grant(parent)
+	action.Grant(src)
 
-/datum/component/perfect_mimicry/UnregisterFromParent()
-	. = ..()
-	UnregisterSignal(parent, list(COMSIG_MOVABLE_PRE_MOVE))
-	UnregisterSignal(parent, list(COMSIG_MOVABLE_PRE_MOVE, COMSIG_MOB_CLICKON))
-
-/datum/component/perfect_mimicry/proc/RegisterWithTarget()
-	RegisterSignal(src.mimic_target, COMSIG_QDELETING, PROC_REF(mimic_target_deleted))
-//COMSIG_ATOM_TAKE_DAMAGE
-
-/datum/component/perfect_mimicry/proc/UnregisterFromTarget()
-	UnregisterSignal(src.mimic_target, COMSIG_QDELETING)
-
-/datum/component/perfect_mimicry/proc/is_allowed_object(obj/item/target_item)
-	if(!isitem(target_item))
-		return FALSE
-	if(length(allowed_objects) && !is_type_in_typecache(target_item, allowed_objects))
-		return FALSE
-	return TRUE
-
-// Handle special cases for certain object types (Eg. emptying reagents from beakers)
-/datum/component/perfect_mimicry/proc/handle_special_types(obj/item/mimic_item)
-
-/datum/component/perfect_mimicry/proc/start_mimicry(obj/item/target_item)
-	if(QDELETED(parent) || !isliving(parent))
-		return
-	if(currently_disguised == DISGUISED)
-		return // Already disguised
-	if(!is_allowed_object(target_item))
-		return // Not an allowed object
-
-	var/mob/living/mimic = parent
-	mimic_target = new target_item.type(mimic.loc)
-	handle_special_types(mimic_target)
-	mimic_target.name = target_item.name
-	mimic_target.appearance = target_item.appearance
-	mimic_target.copy_overlays(target_item)
-	mimic_target.alpha = max(target_item.alpha, 150)
-	mimic_target.transform = initial(target_item.transform)
-	mimic_target.pixel_x = target_item.base_pixel_x
-	mimic_target.pixel_y = target_item.base_pixel_y
-
-	if(QDELETED(mimic_target))
-		mimic_target = null
-		return // Failed to create mimic target
-	RegisterWithTarget()
-	if(ismovable(target_item))
-		tracker = new(mimic_target, CALLBACK(src, PROC_REF(sync_mimic_position)))
-	mimic.add_traits(applied_mob_traits, REF(src))
-	mimic.SetInvisibility(INVISIBILITY_MAXIMUM, id=REF(src), priority=INVISIBILITY_PRIORITY_ABSTRACT)
-	currently_disguised = DISGUISED
-	return mimic_target
-
-/datum/component/perfect_mimicry/proc/stop_mimicry()
-	if(QDELETED(parent) || !isliving(parent))
-		QDEL_NULL(tracker)
-		if(!QDELETED(mimic_target))
-			UnregisterFromTarget()
-			QDEL_NULL(mimic_target)
-		return FALSE
-	var/mob/living/mimic = parent
-	var/drop_loc
-	if(!isnull(mimic_target))
-		QDEL_NULL(tracker)
-		UnregisterFromTarget()
-		mimic_target.transfer_observers_to(parent)
-		drop_loc = mimic_target.drop_location()
-		if(!get_turf(drop_loc))
-			drop_loc = mimic.loc
-		if(!QDELETED(mimic_target))
-			QDEL_NULL(mimic_target)
-
-	if(currently_disguised == UNDISGUISED)
-		return FALSE // Already undisguised
-	if(!isnull(drop_loc))
-		mimic.abstract_move(drop_loc)
-	mimic.remove_traits(applied_mob_traits, REF(src))
-	mimic.RemoveInvisibility(REF(src))
-	currently_disguised = UNDISGUISED
-	return TRUE
-
-/*
- * Signal handlers for the mob
- */
-/datum/component/perfect_mimicry/proc/block_normal_movement(datum/source, atom/entering_loc)
-	SIGNAL_HANDLER
-	if(currently_disguised == DISGUISED)
-		return COMPONENT_MOVABLE_BLOCK_PRE_MOVE
-
-/datum/component/perfect_mimicry/proc/block_normal_clicks(datum/source, atom/target, list/modifiers)
-	SIGNAL_HANDLER
-	if(currently_disguised == DISGUISED)
-		return COMSIG_MOB_CANCEL_CLICKON
-
-/datum/component/perfect_mimicry/proc/mimic_target_deleted(datum/source, force)
-	SIGNAL_HANDLER
-	stop_mimicry()
-	if(!QDELETED(parent) && isliving(parent))
-		var/mob/living/mimic = parent
-		for(var/datum/action/cooldown/mimic_ability/mimic_object/A in mimic.actions)
-			A.click_to_activate = TRUE
-			A.StartCooldown(A.cooldown_after_use)
-
-/*
- * Signal handlers for the mimic_target
- */
-
-/*
-/datum/component/perfect_mimicry/proc/on_take_damage(obj/target, damage_amt, danage_type, damage_flag, sound_effect, attack_dir, armour_penetration)
-	SIGNAL_HANDLER
-	to_chat(world, span_adminsay("Item took [damage_amt] damage"))
-*/
-
-/*
- * Tracker callback
- */
-/datum/component/perfect_mimicry/proc/sync_mimic_position(atom/movable/master, atom/mover, atom/oldloc, direction)
-	var/mob/living/mimic = parent
-	if(master.loc == oldloc)
-		return
-
-	var/turf/newturf = get_turf(master)
-	if(!newturf)
-		mimic.abstract_move(oldloc)
-		QDEL_NULL(master)
-		return
-
-	if(QDELETED(mimic) || mimic.loc == newturf)
-		return
-
-	mimic.abstract_move(newturf)
 /*
  * Mimicry actions
  */
@@ -176,13 +10,7 @@
 	desc = "You should not be seeing this. This is an error alert developers."
 	check_flags = AB_CHECK_CONSCIOUS|AB_CHECK_INCAPACITATED
 
-// These abilities require a perfect_mimicry component otherwise they are useless.
-/datum/action/cooldown/mimic_ability/New(Target)
-	. = ..()
-	if(!istype(Target, /datum/component/perfect_mimicry))
-		stack_trace("[name] ([type]) was instantiated on a non-perfect_mimicry target, this doesn't work.")
-		qdel(src)
-		return
+	var/cooldown_after_use = 3 SECONDS // Cooldown after mimicry ends
 
 /datum/action/cooldown/mimic_ability/mimic_object
 	name = "Mimic Object"
@@ -190,46 +18,102 @@
 
 	click_to_activate = TRUE
 	cooldown_time = 1 SECOND
-	var/cooldown_after_use = 3 SECONDS // Cooldown after mimicry ends
 	ranged_mousepointer = 'icons/effects/mouse_pointers/supplypod_target.dmi'
 
-/datum/action/cooldown/mimic_ability/mimic_object/PreActivate(atom/target)
-	var/datum/component/perfect_mimicry/mimicker = src.target
-	if(!istype(mimicker))
-		return
-	if(mimicker.currently_disguised == DISGUISED)
+	var/static/list/allowed_objects = list() // typecache of allowed objects to mimic
+
+	COOLDOWN_DECLARE(move_cooldown)
+	var/obj/mimicked_object
+	var/obj/fake_storage
+
+/datum/action/cooldown/mimic_ability/mimic_object/PreActivate(atom/mimic_target)
+	if(!isnull(mimicked_object))
 		return ..()
-	if(target == owner)
+	if(mimic_target == owner)
 		to_chat(owner, span_notice("You cannot mimic yourself."))
-		return
-	//if(!isturf(target.loc, owner.loc)) // Prevent transformation in/from some inventory
+		return FALSE
+	//if(!isturf(mimic_target.loc, owner.loc)) // Prevent transformation in/from some inventory
 	//	return
-	if(get_dist(owner, target) > 2)
-		to_chat(owner, span_notice("[target.name] is too far away."))
-		return
-	if(!mimicker.is_allowed_object(target))
-		to_chat(owner, span_notice("[target.name] is too complex to mimic."))
-		return
+	if(get_dist(owner, mimic_target) > 2)
+		to_chat(owner, span_notice("[mimic_target.name] is too far away."))
+		return FALSE
+	if(!is_allowed_object(mimic_target))
+		to_chat(owner, span_notice("[mimic_target.name] is too complex to mimic."))
+		return FALSE
 	return ..()
 
-/datum/action/cooldown/mimic_ability/mimic_object/Activate(atom/target)
-	var/datum/component/perfect_mimicry/mimicker = src.target
-	if(!istype(mimicker))
+/datum/action/cooldown/mimic_ability/mimic_object/proc/is_allowed_object(obj/item/target_item)
+	if(!isitem(target_item))
 		return FALSE
+	if(length(allowed_objects) && !is_type_in_typecache(target_item, allowed_objects))
+		return FALSE
+	return TRUE
 
-	if((mimicker.currently_disguised == DISGUISED) && mimicker.stop_mimicry())
+/datum/action/cooldown/mimic_ability/mimic_object/Activate(atom/mimic_target)
+	if(!isnull(mimicked_object))
+		stop_mimicry()
 		click_to_activate = TRUE
 		StartCooldown(cooldown_after_use)
 		return TRUE
-
-	if((mimicker.currently_disguised == UNDISGUISED) && mimicker.start_mimicry(target))
+	if(start_mimicry(mimic_target))
 		click_to_activate = FALSE
 		StartCooldown()
 		return TRUE
-
 	return FALSE
 
-/datum/action/cooldown/mimic_ability/throw_self
+/datum/action/cooldown/mimic_ability/mimic_object/proc/start_mimicry(obj/mimic_item)
+	mimicked_object = duplicate_object(mimic_item, get_turf(owner))
+	RegisterSignal(mimicked_object, COMSIG_ATOM_RELAYMOVE, PROC_REF(on_user_move))
+	RegisterSignal(mimicked_object, COMSIG_QDELETING, PROC_REF(on_object_qdel))
+	owner.forceMove(mimicked_object)
+	mimicked_object.buckle_mob(owner)
+	if(mimicked_object.atom_storage)
+		fake_storage = new(src)
+		fake_storage.clone_storage(mimicked_object.atom_storage)
+		mimicked_object.atom_storage.set_real_location(fake_storage)
+	return mimicked_object
 
-#undef DISGUISED
-#undef UNDISGUISED
+/datum/action/cooldown/mimic_ability/mimic_object/proc/stop_mimicry()
+	owner.forceMove(mimicked_object.drop_location())
+	mimicked_object.atom_storage.remove_all(mimicked_object.drop_location())
+	if(fake_storage)
+		QDEL_NULL(fake_storage)
+	if(QDELETED(mimicked_object))
+		mimicked_object = null
+	else
+		QDEL_NULL(mimicked_object)
+
+///The user can move while inside of the item.
+/datum/action/cooldown/mimic_ability/mimic_object/proc/on_user_move(obj/moved_source, mob/user_moving, direction)
+	SIGNAL_HANDLER
+
+	if(!COOLDOWN_FINISHED(src, move_cooldown))
+		return COMSIG_BLOCK_RELAYMOVE
+	var/turf/next = get_step(moved_source, direction)
+	var/turf/current = get_turf(moved_source)
+	if(!istype(next) || !istype(current))
+		return COMSIG_BLOCK_RELAYMOVE
+	if(next.density)
+		return COMSIG_BLOCK_RELAYMOVE
+	if(!isturf(moved_source.loc))
+		return COMSIG_BLOCK_RELAYMOVE
+
+	step(moved_source, direction)
+	var/last_move_diagonal = ((direction & (direction - 1)) && (moved_source.loc == next))
+	COOLDOWN_START(src, move_cooldown, ((last_move_diagonal ? 1 : 0.5)) SECOND)
+
+	if(QDELETED(src))
+		return COMSIG_BLOCK_RELAYMOVE
+	return TRUE
+
+///Called when the host of the mob is qdeleted.
+/datum/action/cooldown/mimic_ability/mimic_object/proc/on_object_qdel(datum/source, force)
+	SIGNAL_HANDLER
+	stop_mimicry()
+	if(QDELETED(owner))
+		return
+	for(var/datum/action/cooldown/mimic_ability/mimic_abilities in owner.actions)
+		mimic_abilities.click_to_activate = TRUE
+		mimic_abilities.StartCooldown(mimic_abilities.cooldown_after_use)
+
+/datum/action/cooldown/mimic_ability/throw_self
