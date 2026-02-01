@@ -151,7 +151,7 @@ GLOBAL_LIST_EMPTY_TYPED(dead_oozeling_cores, /obj/item/organ/internal/brain/slim
 	. += span_notice("You look closer through the core's hazy interior and see...")
 	if(length(stored_items))
 		for(var/atom/movable/item as anything in stored_items)
-			. += " [ma2html(item, user)] <a href='byond://?src=[REF(user)];core=[REF(src)];core_item=[REF(item)]'>[item.get_examine_name(user)]</a>"
+			. += " [ma2html(item, user)] <a href='byond://?src=[REF(src)];core_item=[REF(item)]'>[item.get_examine_name(user)]</a>"
 		. += span_notice("floating inside...")
 	else
 		. += span_notice("...nothing of interest.")
@@ -192,9 +192,8 @@ GLOBAL_LIST_EMPTY_TYPED(dead_oozeling_cores, /obj/item/organ/internal/brain/slim
 	drop_items_to_ground(user.drop_location())
 
 /obj/item/organ/internal/brain/slime/proc/drop_items(mob/living/user, list/items_to_drop)
-	var/obj/item/organ/internal/brain/slime/core = user.get_active_held_item()
-	if(!core)
-		to_chat(user, span_userdanger("Hold the core in your hand to extract items from it!"))
+	if(user.get_active_held_item() != src)
+		to_chat(user, span_userdanger("Hold [src] in your hand to extract items from it!"))
 		return
 	if(DOING_INTERACTION_WITH_TARGET(user, src) || !length(items_to_drop))
 		return
@@ -619,6 +618,15 @@ GLOBAL_LIST_EMPTY_TYPED(dead_oozeling_cores, /obj/item/organ/internal/brain/slim
 
 	SEND_SIGNAL(mind, COMSIG_OOZELING_REVIVED, new_body, src)
 	return new_body
+
+/obj/item/organ/internal/brain/slime/Topic(href, list/href_list)
+	. = ..()
+	if(href_list["core_item"])
+		if(!core_ejected || !iscarbon(usr) || !usr.can_perform_action(src, NEED_DEXTERITY | NEED_HANDS | FORBID_TELEKINESIS_REACH | ALLOW_RESTING))
+			return
+		var/obj/item/core_item = locate(href_list["core_item"]) in stored_items
+		if(core_item)
+			drop_items(usr, list(core_item))
 
 ADMIN_VERB(cmd_admin_heal_oozeling, R_ADMIN, FALSE, "Heal Oozeling Core", "Use this to heal Oozeling cores.", ADMIN_CATEGORY_DEBUG, obj/item/organ/internal/brain/slime/core in GLOB.dead_oozeling_cores)
 	if(QDELETED(core))
