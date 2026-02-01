@@ -137,13 +137,7 @@ GLOBAL_LIST_EMPTY_TYPED(dead_oozeling_cores, /obj/item/organ/internal/brain/slim
 		. += span_red("You could probably use the core in-hand to snuff out the tracking signal and retrieve the items within it.")
 	else
 		. += span_red("You could probably use the core in-hand to retrieve the items within it.")
-	var/has_dnr_quirk = FALSE
-	if(!isnull(stored_quirks))
-		for(var/datum/quirk/quirk in stored_quirks)
-			if(istype(quirk, /datum/quirk/dnr))
-				has_dnr_quirk = TRUE
-				break
-	if(mind?.dnr || has_dnr_quirk)
+	if(mind?.dnr || (locate(/datum/quirk/dnr) in stored_quirks))
 		. += span_warning("It looks dull and faded, as if the soul within the core had moved on...")
 	else if((brainmob && (brainmob.client || brainmob.get_ghost())) || (mind?.current && (mind.current.client || mind.current.get_ghost())) || decoy_override)
 		if(isnull(stored_dna))
@@ -268,9 +262,12 @@ GLOBAL_LIST_EMPTY_TYPED(dead_oozeling_cores, /obj/item/organ/internal/brain/slim
 	return ITEM_INTERACT_SUCCESS
 
 /obj/item/organ/internal/brain/slime/proc/colorize()
-	if(isoozeling(owner))
-		var/datum/color_palette/generic_colors/located = owner.dna.color_palettes[/datum/color_palette/generic_colors]
-		core_color = located.return_color(MUTANT_COLOR)
+	if(!isoozeling(owner))
+		return
+	var/datum/color_palette/generic_colors/located = owner.dna.color_palettes[/datum/color_palette/generic_colors]
+	var/new_core_color = located.return_color(MUTANT_COLOR)
+	if(new_core_color)
+		core_color = new_core_color
 		add_atom_colour(core_color, FIXED_COLOUR_PRIORITY)
 
 /obj/item/organ/internal/brain/slime/proc/on_stat_change(mob/living/carbon/victim, new_stat, turf/loc_override)
@@ -381,13 +378,7 @@ GLOBAL_LIST_EMPTY_TYPED(dead_oozeling_cores, /obj/item/organ/internal/brain/slim
 
 /obj/item/organ/internal/brain/slime/check_for_repair(obj/item/item, mob/user)
 	if(item.is_drainable() && item.reagents.has_reagent(/datum/reagent/toxin/plasma)) //attempt to heal the brain
-
-		var/has_dnr_quirk = FALSE
-		if(!isnull(stored_quirks))
-			for(var/datum/quirk/quirk in stored_quirks)
-				if(istype(quirk, /datum/quirk/dnr))
-					has_dnr_quirk = TRUE
-					break
+		var/has_dnr_quirk = locate(/datum/quirk/dnr) in stored_quirks
 
 		if(mind?.dnr || has_dnr_quirk)
 			to_chat(user, span_warning("The soul of [src] has departed..."))
@@ -503,33 +494,26 @@ GLOBAL_LIST_EMPTY_TYPED(dead_oozeling_cores, /obj/item/organ/internal/brain/slim
 
 /obj/item/organ/internal/brain/slime/proc/drop_items_to_ground(turf/turf, list/dropping = stored_items, explode = FALSE)
 	for(var/atom/movable/item as anything in dropping)
-		if(item in stored_items)
-			if(istype(item, /obj/item/implantcase)) // Delete implants that aren't re-implanted. For now.
-				stored_items.Remove(item)
-				qdel(item)
-			if(explode)
-				brainmob.dropItemToGround(item, violent = TRUE)
-				stored_items.Remove(item)
-			else
-				item.forceMove(turf)
-				stored_items.Remove(item)
-		else
+		if(!(item in stored_items))
 			continue
+		if(istype(item, /obj/item/implantcase)) // Delete implants that aren't re-implanted. For now.
+			qdel(item)
+		else if(explode)
+			brainmob.dropItemToGround(item, violent = TRUE)
+		else
+			item.forceMove(turf)
+		stored_items -= item
 
 /obj/item/organ/internal/brain/slime/proc/readd_to_body(mob/living/carbon/human/new_body)
-	if(!QDELETED(new_body) && !QDELETED(src))
-		var/specific_implants = list(/obj/item/implant/exile, /obj/item/implant/tracking, /obj/item/implant/teleport_blocker, /obj/item/implant/chem)
-		for(var/atom/movable/item as anything in stored_items)
-			if(istype(item, /obj/item/implantcase)) // For sec implants for now.
-				var/obj/item/implantcase/case = item
-				if(istype(case.imp) && (case.imp.type in specific_implants))
-					var/obj/item/implant/imp = case.imp
-					if(imp.implant(new_body, new_body, silent = TRUE))
-						stored_items.Remove(item)
-						qdel(item)
-					else
-						stored_items.Remove(item)
-						qdel(item)
+	if(QDELETED(new_body) || QDELETED(src))
+		return
+	var/specific_implants = list(/obj/item/implant/exile, /obj/item/implant/tracking, /obj/item/implant/teleport_blocker, /obj/item/implant/chem)
+	for(var/obj/item/implantcase/case in stored_items)
+		if(!is_type_in_list(case.imp, specific_implants))
+			continue
+		case.imp.implant(new_body, new_body, silent = TRUE)
+		stored_items -= case
+		qdel(case)
 
 /obj/item/organ/internal/brain/slime/proc/rebuild_body(mob/user, nugget = TRUE, revival_policy = POLICY_REVIVAL) as /mob/living/carbon/human
 	if(rebuilt)
