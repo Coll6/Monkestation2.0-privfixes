@@ -174,7 +174,7 @@ GLOBAL_LIST_EMPTY_TYPED(dead_oozeling_cores, /obj/item/organ/internal/brain/slim
 
 	if(!do_after(user, 30 SECONDS, src))
 		user.visible_message(
-			span_warning("[user]'s hand slips out of [src] before they can cause any harm!"),
+			span_warning("[user]'s hand slips out of [src] before [user.p_they()] can cause any harm!"),
 			gps_active ? span_notice("Your hand slips out of the goopy core before you can find it's densest point.") : span_notice("Your hand slips out of the goopy core before you can find any dense points."),
 			span_notice("You hear a resounding plop.")
 		)
@@ -213,7 +213,7 @@ GLOBAL_LIST_EMPTY_TYPED(dead_oozeling_cores, /obj/item/organ/internal/brain/slim
 
 	if(!do_after(user, 15 SECONDS, src))
 		user.visible_message(
-			span_warning("[user]'s hand slips out of [src] before they can cause any harm!"),
+			span_warning("[user]'s hand slips out of [src] before [user.p_they()] can cause any harm!"),
 			span_notice("Your hand slips out of the goopy core before you could find find anything."),
 			span_notice("You hear a resounding plop.")
 		)
