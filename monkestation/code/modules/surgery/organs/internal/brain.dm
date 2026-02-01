@@ -151,8 +151,8 @@ GLOBAL_LIST_EMPTY_TYPED(dead_oozeling_cores, /obj/item/organ/internal/brain/slim
 	. += span_notice("You look closer through the core's hazy interior and see...")
 	if(length(stored_items))
 		for(var/atom/movable/item as anything in stored_items)
-			. += "<a href='byond://?src=[REF(user)];core=[REF(src)];core_item=[REF(item)]' class='alert'> [item.name] </a>"
-		. += span_notice("floating inside.")
+			. += " [ma2html(item, user)] <a href='byond://?src=[REF(user)];core=[REF(src)];core_item=[REF(item)]'>[item.get_examine_name(user)]</a>"
+		. += span_notice("floating inside...")
 	else
 		. += span_notice("...nothing of interest.")
 
@@ -214,7 +214,7 @@ GLOBAL_LIST_EMPTY_TYPED(dead_oozeling_cores, /obj/item/organ/internal/brain/slim
 		return
 	user.visible_message(
 			span_warning("[user] forcefully extracts items from [src]!"),
-			span_notice("You managed to find what you were looking for and they fall to the ground."),
+			span_notice("You managed to find what you were looking for, and it falls to the ground."),
 			span_notice("You hear a wet squelching sounds.")
 		)
 	playsound(user, 'sound/effects/wounds/crackandbleed.ogg', 80, TRUE)
