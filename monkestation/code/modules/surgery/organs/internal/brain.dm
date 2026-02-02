@@ -197,6 +197,12 @@ GLOBAL_LIST_EMPTY_TYPED(dead_oozeling_cores, /obj/item/organ/internal/brain/slim
 		return
 	if(DOING_INTERACTION_WITH_TARGET(user, src) || !length(items_to_drop))
 		return
+
+	var/our_name = brainmob ? key_name(brainmob) : name
+	user.log_message("is stripping [our_name] of [english_list(items_to_drop)].", LOG_ATTACK, color="red")
+	log_message("is being stripped of [english_list(items_to_drop)] by [key_name(user)].", LOG_VICTIM, color="orange", log_globally=FALSE)
+	brainmob?.log_message("is being stripped of [english_list(items_to_drop)] by [key_name(user)].", LOG_VICTIM, color="orange", log_globally=FALSE)
+
 	user.visible_message(
 		span_warning("[user] begins jamming their hand into [src]! Slime goes everywhere!"),
 		span_notice("You jam your hand into [src], feeling for the densest point, your prize!"),
@@ -218,6 +224,10 @@ GLOBAL_LIST_EMPTY_TYPED(dead_oozeling_cores, /obj/item/organ/internal/brain/slim
 		)
 	playsound(user, 'sound/effects/wounds/crackandbleed.ogg', 80, TRUE)
 	drop_items_to_ground(user.drop_location(), dropping = items_to_drop)
+
+	user.log_message("has stripped [our_name] of [english_list(items_to_drop)].", LOG_ATTACK, color="red")
+	log_message("has been stripped of [english_list(items_to_drop)] by [key_name(user)].", LOG_VICTIM, color="orange", log_globally=FALSE)
+	brainmob?.log_message("has been stripped of [english_list(items_to_drop)] by [key_name(user)].", LOG_VICTIM, color="orange", log_globally=FALSE)
 
 /obj/item/organ/internal/brain/slime/Insert(mob/living/carbon/organ_owner, special = FALSE, drop_if_replaced, no_id_transfer)
 	. = ..()
