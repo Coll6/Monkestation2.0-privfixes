@@ -43,6 +43,8 @@ GLOBAL_LIST_EMPTY_TYPED(dead_oozeling_cores, /obj/item/organ/internal/brain/slim
 //
 	var/list/stored_quirks = list()
 	var/list/stored_items = list()
+	var/alist/items_per_slot = alist()
+
 	///Item types that should never be stored in core and will drop on death. Takes priority over allowed lists.
 	var/static/list/bannedcore = typecacheof(list(/obj/item/disk/nuclear))
 	//Allowed implants usually given by cases and injectors
@@ -128,6 +130,9 @@ GLOBAL_LIST_EMPTY_TYPED(dead_oozeling_cores, /obj/item/organ/internal/brain/slim
 			drop_items_to_ground(drop_loc, explode = TRUE)
 		else
 			QDEL_LIST(stored_items)
+
+	items_per_slot = null
+
 	return ..()
 
 /obj/item/organ/internal/brain/slime/examine()
@@ -329,6 +334,8 @@ GLOBAL_LIST_EMPTY_TYPED(dead_oozeling_cores, /obj/item/organ/internal/brain/slim
 			continue
 		quirk.remove_from_current_holder(quirk_transfer = TRUE)
 		stored_quirks |= quirk
+
+	store_item_slots(victim)
 	victim.drop_all_held_items()
 	process_items(victim) // Start moving items before anything else can touch them.
 
@@ -375,6 +382,26 @@ GLOBAL_LIST_EMPTY_TYPED(dead_oozeling_cores, /obj/item/organ/internal/brain/slim
 	qdel(victim)
 
 	SEND_SIGNAL(mind, COMSIG_OOZELING_CORE_EJECTED, src)
+
+/obj/item/organ/internal/brain/slime/proc/store_item_slots(mob/living/carbon/human/victim)
+	items_per_slot = alist()
+	// instantly retract any modsuits, to avoid jank
+	if(istype(victim.back, /obj/item/mod/control))
+		var/obj/item/mod/control/mod_control = victim.back
+		for(var/obj/item/part as anything in mod_control.mod_parts)
+			mod_control.retract(null, part)
+	// also retract any deployables
+	if(victim.wear_suit)
+		var/datum/component/toggle_attached_clothing/hood_component = victim.wear_suit.GetComponent(/datum/component/toggle_attached_clothing)
+		hood_component?.remove_deployable()
+	for(var/obj/item/equipped as anything in victim.get_equipped_items(INCLUDE_POCKETS))
+		if(equipped.item_flags & (DROPDEL | ABSTRACT | HAND_ITEM))
+			continue
+		if(HAS_TRAIT(equipped, TRAIT_NODROP))
+			continue
+		var/slot = victim.get_slot_by_item(equipped)
+		if(slot)
+			items_per_slot[equipped] = slot
 
 /obj/item/organ/internal/brain/slime/proc/do_steam_effects(turf/loc)
 	var/datum/effect_system/steam_spread/steam = new()
@@ -513,6 +540,16 @@ GLOBAL_LIST_EMPTY_TYPED(dead_oozeling_cores, /obj/item/organ/internal/brain/slim
 			item.forceMove(turf)
 		stored_items -= item
 
+/obj/item/organ/internal/brain/slime/proc/reequip_items(mob/living/carbon/human/body)
+	for(var/i, slot in items_per_slot)
+		var/obj/item/item = i
+		if(QDELETED(item))
+			continue
+		body.equip_to_slot(item, slot)
+		if(body.get_item_by_slot(slot) == item)
+			stored_items -= item
+	items_per_slot.Cut()
+
 /obj/item/organ/internal/brain/slime/proc/readd_to_body(mob/living/carbon/human/new_body)
 	if(QDELETED(new_body) || QDELETED(src))
 		return
@@ -584,6 +621,7 @@ GLOBAL_LIST_EMPTY_TYPED(dead_oozeling_cores, /obj/item/organ/internal/brain/slim
 	new_body.forceMove(drop_location())
 	if(!nugget)
 		new_body.set_nutrition(NUTRITION_LEVEL_FED)
+		reequip_items(new_body)
 	new_body.blood_volume = nugget ? (BLOOD_VOLUME_SAFE + 60) : BLOOD_VOLUME_NORMAL
 	REMOVE_TRAIT(new_body, TRAIT_NO_TRANSFORM, REF(src))
 	if(!isnull(stored_quirks))
