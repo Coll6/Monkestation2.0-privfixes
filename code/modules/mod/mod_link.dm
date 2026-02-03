@@ -262,7 +262,7 @@ GLOBAL_LIST_INIT(scryer_auto_link_freqs, zebra_typecacheof(list(
 			return .
 		if(!user.temporarilyRemoveItemFromInventory(src) || QDELETED(src))
 			return .
-		var/obj/item/clothing/accessory/scryer/holder = new(user, src)
+		var/obj/item/clothing/accessory/scryer_accessory/holder = new(user, src)
 		if(QDELETED(holder))
 			return .
 		if(!clothes.attach_accessory(holder, user))
