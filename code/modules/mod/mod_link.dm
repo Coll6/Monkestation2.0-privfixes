@@ -255,7 +255,23 @@ GLOBAL_LIST_INIT(scryer_auto_link_freqs, zebra_typecacheof(list(
 			return
 
 /obj/item/clothing/neck/link_scryer/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
-	. = ..() //ITEM_INTERACT_SUCCESS
+	. = ..()
+	if(istype(interacting_with, /obj/item/clothing/under))
+		var/obj/item/clothing/under/clothes = interacting_with
+		if(!isliving(user))
+			return .
+		if(!user.temporarilyRemoveItemFromInventory(src) || QDELETED(src))
+			return .
+		var/obj/item/clothing/accessory/scryer/holder = new(user, src)
+		if(QDELETED(holder))
+			return .
+		if(!clothes.attach_accessory(holder, user))
+			user.temporarilyRemoveItemFromInventory(holder)
+			holder.scryer = null
+			user.put_in_hands(src)
+			qdel(holder)
+			return .
+		return ITEM_INTERACT_SUCCESS
 
 /obj/item/clothing/neck/link_scryer/process(seconds_per_tick)
 	if(!mod_link.link_call)

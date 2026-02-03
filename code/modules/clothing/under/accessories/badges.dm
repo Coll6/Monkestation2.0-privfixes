@@ -243,3 +243,34 @@ GLOBAL_LIST_INIT(pride_pin_reskins, list(
 		to_chat(interacting_living, span_boldwarning("[user] shows [src] to you."))
 		user.visible_message(span_notice("[user] shows [src] to [interacting_living]."))
 	return ITEM_INTERACT_SUCCESS
+
+/obj/item/clothing/accessory/scryer
+	name = "\improper MODlink scryer"
+	icon_state = "plasma"
+	inhand_icon_state = "" //self deletes if removed from clothing
+	desc = "A MODlink Scryer that someone modified to attach to their clothes."
+	attachment_slot = CHEST
+
+	var/obj/item/clothing/neck/link_scryer/scryer // The scryer that this accessory is imitating.
+
+/obj/item/clothing/accessory/scryer/Initialize(mapload, obj/item/clothing/neck/link_scryer/attaching)
+	. = ..()
+	if(!isliving(src.loc) || QDELETED(attaching))
+		qdel(src)
+		return
+	var/mob/living/scryer_mob = src.loc
+	if(!scryer_mob.transferItemToLoc(attaching, src))
+		scryer_mob.put_in_hands(attaching)
+		qdel(src)
+		return
+	scryer = attaching
+	if(!scryer_mob.put_in_hands(src))
+		scryer_mob.put_in_hands(attaching)
+		qdel(src)
+		return
+
+/obj/item/clothing/accessory/scryer/Destroy()
+	if(istype(scryer))	// For some reason this was deleted before scryer removed, Assume it was destroyed.
+		QDEL_NULL(scryer)
+	return ..()
+

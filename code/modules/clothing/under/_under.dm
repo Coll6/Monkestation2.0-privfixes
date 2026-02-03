@@ -230,7 +230,7 @@
 	var/obj/item/clothing/accessory/popped_accessory = attached_accessories[1]
 	remove_accessory(popped_accessory)
 
-	if(!user)
+	if(!user || QDELETED(popped_accessory))
 		return
 
 	user.put_in_hands(popped_accessory)
