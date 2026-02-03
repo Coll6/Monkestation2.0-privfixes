@@ -1,3 +1,5 @@
+#define INTEGRITY_PER_WCLASS 10
+
 /mob/living/proc/grant_mimicry()
 	var/datum/action/cooldown/mimic_ability/mimic_object/action = new(src)
 	action.Grant(src)
@@ -21,10 +23,53 @@
 	ranged_mousepointer = 'icons/effects/mouse_pointers/supplypod_target.dmi'
 
 	var/static/list/allowed_objects = list() // typecache of allowed objects to mimic
+	var/static/list/banned_objects = list() // typecache of banned objects that should absolutely not be mimicked
+	var/list/applied_mob_traits = list(TRAIT_HANDS_BLOCKED, TRAIT_UI_BLOCKED, TRAIT_PULL_BLOCKED, TRAIT_NOBREATH)
 
 	COOLDOWN_DECLARE(move_cooldown)
 	var/obj/mimicked_object
 	var/obj/fake_storage
+
+/datum/action/cooldown/mimic_ability/mimic_object/proc/block_abilities()
+	SIGNAL_HANDLER
+
+// Item adjustments for specific cases.
+/datum/action/cooldown/mimic_ability/mimic_object/proc/handle_mimic_target(obj/item/target_item)
+	if(!isitem(target_item))
+		return
+	var/obj/item/new_item
+	if(istype(target_item, /obj/item/disk/nuclear)) // Can mimic disk but it is fake and can be destroyed.
+		var/obj/item/disk/nuclear/fake/nuclear = new(owner.drop_location())
+		nuclear.resistance_flags = LAVA_PROOF | FIRE_PROOF | ACID_PROOF
+		new_item = nuclear
+	if(!istype(new_item))
+		new_item = duplicate_object(target_item, get_turf(owner))
+
+	if(new_item.uses_integrity) // Mimicked items can break easier
+		var/weight_multiplier = max(1, new_item.w_class)
+		var/adjusted_integrity = 5 + (weight_multiplier * INTEGRITY_PER_WCLASS)
+		new_item.modify_max_integrity(clamp(adjusted_integrity, 10, 60))
+
+	return new_item
+
+/datum/action/cooldown/mimic_ability/mimic_object/proc/reflect_damage(datum/source, damage_amount, damage_type, damage_flag, sound_effect, attack_dir, armour_penetration)
+	SIGNAL_HANDLER
+	if(!damage_amount)
+		return
+
+/datum/action/cooldown/mimic_ability/mimic_object/proc/handle_speech(datum/source, list/speech_args)
+	SIGNAL_HANDLER
+
+	if(QDELETED(mimicked_object)) // Return early and prevent speech. Object cleanup should be happening.
+		speech_args[SPEECH_MESSAGE] = ""
+		return
+
+	mimicked_object.say(speech_args[SPEECH_MESSAGE], speech_args[SPEECH_BUBBLE_TYPE], \
+	speech_args[SPEECH_SPANS], speech_args[SPEECH_SANITIZE], speech_args[SPEECH_LANGUAGE], \
+	speech_args[SPEECH_IGNORE_SPAM], speech_args[SPEECH_FORCED], speech_args[SPEECH_FILTERPROOF], \
+	speech_args[SPEECH_RANGE], speech_args[SPEECH_SAYMODE])
+
+	speech_args[SPEECH_MESSAGE] = ""
 
 /datum/action/cooldown/mimic_ability/mimic_object/PreActivate(atom/mimic_target)
 	if(!isnull(mimicked_object))
@@ -32,8 +77,6 @@
 	if(mimic_target == owner)
 		to_chat(owner, span_notice("You cannot mimic yourself."))
 		return FALSE
-	//if(!isturf(mimic_target.loc, owner.loc)) // Prevent transformation in/from some inventory
-	//	return
 	if(get_dist(owner, mimic_target) > 2)
 		to_chat(owner, span_notice("[mimic_target.name] is too far away."))
 		return FALSE
@@ -44,6 +87,10 @@
 
 /datum/action/cooldown/mimic_ability/mimic_object/proc/is_allowed_object(obj/item/target_item)
 	if(!isitem(target_item))
+		return FALSE
+	if(!target_item.uses_integrity)
+		return FALSE
+	if(length(banned_objects) && is_type_in_typecache(target_item, banned_objects))
 		return FALSE
 	if(length(allowed_objects) && !is_type_in_typecache(target_item, allowed_objects))
 		return FALSE
@@ -62,11 +109,17 @@
 	return FALSE
 
 /datum/action/cooldown/mimic_ability/mimic_object/proc/start_mimicry(obj/mimic_item)
-	mimicked_object = duplicate_object(mimic_item, get_turf(owner))
+	mimicked_object = handle_mimic_target(mimic_item)
+	if(isnull(mimicked_object))
+		return
 	RegisterSignal(mimicked_object, COMSIG_ATOM_RELAYMOVE, PROC_REF(on_user_move))
+	RegisterSignal(mimicked_object, COMSIG_ATOM_TAKE_DAMAGE, PROC_REF(reflect_damage))
 	RegisterSignal(mimicked_object, COMSIG_QDELETING, PROC_REF(on_object_qdel))
+	RegisterSignal(owner, COMSIG_MOB_SAY, PROC_REF(handle_speech))
 	owner.forceMove(mimicked_object)
 	mimicked_object.buckle_mob(owner)
+	if(length(applied_mob_traits))
+		owner.add_traits(applied_mob_traits, REF(src))
 	if(mimicked_object.atom_storage)
 		fake_storage = new(src)
 		fake_storage.clone_storage(mimicked_object.atom_storage)
@@ -75,7 +128,11 @@
 
 /datum/action/cooldown/mimic_ability/mimic_object/proc/stop_mimicry()
 	owner.forceMove(mimicked_object.drop_location())
-	mimicked_object.atom_storage.remove_all(mimicked_object.drop_location())
+	UnregisterSignal(owner, COMSIG_MOB_SAY)
+	if(mimicked_object.atom_storage)
+		mimicked_object.atom_storage.remove_all(mimicked_object.drop_location())
+	if(length(applied_mob_traits))
+		owner.remove_traits(applied_mob_traits, REF(src))
 	if(fake_storage)
 		QDEL_NULL(fake_storage)
 	if(QDELETED(mimicked_object))
@@ -117,3 +174,5 @@
 		mimic_abilities.StartCooldown(mimic_abilities.cooldown_after_use)
 
 /datum/action/cooldown/mimic_ability/throw_self
+
+#undef INTEGRITY_PER_WCLASS
