@@ -5388,7 +5388,7 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /turf/open/floor/iron,
-/area/station/asteroid)
+/area/station/cargo/miningfoundry)
 "aKL" = (
 /obj/effect/spawner/random/engineering/tracking_beacon,
 /obj/machinery/door/firedoor/border_only,
@@ -7957,6 +7957,13 @@
 /obj/machinery/atmospherics/components/unary/vent_pump/on/layer4,
 /turf/open/floor/iron/freezer,
 /area/station/commons/toilet)
+"buA" = (
+/obj/item/kirbyplants/random,
+/obj/effect/turf_decal/trimline/brown/filled/line{
+	dir = 9
+	},
+/turf/open/floor/iron,
+/area/station/cargo/miningdock)
 "buB" = (
 /obj/effect/spawner/structure/window/reinforced,
 /turf/open/floor/plating,
@@ -9561,6 +9568,9 @@
 	},
 /turf/open/openspace,
 /area/station/hallway/primary/tram/right)
+"bUa" = (
+/turf/closed/wall,
+/area/station/cargo/miningfoundry)
 "bUf" = (
 /obj/machinery/light/neon_lining{
 	dir = 8
@@ -10130,7 +10140,7 @@
 "ccf" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /turf/open/floor/iron,
-/area/station/asteroid)
+/area/station/cargo/miningfoundry)
 "cch" = (
 /turf/open/floor/catwalk_floor/iron_smooth,
 /area/station/maintenance/tram/right)
@@ -10545,8 +10555,11 @@
 	id = "mining";
 	dir = 1
 	},
+/obj/effect/turf_decal/trimline/brown/filled/line{
+	dir = 8
+	},
 /turf/open/floor/iron,
-/area/station/asteroid)
+/area/station/cargo/miningfoundry)
 "cgy" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/closet/crate,
@@ -11114,9 +11127,9 @@
 	id = "mining";
 	dir = 8
 	},
-/obj/machinery/bouldertech/refinery,
+/obj/effect/turf_decal/tile/brown/fourcorners,
 /turf/open/floor/iron,
-/area/station/asteroid)
+/area/station/cargo/miningfoundry)
 "cqT" = (
 /obj/structure/chair/plastic,
 /obj/effect/landmark/start/assistant,
@@ -12906,8 +12919,11 @@
 /obj/item/clothing/ears/earmuffs,
 /obj/item/clothing/ears/earmuffs,
 /obj/machinery/light_switch/directional/south,
+/obj/effect/turf_decal/trimline/brown/filled/line{
+	dir = 10
+	},
 /turf/open/floor/iron,
-/area/station/asteroid)
+/area/station/cargo/miningfoundry)
 "cWQ" = (
 /obj/effect/spawner/random/engineering/tracking_beacon,
 /obj/effect/mapping_helpers/burnt_floor,
@@ -14271,8 +14287,11 @@
 /area/station/security/prison/safe)
 "drQ" = (
 /obj/structure/cable,
+/obj/effect/turf_decal/trimline/brown/filled/corner{
+	dir = 8
+	},
 /turf/open/floor/iron,
-/area/station/asteroid)
+/area/station/cargo/miningfoundry)
 "drZ" = (
 /obj/effect/spawner/structure/window,
 /turf/open/floor/plating,
@@ -14518,8 +14537,9 @@
 "dwE" = (
 /obj/structure/closet/crate,
 /obj/effect/decal/cleanable/rubble,
+/obj/effect/turf_decal/tile/brown/fourcorners,
 /turf/open/floor/iron,
-/area/station/asteroid)
+/area/station/cargo/miningfoundry)
 "dwR" = (
 /obj/effect/spawner/structure/window/reinforced,
 /turf/open/floor/plating,
@@ -18214,6 +18234,11 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /turf/open/floor/catwalk_floor,
 /area/station/maintenance/department/crew_quarters/dorms)
+"eCO" = (
+/obj/effect/spawner/structure/window,
+/obj/structure/curtain,
+/turf/open/floor/plating,
+/area/station/cargo/miningdock/cafeteria)
 "eCQ" = (
 /obj/effect/turf_decal/trimline/neutral/filled/line,
 /obj/machinery/light/directional/south,
@@ -19266,8 +19291,9 @@
 	dir = 8
 	},
 /obj/structure/sign/poster/random/directional/north,
+/obj/effect/turf_decal/tile/brown/fourcorners,
 /turf/open/floor/iron,
-/area/station/asteroid)
+/area/station/cargo/miningfoundry)
 "eVQ" = (
 /obj/effect/turf_decal/trimline/yellow/filled/line{
 	dir = 1
@@ -22293,8 +22319,9 @@
 	dir = 8
 	},
 /obj/machinery/bouldertech/refinery/smelter,
+/obj/effect/turf_decal/tile/brown/fourcorners,
 /turf/open/floor/iron,
-/area/station/asteroid)
+/area/station/cargo/miningfoundry)
 "fSp" = (
 /obj/effect/landmark/start/depsec/engineering,
 /obj/structure/chair/office,
@@ -22409,6 +22436,13 @@
 	},
 /turf/closed/wall/r_wall,
 /area/station/science/xenobiology)
+"fUL" = (
+/obj/structure/closet/secure_closet/miner,
+/obj/effect/turf_decal/trimline/brown/filled/line{
+	dir = 5
+	},
+/turf/open/floor/iron,
+/area/station/cargo/miningdock)
 "fUQ" = (
 /obj/machinery/door/airlock/hatch{
 	name = "Ladder Access Hatch"
@@ -23500,8 +23534,11 @@
 /area/station/medical/psychology)
 "gnJ" = (
 /obj/machinery/atmospherics/components/unary/vent_pump/on/layer4,
+/obj/effect/turf_decal/trimline/brown/filled/line{
+	dir = 1
+	},
 /turf/open/floor/iron,
-/area/station/asteroid)
+/area/station/cargo/miningfoundry)
 "gnL" = (
 /obj/effect/turf_decal/trimline/red/filled/line,
 /obj/structure/disposalpipe/segment{
@@ -23767,8 +23804,14 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/machinery/firealarm/directional/east,
 /obj/structure/cable,
+/obj/effect/turf_decal/trimline/brown/filled/line{
+	dir = 4
+	},
+/obj/effect/turf_decal/trimline/brown/filled/corner{
+	dir = 8
+	},
 /turf/open/floor/iron,
-/area/station/asteroid)
+/area/station/cargo/miningfoundry)
 "gsT" = (
 /obj/structure/easel,
 /obj/item/canvas/nineteen_nineteen,
@@ -25322,8 +25365,9 @@
 /turf/open/floor/iron,
 /area/station/hallway/secondary/service)
 "gRL" = (
+/obj/effect/turf_decal/trimline/brown/filled/line,
 /turf/open/floor/iron,
-/area/station/asteroid)
+/area/station/cargo/miningfoundry)
 "gRO" = (
 /obj/effect/turf_decal/trimline/red/filled/line{
 	dir = 6
@@ -25463,6 +25507,12 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/plating,
 /area/station/cargo/drone_bay)
+"gTv" = (
+/obj/effect/turf_decal/trimline/brown/filled/line{
+	dir = 5
+	},
+/turf/open/floor/iron,
+/area/station/cargo/miningfoundry)
 "gTw" = (
 /obj/effect/turf_decal/trimline/neutral/filled/line{
 	dir = 1
@@ -35647,6 +35697,12 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /turf/open/floor/iron,
 /area/station/hallway/primary/tram/right)
+"kcg" = (
+/obj/effect/turf_decal/trimline/brown/filled/line{
+	dir = 1
+	},
+/turf/open/floor/iron,
+/area/station/cargo/miningfoundry)
 "kch" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/button/door/directional/south{
@@ -36515,13 +36571,6 @@
 	},
 /turf/open/floor/iron,
 /area/station/hallway/secondary/entry)
-"kqk" = (
-/obj/machinery/conveyor{
-	id = "mining";
-	dir = 8
-	},
-/turf/open/floor/iron,
-/area/station/asteroid)
 "kqs" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/station_map/engineering/directional/north,
@@ -42664,8 +42713,11 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/structure/cable,
 /obj/machinery/light/small/directional/east,
+/obj/effect/turf_decal/trimline/brown/filled/line{
+	dir = 4
+	},
 /turf/open/floor/iron,
-/area/station/asteroid)
+/area/station/cargo/miningfoundry)
 "mkf" = (
 /obj/machinery/power/apc/auto_name/directional/west,
 /obj/structure/cable,
@@ -44567,6 +44619,18 @@
 /obj/effect/mapping_helpers/airlock/access/all/engineering/maintenance,
 /turf/open/floor/plating,
 /area/station/maintenance/starboard/greater)
+"mOY" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/structure/cable,
+/obj/effect/turf_decal/trimline/brown/filled/corner{
+	dir = 1
+	},
+/obj/effect/turf_decal/trimline/brown/filled/corner{
+	dir = 4
+	},
+/turf/open/floor/iron,
+/area/station/cargo/miningdock)
 "mOZ" = (
 /obj/machinery/door/airlock/security{
 	name = "Labor Shuttle"
@@ -44968,8 +45032,9 @@
 	dir = 1
 	},
 /obj/machinery/light_switch/directional/south,
+/obj/effect/turf_decal/trimline/brown/filled/line,
 /turf/open/floor/iron,
-/area/station/asteroid)
+/area/station/cargo/miningfoundry)
 "mWK" = (
 /obj/structure/chair/stool/directional/south,
 /obj/effect/landmark/start/hangover,
@@ -46398,8 +46463,9 @@
 	dir = 8
 	},
 /obj/machinery/brm,
+/obj/effect/turf_decal/tile/brown/fourcorners,
 /turf/open/floor/iron,
-/area/station/asteroid)
+/area/station/cargo/miningfoundry)
 "ntf" = (
 /obj/structure/cable,
 /turf/open/floor/grass,
@@ -47467,8 +47533,10 @@
 	dir = 8
 	},
 /obj/machinery/light/small/warm/directional/north,
+/obj/machinery/bouldertech/refinery,
+/obj/effect/turf_decal/tile/brown/fourcorners,
 /turf/open/floor/iron,
-/area/station/asteroid)
+/area/station/cargo/miningfoundry)
 "nKY" = (
 /obj/machinery/status_display/ai/directional/north,
 /obj/structure/table,
@@ -47516,7 +47584,6 @@
 /obj/effect/turf_decal/trimline/brown/filled/line{
 	dir = 1
 	},
-/obj/item/kirbyplants/random,
 /obj/item/radio/intercom/directional/north,
 /obj/structure/disposalpipe/segment{
 	dir = 10
@@ -51699,8 +51766,11 @@
 /area/station/cargo/miningdock/cafeteria)
 "pfV" = (
 /obj/machinery/light/small/directional/west,
+/obj/effect/turf_decal/trimline/brown/filled/line{
+	dir = 9
+	},
 /turf/open/floor/iron,
-/area/station/asteroid)
+/area/station/cargo/miningfoundry)
 "pfZ" = (
 /obj/machinery/exodrone_launcher,
 /obj/item/exodrone,
@@ -57663,8 +57733,11 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/machinery/airalarm/directional/east,
+/obj/effect/turf_decal/trimline/brown/filled/line{
+	dir = 4
+	},
 /turf/open/floor/iron,
-/area/station/asteroid)
+/area/station/cargo/miningfoundry)
 "qQW" = (
 /obj/structure/reagent_dispensers/water_cooler,
 /obj/structure/sign/flag{
@@ -59474,8 +59547,11 @@
 /area/station/engineering/break_room)
 "rsB" = (
 /obj/item/radio/intercom/directional/west,
+/obj/effect/turf_decal/trimline/brown/filled/line{
+	dir = 8
+	},
 /turf/open/floor/iron,
-/area/station/asteroid)
+/area/station/cargo/miningfoundry)
 "rsH" = (
 /obj/structure/sign/warning/radiation/rad_area{
 	pixel_y = 32
@@ -60108,8 +60184,9 @@
 "rDz" = (
 /obj/machinery/power/apc/auto_name/directional/south,
 /obj/structure/cable,
+/obj/effect/turf_decal/trimline/brown/filled/line,
 /turf/open/floor/iron,
-/area/station/asteroid)
+/area/station/cargo/miningfoundry)
 "rDA" = (
 /obj/structure/flora/bush/sparsegrass/style_random,
 /obj/structure/flora/bush/grassy,
@@ -61157,6 +61234,9 @@
 /area/station/science/ordnance/bomb)
 "rXr" = (
 /obj/structure/closet/secure_closet/miner,
+/obj/effect/turf_decal/trimline/brown/filled/line{
+	dir = 4
+	},
 /turf/open/floor/iron,
 /area/station/cargo/miningdock)
 "rXK" = (
@@ -70314,8 +70394,11 @@
 /area/station/science/lower)
 "uKa" = (
 /obj/item/kirbyplants/random,
+/obj/effect/turf_decal/trimline/brown/filled/line{
+	dir = 10
+	},
 /turf/open/floor/iron,
-/area/station/asteroid)
+/area/station/cargo/miningfoundry)
 "uKq" = (
 /obj/machinery/smartfridge/chemistry/virology/preloaded,
 /obj/machinery/smartfridge/disks{
@@ -74231,8 +74314,11 @@
 	c_tag = "Cargo - Mining North-East"
 	},
 /obj/structure/cable,
+/obj/effect/turf_decal/trimline/brown/filled/line{
+	dir = 4
+	},
 /turf/open/floor/iron,
-/area/station/asteroid)
+/area/station/cargo/miningfoundry)
 "vOW" = (
 /turf/closed/mineral/random/stationside/asteroid/porus,
 /area/station/asteroid/tram/pet)
@@ -78276,13 +78362,21 @@
 /area/station/medical/morgue)
 "xgF" = (
 /obj/machinery/door/airlock/mining/glass{
-	name = "Mining Dock"
+	name = "Mining Foundry"
 	},
 /obj/effect/mapping_helpers/airlock/access/all/supply/mining,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/structure/cable,
+/obj/effect/landmark/navigate_destination/mining_foundry,
+/obj/effect/turf_decal/trimline/brown/filled/line{
+	dir = 8
+	},
+/obj/effect/turf_decal/trimline/brown/filled/line{
+	dir = 4
+	},
+/obj/machinery/door/firedoor,
 /turf/open/floor/iron,
-/area/station/asteroid)
+/area/station/cargo/miningfoundry)
 "xgJ" = (
 /obj/effect/turf_decal/siding/thinplating/dark{
 	dir = 10
@@ -127172,11 +127266,11 @@ aac
 aac
 aaa
 aaa
-aaS
-aaS
-aaS
-aaS
-aaS
+bUa
+bUa
+bUa
+bUa
+bUa
 unl
 hKV
 rMq
@@ -127429,7 +127523,7 @@ aac
 aac
 aaa
 aaa
-aaS
+bUa
 dwE
 pfV
 rsB
@@ -127686,9 +127780,9 @@ aac
 aac
 aac
 aaa
-aaS
+bUa
 fSh
-gRL
+kcg
 ccf
 mWG
 unl
@@ -127943,9 +128037,9 @@ aac
 aac
 aaa
 aaa
-aaS
+bUa
 eVL
-gRL
+kcg
 ccf
 gRL
 unl
@@ -128200,12 +128294,12 @@ aac
 aac
 aac
 aaa
-aaS
+bUa
 nKX
-gRL
+kcg
 ccf
 gRL
-njK
+eCO
 xiZ
 nTG
 nTG
@@ -128457,12 +128551,12 @@ aac
 aac
 aaa
 aaa
-aaS
+bUa
 cqS
-gRL
+kcg
 ccf
 gRL
-njK
+eCO
 xsk
 vJu
 vJu
@@ -128714,9 +128808,9 @@ aac
 aac
 aaa
 aaa
-aaS
-kqk
-gRL
+bUa
+cqS
+kcg
 ccf
 rDz
 unl
@@ -128971,17 +129065,17 @@ aac
 aac
 aac
 aaa
-aaS
+bUa
 eVL
 gnJ
 aKD
 drQ
 cgm
 cWL
-aaS
-kDi
-kDi
-kDi
+bUa
+buA
+kaF
+kaF
 bMX
 ljU
 lGz
@@ -129228,15 +129322,15 @@ aac
 aac
 aaa
 aaa
-aaS
+bUa
 ntb
-gRL
+gTv
 qQE
 vOV
 mjY
 gsO
 xgF
-aos
+mOY
 aos
 aos
 aos
@@ -129485,15 +129579,15 @@ aac
 aac
 aac
 aaa
-aaS
-aaS
-aaS
-aaS
-aaS
-aaS
-aaS
-aaS
-rXr
+bUa
+bUa
+bUa
+bUa
+bUa
+bUa
+bUa
+bUa
+fUL
 rXr
 rXr
 dAl
@@ -129749,7 +129843,7 @@ aaa
 aaa
 aaa
 aaa
-aaS
+bUa
 uGW
 uGW
 uGW

@@ -2342,6 +2342,10 @@
 	dir = 4
 	},
 /obj/machinery/brm,
+/obj/effect/turf_decal/tile/brown/full,
+/obj/effect/turf_decal/stripes/line{
+	dir = 1
+	},
 /turf/open/floor/iron,
 /area/station/cargo/miningfoundry)
 "aNq" = (
@@ -13247,12 +13251,10 @@
 	dir = 10;
 	id = "mining_internal"
 	},
-/obj/effect/turf_decal/stripes/corner{
-	dir = 1
-	},
 /obj/effect/turf_decal/stripes/line{
 	dir = 6
 	},
+/obj/effect/turf_decal/tile/brown/full,
 /turf/open/floor/iron,
 /area/station/cargo/miningfoundry)
 "dUd" = (
@@ -18716,6 +18718,8 @@
 /obj/machinery/atmospherics/components/unary/vent_scrubber/on/layer2{
 	dir = 1
 	},
+/obj/effect/turf_decal/stripes/line,
+/obj/effect/turf_decal/tile/brown/half/contrasted,
 /turf/open/floor/iron,
 /area/station/cargo/miningfoundry)
 "fFJ" = (
@@ -19993,9 +19997,6 @@
 	id = "mining_internal"
 	},
 /obj/effect/turf_decal/stripes/line{
-	dir = 8
-	},
-/obj/effect/turf_decal/stripes/line{
 	dir = 4
 	},
 /obj/machinery/camera{
@@ -20003,7 +20004,7 @@
 	dir = 6
 	},
 /obj/structure/sign/poster/official/random/directional/east,
-/obj/machinery/bouldertech/refinery,
+/obj/effect/turf_decal/tile/brown/full,
 /turf/open/floor/iron,
 /area/station/cargo/miningfoundry)
 "gbJ" = (
@@ -21406,6 +21407,8 @@
 /turf/open/floor/vault,
 /area/station/security/prison/rec)
 "gzv" = (
+/obj/effect/turf_decal/tile/brown/half/contrasted,
+/obj/effect/turf_decal/stripes/line,
 /turf/open/floor/iron,
 /area/station/cargo/miningfoundry)
 "gzw" = (
@@ -24631,6 +24634,11 @@
 /obj/structure/sink/directional/south,
 /turf/open/floor/iron/dark,
 /area/station/medical/morgue)
+"hyQ" = (
+/obj/effect/turf_decal/stripes/line,
+/obj/effect/turf_decal/tile/brown/half/contrasted,
+/turf/open/floor/iron,
+/area/station/cargo/miningfoundry)
 "hyV" = (
 /turf/closed/wall/r_wall,
 /area/station/science/ordnance/testlab)
@@ -27751,10 +27759,8 @@
 	dir = 8;
 	id = "mining_internal"
 	},
-/obj/effect/turf_decal/stripes/line{
-	dir = 1
-	},
 /obj/effect/turf_decal/stripes/line,
+/obj/effect/turf_decal/tile/brown/full,
 /turf/open/floor/iron,
 /area/station/cargo/miningfoundry)
 "izw" = (
@@ -29171,6 +29177,7 @@
 	},
 /obj/machinery/power/apc/auto_name/directional/north,
 /obj/structure/cable,
+/obj/effect/turf_decal/tile/brown/full,
 /turf/open/floor/iron,
 /area/station/cargo/miningfoundry)
 "iUg" = (
@@ -31139,11 +31146,9 @@
 	dir = 8;
 	id = "mining_internal"
 	},
-/obj/effect/turf_decal/stripes/line{
-	dir = 1
-	},
 /obj/effect/turf_decal/stripes/line,
-/obj/machinery/bouldertech/refinery/smelter,
+/obj/machinery/bouldertech/refinery,
+/obj/effect/turf_decal/tile/brown/full,
 /turf/open/floor/iron,
 /area/station/cargo/miningfoundry)
 "jBB" = (
@@ -31732,6 +31737,8 @@
 /area/station/science/xenobiology)
 "jLb" = (
 /obj/effect/decal/cleanable/dirt,
+/obj/effect/turf_decal/tile/brown/half/contrasted,
+/obj/effect/turf_decal/stripes/line,
 /turf/open/floor/iron,
 /area/station/cargo/miningfoundry)
 "jLc" = (
@@ -42368,6 +42375,9 @@
 /obj/effect/turf_decal/tile/brown/half/contrasted{
 	dir = 8
 	},
+/obj/effect/turf_decal/stripes/line{
+	dir = 4
+	},
 /turf/open/floor/iron/dark/side{
 	dir = 8
 	},
@@ -45015,14 +45025,12 @@
 /area/station/tcommsat/server)
 "nLd" = (
 /obj/effect/turf_decal/stripes/line{
-	dir = 8
-	},
-/obj/effect/turf_decal/stripes/line{
 	dir = 4
 	},
 /obj/machinery/conveyor{
 	id = "mining_internal"
 	},
+/obj/effect/turf_decal/tile/brown/full,
 /turf/open/floor/iron,
 /area/station/cargo/miningfoundry)
 "nLf" = (
@@ -46758,6 +46766,19 @@
 	},
 /turf/open/lava/plasma/ice_moon,
 /area/icemoon/underground/explored)
+"okQ" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/structure/cable,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/turf_decal/stripes/corner{
+	dir = 4
+	},
+/obj/effect/turf_decal/tile/brown{
+	dir = 4
+	},
+/turf/open/floor/iron,
+/area/station/cargo/miningfoundry)
 "olf" = (
 /turf/open/floor/carpet,
 /area/station/commons/dorms)
@@ -47370,6 +47391,16 @@
 	},
 /turf/open/floor/iron,
 /area/station/engineering/engine_smes)
+"ouN" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/structure/cable,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/turf_decal/stripes/line{
+	dir = 4
+	},
+/turf/open/floor/iron,
+/area/mine/eva)
 "ouP" = (
 /obj/structure/cable,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/general/visible,
@@ -49391,6 +49422,12 @@
 /area/station/hallway/primary/central)
 "pbv" = (
 /obj/structure/chair/stool/directional/south,
+/obj/effect/turf_decal/stripes/line{
+	dir = 5
+	},
+/obj/effect/turf_decal/tile/brown/anticorner/contrasted{
+	dir = 4
+	},
 /turf/open/floor/iron,
 /area/station/cargo/miningfoundry)
 "pby" = (
@@ -57265,10 +57302,9 @@
 	dir = 8;
 	id = "mining_internal"
 	},
-/obj/effect/turf_decal/stripes/line{
-	dir = 1
-	},
 /obj/effect/turf_decal/stripes/line,
+/obj/machinery/bouldertech/refinery/smelter,
+/obj/effect/turf_decal/tile/brown/full,
 /turf/open/floor/iron,
 /area/station/cargo/miningfoundry)
 "ryG" = (
@@ -74286,6 +74322,18 @@
 /obj/structure/cable,
 /turf/open/floor/iron/dark/textured,
 /area/station/security/processing)
+"wOk" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/structure/cable,
+/obj/effect/turf_decal/stripes/line{
+	dir = 4
+	},
+/obj/effect/turf_decal/tile/brown/half/contrasted{
+	dir = 4
+	},
+/turf/open/floor/iron,
+/area/station/cargo/miningfoundry)
 "wOn" = (
 /obj/effect/spawner/structure/window/reinforced,
 /turf/open/floor/plating,
@@ -77759,6 +77807,10 @@
 	id = "mining_internal";
 	name = "mining conveyor"
 	},
+/obj/effect/turf_decal/stripes/line{
+	dir = 6
+	},
+/obj/effect/turf_decal/tile/brown/anticorner/contrasted,
 /turf/open/floor/iron,
 /area/station/cargo/miningfoundry)
 "xPu" = (
@@ -164103,9 +164155,9 @@ tDa
 tDa
 tDa
 sWB
-tlk
-hhX
-gzv
+wOk
+okQ
+hyQ
 izq
 uvM
 gjq
@@ -166157,7 +166209,7 @@ lvT
 lvT
 pZD
 pZD
-lvT
+ouN
 lvT
 niG
 jZr

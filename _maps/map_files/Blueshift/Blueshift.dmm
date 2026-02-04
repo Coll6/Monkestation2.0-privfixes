@@ -54715,6 +54715,10 @@
 	dir = 1
 	},
 /obj/effect/turf_decal/stripes,
+/obj/machinery/conveyor{
+	dir = 1;
+	id = "mining"
+	},
 /turf/open/floor/iron/smooth_edge{
 	dir = 8
 	},
@@ -84068,17 +84072,6 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /turf/open/floor/plating,
 /area/station/maintenance/central)
-"qmR" = (
-/obj/effect/turf_decal/stripes{
-	dir = 1
-	},
-/obj/machinery/conveyor{
-	dir = 8;
-	id = "mining"
-	},
-/obj/machinery/bouldertech/refinery/smelter,
-/turf/open/floor/plating,
-/area/station/cargo/miningdock)
 "qmT" = (
 /obj/machinery/light/directional/west,
 /obj/machinery/duct,
@@ -88549,6 +88542,7 @@
 	dir = 9;
 	id = "mining"
 	},
+/obj/machinery/bouldertech/refinery/smelter,
 /turf/open/floor/plating,
 /area/station/cargo/miningdock)
 "rdB" = (
@@ -168185,7 +168179,7 @@ ryA
 mYd
 txY
 dJV
-qmR
+lCX
 bti
 kyD
 pEc
@@ -168699,7 +168693,7 @@ vHy
 bvN
 txY
 dJV
-lCX
+oww
 sZm
 wYj
 pEc
