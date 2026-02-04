@@ -2337,6 +2337,11 @@
 /obj/machinery/light/small/directional/north,
 /obj/machinery/firealarm/directional/north,
 /obj/structure/cable,
+/obj/machinery/conveyor{
+	id = "mining_internal";
+	dir = 4
+	},
+/obj/machinery/brm,
 /turf/open/floor/iron,
 /area/mine/production)
 "aNq" = (
@@ -19998,6 +20003,7 @@
 	dir = 6
 	},
 /obj/structure/sign/poster/official/random/directional/east,
+/obj/machinery/bouldertech/refinery,
 /turf/open/floor/iron,
 /area/mine/production)
 "gbJ" = (
@@ -31115,6 +31121,19 @@
 /obj/machinery/duct,
 /turf/open/floor/iron,
 /area/station/service/kitchen/coldroom)
+"jBx" = (
+/obj/machinery/conveyor{
+	dir = 8;
+	id = "mining_internal"
+	},
+/obj/structure/window/reinforced/spawner/directional/north,
+/obj/effect/turf_decal/stripes/line{
+	dir = 1
+	},
+/obj/effect/turf_decal/stripes/line,
+/obj/machinery/bouldertech/refinery/smelter,
+/turf/open/floor/iron,
+/area/mine/production)
 "jBB" = (
 /obj/structure/kitchenspike,
 /turf/open/floor/plating/snowed/coldroom,
@@ -44982,15 +45001,15 @@
 /turf/open/floor/iron/dark/telecomms,
 /area/station/tcommsat/server)
 "nLd" = (
-/obj/machinery/mineral/processing_unit{
-	dir = 1
-	},
 /obj/structure/window/reinforced/spawner/directional/west,
 /obj/effect/turf_decal/stripes/line{
 	dir = 8
 	},
 /obj/effect/turf_decal/stripes/line{
 	dir = 4
+	},
+/obj/machinery/conveyor{
+	id = "mining_internal"
 	},
 /turf/open/floor/iron,
 /area/mine/production)
@@ -164330,7 +164349,7 @@ kZu
 aNg
 pbv
 xOM
-izq
+jBx
 nWH
 hFL
 hFL
