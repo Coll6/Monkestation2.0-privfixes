@@ -21854,6 +21854,12 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/iron,
 /area/station/cargo/storage)
+"cte" = (
+/obj/machinery/conveyor{
+	id = "mining"
+	},
+/turf/open/floor/iron/dark,
+/area/station/cargo/miningoffice)
 "ctl" = (
 /obj/structure/window/reinforced/spawner/directional/south,
 /obj/structure/window/reinforced/spawner/directional/east,
@@ -26501,11 +26507,11 @@
 "cXW" = (
 /obj/item/radio/intercom/directional/south,
 /obj/item/radio/intercom/directional/south,
-/obj/structure/bed/dogbed,
-/mob/living/basic/pet/dog/bullterrier/walter/smallter{
-	name = "Goliath";
-	real_name = "Goliath"
+/obj/machinery/conveyor/inverted{
+	dir = 9;
+	id = "mining"
 	},
+/obj/machinery/bouldertech/refinery/smelter,
 /turf/open/floor/iron/dark,
 /area/station/cargo/miningoffice)
 "cYb" = (
@@ -27569,6 +27575,9 @@
 /area/station/command/heads_quarters/captain)
 "drJ" = (
 /obj/machinery/airalarm/directional/west,
+/obj/machinery/conveyor{
+	id = "mining"
+	},
 /turf/open/floor/iron/dark/textured_half{
 	dir = 1
 	},
@@ -31299,6 +31308,9 @@
 	dir = 8
 	},
 /obj/effect/decal/cleanable/dirt/dust,
+/obj/machinery/conveyor_switch/oneway{
+	id = "mining"
+	},
 /turf/open/floor/iron/dark,
 /area/station/cargo/miningoffice)
 "eSi" = (
@@ -39672,7 +39684,10 @@
 /turf/open/floor/iron/textured_half,
 /area/station/cargo/warehouse)
 "igI" = (
-/obj/effect/landmark/start/explorer,
+/obj/machinery/conveyor{
+	id = "mining"
+	},
+/obj/machinery/brm,
 /turf/open/floor/iron/dark,
 /area/station/cargo/miningoffice)
 "ihm" = (
@@ -55265,6 +55280,11 @@
 /obj/effect/turf_decal/delivery,
 /turf/open/floor/iron/dark,
 /area/station/science/ordnance)
+"nWL" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/landmark/start/explorer,
+/turf/open/floor/iron/dark,
+/area/station/cargo/miningoffice)
 "nWO" = (
 /obj/effect/spawner/random/contraband/permabrig_weapon,
 /turf/open/misc/asteroid,
@@ -56360,6 +56380,13 @@
 /obj/structure/cable,
 /turf/open/floor/iron,
 /area/station/cargo/lobby)
+"orF" = (
+/obj/machinery/conveyor{
+	id = "mining"
+	},
+/obj/machinery/bouldertech/refinery,
+/turf/open/floor/iron/dark,
+/area/station/cargo/miningoffice)
 "orJ" = (
 /obj/effect/spawner/random/structure/barricade,
 /turf/open/floor/plating,
@@ -58070,6 +58097,11 @@
 "oXA" = (
 /obj/effect/turf_decal/stripes/corner{
 	dir = 4
+	},
+/obj/structure/bed/dogbed,
+/mob/living/basic/pet/dog/bullterrier/walter/smallter{
+	name = "Goliath";
+	real_name = "Goliath"
 	},
 /turf/open/floor/iron/dark,
 /area/station/cargo/miningoffice)
@@ -70521,6 +70553,13 @@
 	},
 /turf/open/floor/iron,
 /area/station/engineering/hallway)
+"tJX" = (
+/obj/machinery/conveyor{
+	id = "mining";
+	dir = 4
+	},
+/turf/open/floor/iron/dark,
+/area/station/cargo/miningoffice)
 "tKc" = (
 /turf/open/floor/iron,
 /area/station/maintenance/department/medical)
@@ -73689,6 +73728,7 @@
 	dir = 8
 	},
 /obj/effect/decal/cleanable/dirt,
+/obj/effect/landmark/start/explorer,
 /turf/open/floor/iron/dark,
 /area/station/cargo/miningoffice)
 "uXL" = (
@@ -119661,8 +119701,8 @@ oct
 cIX
 igI
 drJ
-cJV
-cJV
+orF
+cte
 cXW
 kUi
 aaa
@@ -119914,13 +119954,13 @@ cDu
 vjN
 lWv
 cEM
-cIi
+nWL
 lYI
 uXv
 deO
 eRQ
 cMc
-cJV
+tJX
 kUi
 aaa
 aaa

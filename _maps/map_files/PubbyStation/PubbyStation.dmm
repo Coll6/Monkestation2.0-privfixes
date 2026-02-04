@@ -1152,15 +1152,15 @@
 /turf/open/floor/plating,
 /area/station/ai_monitored/turret_protected/ai_sat_ext_ap)
 "afd" = (
-/obj/structure/disposalpipe/segment{
-	dir = 4
-	},
 /obj/machinery/status_display/supply{
 	dir = 4;
 	layer = 4;
 	pixel_y = 32
 	},
 /obj/effect/turf_decal/trimline/brown/filled/corner,
+/obj/structure/disposalpipe/segment{
+	dir = 6
+	},
 /turf/open/floor/iron,
 /area/station/cargo/storage)
 "afe" = (
@@ -4118,6 +4118,13 @@
 /obj/structure/girder,
 /turf/open/floor/plating,
 /area/station/maintenance/department/security/brig)
+"apC" = (
+/obj/structure/railing{
+	dir = 8
+	},
+/obj/effect/landmark/start/cargo_technician,
+/turf/open/floor/iron,
+/area/station/cargo/storage)
 "apD" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4{
 	dir = 4
@@ -9997,11 +10004,18 @@
 /obj/machinery/power/apc/auto_name/directional/north,
 /obj/structure/cable,
 /obj/effect/mapping_helpers/broken_floor,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /turf/open/floor/plating,
 /area/station/cargo/warehouse)
 "aMy" = (
-/obj/effect/spawner/random/trash/grille_or_waste,
 /obj/structure/cable,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /turf/open/floor/plating,
 /area/station/cargo/warehouse)
 "aMD" = (
@@ -10589,11 +10603,12 @@
 	dir = 4
 	},
 /obj/machinery/conveyor{
-	id = "CargoLoad"
+	id = "mining"
 	},
 /obj/machinery/camera/directional/north{
 	c_tag = "Cargo Warehouse"
 	},
+/obj/machinery/brm,
 /turf/open/floor/iron,
 /area/station/cargo/warehouse)
 "aPg" = (
@@ -10603,6 +10618,10 @@
 /obj/effect/mapping_helpers/airlock/abandoned,
 /obj/structure/cable,
 /obj/effect/mapping_helpers/airlock/access/any/supply/general,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /turf/open/floor/iron,
 /area/station/maintenance/department/cargo)
 "aPi" = (
@@ -10782,8 +10801,9 @@
 	dir = 4
 	},
 /obj/machinery/conveyor{
-	id = "CargoLoad"
+	id = "mining"
 	},
+/obj/machinery/bouldertech/refinery,
 /turf/open/floor/iron,
 /area/station/cargo/warehouse)
 "aPV" = (
@@ -10824,6 +10844,11 @@
 	name = "Warehouse Door Control";
 	req_access = list("cargo")
 	},
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/structure/cable,
 /turf/open/floor/iron,
 /area/station/cargo/warehouse)
 "aQp" = (
@@ -11108,11 +11133,6 @@
 "aRl" = (
 /turf/closed/wall,
 /area/station/cargo/office)
-"aRq" = (
-/obj/structure/rack,
-/obj/item/storage/box/lights/mixed,
-/turf/open/floor/iron,
-/area/station/cargo/storage)
 "aRs" = (
 /obj/structure/disposalpipe/segment,
 /obj/item/shard,
@@ -11498,14 +11518,10 @@
 /turf/open/floor/plating,
 /area/station/cargo/quartermaster)
 "aTp" = (
-/obj/structure/rack,
-/obj/item/stack/sheet/cardboard,
-/obj/item/stack/sheet/cardboard,
-/obj/item/stack/sheet/cardboard,
-/obj/item/stack/sheet/cardboard,
-/obj/item/stack/sheet/cardboard,
-/obj/item/stack/sheet/cardboard,
-/obj/item/stack/sheet/cardboard,
+/obj/machinery/conveyor{
+	id = "CargoLoad";
+	dir = 1
+	},
 /turf/open/floor/iron,
 /area/station/cargo/storage)
 "aTr" = (
@@ -11756,7 +11772,9 @@
 	layer = 4;
 	pixel_y = 32
 	},
-/obj/effect/landmark/start/explorer,
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
 /turf/open/floor/iron,
 /area/station/cargo/storage)
 "aUG" = (
@@ -13796,13 +13814,13 @@
 	dir = 4
 	},
 /obj/machinery/light/small/directional/east,
-/obj/machinery/conveyor{
-	id = "CargoLoad"
-	},
 /obj/machinery/status_display/supply{
 	dir = 4;
 	layer = 4;
 	pixel_x = 33
+	},
+/obj/machinery/conveyor{
+	id = "mining"
 	},
 /turf/open/floor/iron,
 /area/station/cargo/warehouse)
@@ -14644,9 +14662,16 @@
 /turf/open/floor/iron,
 /area/station/hallway/primary/central/aft)
 "bgy" = (
-/obj/structure/rack,
-/obj/effect/spawner/random/maintenance,
 /obj/machinery/airalarm/directional/north,
+/obj/machinery/conveyor{
+	id = "CargoLoad";
+	dir = 1
+	},
+/obj/structure/disposalpipe/trunk{
+	dir = 4
+	},
+/obj/machinery/disposal/delivery_chute,
+/obj/machinery/door/window/left/directional/south,
 /turf/open/floor/iron,
 /area/station/cargo/storage)
 "bgz" = (
@@ -26921,6 +26946,9 @@
 	name = "Warehouse Door Control";
 	req_access = list("cargo")
 	},
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
 /turf/open/floor/iron,
 /area/station/cargo/storage)
 "coP" = (
@@ -29379,6 +29407,10 @@
 	},
 /turf/open/floor/iron,
 /area/station/hallway/primary/central/aft)
+"dit" = (
+/obj/structure/disposalpipe/segment,
+/turf/open/floor/iron,
+/area/station/cargo/storage)
 "diw" = (
 /obj/machinery/light/directional/south,
 /obj/structure/cable,
@@ -29618,8 +29650,7 @@
 "dqY" = (
 /obj/structure/table,
 /obj/machinery/conveyor_switch/oneway{
-	id = "CargoLoad";
-	name = "Cargo Load";
+	id = "mining";
 	pixel_y = 8
 	},
 /turf/open/floor/iron,
@@ -31653,9 +31684,11 @@
 "eZj" = (
 /obj/effect/turf_decal/trimline/brown/filled/line,
 /obj/structure/disposalpipe/segment,
-/obj/structure/cable,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4{
+	dir = 4
+	},
+/obj/structure/disposalpipe/segment{
 	dir = 4
 	},
 /turf/open/floor/iron,
@@ -32352,6 +32385,11 @@
 /area/station/ai_monitored/turret_protected/aisat_interior)
 "fAZ" = (
 /obj/effect/landmark/start/explorer,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/structure/cable,
 /turf/open/floor/iron,
 /area/station/cargo/storage)
 "fBp" = (
@@ -32697,14 +32735,14 @@
 /turf/open/floor/iron/dark,
 /area/station/ai_monitored/turret_protected/ai_upload)
 "fQd" = (
-/obj/machinery/conveyor{
-	id = "CargoLoad"
-	},
 /obj/effect/turf_decal/stripes/line{
 	dir = 8
 	},
 /obj/effect/turf_decal/stripes/line{
 	dir = 4
+	},
+/obj/machinery/conveyor{
+	id = "mining"
 	},
 /turf/open/floor/iron,
 /area/station/cargo/warehouse)
@@ -33880,11 +33918,6 @@
 /area/station/science/explab)
 "gQa" = (
 /obj/structure/disposalpipe/segment,
-/obj/structure/cable,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4{
-	dir = 4
-	},
 /obj/effect/mapping_helpers/broken_floor,
 /turf/open/floor/plating,
 /area/station/cargo/warehouse)
@@ -34205,6 +34238,10 @@
 "hhJ" = (
 /obj/machinery/airalarm/directional/north,
 /obj/structure/cable,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /turf/open/floor/iron,
 /area/station/cargo/warehouse)
 "hhN" = (
@@ -35830,6 +35867,7 @@
 /obj/machinery/camera/directional/east{
 	c_tag = "Cargo Bay"
 	},
+/obj/structure/disposalpipe/segment,
 /turf/open/floor/iron,
 /area/station/cargo/storage)
 "iDX" = (
@@ -36386,6 +36424,20 @@
 	},
 /turf/open/floor/iron/white,
 /area/station/medical/chemistry)
+"jfv" = (
+/obj/effect/turf_decal/delivery,
+/obj/machinery/door/poddoor/shutters{
+	id = "qm_warehouse";
+	name = "Warehouse Shutters"
+	},
+/obj/machinery/door/firedoor,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/structure/cable,
+/turf/open/floor/iron,
+/area/station/cargo/warehouse)
 "jgr" = (
 /obj/machinery/door/airlock/grunge{
 	name = "Library"
@@ -36453,6 +36505,12 @@
 	name = "Cargo Bay Requests Console"
 	},
 /obj/effect/mapping_helpers/requests_console/supplies,
+/obj/structure/railing{
+	dir = 8
+	},
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
 /turf/open/floor/iron,
 /area/station/cargo/storage)
 "jiD" = (
@@ -36710,6 +36768,12 @@
 /obj/effect/turf_decal/tile/brown/half/contrasted,
 /turf/open/floor/iron,
 /area/station/maintenance/disposal)
+"jww" = (
+/obj/structure/disposalpipe/segment{
+	dir = 10
+	},
+/turf/open/floor/iron,
+/area/station/cargo/storage)
 "jwA" = (
 /obj/effect/turf_decal/trimline/red/filled/line{
 	dir = 8
@@ -36795,12 +36859,6 @@
 	},
 /turf/open/floor/iron,
 /area/station/construction/mining/aux_base)
-"jBh" = (
-/obj/structure/disposalpipe/segment{
-	dir = 6
-	},
-/turf/closed/wall,
-/area/station/cargo/warehouse)
 "jBn" = (
 /obj/structure/disposalpipe/segment{
 	dir = 4
@@ -40900,6 +40958,9 @@
 "mZS" = (
 /obj/effect/turf_decal/trimline/brown/filled/line,
 /obj/item/radio/intercom/directional/north,
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
 /turf/open/floor/iron,
 /area/station/cargo/storage)
 "naq" = (
@@ -41761,6 +41822,9 @@
 /obj/effect/turf_decal/trimline/brown/filled/line{
 	dir = 6
 	},
+/obj/structure/disposalpipe/segment{
+	dir = 9
+	},
 /turf/open/floor/iron,
 /area/station/cargo/storage)
 "nNq" = (
@@ -42031,6 +42095,14 @@
 	},
 /turf/closed/wall/r_wall,
 /area/station/science/ordnance)
+"nXj" = (
+/obj/structure/disposalpipe/segment,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4{
+	dir = 4
+	},
+/turf/open/floor/iron,
+/area/station/cargo/warehouse)
 "nXy" = (
 /obj/structure/disposalpipe/segment{
 	dir = 6
@@ -42597,6 +42669,15 @@
 	},
 /turf/open/space/basic,
 /area/space/nearstation)
+"ouG" = (
+/obj/effect/turf_decal/trimline/brown/filled/line,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/structure/cable,
+/turf/open/floor/iron,
+/area/station/cargo/storage)
 "ovf" = (
 /obj/structure/window/reinforced/spawner/directional/south,
 /obj/effect/spawner/structure/window/reinforced,
@@ -45672,6 +45753,12 @@
 "qRW" = (
 /turf/open/floor/wood,
 /area/station/service/abandoned_gambling_den)
+"qST" = (
+/obj/structure/railing{
+	dir = 8
+	},
+/turf/open/floor/iron,
+/area/station/cargo/storage)
 "qUe" = (
 /obj/structure/table,
 /obj/item/paper_bin{
@@ -45882,6 +45969,7 @@
 /obj/machinery/camera/directional/west{
 	c_tag = "Drone Bay Ext."
 	},
+/obj/structure/disposalpipe/segment,
 /turf/open/floor/iron,
 /area/station/cargo/storage)
 "rch" = (
@@ -45975,6 +46063,9 @@
 "rgO" = (
 /obj/effect/turf_decal/trimline/brown/filled/line,
 /obj/machinery/atmospherics/components/unary/vent_pump/on/layer4,
+/obj/structure/disposalpipe/segment{
+	dir = 5
+	},
 /turf/open/floor/iron,
 /area/station/cargo/storage)
 "rhb" = (
@@ -45986,6 +46077,13 @@
 /obj/effect/mapping_helpers/broken_floor,
 /turf/open/floor/wood,
 /area/station/maintenance/department/engine)
+"rhF" = (
+/obj/effect/turf_decal/trimline/brown/filled/line,
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/turf/open/floor/iron,
+/area/station/cargo/storage)
 "rhY" = (
 /obj/structure/closet/crate/engineering/fundedsatellites,
 /turf/open/floor/plating,
@@ -47102,6 +47200,17 @@
 /obj/structure/window/reinforced/spawner/directional/north,
 /turf/open/space/basic,
 /area/space/nearstation)
+"rXm" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/structure/cable,
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/turf/open/floor/iron,
+/area/station/cargo/storage)
 "rXH" = (
 /obj/machinery/atmospherics/components/unary/vent_scrubber/on/layer2,
 /obj/effect/turf_decal/tile/red/opposingcorners,
@@ -47972,6 +48081,17 @@
 	},
 /turf/open/floor/plating,
 /area/station/security/execution)
+"sJO" = (
+/obj/structure/railing{
+	dir = 8
+	},
+/obj/machinery/conveyor_switch/oneway{
+	id = "CargoLoad";
+	name = "Cargo Load";
+	pixel_y = 8
+	},
+/turf/open/floor/iron,
+/area/station/cargo/storage)
 "sKa" = (
 /obj/structure/closet/secure_closet/engineering_personal,
 /obj/machinery/newscaster/directional/north,
@@ -48574,6 +48694,7 @@
 /obj/machinery/atmospherics/components/unary/vent_pump/on/layer4{
 	dir = 4
 	},
+/obj/structure/disposalpipe/segment,
 /turf/open/floor/iron,
 /area/station/cargo/storage)
 "teR" = (
@@ -48661,6 +48782,15 @@
 /obj/effect/turf_decal/tile/blue/fourcorners,
 /turf/open/floor/iron,
 /area/station/medical/treatment_center)
+"thr" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/structure/cable,
+/obj/effect/landmark/start/cargo_technician,
+/turf/open/floor/iron,
+/area/station/cargo/storage)
 "thT" = (
 /obj/effect/turf_decal/stripes/corner,
 /obj/machinery/meter,
@@ -48885,12 +49015,6 @@
 /obj/item/clothing/mask/gas,
 /turf/open/floor/iron/dark,
 /area/station/service/chapel/funeral)
-"tpC" = (
-/obj/structure/disposalpipe/segment{
-	dir = 9
-	},
-/turf/closed/wall,
-/area/station/cargo/warehouse)
 "tpI" = (
 /obj/structure/window/reinforced/spawner/directional/east,
 /obj/structure/lattice,
@@ -49727,12 +49851,6 @@
 	},
 /turf/open/floor/iron,
 /area/station/cargo/sorting)
-"tYu" = (
-/obj/structure/rack,
-/obj/effect/spawner/random/maintenance,
-/obj/item/stack/sheet/cardboard,
-/turf/open/floor/iron,
-/area/station/cargo/storage)
 "tYF" = (
 /obj/structure/table,
 /obj/item/training_toolbox,
@@ -49914,11 +50032,6 @@
 /obj/structure/cable,
 /turf/open/floor/plastic,
 /area/station/security/mechbay)
-"ueu" = (
-/obj/structure/table,
-/obj/item/stack/sheet/cardboard,
-/turf/open/floor/iron,
-/area/station/cargo/warehouse)
 "ueJ" = (
 /obj/structure/reagent_dispensers/cooking_oil,
 /turf/open/floor/iron/showroomfloor,
@@ -50042,14 +50155,12 @@
 /turf/open/floor/wood,
 /area/station/maintenance/department/engine)
 "ujf" = (
-/obj/structure/disposalpipe/trunk{
-	dir = 4
-	},
-/obj/machinery/disposal/delivery_chute{
-	dir = 1
-	},
 /obj/effect/turf_decal/stripes/end,
-/obj/structure/plasticflaps/opaque,
+/obj/machinery/conveyor{
+	id = "mining";
+	dir = 10
+	},
+/obj/machinery/bouldertech/refinery/smelter,
 /turf/open/floor/iron,
 /area/station/cargo/warehouse)
 "ujj" = (
@@ -51790,11 +51901,6 @@
 /area/station/service/chapel/storage)
 "vBZ" = (
 /obj/structure/disposalpipe/segment,
-/obj/structure/cable,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4{
-	dir = 4
-	},
 /turf/open/floor/iron,
 /area/station/cargo/warehouse)
 "vCE" = (
@@ -52129,17 +52235,8 @@
 /turf/open/floor/plating,
 /area/station/maintenance/department/science/central)
 "vQz" = (
-/obj/machinery/door/airlock/mining/glass{
-	name = "Cargo Bay"
-	},
 /obj/structure/disposalpipe/segment,
-/obj/machinery/door/firedoor,
-/obj/structure/cable,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4{
-	dir = 4
-	},
-/obj/effect/mapping_helpers/airlock/access/any/supply/general,
+/obj/effect/spawner/structure/window/reinforced,
 /turf/open/floor/iron,
 /area/station/cargo/warehouse)
 "vRi" = (
@@ -52554,6 +52651,13 @@
 /obj/effect/turf_decal/tile/red/opposingcorners,
 /turf/open/floor/iron/white,
 /area/station/security/prison/mess)
+"wcX" = (
+/obj/effect/spawner/structure/window/reinforced,
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/turf/open/floor/plating,
+/area/station/cargo/storage)
 "wdl" = (
 /obj/structure/disposalpipe/segment{
 	dir = 6
@@ -54024,6 +54128,11 @@
 	},
 /turf/open/floor/iron/dark,
 /area/station/command/heads_quarters/rd)
+"xdT" = (
+/obj/structure/disposalpipe/segment,
+/obj/effect/mapping_helpers/burnt_floor,
+/turf/open/floor/plating,
+/area/station/cargo/warehouse)
 "xdW" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 5
@@ -54414,6 +54523,10 @@
 /area/station/security/prison/mess)
 "xog" = (
 /obj/structure/cable,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /turf/open/floor/iron,
 /area/station/cargo/warehouse)
 "xoo" = (
@@ -96576,8 +96689,8 @@ uXX
 aQk
 aEj
 bgy
-aRq
-tYu
+aTp
+aTp
 aTp
 aUz
 wkM
@@ -96833,9 +96946,9 @@ uXX
 aNQ
 aEj
 jiu
-cCB
-fAZ
-cCB
+qST
+apC
+sJO
 bUh
 wkM
 sAD
@@ -97345,12 +97458,12 @@ uXX
 aEj
 aMw
 aQo
-bbJ
-cCB
+jfv
+rXm
 fAZ
-cCB
+thr
 fAZ
-aUz
+ouG
 vrX
 sAD
 aXA
@@ -97603,9 +97716,9 @@ aEj
 hhJ
 aQp
 bbJ
-cCB
-cCB
-cCB
+jww
+dit
+dit
 iDV
 rgO
 wkM
@@ -98121,7 +98234,7 @@ aTv
 bfC
 oMH
 bcV
-aUz
+rhF
 wkM
 evg
 cCB
@@ -98372,10 +98485,10 @@ tfz
 aNU
 aLk
 aPi
+nXj
 vBZ
 vBZ
-vBZ
-aPi
+xdT
 gQa
 vQz
 eZj
@@ -98633,9 +98746,9 @@ mlI
 cCY
 jIM
 dqY
-ueu
+aTv
 bcV
-aUz
+rhF
 myc
 sAD
 rAP
@@ -98885,14 +98998,14 @@ aEj
 lru
 aEj
 aPc
-aPU
-aPU
+fQd
+fQd
 bcJ
 aPU
 fQd
 ujf
 cDa
-aTy
+wcX
 iYH
 aTy
 bbG
@@ -99146,8 +99259,8 @@ aEj
 aEj
 aEj
 bdG
-jBh
-tpC
+cDa
+cDa
 cDa
 mZS
 myc
