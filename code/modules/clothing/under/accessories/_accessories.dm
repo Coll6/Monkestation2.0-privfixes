@@ -188,7 +188,7 @@
 		return
 
 	source.remove_accessory(src)
-	if(!QDELETED(src))
+	if(QDELETED(src))
 		return
 	forceMove(source.drop_location())
 	source.visible_message(span_warning("[src] falls off of [source]!"))

@@ -227,7 +227,7 @@ GLOBAL_LIST_INIT(scryer_auto_link_freqs, zebra_typecacheof(list(
 
 /obj/item/clothing/neck/link_scryer/equipped(mob/living/user, slot)
 	. = ..()
-	if(slot != ITEM_SLOT_NECK)
+	if(slot != ITEM_SLOT_NECK && (istype(src.loc, /obj/item/clothing/accessory/scryer_accessory)) && slot != ITEM_SLOT_ICLOTHING)
 		mod_link?.end_call()
 
 /obj/item/clothing/neck/link_scryer/dropped(mob/living/user)
@@ -356,15 +356,35 @@ GLOBAL_LIST_INIT(scryer_auto_link_freqs, zebra_typecacheof(list(
 	src.mod_link?.soundloop?.set_ringtone(src.ringtone)
 	src.mod_link?.soundloop?.stop()
 
-
 /obj/item/clothing/neck/link_scryer/proc/get_user()
 	var/mob/living/carbon/user = loc
 	return istype(user) && user.wear_neck == src ? user : null
+
+/obj/item/clothing/neck/link_scryer/proc/get_accessory_user()
+	var/obj/item/clothing/accessory/scryer_accessory/acc = loc
+	if(!istype(acc))
+		return null
+	var/obj/item/clothing/under/uniform = acc.loc
+	if(!istype(uniform))
+		return null
+	var/mob/living/carbon/human/user = uniform.loc
+	return istype(user) && user.w_uniform == uniform  ? user : null
 
 /obj/item/clothing/neck/link_scryer/proc/can_call()
 	if(!cell?.charge)
 		return FALSE
 	return base_mod_link_checks(loc)
+
+/obj/item/clothing/neck/link_scryer/proc/can_accessory_call()
+	if(!cell?.charge)
+		return FALSE
+	var/obj/item/clothing/accessory/scryer_accessory/acc = loc
+	if(!istype(acc))
+		return FALSE
+	var/obj/item/clothing/under/uniform = acc.loc
+	if(!istype(uniform))
+		return FALSE
+	return base_mod_link_checks(uniform.loc)
 
 /obj/item/clothing/neck/link_scryer/proc/make_link_visual()
 	var/mob/living/user = mod_link.get_user_callback.Invoke()

@@ -268,6 +268,9 @@ GLOBAL_LIST_INIT(pride_pin_reskins, list(
 		scryer_mob.put_in_hands(attaching)
 		qdel(src)
 		return
+	scryer.slot_flags = ITEM_SLOT_ICLOTHING
+	scryer.mod_link.get_user_callback = CALLBACK(scryer, TYPE_PROC_REF(/obj/item/clothing/neck/link_scryer, get_accessory_user))
+	scryer.mod_link.can_call_callback = CALLBACK(scryer, TYPE_PROC_REF(/obj/item/clothing/neck/link_scryer, can_accessory_call))
 
 /obj/item/clothing/accessory/scryer_accessory/detach(obj/item/clothing/under/detach_from, popped)
 	. = ..()
@@ -281,6 +284,9 @@ GLOBAL_LIST_INIT(pride_pin_reskins, list(
 		remover.put_in_hands(scryer)
 	else
 		scryer.forceMove(detach_from.drop_location())
+	scryer.slot_flags = ITEM_SLOT_NECK
+	scryer.mod_link.get_user_callback = CALLBACK(scryer, TYPE_PROC_REF(/obj/item/clothing/neck/link_scryer, get_user))
+	scryer.mod_link.can_call_callback = CALLBACK(scryer, TYPE_PROC_REF(/obj/item/clothing/neck/link_scryer, can_call))
 	scryer =  null
 	qdel(src)
 
@@ -289,3 +295,12 @@ GLOBAL_LIST_INIT(pride_pin_reskins, list(
 		QDEL_NULL(scryer)
 	return ..()
 
+/obj/item/clothing/accessory/scryer_accessory/accessory_equipped(obj/item/clothing/under/clothes, mob/living/user)
+	. = ..()
+	if(istype(scryer))
+		scryer.equipped(user, user.get_slot_by_item(clothes))
+
+/obj/item/clothing/accessory/scryer_accessory/accessory_dropped(obj/item/clothing/under/clothes, mob/living/user)
+	. = ..()
+	if(istype(scryer))
+		scryer.dropped(user)
