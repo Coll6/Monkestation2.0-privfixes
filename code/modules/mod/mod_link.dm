@@ -32,7 +32,8 @@ GLOBAL_LIST_INIT(scryer_auto_link_freqs, zebra_typecacheof(list(
 	animate(visuals, 0.5 SECONDS, alpha = 255)
 	var/datum/callback/setdir_callback = CALLBACK(mod_link.holder, proc_path)
 	setdir_callback.Invoke(user, user.dir, user.dir)
-	mod_link.holder.RegisterSignal(mod_link.holder.loc, COMSIG_ATOM_DIR_CHANGE, proc_path)
+	var/holder_location = (istype(mod_link.holder.loc, /obj/item/clothing/accessory/scryer_accessory) && !isnull(user)) ? user : mod_link.holder.loc
+	mod_link.holder.RegisterSignal(holder_location, COMSIG_ATOM_DIR_CHANGE, proc_path)
 
 /proc/delete_link_visual_generic(datum/mod_link/mod_link)
 	var/mob/living/user = mod_link.get_user_callback.Invoke()
@@ -417,7 +418,8 @@ GLOBAL_LIST_INIT(scryer_auto_link_freqs, zebra_typecacheof(list(
 /obj/item/clothing/neck/link_scryer/proc/update_link_visual()
 	if(QDELETED(mod_link.link_call))
 		return
-	var/mob/living/user = loc
+	var/location = istype(loc, /obj/item/clothing/accessory/scryer_accessory) ? get_accessory_user() : loc
+	var/mob/living/user = location
 	mod_link.visual.cut_overlay(mod_link.visual_overlays)
 	mod_link.visual_overlays = user.overlays - user.active_thinking_indicator
 	mod_link.visual.add_overlay(mod_link.visual_overlays)

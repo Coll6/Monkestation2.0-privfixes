@@ -246,9 +246,11 @@ GLOBAL_LIST_INIT(pride_pin_reskins, list(
 
 /obj/item/clothing/accessory/scryer_accessory
 	name = "\improper MODlink scryer accessory"
-	icon_state = "plasma"
-	inhand_icon_state = "" //self deletes if removed from clothing
 	desc = "A MODlink Scryer that someone modified to attach to their clothes."
+	icon = 'icons/obj/clothing/neck.dmi'
+	worn_icon = 'icons/mob/clothing/neck.dmi'
+	icon_state = "modlink"
+	inhand_icon_state = "" //self deletes if removed from clothing
 	attachment_slot = CHEST
 
 	var/obj/item/clothing/neck/link_scryer/scryer // The scryer that this accessory is imitating.
@@ -294,11 +296,6 @@ GLOBAL_LIST_INIT(pride_pin_reskins, list(
 	if(istype(scryer))	// For some reason this was deleted before scryer removed, Assume it was destroyed.
 		QDEL_NULL(scryer)
 	return ..()
-
-/obj/item/clothing/accessory/scryer_accessory/worn_overlays(mutable_appearance/standing, isinhands)
-	. = ..()
-	if(!QDELETED(scryer) && !QDELETED(scryer.mod_link.link_call))
-		. += mutable_appearance('icons/mob/clothing/neck.dmi', "modlink_active")
 
 /obj/item/clothing/accessory/scryer_accessory/accessory_equipped(obj/item/clothing/under/clothes, mob/living/user)
 	. = ..()
