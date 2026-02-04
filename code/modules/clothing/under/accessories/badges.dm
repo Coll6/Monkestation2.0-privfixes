@@ -306,3 +306,38 @@ GLOBAL_LIST_INIT(pride_pin_reskins, list(
 	. = ..()
 	if(istype(scryer))
 		scryer.dropped(user)
+
+// Examining the person wearing the clothes will display the examine message to strip.
+/obj/item/clothing/accessory/scryer_accessory/accessory_equipped(obj/item/clothing/under/clothes, mob/living/user)
+	RegisterSignal(user, COMSIG_ATOM_EXAMINE, PROC_REF(on_examine))
+
+/obj/item/clothing/accessory/scryer_accessory/accessory_dropped(obj/item/clothing/under/clothes, mob/living/user)
+	UnregisterSignal(user, COMSIG_ATOM_EXAMINE)
+
+/obj/item/clothing/accessory/scryer_accessory/proc/on_examine(datum/source, mob/user, list/examine_list)
+	SIGNAL_HANDLER
+
+	if(istype(source, /mob/living/carbon/human) && istype(src.loc, /obj/item/clothing/under))
+		var/mob/living/carbon/human/holder = source
+		var/obj/item/clothing/under/uniform = src.loc
+		if(holder.w_uniform == uniform && user != holder && user.CanReach(holder, view_only = TRUE))
+			examine_list += "[ma2html(src, user)]<a href='byond://?src=[REF(src)];strip_scryer=1;clothing=[REF(uniform)];holder=[REF(source)]'>[src.get_examine_name(user)] (Click to strip)</a>"
+
+/obj/item/clothing/accessory/scryer_accessory/Topic(href, list/href_list)
+	. = ..()
+	if(href_list["strip_scryer"])
+		if(!iscarbon(usr) || !usr.can_perform_action(locate(href_list["holder"]), NEED_DEXTERITY | NEED_HANDS | FORBID_TELEKINESIS_REACH | ALLOW_RESTING))
+			return
+		INVOKE_ASYNC(src, PROC_REF(remove_scryer), usr, locate(href_list["holder"]), locate(href_list["clothing"]))
+
+/obj/item/clothing/accessory/scryer_accessory/proc/remove_scryer(mob/living/carbon/remover, mob/living/carbon/human/wearer, obj/item/clothing/under/uniform)
+	if(QDELETED(src) || QDELETED(remover) || QDELETED(wearer) || QDELETED(uniform))
+		return
+	if(DOING_INTERACTION_WITH_TARGET(remover, wearer) || (wearer.w_uniform != uniform) || src.loc != uniform)
+		return
+	remover.visible_message(
+		span_warning("[remover] begins removing [src] from [wearer]."),
+		span_notice("You start removing [src] from [wearer]."))
+	if(!do_after(remover, uniform.strip_delay, wearer) || (wearer.w_uniform != uniform) || src.loc != uniform)
+		return
+	uniform.remove_accessory(src)
