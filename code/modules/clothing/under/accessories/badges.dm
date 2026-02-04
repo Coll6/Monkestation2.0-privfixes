@@ -295,6 +295,11 @@ GLOBAL_LIST_INIT(pride_pin_reskins, list(
 		QDEL_NULL(scryer)
 	return ..()
 
+/obj/item/clothing/accessory/scryer_accessory/worn_overlays(mutable_appearance/standing, isinhands)
+	. = ..()
+	if(!QDELETED(scryer) && !QDELETED(scryer.mod_link.link_call))
+		. += mutable_appearance('icons/mob/clothing/neck.dmi', "modlink_active")
+
 /obj/item/clothing/accessory/scryer_accessory/accessory_equipped(obj/item/clothing/under/clothes, mob/living/user)
 	. = ..()
 	if(istype(scryer))

@@ -223,7 +223,7 @@ GLOBAL_LIST_INIT(scryer_auto_link_freqs, zebra_typecacheof(list(
 	. += span_notice("The MODlink ID is [mod_link.id], frequency is [mod_link.frequency || "unset"]. <b>Right-click</b> with multitool to copy/imprint frequency.")
 	. += span_notice("Use in hand to set name.")
 	. += span_notice("Its ringtone is set to '[ringtone]'")
-	. += span_notice("You can wear this as a neck accessory.")
+	. += span_notice("You can wear this as an accessory.")
 
 /obj/item/clothing/neck/link_scryer/equipped(mob/living/user, slot)
 	. = ..()
@@ -402,7 +402,8 @@ GLOBAL_LIST_INIT(scryer_auto_link_freqs, zebra_typecacheof(list(
 
 /obj/item/clothing/neck/link_scryer/Hear(message, atom/movable/speaker, message_language, raw_message, radio_freq, list/spans, list/message_mods, message_range)
 	. = ..()
-	if(speaker != loc)
+	var/location = istype(loc, /obj/item/clothing/accessory/scryer_accessory) ? get_accessory_user() : loc
+	if(speaker != location)
 		return
 	var/old_name = mod_link.visual.name
 	mod_link.visual.name = speaker.GetVoice()
