@@ -258,18 +258,15 @@ GLOBAL_LIST_INIT(pride_pin_reskins, list(
 /obj/item/clothing/accessory/scryer_accessory/Initialize(mapload, obj/item/clothing/neck/link_scryer/attaching)
 	. = ..()
 	if(!isliving(src.loc) || QDELETED(attaching))
-		qdel(src)
-		return
+		return INITIALIZE_HINT_QDEL
 	var/mob/living/scryer_mob = src.loc
 	if(!scryer_mob.transferItemToLoc(attaching, src))
 		scryer_mob.put_in_hands(attaching)
-		qdel(src)
-		return
+		return INITIALIZE_HINT_QDEL
 	scryer = attaching
 	if(!scryer_mob.put_in_hands(src))
 		scryer_mob.put_in_hands(attaching)
-		qdel(src)
-		return
+		return INITIALIZE_HINT_QDEL
 	scryer.slot_flags = ITEM_SLOT_ICLOTHING
 	scryer.mod_link.get_user_callback = CALLBACK(scryer, TYPE_PROC_REF(/obj/item/clothing/neck/link_scryer, get_accessory_user))
 	scryer.mod_link.can_call_callback = CALLBACK(scryer, TYPE_PROC_REF(/obj/item/clothing/neck/link_scryer, can_accessory_call))
