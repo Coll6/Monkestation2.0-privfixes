@@ -297,22 +297,18 @@ GLOBAL_LIST_INIT(pride_pin_reskins, list(
 		QDEL_NULL(scryer)
 	return ..()
 
+// Examining the person wearing the clothes will display the examine message to strip.
 /obj/item/clothing/accessory/scryer_accessory/accessory_equipped(obj/item/clothing/under/clothes, mob/living/user)
 	. = ..()
 	if(istype(scryer))
+		RegisterSignal(user, COMSIG_ATOM_EXAMINE, PROC_REF(on_examine))
 		scryer.equipped(user, user.get_slot_by_item(clothes))
 
 /obj/item/clothing/accessory/scryer_accessory/accessory_dropped(obj/item/clothing/under/clothes, mob/living/user)
 	. = ..()
 	if(istype(scryer))
+		UnregisterSignal(user, COMSIG_ATOM_EXAMINE)
 		scryer.dropped(user)
-
-// Examining the person wearing the clothes will display the examine message to strip.
-/obj/item/clothing/accessory/scryer_accessory/accessory_equipped(obj/item/clothing/under/clothes, mob/living/user)
-	RegisterSignal(user, COMSIG_ATOM_EXAMINE, PROC_REF(on_examine))
-
-/obj/item/clothing/accessory/scryer_accessory/accessory_dropped(obj/item/clothing/under/clothes, mob/living/user)
-	UnregisterSignal(user, COMSIG_ATOM_EXAMINE)
 
 /obj/item/clothing/accessory/scryer_accessory/proc/on_examine(datum/source, mob/user, list/examine_list)
 	SIGNAL_HANDLER
