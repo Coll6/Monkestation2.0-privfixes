@@ -50477,6 +50477,11 @@
 /obj/machinery/vending/wallmed/directional/south,
 /turf/open/floor/iron,
 /area/station/medical/surgery/theatre)
+"lLV" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/landmark/navigate_destination/mining_foundry,
+/turf/open/floor/iron,
+/area/station/cargo/warehouse)
 "lLY" = (
 /obj/machinery/atmospherics/pipe/smart/simple/yellow/visible{
 	dir = 4
@@ -144863,7 +144868,7 @@ iXj
 oXl
 dFm
 fqx
-kYB
+lLV
 tTX
 lDi
 oKr
