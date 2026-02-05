@@ -568,7 +568,7 @@
 	id = "no_throw_back"
 	status_type = STATUS_EFFECT_REFRESH
 	duration = 0.5 SECONDS
-	tick_interval = 2
+	tick_interval = STATUS_EFFECT_NO_TICK
 
 /datum/status_effect/tagalong //applied to darkspawns while they accompany someone //yogs start: darkspawn
 	id = "tagalong"
