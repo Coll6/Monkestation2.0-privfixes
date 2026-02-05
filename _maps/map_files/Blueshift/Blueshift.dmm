@@ -71113,6 +71113,7 @@
 	dir = 1;
 	name = "Unfiltered to Mix"
 	},
+/obj/machinery/portable_atmospherics/canister/bz,
 /turf/open/floor/iron/dark,
 /area/station/engineering/atmos/pumproom)
 "nLl" = (
@@ -82951,9 +82952,6 @@
 	name = "frozen safe"
 	},
 /obj/item/reagent_containers/condiment/coldsauce,
-/obj/item/temperature_pack/cold,
-/obj/item/temperature_pack/cold,
-/obj/item/temperature_pack/cold,
 /obj/item/reagent_containers/condiment/coldsauce,
 /obj/item/food/grown/icepepper,
 /obj/item/clothing/head/costume/drfreezehat,
@@ -97034,7 +97032,7 @@
 /turf/open/floor/iron,
 /area/station/commons/fitness)
 "sKr" = (
-/obj/structure/bookcase/manuals/engineering,
+/obj/machinery/cassette_library,
 /turf/open/floor/wood,
 /area/station/service/library)
 "sKs" = (
@@ -106105,6 +106103,7 @@
 	dir = 4
 	},
 /obj/item/radio/intercom/directional/east,
+/obj/machinery/portable_atmospherics/canister/bz,
 /turf/open/floor/iron,
 /area/station/engineering/atmos/pumproom)
 "usM" = (
@@ -109637,10 +109636,7 @@
 /area/station/science/xenobiology)
 "vcz" = (
 /obj/structure/extinguisher_cabinet/directional/south,
-/obj/structure/chair/comfy/brown{
-	color = "#A46106";
-	dir = 8
-	},
+/obj/structure/bookcase/manuals/engineering,
 /turf/open/floor/wood,
 /area/station/service/library)
 "vcA" = (
@@ -120120,7 +120116,7 @@
 /area/station/maintenance/department/medical)
 "wYS" = (
 /obj/machinery/computer/records/security,
-/obj/structure/noticeboard/directional/north,
+/obj/structure/detectiveboard/directional/north,
 /turf/open/floor/carpet,
 /area/station/security/detectives_office)
 "wYV" = (
