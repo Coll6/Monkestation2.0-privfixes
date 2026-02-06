@@ -1,6 +1,7 @@
 /datum/status_effect/thermally_destabilized
 	id = "thermally_destabilized"
 	status_type = STATUS_EFFECT_REFRESH //Custom code
+	alert_type = /atom/movable/screen/alert/status_effect/thermally_destabilized
 	duration = 3 SECONDS
 	tick_interval = STATUS_EFFECT_NO_TICK
 	remove_on_fullheal = TRUE
