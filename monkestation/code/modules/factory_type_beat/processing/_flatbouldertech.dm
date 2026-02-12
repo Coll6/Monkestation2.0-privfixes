@@ -8,6 +8,7 @@
 
 /obj/machinery/bouldertech/flatpack/Destroy()
 	QDEL_NULL(rotation)
+	machine = null
 	return ..()
 
 

@@ -16,3 +16,8 @@
 /obj/item/flatpacked_machine/ore_processing/purification_chamber
 	name = "flat-packed purification chamber"
 	type_to_deploy = /obj/machinery/bouldertech/flatpack/purification_chamber
+
+/obj/item/flatpacked_machine/ore_processing/brine_chamber
+	name = "flat-packed brine chamber controller"
+	desc = "This is a massive deploy so clear space (5x5). This acts as the lower left corner"
+	type_to_deploy = /obj/structure/brine_chamber/controller
