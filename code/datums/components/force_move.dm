@@ -39,16 +39,16 @@
 		if(!result) // Something prevented us from moving into the space.
 			var/obj/machinery/heavy_weight = (locate(/obj/machinery/vending) in target_turf)
 			var/datum/move_loop/has_target/move_towards/blocked_move = blocked
-			if(istype(heavy_weight, /obj/machinery/vending)) // When a stoppable force hits immovable capitalism.
+			if(heavy_weight) // When a stoppable force hits immovable capitalism.
 				blocked_move.lifetime = -1
-				INVOKE_ASYNC(heavy_weight, /obj/machinery/vending/proc/tilt, parent) // We hit the machine so let them hit back.
+				INVOKE_ASYNC(heavy_weight, TYPE_PROC_REF(/obj/machinery/vending, tilt), parent) // We hit the machine so let them hit back.
 			else
 				// We hit a structure and we need to keep going.
 				mob_parent.Immobilize(0.8 SECONDS) // Prevent them from throw bending around objects.
 				mob_parent.apply_status_effect(/datum/status_effect/no_throw_back) // Stops the default knockback when tossed into walls
 			// We don't exactly know what stopped us. So throw us at the turf and let physics handle it.
 				blocked_move.lifetime = -1
-				INVOKE_ASYNC(mob_parent, /atom/movable/proc/throw_at, target_turf, 1, 1)
+				INVOKE_ASYNC(mob_parent, TYPE_PROC_REF(/atom/movable, throw_at), target_turf, 1, 1)
 
 /datum/component/force_move/proc/loop_ended(datum/source)
 	SIGNAL_HANDLER
