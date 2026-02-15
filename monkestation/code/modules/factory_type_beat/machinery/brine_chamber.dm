@@ -11,10 +11,22 @@
 
 	/// Pack to return when deconstructed with crowbar.
 	var/obj/item/flatpacked_machine/ore_processing/machine = /obj/item/flatpacked_machine/ore_processing/brine_chamber
+	var/obj/item/marker_tool
 
 /obj/structure/brine_chamber/controller/Destroy()
 	machine = null
+	clear_marking()
 	return ..()
+
+/obj/structure/brine_chamber/controller/proc/mark_border()
+	SIGNAL_HANDLER
+	if(!istype(marker_tool))
+		return
+
+/obj/structure/brine_chamber/controller/proc/clear_marking()
+	SIGNAL_HANDLER
+	UnregisterSignal(marker_tool, list(COMSIG_ITEM_DROPPED, COMSIG_QDELETING, COMSIG_ATOM_SECONDARY_TOOL_ACT(TOOL_MULTITOOL)))
+	marker_tool = null
 
 /obj/structure/brine_chamber/controller/deconstruct(disassembled)
 	if(disassembled && !isnull(machine))
@@ -22,11 +34,24 @@
 
 	return ..()
 
+/obj/structure/brine_chamber/controller/multitool_act(mob/living/user, obj/item/tool)
+	if(QDELETED(tool))
+		return
+	if(!marker_tool)
+		marker_tool = tool
+		RegisterSignals(tool, list(COMSIG_ITEM_DROPPED, COMSIG_QDELETING), PROC_REF(clear_marking))
+		RegisterSignals(tool, list(COMSIG_ATOM_SECONDARY_TOOL_ACT(TOOL_MULTITOOL)), PROC_REF(mark_border))
+		balloon_alert_to_viewers("Mark the corners with the multitool.")
+		return ITEM_INTERACT_SUCCESS
+
 /obj/structure/brine_chamber/controller/crowbar_act(mob/living/user, obj/item/tool)
 	if(isitem(tool))
-		if(!(flags_1 & NODECONSTRUCT_1) && tool.tool_behaviour == TOOL_CROWBAR)
+		if(!(flags_1 & NODECONSTRUCT_1))
 			tool.play_tool_sound(src, 50)
 			deconstruct(TRUE)
 		return ITEM_INTERACT_SUCCESS
 	return
 
+// Marker for the boundary corners.
+//obj/effect/brine_marker
+//	icon_state = "scanline"
