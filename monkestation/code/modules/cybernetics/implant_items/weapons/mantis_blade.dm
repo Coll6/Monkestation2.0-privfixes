@@ -88,7 +88,7 @@
 	if(isliving(user))
 		var/mob/living/living = user
 		living.stamina?.adjust(-25) // cost of a lunge
-	if(get_dist(user, interacting_with) > 1) // If we do not reach the target don't hit it.
+	if(!user.Adjacent(interacting_with)) // If we do not reach the target don't hit it.
 		return
 	attack(interacting_with, user)
 	return
