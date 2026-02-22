@@ -1,0 +1,5 @@
+author: "Absolucy"
+delete-after: True
+changes:
+  - qol: "Reworked the Monster Hunter rabbit spawning logic - they now use selection similar to heretic influences, and won't spawn in stupid unfair places."
+  - balance: "Monster Hunters will now always get the bloodsilver revolver from their second rabbit."
