@@ -1,0 +1,6 @@
+author: "JohnFulpWillard"
+delete-after: True
+changes:
+  - bugfix: "Silicon cameras no longer cause server lag."
+  - bugfix: "pAIs now regenerate their chassis integrity."
+  - qol: "pAIs now have a new HUD to take widescreen into account, it includes a new button for Crew Monitor."
