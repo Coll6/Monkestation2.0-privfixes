@@ -38,7 +38,7 @@
 /obj/structure/brine_chamber/controller/proc/clear_marking()
 	SIGNAL_HANDLER
 	UnregisterSignal(marker_tool, list(COMSIG_ITEM_DROPPED, COMSIG_QDELETING, COMSIG_ITEM_INTERACTING_WITH_ATOM_SECONDARY))
-	if(!QDELETED(marker_tool) && istype(multitool_get_buffer(marker_tool), /obj/structure/brine_chamber/controller))
+	if(!QDELETED(marker_tool) && multitool_get_buffer(marker_tool) == src)
 		multitool_set_buffer(marker_tool, null)
 	marker_tool = null
 
