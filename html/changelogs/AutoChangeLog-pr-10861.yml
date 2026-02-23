@@ -1,0 +1,11 @@
+author: "notghosti"
+delete-after: True
+changes:
+  - map: "Oshan now has power for brig medical"
+  - map: "Oshan has better construction access"
+  - map: "Oshan has RD Console"
+  - map: "Oshan has xenobio lockers moved from public hallway"
+  - map: "Thesues no longer has mapped mime book"
+  - map: "Theseus no longer has indestructible perma lube floors. Replaced with slippery oil"
+  - map: "Theseus cryogenics now hook into distro"
+  - map: "Pubby now has wirechemistry added"
