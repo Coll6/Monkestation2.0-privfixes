@@ -1,0 +1,5 @@
+author: "SirNightKnight"
+delete-after: True
+changes:
+  - bugfix: "added the warden's grey jumpsuit to their garment bag."
+  - bugfix: "basic and makeshift microfusion cells have the correct charge capacity."
