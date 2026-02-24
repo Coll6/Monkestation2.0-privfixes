@@ -1,0 +1,7 @@
+author: "wonderinghost"
+delete-after: True
+changes:
+  - map: "[oshan] Reworks Medical Department Layout"
+  - map: "[oshan] Proper Chemistry room"
+  - map: "[oshan] Fixes Access For NTrep and Blueshield doors"
+  - map: "[oshan] Chefs and Chaplains Medical Front Door Access for Morgue"
