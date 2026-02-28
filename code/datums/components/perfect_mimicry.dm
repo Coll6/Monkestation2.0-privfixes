@@ -49,7 +49,7 @@
 			stationcomp.allow_item_destruction = TRUE
 		new_item = nuclear
 	if(!istype(new_item))
-		new_item = duplicate_object(target_item, get_turf(owner))
+		new_item = duplicate_object(target_item, owner.drop_location())
 	new_item.AddComponent(/datum/component/mimic_disguise)
 	if(new_item.uses_integrity) // Mimicked items can break easier
 		var/weight_multiplier = max(1, new_item.w_class)
@@ -88,6 +88,9 @@
 		return FALSE
 	if(!is_allowed_object(mimic_target))
 		to_chat(owner, span_notice("[mimic_target.name] is too complex to mimic."))
+		return FALSE
+	if(movement_type & VENTCRAWLING)
+		to_chat(owner, span_notice("You cannot mimic objects while ventcrawling."))
 		return FALSE
 	return ..()
 
