@@ -89,7 +89,7 @@
 	if(!is_allowed_object(mimic_target))
 		to_chat(owner, span_notice("[mimic_target.name] is too complex to mimic."))
 		return FALSE
-	if(movement_type & VENTCRAWLING)
+	if(owner.movement_type & VENTCRAWLING)
 		to_chat(owner, span_notice("You cannot mimic objects while ventcrawling."))
 		return FALSE
 	return ..()
