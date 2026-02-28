@@ -1,9 +1,9 @@
 #define MIMIC_SPOOF_RESIST_MASK ( \
-    LAVA_PROOF | \
-    FIRE_PROOF | \
-    UNACIDABLE | \
-    ACID_PROOF | \
-    INDESTRUCTIBLE \
+	LAVA_PROOF | \
+	FIRE_PROOF | \
+	UNACIDABLE | \
+	ACID_PROOF | \
+	INDESTRUCTIBLE \
 )
 /datum/component/mimic_disguise
 	dupe_mode = COMPONENT_DUPE_UNIQUE
