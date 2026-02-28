@@ -4,6 +4,10 @@
 	var/datum/action/cooldown/mimic_ability/mimic_object/action = new(src)
 	action.Grant(src)
 
+/mob/living/proc/remove_mimicry()
+	for(var/datum/action/cooldown/mimic_ability/mimic_object/action in src.actions)
+		action.Remove(src)
+
 /*
  * Mimicry actions
  */
@@ -40,11 +44,13 @@
 	var/obj/item/new_item
 	if(istype(target_item, /obj/item/disk/nuclear)) // Can mimic disk but it is fake and can be destroyed.
 		var/obj/item/disk/nuclear/fake/nuclear = new(owner.drop_location())
-		nuclear.resistance_flags = LAVA_PROOF | FIRE_PROOF | ACID_PROOF
+		var/datum/component/stationloving/stationcomp = nuclear.GetComponent(/datum/component/stationloving)
+		if(stationcomp)
+			stationcomp.allow_item_destruction = TRUE
 		new_item = nuclear
 	if(!istype(new_item))
 		new_item = duplicate_object(target_item, get_turf(owner))
-
+	new_item.AddComponent(/datum/component/mimic_disguise)
 	if(new_item.uses_integrity) // Mimicked items can break easier
 		var/weight_multiplier = max(1, new_item.w_class)
 		var/adjusted_integrity = 5 + (weight_multiplier * INTEGRITY_PER_WCLASS)
