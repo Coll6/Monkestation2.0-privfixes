@@ -1093,3 +1093,10 @@
 	item_path = /obj/item/clothing/mask/gas/lobotomites_visage
 	donator_only = TRUE
 	requires_purchase = FALSE
+
+// Coll6
+/datum/loadout_item/suit/lava_cat_robe
+	name = "Lava Cat Robe"
+	item_path = /obj/item/clothing/suit/hooded/lava_cat_robe
+	donator_only = TRUE
+	requires_purchase = FALSE
