@@ -68,6 +68,7 @@
 	greyscale_colors = "#2B0F0F#7A1E1E#FF6A00"
 	greyscale_config = /datum/greyscale_config/lava_cat_robe
 	greyscale_config_worn = /datum/greyscale_config/lava_cat_robe/worn
+	respect_suit_greyscale = TRUE
 	flags_1 = IS_PLAYER_COLORABLE_1
 	allowed = list(
 		/obj/item/flashlight,
@@ -79,11 +80,11 @@
 	)
 	hoodtype = /obj/item/clothing/head/hooded/lava_cat_hood
 
-/obj/item/clothing/suit/hooded/lava_cat_robe/on_hood_up(obj/item/clothing/head/hooded/hood)
-	if(src.greyscale_colors && istype(hood) && src.greyscale_colors != hood.greyscale_colors)
+/obj/item/clothing/suit/hooded/lava_cat_robe/on_hood_created(obj/item/clothing/head/hooded/hood)
+	..()
+	if(respect_suit_greyscale && src.greyscale_colors && istype(hood) && src.greyscale_colors != hood.greyscale_colors)
 		hood.greyscale_colors = src.greyscale_colors
-		src.update_greyscale()
-		hood.update_greyscale()
+		src.update_greyscale() // hood greyscale will update itself when suit does. Keeps them in sync.
 
 /obj/item/clothing/head/hooded/lava_cat_hood
 	name = "\improper lava cat hood"
@@ -93,8 +94,8 @@
 	icon_state = "lava_cat_hood"
 	inhand_icon_state = null
 	greyscale_colors = "#2B0F0F#7A1E1E#FF6A00"
-	greyscale_config = /datum/greyscale_config/lava_cat_robe
-	greyscale_config_worn = /datum/greyscale_config/lava_cat_robe/worn
+	greyscale_config = /datum/greyscale_config/lava_cat_hood
+	greyscale_config_worn = /datum/greyscale_config/lava_cat_hood/worn
 	body_parts_covered = HEAD
 	flags_inv = HIDEFACE|HIDEHAIR|HIDEEARS|HIDEMASK|HIDEEARS|HIDEFACIALHAIR|HIDESNOUT
 
