@@ -10,6 +10,8 @@
 	var/hood_down_overlay_suffix = ""
 	/// Reference to hood object, if it exists
 	var/obj/item/clothing/head/hooded/hood
+	/// Hood respects the suit's greyscale.Initialize(mapload)
+	var/respect_suit_greyscale = FALSE
 
 /obj/item/clothing/suit/hooded/Initialize(mapload)
 	. = ..()
@@ -32,6 +34,13 @@
 /obj/item/clothing/suit/hooded/Destroy()
 	hood = null
 	return ..()
+
+/// Any hood greyscale should respect the main suit's greyscale.
+/obj/item/clothing/suit/hooded/update_greyscale()
+	..()
+	if(respect_suit_greyscale && istype(hood) && src.greyscale_colors && src.greyscale_colors != hood.greyscale_colors)
+		hood.greyscale_colors = src.greyscale_colors
+		hood.update_greyscale()
 
 /// Override to only create the hood conditionally
 /obj/item/clothing/suit/hooded/proc/can_create_hood()
