@@ -64,7 +64,7 @@
 		liquid_group = new(1, src)
 
 	if(!SSliquids)
-		CRASH("Liquid Turf created with the liquids sybsystem not yet initialized!")
+		CRASH("Liquid Turf created with the liquids subsystem not yet initialized!")
 	RegisterSignal(my_turf, COMSIG_ATOM_ENTERED, PROC_REF(movable_entered))
 	RegisterSignal(my_turf, COMSIG_TURF_MOB_FALL, PROC_REF(mob_fall))
 	RegisterSignal(my_turf, COMSIG_ATOM_EXAMINE, PROC_REF(examine_turf))
