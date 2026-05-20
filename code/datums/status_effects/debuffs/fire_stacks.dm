@@ -294,7 +294,7 @@
 /datum/status_effect/fire_handler/wet_stacks
 	id = "wet_stacks"
 
-	enemy_types = list(/datum/status_effect/fire_handler/fire_stacks)
+	enemy_types = list(/datum/status_effect/fire_handler/fire_stacks, /datum/status_effect/fire_handler/wet_resist_stacks)
 	stack_modifier = -1
 
 /datum/status_effect/fire_handler/wet_stacks/on_apply()
@@ -309,3 +309,29 @@
 	adjust_stacks(-0.5 * seconds_between_ticks)
 	if(stacks <= 0)
 		qdel(src)
+
+/**
+ * Used by oozelings to resist water stacks and effects.
+ */
+
+/datum/status_effect/fire_handler/wet_resist_stacks
+	id = "wet_resist_stacks"
+
+/datum/status_effect/fire_handler/wet_resist_stacks/on_apply()
+	. = ..()
+	var/color
+	if(isoozeling(owner))
+		var/mob/living/carbon/human/oozie = owner
+		var/datum/color_palette/generic_colors/colors = oozie.dna.color_palettes[/datum/color_palette/generic_colors]
+		color = colors.mutant_color
+	else
+		color = COLOR_LIME
+
+	var/obj/effect/abstract/shared_particle_holder/slime_droplets = owner.add_shared_particles(/particles/droplets/slime, "slime_droplets_[owner.name]", pool_size = 1)
+	slime_droplets.color = color
+
+/datum/status_effect/fire_handler/wet_resist_stacks/on_remove()
+	. = ..()
+	owner.remove_shared_particles(/particles/droplets/slime)
+
+//TODO : Figure out how to use /datum/status_effect/fire_handler/proc/cache_stacks() or adjust_stacks to alter drip amount.
