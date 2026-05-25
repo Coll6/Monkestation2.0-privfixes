@@ -316,10 +316,22 @@
 
 /datum/status_effect/fire_handler/wet_resist_stacks
 	id = "wet_resist_stacks"
+	stack_limit = MAX_FIRE_STACKS * 1.5
+	stack_modifier = -0.5
+	enemy_types = list(/datum/status_effect/fire_handler/wet_stacks)
 	var/slime_color = COLOR_LIME
 
 /datum/status_effect/fire_handler/wet_resist_stacks/get_examine_text()
-	return "[owner.p_They()] [owner.p_are()] covered in hydrophobic."
+	var/ratio = stacks / stack_limit * 100
+	switch(ratio)
+		if(76 to 100)
+			return "[owner.p_They()] [owner.p_are()] fully enveloped in thick hydrophobic slime."
+		if(51 to 75)
+			return "[owner.p_They()] [owner.p_are()] covered in a dense layer of hydrophobic slime."
+		if(26 to 50)
+			return "A noticeable layer of hydrophobic slime coats [owner.p_their()] body."
+		else
+			return "Thin streaks of hydrophobic slime cling to [owner.p_their()] body."
 
 /datum/status_effect/fire_handler/wet_resist_stacks/on_apply()
 	. = ..()
@@ -336,6 +348,16 @@
 		QDEL_NULL(particle_effect)
 		return ..()
 	drops.color = slime_color
+	var/ratio = stacks / stack_limit * 100
+	switch(ratio)
+		if(76 to 100)
+			drops.count = 6
+		if(51 to 75)
+			drops.count = 4
+		if(26 to 50)
+			drops.count = 2
+		else
+			drops.count = 1
 	return ..()
 
 /datum/status_effect/fire_handler/wet_resist_stacks/tick(seconds_between_ticks)
