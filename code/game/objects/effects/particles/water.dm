@@ -15,8 +15,8 @@
 
 /particles/droplets/slime
 	count = 6
-	icon_state = list("dot"=2)
+	icon_state = list("dot" = 2)
 	spawning = 0.3
 	lifespan = 3 SECONDS
 	fade = 1 SECOND
-	gravity = list(0, -0.05)
+	gravity = list(0, -0.02)
